@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>邓德昭的技术博客 - "OAF单选删除行功能"</title>
+    <title>邓德昭的技术博客 - About</title>
     <meta name="description" content="">
     <meta name="author" content="pierreorz">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,8 +55,8 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>"OAF单选删除行功能"</h1>
-2013-03-20(Wednesday) 00:00
+            <h1>About</h1>
+2016-05-30(Monday) 00:00
 
 by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
  
@@ -64,60 +64,30 @@ by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">p
 
         </div>
 	
-        <div><hr />
-<p>平台：Jdeveloper 9i    </p>
-<hr />
-<p><strong>一般实现步骤：</strong></p>
-<ol>
-<li>在VO中添加新transient属性selector，updatable设置为always。    </li>
-<li>在PG中给table添加singleSelection方法，并绑定view Instance为VO的instance，View Attribute为刚刚新建的transient属性seletor。        </li>
-<li>这样当用户勾选checkbox时，会给transient属性变量赋值为Y，因此，在删除逻辑中循环判断VO中的transient属性，当其为Y时执行remove该行即可实现选择删除功能。  <br />
-<strong>相关代码如下：</strong></li>
-</ol>
-<p><strong>CO中processFormRequest里添加代码如下：</strong></p>
-<p>{% codeblock lang:java %}
-    //当单击deleteBtn按钮时执行AM中的deleteAutoSequenceVO方法  <br />
-    if (pageContext.getParameter("deleteBtn")!=null)
-    {
-      am.invokeMethod("deleteAutoSequenceVO");</p>
-<div class="highlight"><pre><span></span>}
-</pre></div>
-
-
-<p>{% endcodeblock %}</p>
-<p><strong>AM中代码如下：</strong></p>
-<p>{% codeblock lang:java %}
-    public void deleteAutoSequenceVO() {
-        OAViewObject vo = this.getChAutoSequenceVO1();
-        RowSetIterator iter = vo.createRowSetIterator("delete");
-        if (vo != null) {
-            int num = vo.getRowCount();
-            for (int i = 0; i &lt; num; i++) {
-                Row temp = iter.next();
-                if ("Y".equals(temp.getAttribute("selector"))) {
-                    vo.setCurrentRow(temp);
-                    vo.removeCurrentRow();
-                    break;
-                }
-            }
-        }
-        iter.closeRowSetIterator();
-        throw new OAException("删除成功,请点击[保存]按钮生效到数据库.",  <br />
-                              OAException.INFORMATION);
-    }</p>
-<p>{% endcodeblock %}</p>
-<p>但是在实际开发中，出现一个很诡异的现象，其它页面单选删除功能都正常，某一页面单选之后却无法赋值Y给VO中的transient变量，推测可能是VO用的是复合主键或者其它框架BUG导致，无奈给单选再添加手工赋值功能。    </p>
-<p>选择单选控件，将其Client Action中的Action Type设置为firePartialAction Submit设置为false。准备在用户单选时调用自定义方法，给变量赋值。</p>
-<p><strong>CO中processFormRequest里添加如下方法</strong>
+        <div><h1>关于博主</h1>
+<p><strong>NickName：pierreorz or 49</strong></p>
+<p>目前自由职业，工作事宜你可以联系我：</p>
+<p _="%" endcodeblock="endcodeblock"><strong>Email:</strong>
 {% codeblock lang:java %}
-        if ("update".equals(pageContext.getParameter(OAWebBeanConstants.EVENT_PARAM))) {
-            String rowRef =
-                pageContext.getParameter(OAWebBeanConstants.EVENT_SOURCE_ROW_REFERENCE);
-            Row currentRow = am.findRowByRef(rowRef);
-            currentRow.setAttribute("selector", "Y");
-        }</p>
-<p>{% endcodeblock %}</p>
-<p>这样便实现了单选删除功能。</p></div>
+ echo 'cGllcnJlb3J6QGdtYWlsLmNvbQo=' | base64 -d</p>
+<p _="%" endcodeblock="endcodeblock"><strong>QQ:</strong>
+{% codeblock lang:java %}
+echo 'NTQ0ODI3MzMK' | base64 -d</p>
+<p _="%" endcodeblock="endcodeblock"><strong>GeekCode:</strong>
+{% codeblock lang:java %}
+ -----BEGIN GEEK CODE BLOCK----
+Version: 3.1
+GCS/E/MU d- s-:- a- C++ UL+ P+++ L+++++ E+ W++ N- o K- w++ O- M-- V- PS PE+ Y+ PGP t 5--
+X+++ R+ tv b+ DI- D-- G++ e++ h+ r y+
+------END GEEK CODE BLOCK------</p>
+<h1>关于本博</h1>
+<blockquote>
+<p>2014-04-25 因政策原因<em>stdyun.com</em>迁至国外，重新托管于<em>github.com</em></p>
+<p>2013-04-15 托管服务器从<em>github.com</em>迁至<em>stdyun.com</em></p>
+<p>2013-03-12 绑定域名<em>dengdezhao.cn</em></p>
+<p>2013-03-09 从<em>WordPress</em>迁移至<em>Octopress</em></p>
+<p>2011-05-25 <em>adfkf.com</em> 基于<em>wordpress</em>搭建</p>
+</blockquote></div>
 	
         <hr>
 

@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>dengdezhao</title>
+    <title>邓德昭的技术博客</title>
     <meta name="description" content="">
     <meta name="author" content="pierreorz">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,7 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="http://pelican.dengdezhao.cn">dengdezhao</a>
+        <a class="brand" href="http://pelican.dengdezhao.cn">邓德昭的技术博客</a>
 
         <div class="nav-collapse">
         <ul class="nav">
@@ -60,8 +60,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="http://pelican.dengdezhao.cn/shi-yong-ridczai-webcenter-portalji-cheng-ecmde-wen-dang-cha-xun-gong-neng.html"><h1>"使用RIDC在webcenter portal集成ECM的文档查询功能"</h1></a>
-2014-11-28(Friday) 00:00
+            <a href="http://pelican.dengdezhao.cn/about.html"><h1>About</h1></a>
+2016-05-30(Monday) 00:00
 
 by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
  
@@ -70,7 +70,49 @@ by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">p
  
         </div>
         
-        <div><h4><i class="icon-file"></i>   需求：</h4>
+        <div><h1>关于博主</h1>
+<p><strong>NickName：pierreorz or 49</strong></p>
+<p>目前自由职业，工作事宜你可以联系我：</p>
+<p _="%" endcodeblock="endcodeblock"><strong>Email:</strong>
+{% codeblock lang:java %}
+ echo 'cGllcnJlb3J6QGdtYWlsLmNvbQo=' | base64 -d</p>
+<p _="%" endcodeblock="endcodeblock"><strong>QQ:</strong>
+{% codeblock lang:java %}
+echo 'NTQ0ODI3MzMK' | base64 -d</p>
+<p _="%" endcodeblock="endcodeblock"><strong>GeekCode:</strong>
+{% codeblock lang:java %}
+ -----BEGIN GEEK CODE BLOCK----
+Version: 3.1
+GCS/E/MU d- s-:- a- C++ UL+ P+++ L+++++ E+ W++ N- o K- w++ O- M-- V- PS PE+ Y+ PGP t 5--
+X+++ R+ tv b+ DI- D-- G++ e++ h+ r y+
+------END GEEK CODE BLOCK------</p>
+<h1>关于本博</h1>
+<blockquote>
+<p>2014-04-25 因政策原因<em>stdyun.com</em>迁至国外，重新托管于<em>github.com</em></p>
+<p>2013-04-15 托管服务器从<em>github.com</em>迁至<em>stdyun.com</em></p>
+<p>2013-03-12 绑定域名<em>dengdezhao.cn</em></p>
+<p>2013-03-09 从<em>WordPress</em>迁移至<em>Octopress</em></p>
+<p>2011-05-25 <em>adfkf.com</em> 基于<em>wordpress</em>搭建</p>
+</blockquote></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/shi-yong-ridczai-webcenter-portalji-cheng-ecmde-wen-dang-cha-xun-gong-neng.html"><h2>"使用RIDC在webcenter portal集成ECM的文档查询功能"</h2></a>
+        <div class= "well small"> 2014-11-28(Friday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><h4><i class="icon-file"></i>   需求：</h4>
 <p>标准的document service很不灵活，实际开发中少不了要开发定制。那么问题来了，通过RIDC很灵活的查询出了需要的文档，如何集成到portal上去呢</p>
 <h4><i class="icon-folder-open"></i> 分析：</h4>
 <p>使用RIDC查询出需要的文档，存放在POJO等数据模型中
@@ -91,143 +133,9 @@ dDocType <matches> <code>PJT-INTERFACE-DOC</code>
         ServiceResponse serviceResponse = null;
         List<Document> list = new ArrayList<Document>();</p>
 <div class="highlight"><pre><span></span>    <span class="nt">try</span> <span class="p">{</span>
-        <span class="n">if</span> <span class="p">(</span><span class="n">query</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span> <span class="err">{</span>
-            <span class="n">return</span> <span class="n">list</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="nt">IdcClient</span> <span class="nt">client</span> <span class="o">=</span> <span class="nt">getIdcClient</span><span class="o">();</span>
-        <span class="nt">DataBinder</span> <span class="nt">dataBinderReq</span> <span class="o">=</span> <span class="nt">client</span><span class="nc">.createBinder</span><span class="o">();</span>
-        <span class="nt">dataBinderReq</span><span class="nc">.putLocal</span><span class="o">(</span><span class="s2">&quot;IdcService&quot;</span><span class="o">,</span> <span class="s2">&quot;GET_SEARCH_RESULTS&quot;</span><span class="o">);</span>
-        <span class="nt">dataBinderReq</span><span class="nc">.putLocal</span><span class="o">(</span><span class="s2">&quot;QueryText&quot;</span><span class="o">,</span> <span class="nt">query</span><span class="nc">.toString</span><span class="o">());</span>
-        <span class="nt">dataBinderReq</span><span class="nc">.putLocal</span><span class="o">(</span><span class="s2">&quot;ResultCount&quot;</span><span class="o">,</span> <span class="s2">&quot;100&quot;</span><span class="o">);</span>
-        <span class="nt">serviceResponse</span> <span class="o">=</span>
-                <span class="nt">client</span><span class="nc">.sendRequest</span><span class="o">(</span><span class="nt">new</span> <span class="nt">IdcContext</span><span class="o">(</span><span class="nt">username</span><span class="o">),</span> <span class="nt">dataBinderReq</span><span class="o">);</span>
-        <span class="nt">DataBinder</span> <span class="nt">dataBinderRes</span> <span class="o">=</span> <span class="nt">serviceResponse</span><span class="nc">.getResponseAsBinder</span><span class="o">();</span>
-        <span class="nt">DataResultSet</span> <span class="nt">resultSet</span> <span class="o">=</span>
-            <span class="nt">dataBinderRes</span><span class="nc">.getResultSet</span><span class="o">(</span><span class="s2">&quot;SearchResults&quot;</span><span class="o">);</span>
-        <span class="nt">for</span> <span class="o">(</span><span class="nt">DataObject</span> <span class="nt">dataObject</span> <span class="o">:</span> <span class="nt">resultSet</span><span class="nc">.getRows</span><span class="o">())</span> <span class="p">{</span>
-            <span class="n">Document</span> <span class="n">d</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Document</span><span class="p">();</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setContentId</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dDocName&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setDocumentId</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dID&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setOwner</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dDocAuthor&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dDocTitle&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setDocType</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dDocType&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setXspeciality</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;xSPECIALTY&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setXrcvMajor</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;xRCV_MAJOR&quot;</span><span class="p">));</span>
-            <span class="n">Date</span> <span class="n">date</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">getDate</span><span class="p">(</span><span class="s2">&quot;dInDate&quot;</span><span class="p">);</span>
-            <span class="n">SimpleDateFormat</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s2">&quot;yyyy/mm/dd&quot;</span><span class="p">);</span>
-            <span class="n">String</span> <span class="n">format</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="p">);</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setDindate</span><span class="p">(</span><span class="n">format</span><span class="p">);</span>
-            <span class="n">list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="err">}</span> <span class="nt">catch</span> <span class="o">(</span><span class="nt">Exception</span> <span class="nt">ex</span><span class="o">)</span> <span class="p">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Error Search: &quot;</span> <span class="o">+</span> <span class="n">ex</span><span class="o">.</span><span class="n">getMessage</span><span class="p">());</span>
-    <span class="p">}</span> <span class="nt">finally</span> <span class="p">{</span>
-        <span class="n">if</span> <span class="p">(</span><span class="n">serviceResponse</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="err">{</span>
-            <span class="n">serviceResponse</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="err">}</span>
-    <span class="nt">return</span> <span class="nt">list</span><span class="o">;</span>
-<span class="err">}</span> <span class="o">//</span>
-</pre></div>
-
-
-<p _="%" endcodeblock="endcodeblock">{% endcodeblock %}
-其中Document.java即是POJO类
-{% codeblock lang:java %}
-public class Document {
-    private String contentId;
-    private String documentId;
-    private String owner;
-    private String title;
-    private String doctype;
-    private String securitygroup;
-    private String dindate;
-    private String xDesignPhase;
-    private String xspeciality;//send
-    private String xrcvMajor;//receive
-       ......get set accessor......
-}//end class</p>
-<p>创建facade类：MyCondition.java，主要是调用search方法接受RIDC查询的结果集，生成dataControl供UI层使用。参考代码如下：
-{% codeblock lang:java %}
-public class MyCondition {
-    private static final ADFLogger LOGGER = ADFLogger.createADFLogger(MyCondition.class);
-    private ArrayList<Document> receiveDocumentList;
-    private ArrayList<Document> sendDocumentList;
-    public MyCondition() {
-        this.receiveDocumentList=new ArrayList<Document>();
-        this.sendDocumentList=new ArrayList<Document>();
-    }
-    /<strong><em>*</em></strong>
-     * 初始化，调用RIDC API查询出文档数据集
-     * <strong><em>*</em>/
-    public String init(){
-        LOGGER.severe("start init....");
-        Object userId = JSFUtils.resolveExpression("#{securityContext.userName}");
-        Object projectCode = JSFUtils.resolveExpression("#{pageFlowScope.inputProjectCode}");
-        List<String> spcCode = (List<String>)(JSFUtils.resolveExpression("#{pageFlowScope.spcCode}")==null?null:JSFUtils.resolveExpression("#{pageFlowScope.spcCode}"));
-        if(userId==null||"".equals(userId)){
-            LOGGER.severe("userId is null ");
-            FacesMessage msg = new FacesMessage("用户为空请重试!");
-            JSFUtils.getFacesContext().addMessage(null, msg);
-            return "NO";
-        }
-        if(projectCode==null||"".equals(projectCode)){
-            LOGGER.severe("projectCode is null ");
-            FacesMessage msg = new FacesMessage("项目ID为空请重试!");
-            JSFUtils.getFacesContext().addMessage(null, msg);
-            return "NO";
-        }
-        /</strong><strong><em>*
-         * 
-         * 生成发出专业SQL,生成接受专业SQL
-         * 
-         * </em></strong><em>/
-        String sendSql=" xSPECIALTY <matches> <code>NULL</code> ";
-        String receiveSql=" xRCV_MAJOR <matches> <code>NULL</code> ";
-        if(spcCode==null||spcCode.size()==0){
-            LOGGER.severe("spcCode is null or size is 0");
-            return "NO";
-        }
-        for(int i=0;i<spcCode.size();i++){
-            sendSql=sendSql+" <OR> "+"xSPECIALTY <matches> <code>"+spcCode.get(i)+"</code> ";
-            receiveSql=receiveSql+" <OR> "+"xRCV_MAJOR <matches> <code>"+spcCode.get(i)+"</code> ";
-        }
-        sendSql="("+sendSql+") <AND> dDocType <matches> <code>PJT-INTERFACE-DOC</code> <AND> xPROJECT_NUM <starts> <code>"+projectCode+"</code>";
-        receiveSql="("+receiveSql+") <AND> dDocType <matches> <code>PJT-INTERFACE-DOC</code> <AND> xPROJECT_NUM <starts> <code>"+projectCode+"</code>";
-        LOGGER.severe("sendSql:"+sendSql);
-        LOGGER.severe("receiveSql:"+receiveSql);
-        /<strong><em> 
-         * 查询当前用户在该项目中的专业（ME,EL等)，拼接QueryText
-         * dDocType <matches> <code>PJT-INTERFACE-DOC</code>
-         * </em></strong></em>**/
-        UCMAdapter ap=new UCMAdapter();
-        this.sendDocumentList = (ArrayList<Document>)ap.search(userId.toString(), sendSql);
-        this.receiveDocumentList = (ArrayList<Document>)ap.search(userId.toString(), receiveSql);
-        LOGGER.severe("success init...YES.");
-        return "YES";
-    }</p>
-<div class="highlight"><pre><span></span>public void setReceiveDocumentList(ArrayList&lt;Document&gt; receiveDocumentList) {
-    this.receiveDocumentList = receiveDocumentList;
-}
-
-public ArrayList&lt;Document&gt; getReceiveDocumentList() {
-    return receiveDocumentList;
-}
-
-public void setSendDocumentList(ArrayList&lt;Document&gt; sendDocumentList) {
-    this.sendDocumentList = sendDocumentList;
-}
-
-public ArrayList&lt;Document&gt; getSendDocumentList() {
-    return sendDocumentList;
-}
-</pre></div>
-
-
-<p _="%" endcodeblock="endcodeblock">}</p></div>
-        <hr />
-    </div>
-		
+        <span class="n">if …</span></pre></div> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/shi-yong-ridczai-webcenter-portalji-cheng-ecmde-wen-dang-cha-xun-gong-neng.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -513,55 +421,6 @@ by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">p
 <dt>{% codeblock lang:java …</dt></dl></li></ul> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/you-yi-wai-duan-dian-dao-zhi-oracle11gqi-dong-bu-qi-lai-de-wen-ti-jie-jue.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="http://pelican.dengdezhao.cn/kong-jian-afiteratoryi-ji-afforeachde-dui-bi.html"><h2>"控件af:iterator以及af:forEach的对比"</h2></a>
-        <div class= "well small"> 2013-09-23(Monday) 00:00
-
-by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
- 
-
-
- </div>
-        <div class="summary"><ul>
-<li>
-<p>平台:Jdeveloper 12c</p>
-</li>
-<li>
-<p>需求：对Collection类型遍历。MB中定义两个List，如何利用iterator&amp;foreach控件将List内容显示到页面。</p>
-</li>
-</ul>
-<p><strong>页面如下</strong></p>
-<p>分别绑定iterBean中的两个集合类型变量，将其中的值取出来。</p>
-<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
-<af:iterator id="i1" var="each" value="#{iterBean.list}" varStatus="row">
-    <af:panelBox text="#{each}" id="pb1">
-        <f:facet name="toolbar"/>
-        <af:inputText label="Values" id="it1" value="#{iterBean.values[row.index]}"/>
-    </af:panelBox>
-</af:iterator>
-<af:forEach items="#{iterBean.testList}"  var="each" varStatus="row">
-  <af:panelBox text="#{each.title}" id="pb2">
-    <af:outputText value="#{row.index} #{each.title}" id="ot1"/>
-    </af:panelBox>
-</af:forEach></p>
-<p><strong>BackingBean内容如下：</strong></p>
-<p>{% codeblock lang:java %}
-package cn.dengdezhao;
-import java.util.ArrayList;
-import java.util.List;
-public class IteratorBean {
-    List list = new ArrayList();
-    String[] values=new String[]{"1","2","3"};
-    List<contentList> testList=new ArrayList<contentList>();</p>
-<div class="highlight"><pre><span></span>public void setTestList …</pre></div> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/kong-jian-afiteratoryi-ji-afforeachde-dui-bi.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -606,6 +465,7 @@ public class IteratorBean {
                 Categories
                 </li>
                 
+                <li><a href="http://pelican.dengdezhao.cn/category/about.html">About</a></li>
                 <li><a href="http://pelican.dengdezhao.cn/category/adf.html">ADF</a></li>
                 <li><a href="http://pelican.dengdezhao.cn/category/ebs.html">ebs</a></li>
                 <li><a href="http://pelican.dengdezhao.cn/category/java.html">java</a></li>
@@ -623,24 +483,12 @@ public class IteratorBean {
 
 
 
-            <div class="social">
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Social
-                </li>
-           
-                <li><a href="#">You can add links in your config file</a></li>
-                <li><a href="#">Another social link</a></li>
-            </ul>
-            </div>
-            </div>
 
         </div>  
     </div>     </div> 
 <footer>
 <br />
-<p><a href="http://pelican.dengdezhao.cn">dengdezhao</a> &copy; pierreorz 2014</p>
+<p><a href="http://pelican.dengdezhao.cn">邓德昭的技术博客</a> &copy; pierreorz 2016</p>
 </footer>
 
 </div> <!-- /container -->

@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>dengdezhao</title>
+    <title>邓德昭的技术博客</title>
     <meta name="description" content="">
     <meta name="author" content="pierreorz">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,7 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="http://pelican.dengdezhao.cn">dengdezhao</a>
+        <a class="brand" href="http://pelican.dengdezhao.cn">邓德昭的技术博客</a>
 
         <div class="nav-collapse">
         <ul class="nav">
@@ -55,6 +55,50 @@
         <div class="span9">
         
 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/oafdan-xuan-shan-chu-xing-gong-neng.html"><h2>"OAF单选删除行功能"</h2></a>
+        <div class= "well small"> 2013-03-20(Wednesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><hr />
+<p>平台：Jdeveloper 9i    </p>
+<hr />
+<p><strong>一般实现步骤：</strong></p>
+<ol>
+<li>在VO中添加新transient属性selector，updatable设置为always。    </li>
+<li>在PG中给table添加singleSelection方法，并绑定view Instance为VO的instance，View Attribute为刚刚新建的transient属性seletor。        </li>
+<li>这样当用户勾选checkbox时，会给transient属性变量赋值为Y，因此，在删除逻辑中循环判断VO中的transient属性，当其为Y时执行remove该行即可实现选择删除功能。  <br />
+<strong>相关代码如下：</strong></li>
+</ol>
+<p><strong>CO中processFormRequest里添加代码如下：</strong></p>
+<p>{% codeblock lang:java %}
+    //当单击deleteBtn按钮时执行AM中的deleteAutoSequenceVO方法  <br />
+    if (pageContext.getParameter("deleteBtn")!=null)
+    {
+      am.invokeMethod("deleteAutoSequenceVO");</p>
+<div class="highlight"><pre><span></span>}
+</pre></div>
+
+
+<p>{% endcodeblock %}</p>
+<p><strong>AM中代码如下：</strong></p>
+<p>{% codeblock lang:java %}
+    public void deleteAutoSequenceVO() {
+        OAViewObject vo = this.getChAutoSequenceVO1();
+        RowSetIterator iter = vo.createRowSetIterator("delete");
+        if (vo != null …</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/oafdan-xuan-shan-chu-xing-gong-neng.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
@@ -305,40 +349,6 @@ by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">p
 <p>注意，默认版本为1，会新建一个名为“1”的子文件夹。修改config.php，填上APP key , App Sercet 及 WB_CALLBACK_URL …</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/xin-lang-ru-men-ying-yong-zhi-da-ben-zhong.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="http://pelican.dengdezhao.cn/ora-1222tnsno-such-protocol-adapter-wen-ti-jie-jue.html"><h2>ORA-1222：TNS:no such protocol adapter  问题解决</h2></a>
-        <div class= "well small"> 2012-12-03(Monday) 00:00
-
-by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
- 
-
-
- </div>
-        <div class="summary"><p>机器上安装的是instantOracleclient-basic-win32-11.2.0.1.0客户端，本来使用PLSQL developer是可以正常连接数据库的；</p>
-
-<p>后来开发需求装上了Form6<em>i，</em>发现连接数据库时弹出来ORA-1222：TNS:no such protocol adapter这个错误；</p>
-
-<p>解决方案：</p>
-
-<p><strong>1.配置PL/SQL Developer -&gt; Preferences ，OracleHome设置为Form6i的路径；</strong></p>
-
-<p><strong>2.我的电脑 -&gt; 用户变量 设置ORACLE_HOME 为Form6i路径</strong></p>
-
-<p><strong>或者可以直接编辑注册表，修改oracle_home的值为[Form安装的HOME文件夹]/[oracle客户端文件夹]；</strong></p>
-
-<p><strong>如果需要切换按以上步骤修改oracle_home再重启PLSQL Developer即可以正常连接数据库；
-</strong></p>
-
-<p><em>
-</em></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/ora-1222tnsno-such-protocol-adapter-wen-ti-jie-jue.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev"><a href="http://pelican.dengdezhao.cn/index3.html">&larr; Previous</a></li>
@@ -383,6 +393,7 @@ by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">p
                 Categories
                 </li>
                 
+                <li><a href="http://pelican.dengdezhao.cn/category/about.html">About</a></li>
                 <li><a href="http://pelican.dengdezhao.cn/category/adf.html">ADF</a></li>
                 <li><a href="http://pelican.dengdezhao.cn/category/ebs.html">ebs</a></li>
                 <li><a href="http://pelican.dengdezhao.cn/category/java.html">java</a></li>
@@ -400,24 +411,12 @@ by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">p
 
 
 
-            <div class="social">
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Social
-                </li>
-           
-                <li><a href="#">You can add links in your config file</a></li>
-                <li><a href="#">Another social link</a></li>
-            </ul>
-            </div>
-            </div>
 
         </div>  
     </div>     </div> 
 <footer>
 <br />
-<p><a href="http://pelican.dengdezhao.cn">dengdezhao</a> &copy; pierreorz 2014</p>
+<p><a href="http://pelican.dengdezhao.cn">邓德昭的技术博客</a> &copy; pierreorz 2016</p>
 </footer>
 
 </div> <!-- /container -->

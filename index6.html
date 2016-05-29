@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>dengdezhao</title>
+    <title>邓德昭的技术博客</title>
     <meta name="description" content="">
     <meta name="author" content="pierreorz">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,7 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="http://pelican.dengdezhao.cn">dengdezhao</a>
+        <a class="brand" href="http://pelican.dengdezhao.cn">邓德昭的技术博客</a>
 
         <div class="nav-collapse">
         <ul class="nav">
@@ -55,6 +55,38 @@
         <div class="span9">
         
 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html"><h2>关于selectBooleanCheckbox 的问题</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>页面的 selectBooleanCheckbox 选择后，总提示 不是数字（组件value是 true 或 false,数据库存的是Number），怎么解决</p>
+
+<p>方案有三个<br />
+1。如果是基于表的Number字段(假设字段名是Flag，值是1或者0），想生成selectBooleanCheckbox ，可以重写这个VO的的 setFlag()跟getFlag()方法如下：<br />
+public void setFlag(Boolean value){<br />
+this.flag=value==true?1:0;<br />
+}
+public Boolean getFlag(){<br />
+return this.flag==0?false:true;<br />
+}</p>
+
+<p>2。设置valueChangeListener.<br />
+在valueChange方法里捕获当前selectBooleanCheckbox 的值，然后转化成Number类型的传给VO</p>
+
+<p>3。如果是只读的表，可以在UI上通过EL表达式处理。</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
@@ -332,33 +364,6 @@ by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">p
                                     shortDesc …</pre></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="http://pelican.dengdezhao.cn/oracle-11g-shu-ju-ku-an-zhuang-hou-gai-ji-suan-ji-ming-chu-xian-wu-fa-lian-jie-de-wen-ti-jie-jue.html"><h2>oracle 11g 数据库安装后改计算机名出现无法连接的问题解决</h2></a>
-        <div class= "well small"> 2011-07-15(Friday) 00:00
-
-by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
- 
-
-
- </div>
-        <div class="summary"><p>在局域网内一台机器上安装完oracle11g之后，本地测试OK 可以访问orcl。用局域网内另一台机器连接的时候不行。<br />
-两台机器可以PING通。<br />
-修改tnsname.ora  把默认的localhost 都改成了本机IP 试试还是不行。<br />
-然后改了下计算机名，各种测试，打开EM还是只看到实例正常，监听程序为状态为不可用，实例的代理连接状态为不可用。<br />
-很是蛋疼，手贱不应该改计算机名啊。。。<br />
-想想多有可能要改的都改好了。。。怎么还是连不上？<br />
-是不是刚改好的还没有生效？<br />
-lsnrctl stop<br />
-lsnrctl start<br />
-各种重启服务之后，终于见到了全绿~~~</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/oracle-11g-shu-ju-ku-an-zhuang-hou-gai-ji-suan-ji-ming-chu-xian-wu-fa-lian-jie-de-wen-ti-jie-jue.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev"><a href="http://pelican.dengdezhao.cn/index5.html">&larr; Previous</a></li>
@@ -403,6 +408,7 @@ lsnrctl start<br />
                 Categories
                 </li>
                 
+                <li><a href="http://pelican.dengdezhao.cn/category/about.html">About</a></li>
                 <li><a href="http://pelican.dengdezhao.cn/category/adf.html">ADF</a></li>
                 <li><a href="http://pelican.dengdezhao.cn/category/ebs.html">ebs</a></li>
                 <li><a href="http://pelican.dengdezhao.cn/category/java.html">java</a></li>
@@ -420,24 +426,12 @@ lsnrctl start<br />
 
 
 
-            <div class="social">
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Social
-                </li>
-           
-                <li><a href="#">You can add links in your config file</a></li>
-                <li><a href="#">Another social link</a></li>
-            </ul>
-            </div>
-            </div>
 
         </div>  
     </div>     </div> 
 <footer>
 <br />
-<p><a href="http://pelican.dengdezhao.cn">dengdezhao</a> &copy; pierreorz 2014</p>
+<p><a href="http://pelican.dengdezhao.cn">邓德昭的技术博客</a> &copy; pierreorz 2016</p>
 </footer>
 
 </div> <!-- /container -->
