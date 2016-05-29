@@ -1,32 +1,33 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_cn">
-  <head>
-    <title>Tag oracle - dengdezhao</title>
-    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
-    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="dengdezhao Atom Feed" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>dengdezhao - oracle</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://pelican.dengdezhao.cn/theme/css/main.css" type="text/css" />
+        <link href="http://pelican.dengdezhao.cn/None" type="application/atom+xml" rel="alternate" title="dengdezhao ATOM Feed" />
 
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  </head>
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie.css"/>
+                <script src="http://pelican.dengdezhao.cn/js/IE8.js" type="text/javascript"></script><![endif]-->
 
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="span8">
-<div id="content">
-<h1>Blog</h1>
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie6.css"/><![endif]-->
 
-<ul class="unstyled">
-        <li>
-            <div>
-                <div class="header">
-                    <h2>"由意外断电导致oracle11g启动不起来的问题解决"</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2013-11-09(Saturday) 00:00</span> - <span class="tags"><a href="/tag/oracle/">oracle</a></span></small></p>
-                <div class="entry-content">
-                    <ul>
+</head>
+
+<body>
+        
+        
+
+            <header>
+                <h1><a href="http://pelican.dengdezhao.cn" id="site-title">dengdezhao </a> : <a href="http://pelican.dengdezhao.cn/you-yi-wai-duan-dian-dao-zhi-oracle11gqi-dong-bu-qi-lai-de-wen-ti-jie-jue.html" id="page-title">"由意外断电导致oracle11g启动不起来的问题解决"</a></h1>
+<time datetime="2013-11-09T00:00:00+08:00">2013-11-09(Saturday) 00:00</time>            </header>
+
+            <article>
+                <ul>
 <li>
 <p>平台: linux + oracle 11g    </p>
 </li>
@@ -52,83 +53,46 @@
 <dt># relink all</dt>
 <dt>{% endcodeblock %}</dt>
 <dt>执行<code>relink all</code>命令之后，再执行<code>lsnrctrl start</code>时，发现不报之前的错误了，出现了新的错误：</dt>
-<dt>{% codeblock lang:java …</dt></dl></li></ul>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/you-yi-wai-duan-dian-dao-zhi-oracle11gqi-dong-bu-qi-lai-de-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to "由意外断电导致oracle11g启动不起来的问题解决"">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+<dt>{% codeblock lang:java %}</dt>
+<dt>symbol lookup error: $ORACLE_HOME/lib/libclntsh.so.11.1</dt>
+<dd _="%" endcodeblock="endcodeblock">undefined symbol: nnftboot</dd>
+</dl>
+</li>
+<li>
+<p>看来是这个libclntsh.so.11.1出了问题，于是尝试去下载该文件替换掉。   </p>
+</li>
+<li>
+<p>从RPM search网站上下载到oracle-instance-client的RPM文件到本地。</p>
+</li>
+<li>
+<p>使用rpm2cpio命令抽取出里面的libclntsh.so.11.1</p>
+</li>
+</ul>
+<p>{% codeblock lang:java %}     </p>
+<h1>rpm2cpio oracle-instance-client-xxx.rpm | cpio -div</h1>
+<p>{% endcodeblock %}</p>
+<ul>
+<li>将得到的libclntsh.so.11.1文件替换掉$ORACLE_HOME/lib下的重名文件即可。    </li>
+</ul>            </article>
+                <section id="article-list">
+                    <h2>All posts</h2>
+                    <ol>
+        
 
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>oracle 11g 数据库安装后改计算机名出现无法连接的问题解决</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2011-07-15(Friday) 00:00</span> - <span class="tags"><a href="/tag/oracle/">oracle</a></span></small></p>
-                <div class="entry-content">
-                    <p>在局域网内一台机器上安装完oracle11g之后，本地测试OK 可以访问orcl。用局域网内另一台机器连接的时候不行。<br />
-两台机器可以PING通。<br />
-修改tnsname.ora  把默认的localhost 都改成了本机IP 试试还是不行。<br />
-然后改了下计算机名，各种测试，打开EM还是只看到实例正常，监听程序为状态为不可用，实例的代理连接状态为不可用。<br />
-很是蛋疼，手贱不应该改计算机名啊。。。<br />
-想想多有可能要改的都改好了。。。怎么还是连不上？<br />
-是不是刚改好的还没有生效？<br />
-lsnrctl stop<br />
-lsnrctl start<br />
-各种重启服务之后，终于见到了全绿~~~</p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/oracle-11g-shu-ju-ku-an-zhuang-hou-gai-ji-suan-ji-ming-chu-xian-wu-fa-lian-jie-de-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle 11g 数据库安装后改计算机名出现无法连接的问题解决">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/oracle-11g-shu-ju-ku-an-zhuang-hou-gai-ji-suan-ji-ming-chu-xian-wu-fa-lian-jie-de-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle 11g 数据库安装后改计算机名出现无法连接的问题解决">oracle 11g 数据库安装后改计算机名出现无法连接的问题解决</a></li>
+    </ol>
+    </section><!-- #article-list -->
 
-        <li><hr /></li>
-</ul><!-- /#posts-list -->
+        <footer>
+            <nav>
+                <ul>
+                    <li>:: <a href="http://pelican.dengdezhao.cn/categories.html">Categories</a></li>
+                    <li>:: <a href="http://pelican.dengdezhao.cn/tags.html">Tags</a></li>
+                </ul>
+            </nav>
+                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
+        </footer>
 
-<div class="pagination pagination-centered">
-    <ul>
-        <li class="active"><a href="#">1</a></li>
-    </ul>
-</div>
-</div><!-- /#content -->
-        </div>
-        <div class="span3 offset1">
-          <div class="well">
-            <ul class="nav nav-list">
-              <li class="nav-header">Blog</li>
-              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
-              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
-              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
-              <li class="nav-header">Anderes</li>
-              <li><a href="http://pelican.dengdezhao.cn">Home</a></li>
-              <li><a href="about.html">About</a></li>
-            </ul>
-          </div><!-- /#menu -->
-        </div>
-      </div>
-
-      <hr />
-
-      <div class="row">
-        <div class="span12">
-          <div id="about">
-            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
-          </div><!-- /#about -->
-        </div><!-- /#contentinfo -->
-      </div>
-    </div>
-
-
-  </body>
+</body>
 </html>

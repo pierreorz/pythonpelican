@@ -1,148 +1,212 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_cn">
-  <head>
-    <title>Blog - dengdezhao</title>
-    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
-    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="dengdezhao Atom Feed" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>dengdezhao - ADF</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://pelican.dengdezhao.cn/theme/css/main.css" type="text/css" />
+        <link href="http://pelican.dengdezhao.cn/None" type="application/atom+xml" rel="alternate" title="dengdezhao ATOM Feed" />
 
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  </head>
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie.css"/>
+                <script src="http://pelican.dengdezhao.cn/js/IE8.js" type="text/javascript"></script><![endif]-->
 
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="span8">
-<div id="content">
-<h2>Articles in the ADF category</h2>
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie6.css"/><![endif]-->
 
-<ul class="unstyled">
-        <li>
-            <div>
-                <div class="header">
-                    <h2>javax.el.PropertyNotFoundException错误解决</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2011-06-29(Wednesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>有时候明明没有什么错误，一样的代码在别人机器上跑没问题，自己机器上跑却会出现以下这样的错误：
-<pre class="brush:java">javax.el.PropertyNotFoundException: Target Unreachable, identifier 'bindings' resolved to null</pre>
-这样的错误会随着代码量的增加而越发频繁，是IDE的缓存的BUG，如果重启jdeveloper 还不能解决的话，把报错的那个bindings的pagedef文件改动下（加一行空格）保存，然后clean all，再重新build下，基本能够解决这个问题。</p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/javaxelpropertynotfoundexceptioncuo-wu-jie-jue.html" rel="bookmark" title="Permalink to javax.el.PropertyNotFoundException错误解决">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+</head>
 
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>ADF应用“Remote deployment failed”错误解决</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2011-06-28(Tuesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>ADF应用debug模式下最常出现的问题就是远程发布失败了。控制台打印的错误信息如下：
-<pre class="brush:plain">[07:21:55 PM] ####  Deployment incomplete.  ####
-[07:21:55 PM] Remote deployment failed (oracle.jdevimpl.deploy.common.Jsr88RemoteDeployer)
-#### Cannot run application XXX due to error deploying to IntegratedWebLogicServer.
-[Application XXX stopped and undeployed from Server Instance IntegratedWebLogicServer]
-&lt;Logger&gt;&lt;error&gt; ServletContainerAdapter manager not initialized correctly.</pre>
-解决方法有两种：</p>
+<body>
+        
+        
 
-<p>方法一：进入weblogic控制台<span style="color: #0000ff;">http …</span></p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/adfying-yong-remote-deployment-failedcuo-wu-jie-jue.html" rel="bookmark" title="Permalink to ADF应用“Remote deployment failed”错误解决">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+            <header>
+                <h1><a href="http://pelican.dengdezhao.cn" id="site-title">dengdezhao </a> : <a href="http://pelican.dengdezhao.cn/dong-tai-gai-bian-lovde-zhi-ji.html" id="page-title">"动态改变LOV的值集"</a></h1>
+<time datetime="2014-09-17T00:00:00+08:00">2014-09-17(Wednesday) 00:00</time>            </header>
 
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>定制ADF应用的CSS</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2011-06-27(Monday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>客户的要求总是各种变态，如果需要定制默认的控件样式的话，那么以下的文章可能会对你有帮助。</p>
-<p>Step.1 首先我们需要定义自己的CSS文件 <span style="color: #0000ff;">CustomSkin.css</span>
-<pre class="brush:css">af|inputListOfValues::search-icon-style{
-  background-image:none;
-}</pre></p></p>
-<p>af|inputListOfValues::search-icon-style:hover{<br />
-  background-image:none;<br />
-}
-af|inputListOfValues::search-icon-style:active{<br />
-  background-image:none;<br />
-}
-af|inputListOfValues::search-icon-style:info{<br />
-  background-image:none;<br />
-}
-Step.2 接着创建 <span style="color: #0000ff;">trinidad-skins.xml</span>
-<pre class="brush:xml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
-&lt;skins xmlns="http://myfaces.apache.org/trinidad/skin …</pre></p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ding-zhi-adfying-yong-de-css.html" rel="bookmark" title="Permalink to 定制ADF应用的CSS">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+            <article>
+                <h4><i class="icon-file"></i>   需求：</h4>
+<p>LOV的值集需要根据传入的用户角色类型(A,B,C)动态改变，A时查询所有，B时过滤字段1，C时过滤字段2.</p>
+<p><strong>基础VO的SQL如下:</strong>
+{% codeblock lang:sql %}
+ SELECT DISTINCT U.USER_ID, U.USER_NAME, F.FULL_NAME AS DESCRIPTION
+  FROM FND_USER U, PO_HEADERS_ALL P, PO_VENDORS V, PER_PEOPLE_F F
+ WHERE U.EMPLOYEE_ID = P.AGENT_ID
+   AND P.VENDOR_ID = V.VENDOR_ID
+   AND F.PERSON_ID(+) = U.EMPLOYEE_ID
+   AND P.APPROVED_FLAG = 'Y'
+   AND ((P.VENDOR_ID = :VARVENDORID AND :VARUSERTYPE = 'B') OR
+       (:VARUSERTYPE = 'A') OR
+       (:VARUSERTYPE = 'C' AND U.USER_ID = :VARUSERID))
+{% endcodeblock %}
+创建VARUSERTYPE VARUSERID VARVENDORID 三个绑定变量。</p>
+<h4><i class="icon-folder-open"></i> 创建LOV VO</h4>
+<p><strong>LVO的SQL如下:</strong>
+{% codeblock lang:sql %}
+ SELECT NULL         AS USER_ID,
+       NULL         AS USER_NAME,
+       NULL         AS DESCRIPTION,
+       :VARTYPE     AS USERTYPE,<br />
+       :VARVENDORID AS VENDORID,
+       :VARUSERID   AS CURRENTUSERID
+  FROM DUAL
+{% endcodeblock %}
+技巧在这里，LVO同样创建三个绑定变量，并把绑定变量作为VO的attribute暴露出来，然后通过view Accessors传递给基础VO</p>
+<h4><i class="icon-pencil"></i> 设置View Accessors</h4>
+<ul>
+<li>
+<p>创建LOV    </p>
+</li>
+<li>
+<p>设置View Accessors    </p>
+</li>
+</ul>
+<p>这样就可以实现动态切换LOV的基础数据源了。</p>            </article>
+                <section id="article-list">
+                    <h2>All posts</h2>
+                    <ol>
+        
 
-        <li><hr /></li>
-</ul><!-- /#posts-list -->
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ding-zhi-el-function.html" rel="bookmark" title="Permalink to "定制EL function"">"定制EL function"</a></li>
+        
 
-<div class="pagination pagination-centered">
-    <ul>
-        <li><a href="http://pelican.dengdezhao.cn">1</a></li>
-        <li><a href="2">2</a></li>
-        <li><a href="http://pelican.dengdezhao.cncategory/adf3/">3</a></li>
-        <li class="active"><a href="#">4</a></li>
-    </ul>
-</div>
-</div><!-- /#content -->
-        </div>
-        <div class="span3 offset1">
-          <div class="well">
-            <ul class="nav nav-list">
-              <li class="nav-header">Blog</li>
-              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
-              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
-              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
-              <li class="nav-header">Anderes</li>
-              <li><a href="http://pelican.dengdezhao.cn">Home</a></li>
-              <li><a href="about.html">About</a></li>
-            </ul>
-          </div><!-- /#menu -->
-        </div>
-      </div>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/kong-jian-afiteratoryi-ji-afforeachde-dui-bi.html" rel="bookmark" title="Permalink to "控件af:iterator以及af:forEach的对比"">"控件af:iterator以及af:forEach的对比"</a></li>
+        
 
-      <hr />
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ru-he-zai-ye-mian-sui-pian-jia-zai-qian-diao-yong-luo-ji.html" rel="bookmark" title="Permalink to "如何在页面碎片加载前调用逻辑"">"如何在页面碎片加载前调用逻辑"</a></li>
+        
 
-      <div class="row">
-        <div class="span12">
-          <div id="about">
-            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
-          </div><!-- /#about -->
-        </div><!-- /#contentinfo -->
-      </div>
-    </div>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ru-he-huo-qu-webxmlzhong-de-context-paramcan-shu.html" rel="bookmark" title="Permalink to "如何获取web.xml中的context-param参数"">"如何获取web.xml中的context-param参数"</a></li>
+        
 
+ 
+            <li><a href="http://pelican.dengdezhao.cn/attribute-set-for-xxxattribute-in-view-object-xxxvo-failedwen-ti-jie-jue.html" rel="bookmark" title="Permalink to "Attribute set for xxxAttribute in view object xxxVO failed问题解决"">"Attribute set for xxxAttribute in view object xxxVO failed问题解决"</a></li>
+        
 
-  </body>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/cong-backingbeanzhong-diao-yong-bu-dai-fragmentsde-taskflow.html" rel="bookmark" title="Permalink to "从BackingBean中调用不带fragments的taskflow"">"从BackingBean中调用不带fragments的taskflow"</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/fen-ye-lan-chu-xian-3ge-wen-hao-bugjie-jue.html" rel="bookmark" title="Permalink to "分页栏出现3个问号BUG解决"">"<af:table>分页栏出现3个问号BUG解决"</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/groovyzai-adfzhong-de-ying-yong.html" rel="bookmark" title="Permalink to "Groovy在ADF中的应用"">"Groovy在ADF中的应用"</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/li-yong-contextual-eventshua-xin-region.html" rel="bookmark" title="Permalink to "利用contextual event刷新Region"">"利用contextual event刷新Region"</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/zai-managedbeanzhong-diao-yong-appmoduleimplzhong-zi-ding-yi-fang-fa-de-liang-chong-fang-shi.html" rel="bookmark" title="Permalink to "在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"">"在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/guan-yu-applicatoinmodulelei-xing-zong-jie.html" rel="bookmark" title="Permalink to "关于ApplicatoinModule类型总结"">"关于ApplicatoinModule类型总结"</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/adflei-si-xin-tiao-cheng-xu-shi-xian.html" rel="bookmark" title="Permalink to "ADF类似心跳程序实现"">"ADF类似心跳程序实现"</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/adfxue-xi-zong-jie-yi.html" rel="bookmark" title="Permalink to "ADF学习总结(一)"">"ADF学习总结(一)"</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/getrowatrangeindexintfang-fa-de-ju-xian-xing.html" rel="bookmark" title="Permalink to "getRowAtRangeIndex(int)方法的局限性"">"getRowAtRangeIndex(int)方法的局限性"</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html" rel="bookmark" title="Permalink to adf:tree做的树菜单如何过滤子节点的数据？">adf:tree做的树菜单如何过滤子节点的数据？</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html" rel="bookmark" title="Permalink to 表内的checkbox当数据量大时发现部分行勾选不中">表内的checkbox当数据量大时发现部分行勾选不中</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/guan-yu-ding-zhi-validator.html" rel="bookmark" title="Permalink to 关于定制validator">关于定制validator</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html" rel="bookmark" title="Permalink to 关于ManagedBean中多次执行构造方法时的问题">关于ManagedBean中多次执行构造方法时的问题</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html" rel="bookmark" title="Permalink to 关于selectBooleanCheckbox 的问题">关于selectBooleanCheckbox 的问题</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html" rel="bookmark" title="Permalink to 关于VO的只读可写等属性设置">关于VO的只读可写等属性设置</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/immediatetrue-de-yi-chang.html" rel="bookmark" title="Permalink to immediate="true" 的异常">immediate="true" 的异常</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle数据库用户被锁问题解决">oracle数据库用户被锁问题解决</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html" rel="bookmark" title="Permalink to 如何在MB中对selectionListener collectionModel.makeCurrent调用">如何在MB中对selectionListener collectionModel.makeCurrent调用</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html" rel="bookmark" title="Permalink to Table内增加全选checkbox">Table内增加全选checkbox</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html" rel="bookmark" title="Permalink to weblogic定时启动程序">weblogic定时启动程序</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html" rel="bookmark" title="Permalink to 如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row">如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ru-he-rang-adfri-qi-zu-jian-xian-shi-shi-fen-miao.html" rel="bookmark" title="Permalink to 如何让ADF日期组件显示时分秒">如何让ADF日期组件显示时分秒</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/duo-yu-yan-qie-huan-gong-neng-shi-xian.html" rel="bookmark" title="Permalink to 多语言切换功能实现">多语言切换功能实现</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/adfying-yong-zhong-ru-he-zai-backingbeanzhong-diao-yong-javascriptkong-zhi-ui.html" rel="bookmark" title="Permalink to ADF应用中如何在BackingBean中调用javascript控制UI">ADF应用中如何在BackingBean中调用javascript控制UI</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/javaxelpropertynotfoundexceptioncuo-wu-jie-jue.html" rel="bookmark" title="Permalink to javax.el.PropertyNotFoundException错误解决">javax.el.PropertyNotFoundException错误解决</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/adfying-yong-remote-deployment-failedcuo-wu-jie-jue.html" rel="bookmark" title="Permalink to ADF应用“Remote deployment failed”错误解决">ADF应用“Remote deployment failed”错误解决</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ding-zhi-adfying-yong-de-css.html" rel="bookmark" title="Permalink to 定制ADF应用的CSS">定制ADF应用的CSS</a></li>
+    </ol>
+    </section><!-- #article-list -->
+
+        <footer>
+            <nav>
+                <ul>
+                    <li>:: <a href="http://pelican.dengdezhao.cn/categories.html">Categories</a></li>
+                    <li>:: <a href="http://pelican.dengdezhao.cn/tags.html">Tags</a></li>
+                </ul>
+            </nav>
+                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
+        </footer>
+
+</body>
 </html>

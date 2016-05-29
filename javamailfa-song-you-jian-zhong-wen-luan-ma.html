@@ -1,27 +1,31 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_cn">
-  <head>
-    <title>"JavaMail发送邮件中文乱码" - dengdezhao</title>
-    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
-    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="dengdezhao Atom Feed" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>dengdezhao : "JavaMail发送邮件中文乱码"</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://pelican.dengdezhao.cn/theme/css/main.css" type="text/css" />
+        <link href="http://pelican.dengdezhao.cn/None" type="application/atom+xml" rel="alternate" title="dengdezhao ATOM Feed" />
 
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  </head>
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie.css"/>
+                <script src="http://pelican.dengdezhao.cn/js/IE8.js" type="text/javascript"></script><![endif]-->
 
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="span8">
-<div id="content">
-    <div class="header">
-        <h1>"JavaMail发送邮件中文乱码"</h1>
-    </div>
-    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2013-03-20(Wednesday) 00:00</span> - <span class="tags"><a href="/tag/javamail/">javamail</a></span></small></p>
-        <div class="entry-content">
-        <p>使用JavaMail发送邮件时，邮件主题以及发件人中有中文字符时出现乱码</p>
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body>
+        
+<header>
+    <h1><a href="http://pelican.dengdezhao.cn" id="site-title">dengdezhao </a> :
+        <a href="http://pelican.dengdezhao.cn/javamailfa-song-you-jian-zhong-wen-luan-ma.html" id="page-title">"JavaMail发送邮件中文乱码"</a></h1>
+<time datetime="2013-03-20T00:00:00+08:00">2013-03-20(Wednesday) 00:00</time></header>
+<article>
+    <p>使用JavaMail发送邮件时，邮件主题以及发件人中有中文字符时出现乱码</p>
 <p>邮件正文正常。</p>
 <p>尝试对中文字符串进行转码：</p>
 <p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
@@ -39,35 +43,17 @@
 <p>通过返回字符串<code>=?UTF-8?B?</code>得知已经转码成功，但为啥邮件主题仍然乱码？百思不得其解。然后突然发现之前另外一个邮件发送功能调用相同的代码显示是正常的，推测乱码可能跟主题字符串的内容有关。</p>
 <p>经过反复测试，终于找到乱码原因，结果令人大跌眼镜~！</p>
 <p><strong>原来这个版本的JavaMail对邮件主题有长度限制，超过大约15个中文字符就会显示乱码！</strong></p>
-        </div><!-- /.entry-content -->
-</div>
-        </div>
-        <div class="span3 offset1">
-          <div class="well">
-            <ul class="nav nav-list">
-              <li class="nav-header">Blog</li>
-              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
-              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
-              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
-              <li class="nav-header">Anderes</li>
-              <li><a href="http://pelican.dengdezhao.cn">Home</a></li>
-              <li><a href="about.html">About</a></li>
-            </ul>
-          </div><!-- /#menu -->
-        </div>
-      </div>
+</article>
 
-      <hr />
+        <footer>
+            <nav>
+                <ul>
+                    <li>:: <a href="http://pelican.dengdezhao.cn/categories.html">Categories</a></li>
+                    <li>:: <a href="http://pelican.dengdezhao.cn/tags.html">Tags</a></li>
+                </ul>
+            </nav>
+                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
+        </footer>
 
-      <div class="row">
-        <div class="span12">
-          <div id="about">
-            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
-          </div><!-- /#about -->
-        </div><!-- /#contentinfo -->
-      </div>
-    </div>
-
-
-  </body>
+</body>
 </html>

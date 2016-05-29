@@ -1,32 +1,33 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh_cn">
-  <head>
-    <title>Tag ADF - dengdezhao</title>
-    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
-    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="dengdezhao Atom Feed" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>dengdezhao - ADF</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://pelican.dengdezhao.cn/theme/css/main.css" type="text/css" />
+        <link href="http://pelican.dengdezhao.cn/None" type="application/atom+xml" rel="alternate" title="dengdezhao ATOM Feed" />
 
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  </head>
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie.css"/>
+                <script src="http://pelican.dengdezhao.cn/js/IE8.js" type="text/javascript"></script><![endif]-->
 
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="span8">
-<div id="content">
-<h1>Blog</h1>
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie6.css"/><![endif]-->
 
-<ul class="unstyled">
-        <li>
-            <div>
-                <div class="header">
-                    <h2>"<af:table>分页栏出现3个问号BUG解决"</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2013-06-06(Thursday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <hr />
+</head>
+
+<body>
+        
+        
+
+            <header>
+                <h1><a href="http://pelican.dengdezhao.cn" id="site-title">dengdezhao </a> : <a href="http://pelican.dengdezhao.cn/fen-ye-lan-chu-xian-3ge-wen-hao-bugjie-jue.html" id="page-title">"<af:table>分页栏出现3个问号BUG解决"</a></h1>
+<time datetime="2013-06-06T00:00:00+08:00">2013-06-06(Thursday) 00:00</time>            </header>
+
+            <article>
+                <hr />
 <p>平台：Jdeveloper 11.1.1.7.0</p>
 <hr />
 <p><strong>BUG描述</strong>
@@ -49,320 +50,150 @@
     {
       return getSkin().getTranslatedString(getLocaleContext(), key);
     }
-    catch …</p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/fen-ye-lan-chu-xian-3ge-wen-hao-bugjie-jue.html" rel="bookmark" title="Permalink to "分页栏出现3个问号BUG解决"">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
-
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>adf:tree做的树菜单如何过滤子节点的数据？</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2012-06-26(Tuesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>需求：项目中的树菜单需要权限用户的权限过滤显示子菜单，通过用户所在的用户组可以查看的页面ID（List)过滤子节点<br />
-解决方案：<br />
-因为树是通过viewLink关联自身的VO生成的，想在AM里添加方法，对VO进行过滤处理把结果返回。<br />
-但实现起来比较麻烦，调用方法之后要刷新页面，初始化的树数据过滤处理困难。<br />
-于是想重写VO的方法看能不能在VO层就过滤掉子节点。重写createViewLinkAccessorRS，此方法返回ViewLink的结果，也就是菜单的子节点数据
-<div>
-<blockquote>
-@Override<br />
-protected ViewRowSetImpl createViewLinkAccessorRS(AssociationDefImpl associationDefImpl,<br />
-ViewObjectImpl viewObjectImpl,<br />
-Row row,<br />
-Object[] object) {<br />
-ViewRowSetImpl viewRowSetImpl =<br />
-super.createViewLinkAccessorRS(associationDefImpl, viewObjectImpl,<br />
-row, object);<br />
-int count = 0;<br />
-// getList()拿到可以查看的pageId的列表，对比Row中的pageId属性，如果在List中存在，就取该Row，如果不存      //在，表示此子节点不予以显示，remove掉<br />
-if (this …</blockquote></div></p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html" rel="bookmark" title="Permalink to adf:tree做的树菜单如何过滤子节点的数据？">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
-
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>表内的checkbox当数据量大时发现部分行勾选不中</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2012-06-26(Tuesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>测试发现，当数据只有25行的时候，都可以正常勾选，超过25行的数据，总是勾选不中。</p>
-
-<p>问题产生原因：<br />
-由于自定制的checkbox是设置了immediate=true 即时给数据行的checkbox字段赋值。<br />
-VO的rangeSize 默认是25，<br />
-因此导致25条数据内是可选。25条之外的数据初始时没有取出来，因此对这些没取的数据行设置checkbox自然就不生效了（展现出来就是checkbox勾选不中）</p>
-
-<p>解决方案：<br />
-修正VO的rangeSize为-1，查询全部，即可解决此问题。</p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html" rel="bookmark" title="Permalink to 表内的checkbox当数据量大时发现部分行勾选不中">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
-
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>关于定制validator</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2012-06-26(Tuesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>一个时刻字段，要求输入00:00-12:60这样的时刻范围<br />
-使用如下的正则表达式，过滤掉了不合规则的数字之后，还差一个逻辑，结束时刻不能小于开始时刻，比如：10：00-9：00这样的输入也是不合法的。正则太折磨眼力了，应该也是可以做到这点的吧，为了偷懒，就定制个validator来处理这个点。
-<div>
-<blockquote>&lt;af:validateRegExp pattern="([0-1][0-9]|2[0-4])\:([0-5][0-9]|60)\-([0-1][0-9]|2[0-4])\:([0-5][0-9]|60)" messageDetailNoMatch="请输入时刻，例如 00：00-24：60 " hint="请输入时刻，例如 00：00-24：60"/&gt;</blockquote>
-</div>
-<strong>Step1</strong>。创建一个<strong>ValidatorTime</strong>类实现Validator接口
-<div>
-<blockquote>package …</blockquote></div></p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-ding-zhi-validator.html" rel="bookmark" title="Permalink to 关于定制validator">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
-
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>关于ManagedBean中多次执行构造方法时的问题</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2012-06-26(Tuesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>有时候需要在初始化时执行一些查询，但发现会多次执行。需要在构造方法里添加一行代码避免页面点击时多次执行初始化。<br />
-if (!(Boolean)ADFUtils.getBindObject("adfFacesContext.postback")) {<br />
-init()；<br />
+    catch (MissingResourceException mre)
+    {
+      _LOG.severe("CANNOT_GET_RESOURCE_KEY", new String[] { key, getSkin().getId() }); }
+    return "???" + key + "???";
+  }</p>
+<p>可知在调用getTranslatedString获取Resource时，发生MissingResourceException异常所以返回了带"???"+Key+"???"字样的字符串。    </p>
+<p><strong>解决方案：</strong></p>
+<p>根据以上分析基本可知出现问号的原因是在获取resourcebundle时，找不到Key为页的resource，所以直接返回了"???" + key + "???"，就出现分页显示出现问号的BUG。    </p>
+<p><strong>方案一：</strong>重写ResourceBundle类，增加KEY值为“页”的资源。
+步骤如下：    </p>
+<ul>
+<li>
+<p _="%" endcodeblock="endcodeblock">创建SkinBundle类 extends ListResourceBundle   <br />
+{% codeblock lang:java %}
+package cn.dengdezhao.bundle
+public class SkinBundle extends ListResourceBundle {
+    @Override
+    public Object[][] getContents() {
+        System.out.println("executing...");
+        return  new Object[][]{ { "页", "页" } };
+    }
 }</p>
+</li>
+<li>
+<p _="%" endcodeblock="endcodeblock">创建trinidad-skins.xml文件注册定制化Skin  <br />
+{% codeblock lang:xml %}
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+    <skin>
+        <id>mySkin.desktop</id>
+        <family>mySkin</family>
+        <extends>skyros-v1.desktop</extends> 
+        <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+        <style-sheet-name>css/mySkin.css</style-sheet-name>
+        <bundle-name>cn.dengdezhao.bundle.SkinBundle</bundle-name>
+        <!--<bundle-name>ApplicationBundle</bundle-name>-->
+    </skin>
+</skins></p>
+</li>
+<li>
+<p _="%" endcodeblock="endcodeblock">修改trinidad-config.xml文件如下：  <br />
+{% codeblock lang:xml %}
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<trinidad-config xmlns="http://myfaces.apache.org/trinidad/config">
+  <skin-family>mySkin</skin-family>
+</trinidad-config></p>
+</li>
+<li>
+<p>创建css/mySkin.css文件（内容默认CSS即可）</p>
+</li>
+</ul>
+<p>运行即发现问号消失。</p>
+<p _="%" endcodeblock="endcodeblock"><strong>方案二：</strong>其实原理跟方案一一样，也是通过改resourcebundle实现。resourcebundle支持三种类型，一种是以上的扩展ListResourceBundle类实现，一种是通过配置文件properties实现，另外一种是xliff实现。也可创建一个ApplicationBundle.properties文件，内容如下:  <br />
+{% codeblock lang:java %}
+页 = 页</p>
+<p>trinidad-skins.xml里的bundle-name节点设置成ApplicationBundle也可实现同样效果。</p>
+<p>定制CSS可参照["定制CSS"]</p>            </article>
+                <section id="article-list">
+                    <h2>All posts</h2>
+                    <ol>
+        
 
-<p>通过页面是否postback来控制只初始化一次。</p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html" rel="bookmark" title="Permalink to 关于ManagedBean中多次执行构造方法时的问题">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html" rel="bookmark" title="Permalink to adf:tree做的树菜单如何过滤子节点的数据？">adf:tree做的树菜单如何过滤子节点的数据？</a></li>
+        
 
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>关于selectBooleanCheckbox 的问题</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2012-06-26(Tuesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>页面的 selectBooleanCheckbox 选择后，总提示 不是数字（组件value是 true 或 false,数据库存的是Number），怎么解决</p>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html" rel="bookmark" title="Permalink to 表内的checkbox当数据量大时发现部分行勾选不中">表内的checkbox当数据量大时发现部分行勾选不中</a></li>
+        
 
-<p>方案有三个<br />
-1。如果是基于表的Number字段(假设字段名是Flag，值是1或者0），想生成selectBooleanCheckbox ，可以重写这个VO的的 setFlag()跟getFlag()方法如下：<br />
-public void setFlag(Boolean value){<br />
-this.flag=value==true?1:0;<br />
-}
-public Boolean getFlag(){<br />
-return this.flag==0?false:true;<br />
-}</p>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/guan-yu-ding-zhi-validator.html" rel="bookmark" title="Permalink to 关于定制validator">关于定制validator</a></li>
+        
 
-<p>2。设置valueChangeListener.<br />
-在valueChange方法里捕获当前selectBooleanCheckbox 的值，然后转化成Number类型的传给VO</p>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html" rel="bookmark" title="Permalink to 关于ManagedBean中多次执行构造方法时的问题">关于ManagedBean中多次执行构造方法时的问题</a></li>
+        
 
-<p>3。如果是只读的表，可以在UI上通过EL表达式处理。</p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html" rel="bookmark" title="Permalink to 关于selectBooleanCheckbox 的问题">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html" rel="bookmark" title="Permalink to 关于selectBooleanCheckbox 的问题">关于selectBooleanCheckbox 的问题</a></li>
+        
 
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>关于VO的只读可写等属性设置</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2012-06-26(Tuesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>如果生成ViewObject 的时候选择的是只读的VO的话，会发现VO的source里有ReadOnly="true"。<br />
-需求1：在MB中我通过代码拿到这个VO的实例，我想通过以下代码添加Row
-<div>
-<blockquote>Row newRow=Vo.createRow();<br />
-newRow.setAttribute("attribute1","value1");<br />
-newRow.setAttribute("attribute2","value2");<br />
-newRow.setAttribute("attribute3","value3");<br />
-Vo.insertRow(newRow);</blockquote>
-</div>
-最终发现，只读VO无法插入数据。怎么办？将ReadOnly改成"false"之后测试，发现满足需求~！<br />
-需求2：满足需求1之后发现，Vo里的确插入数据了。如果页面上有保存按钮，也会将这个数据更改到数据库，而这个数据只是需要在MB中起过渡作用，不必将newRow的数据postChange到DB，怎么办？<br />
-VO里 这个属性DeleteParticipant 立功了。 DeleteParticipant就是控制数据是否保存到DB的。设置 DeleteParticipant="false"发现满足了需求！</p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html" rel="bookmark" title="Permalink to 关于VO的只读可写等属性设置">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html" rel="bookmark" title="Permalink to 关于VO的只读可写等属性设置">关于VO的只读可写等属性设置</a></li>
+        
 
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>immediate="true" 的异常</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2012-06-26(Tuesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>设置按钮的immediate="true" 可以避免因按钮提交FORM导致的页面刷新闪烁，但也会带来麻烦。<br />
-假如对表的取消按钮设置了此属性，可能会发生新增数据，然后点取消作rollback时数据显示异常。<br />
-开发时值得注意</p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/immediatetrue-de-yi-chang.html" rel="bookmark" title="Permalink to immediate="true" 的异常">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/immediatetrue-de-yi-chang.html" rel="bookmark" title="Permalink to immediate="true" 的异常">immediate="true" 的异常</a></li>
+        
 
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>oracle数据库用户被锁问题解决</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2012-06-26(Tuesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>运行AM的时候报个JDBC连接错误，ORA-280000:用户被锁的异常。<br />
-于是在PL/SQL DEV里切换成SYSTEM用户 alter user XXX account unlock;之后，用PL/SQL DEV测试 可以连上了<br />
-再运行AM的时候，又报了个用户被锁。很是蛋疼<br />
-于是换到命令行，尝试以SYSDBA的身份再执行一次alter account unlock;<br />
-发现连不上：报了以下错误：<br />
-ORA-28056: Writing audit records to Windows Event Log failed<br />
-这你妹的，原来是系统日志满了，解决方案：<br />
-打开windows 事件查看器，将应用程序日志清理一下，重新连接数据库，连接成功。</p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle数据库用户被锁问题解决">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle数据库用户被锁问题解决">oracle数据库用户被锁问题解决</a></li>
+        
 
-        <li><hr /></li>
-        <li>
-            <div>
-                <div class="header">
-                    <h2>如何在MB中对selectionListener collectionModel.makeCurrent调用</h2>
-                </div>
-                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>2012-06-26(Tuesday) 00:00</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
-                <div class="entry-content">
-                    <p>如何在MB中对Table的默认"#{bindings.PromotionVO1.collectionModel.makeCurrent}"进行调用？</p>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html" rel="bookmark" title="Permalink to 如何在MB中对selectionListener collectionModel.makeCurrent调用">如何在MB中对selectionListener collectionModel.makeCurrent调用</a></li>
+        
 
-<p>当需要重写adf:table的缺省的selectListener时，可以在自己绑定的MB的方法里，调用默认的makeCurrent方法。取得当前行的数据，进行自己的定制操作。方法如下：
-<div>
-<blockquote>//调用缺省makeCurrent<br />
-JSFUtils.resolveMethodExpression("#{bindings.yourVO.collectionModel.makeCurrent}",<br />
-new Class[] { SelectionEvent.class },<br />
-new Object[] { selectionEvent });</blockquote>
-</div>
-取得选中行的数据
-<div>
-<blockquote>Row selectedRow =<br />
-(Row)JSFUtils.resolveExpression("#{bindings.yourVOIterator.currentRow}");</blockquote>
-</div>
-然后就可以针对取得的数据进行定制开发了。</p>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html" rel="bookmark" title="Permalink to 如何在MB中对selectionListener collectionModel.makeCurrent调用">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html" rel="bookmark" title="Permalink to Table内增加全选checkbox">Table内增加全选checkbox</a></li>
+        
 
-        <li><hr /></li>
-</ul><!-- /#posts-list -->
+ 
+            <li><a href="http://pelican.dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html" rel="bookmark" title="Permalink to weblogic定时启动程序">weblogic定时启动程序</a></li>
+        
 
-<div class="pagination pagination-centered">
-    <ul>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="http://pelican.dengdezhao.cntag/adf2/">2</a></li>
-    </ul>
-</div>
-</div><!-- /#content -->
-        </div>
-        <div class="span3 offset1">
-          <div class="well">
-            <ul class="nav nav-list">
-              <li class="nav-header">Blog</li>
-              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
-              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
-              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
-              <li class="nav-header">Anderes</li>
-              <li><a href="http://pelican.dengdezhao.cn">Home</a></li>
-              <li><a href="about.html">About</a></li>
-            </ul>
-          </div><!-- /#menu -->
-        </div>
-      </div>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html" rel="bookmark" title="Permalink to 如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row">如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row</a></li>
+        
 
-      <hr />
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ru-he-rang-adfri-qi-zu-jian-xian-shi-shi-fen-miao.html" rel="bookmark" title="Permalink to 如何让ADF日期组件显示时分秒">如何让ADF日期组件显示时分秒</a></li>
+        
 
-      <div class="row">
-        <div class="span12">
-          <div id="about">
-            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
-          </div><!-- /#about -->
-        </div><!-- /#contentinfo -->
-      </div>
-    </div>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/duo-yu-yan-qie-huan-gong-neng-shi-xian.html" rel="bookmark" title="Permalink to 多语言切换功能实现">多语言切换功能实现</a></li>
+        
 
+ 
+            <li><a href="http://pelican.dengdezhao.cn/adfying-yong-zhong-ru-he-zai-backingbeanzhong-diao-yong-javascriptkong-zhi-ui.html" rel="bookmark" title="Permalink to ADF应用中如何在BackingBean中调用javascript控制UI">ADF应用中如何在BackingBean中调用javascript控制UI</a></li>
+        
 
-  </body>
+ 
+            <li><a href="http://pelican.dengdezhao.cn/javaxelpropertynotfoundexceptioncuo-wu-jie-jue.html" rel="bookmark" title="Permalink to javax.el.PropertyNotFoundException错误解决">javax.el.PropertyNotFoundException错误解决</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/adfying-yong-remote-deployment-failedcuo-wu-jie-jue.html" rel="bookmark" title="Permalink to ADF应用“Remote deployment failed”错误解决">ADF应用“Remote deployment failed”错误解决</a></li>
+        
+
+ 
+            <li><a href="http://pelican.dengdezhao.cn/ding-zhi-adfying-yong-de-css.html" rel="bookmark" title="Permalink to 定制ADF应用的CSS">定制ADF应用的CSS</a></li>
+    </ol>
+    </section><!-- #article-list -->
+
+        <footer>
+            <nav>
+                <ul>
+                    <li>:: <a href="http://pelican.dengdezhao.cn/categories.html">Categories</a></li>
+                    <li>:: <a href="http://pelican.dengdezhao.cn/tags.html">Tags</a></li>
+                </ul>
+            </nav>
+                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
+        </footer>
+
+</body>
 </html>
