@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>Tag reports - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+<h1>Blog</h1>
+
+<ul class="unstyled">
+        <li>
+            <div>
+                <div class="header">
+                    <h2>EBS 并发请求调用SQL时，日志跟输出中文出现乱码问题</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 20 September 2012</span> - <span class="tags"><a href="/tag/reports/">reports</a></span></small></p>
+                <div class="entry-content">
+                    <p>已知数据库，数据库所在服务器字符集都是UTF8，在并发请求调用的SQL里，fnd_file.put_line(fnd_file.log,'中文')语句输出时，在EBS界面查看就是乱码。</p>
+
+<p>出现乱码的问题思路：</p>
+
+<p>1.查看客户端系统字符集是否支持中文。确认本机支持，并且NLS_LANG跟数据库都保持一致，可以排除此因素。</p>
+
+<p>2.查看数据库端字符集编码是否支持中文，得知是UTF8编码。</p>
+
+<p>3.查看服务器端是否支持中文编码</p>
+
+<p>发现以上三个因素都可以排除，EBS请求会在服务器端生成log文件，因此telnet到服务器直接查看生成的log文件看是否出现乱码</p>
+
+<p>cd $APPLPTMP</p>
+
+<p>发现生成的文件也是乱码，基本可以确定在数据库端生成文件即出现乱码，需要对中文字符进行转码输出。 exec find_file.put_file(fnd_file.log,convert('中文','UTF8','ZHS16GBK'))；</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ebs-bing-fa-qing-qiu-diao-yong-sqlshi-ri-zhi-gen-shu-chu-zhong-wen-chu-xian-luan-ma-wen-ti.html" rel="bookmark" title="Permalink to EBS 并发请求调用SQL时，日志跟输出中文出现乱码问题">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>EBS并发请求调用Oracle reports时，如何写入日志文件</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 11 September 2012</span> - <span class="tags"><a href="/tag/reports/">reports</a></span></small></p>
+                <div class="entry-content">
+                    <p>EBS并发请求调用procedure时，直接在被调用的procedure中使用fnd_file.put_line即可达到要求；</p>
+
+<p>如果并发请求调用的是oracle reports时，写入日志文件需要使用reports的方法。</p>
+
+<p>在Before/After report Trigger中使用SRW.message(0,'Message');</p>
+
+<p>中断报表执行使用SRW.break;</p>
+
+<p>&nbsp;</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ebsbing-fa-qing-qiu-diao-yong-oracle-reportsshi-ru-he-xie-ru-ri-zhi-wen-jian.html" rel="bookmark" title="Permalink to EBS并发请求调用Oracle reports时，如何写入日志文件">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+</ul><!-- /#posts-list -->
+
+<div class="pagination pagination-centered">
+    <ul>
+        <li class="active"><a href="#">1</a></li>
+    </ul>
+</div>
+</div><!-- /#content -->
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

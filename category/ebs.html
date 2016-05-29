@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>Blog - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+<h2>Articles in the ebs category</h2>
+
+<ul class="unstyled">
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"OAF个性化Button获取页面参数"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 03 June 2014</span> - <span class="tags"><a href="/tag/oaf/">oaf</a></span></small></p>
+                <div class="entry-content">
+                    <ul>
+<li>平台: R12    </li>
+<li>需求: 需要个性化一个button的Destination URI属性，并添附上一个参数。</li>
+</ul>
+<p>实现方法：</p>
+<ol>
+<li>
+<p>本来重写CO便很容易实现该需求，但是涉及到修改代码以及各个环境更新就很麻烦了，所以如果个性化button的URL是最方便了。</p>
+</li>
+<li>
+<p>个性化又涉及到如何在URL里传递参数的问题。  </p>
+</li>
+</ol>
+<p>右键当前页面，查看源代码如下：      </p>
+<div class="highlight"><pre><span></span>&lt;form id=&quot;DefaultFormName&quot; name=&quot;DefaultFormName&quot; style=&quot;margin:0px&quot; method=&quot;POST&quot;          action=&quot;/OA_HTML/OA.jsp?page=/oracle/apps/pa/deliverable/webui/CrUpDeliverablePG&amp;paCallingPage=DLVLIST&amp;paCallingMode=VIEW&amp;paProjectId=106691&amp;paDeliverableId=113287&amp;paDlvrItemId=106962&amp;&amp;addBreadCrumb=RP&amp;_ti=1696581738&amp;PersonalizationParam=PersonalizationParamAdmin …</pre></div>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/oafge-xing-hua-buttonhuo-qu-ye-mian-can-shu.html" rel="bookmark" title="Permalink to "OAF个性化Button获取页面参数"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"OAF中创建LOV"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 18 April 2013</span> - <span class="tags"><a href="/tag/oaf/">oaf</a></span></small></p>
+                <div class="entry-content">
+                    <p>环境：Oracle9i Jdeveloper+R11i</p>
+<h4>首先创建AM</h4>
+<p>创建一个LovAM，默认配置即可。</p>
+<h4>创建VO</h4>
+<p _="%" endcodeblock="endcodeblock">创建LovVO，不需要基于EO，输入查询SQL如下：
+{% codeblock lang:sql %}
+select distinct INVENTORY_ITEM_ID,concatenated_segments 
+from MTL_SYSTEM_ITEMS_KFV where organization_id=85</p>
+<p>将创建好的VO添加到AM的data module中</p>
+<h4>创建RN</h4>
+<p>右键工程，创建一个RN，Scope设置为public.    </p>
+<p>选中创建好的LovRN.xml，在structure Window窗口中选中LovRN右建New Region Using Wizard.找到之前创建的LovVO.    </p>
+<p>修改字段属性如下：   <br />
+Search Allowed : true   <br />
+Selective Search Criteria : true    </p>
+<h4>创建PG页面引用LOV</h4>
+<p>创建一个PG页面LovPG.xml，AM Definition设置为之前创建的LovAM路径 …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/oafzhong-chuang-jian-lov.html" rel="bookmark" title="Permalink to "OAF中创建LOV"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"配置OAF开发环境"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Wed 17 April 2013</span> - <span class="tags"><a href="/tag/oaf/">oaf</a></span></small></p>
+                <div class="entry-content">
+                    <h4>查看EBS系统OA版本信息</h4>
+<p>方法一：使用OPERATIONS用户登陆EBS系统，选择“Diagnostics”后，在页下脚选择“About this Page”后选择“Technology Components”标签可查看相应版本信息。</p>
+<p _="%" endcodeblock="endcodeblock">方法二：访问URI：<em>R12不可用</em>  <br />
+{% codeblock lang:java %}
+http://<HOST>:<PORT>/OA_HTML/OAInfo.jsp  <br /></p>
+<h4>查看OAF版本下载相应JDEV开发工具</h4>
+<p>metalink document id: 787209.1 &amp; 416708.1</p>
+<p>例如：p4141787_11i_GENERIC.zip</p>
+<p>解压缩后把“/jdevhome/jdev”路径加到系统变量中，变量名：      JDEV_USER_HOME=F:\p4141787_11i_GENERIC\jdevhome\jdev</p>
+<h4>配置DBC文件</h4>
+<p>确认当前EBS系统使用的dbc文件.</p>
+<p _="%" endcodeblock="endcodeblock">连接EBS数据库，执行以下SQL查询：
+{% codeblock …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/pei-zhi-oafkai-fa-huan-jing.html" rel="bookmark" title="Permalink to "配置OAF开发环境"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"OAF上传大批量EXCEL文件"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 09 April 2013</span> - <span class="tags"><a href="/tag/oaf/">oaf</a></span></small></p>
+                <div class="entry-content">
+                    <p>客户有个需求：大量数据通过EXCEL导入系统表，并能提供效验及去重功能。</p>
+<h4>设计思路</h4>
+<ul>
+<li>采用POI解析EXCEL文件；</li>
+<li>bulk insert 插入数据到临时表</li>
+<li>临时表结合正式表去除重复</li>
+</ul>
+<h4>POI解析EXCEL</h4>
+<p>在CO的<code>processFormRequest</code>方法中添加如下:  <br />
+{% codeblock lang:java %}
+  public void processFormRequest(OAPageContext pageContext, OAWebBean webBean)
+  {
+    super.processFormRequest(pageContext, webBean);
+    OAApplicationModule am = pageContext.getApplicationModule(webBean);</p>
+<div class="highlight"><pre><span></span>if (pageContext.getParameter(&quot;uploadBtn&quot;) != null)
+{
+  DataObject fileUploadData = (DataObject)pageContext.getNamedDataObject(&quot;uploadFile&quot;);
+  String fileName = null;
+  try {
+    fileName = (String)fileUploadData …</pre></div>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/oafshang-chuan-da-pi-liang-excelwen-jian.html" rel="bookmark" title="Permalink to "OAF上传大批量EXCEL文件"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"OAF单选删除行功能"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Wed 20 March 2013</span> - <span class="tags"><a href="/tag/oaf/">oaf</a></span></small></p>
+                <div class="entry-content">
+                    <hr />
+<p>平台：Jdeveloper 9i    </p>
+<hr />
+<p><strong>一般实现步骤：</strong></p>
+<ol>
+<li>在VO中添加新transient属性selector，updatable设置为always。    </li>
+<li>在PG中给table添加singleSelection方法，并绑定view Instance为VO的instance，View Attribute为刚刚新建的transient属性seletor。        </li>
+<li>这样当用户勾选checkbox时，会给transient属性变量赋值为Y，因此，在删除逻辑中循环判断VO中的transient属性，当其为Y时执行remove该行即可实现选择删除功能。  <br />
+<strong>相关代码如下：</strong></li>
+</ol>
+<p><strong>CO中processFormRequest里添加代码如下：</strong></p>
+<p>{% codeblock lang:java %}
+    //当单击deleteBtn按钮时执行AM中的deleteAutoSequenceVO方法  <br />
+    if (pageContext.getParameter("deleteBtn")!=null)
+    {
+      am.invokeMethod("deleteAutoSequenceVO");</p>
+<div class="highlight"><pre><span></span>}
+</pre></div>
+
+
+<p>{% endcodeblock %}</p>
+<p><strong>AM中代码如下：</strong></p>
+<p>{% codeblock lang:java %}
+    public void deleteAutoSequenceVO() {
+        OAViewObject vo = this.getChAutoSequenceVO1();
+        RowSetIterator iter = vo.createRowSetIterator("delete");
+        if (vo != null …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/oafdan-xuan-shan-chu-xing-gong-neng.html" rel="bookmark" title="Permalink to "OAF单选删除行功能"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>Use Javascript in OAF</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Wed 30 January 2013</span> - <span class="tags"><a href="/tag/javascript/">javascript</a>, <a href="/tag/oaf/">oaf</a></span></small></p>
+                <div class="entry-content">
+                    <h4>使用Js脚本库</h4>
+<p _="%" endcodeblock="endcodeblock">在CO的<em>processRequest</em>中引入JS库<br />
+编写JS库:Calendar2013.js
+{% codeblock lang:java %}
+pageContext.putJavaScriptLibrary("Calendar","Calendar2013.js"); 
+((OAMessageTextInputBean)webBean
+.findChildRecursive("inputDate"))
+.setOnClick("setday(this)");</p>
+<p>需要把Calendar2013.js放置在$<strong>COMMON_TOP</strong>/html下。</p>
+<h4>直接引用javaScript</h4>
+<p _="%" endcodeblock="endcodeblock">编写<em>JavaScript</em>:
+{% codeblock lang:java %}
+String javaScript="JAVASCRIPT:function setday(){...}";</p>
+<p>在<strong>CO</strong>的<em>processRequest</em>中加载<em>javascript</em></p>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+pageContext.putJavaScriptFunction("sayday()",javaScript …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/use-javascript-in-oaf.html" rel="bookmark" title="Permalink to Use Javascript in OAF">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>虚拟机环境RHEL6.3安装EBS R12</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 15 January 2013</span> - <span class="tags"><a href="/tag/RHEL6.3/">RHEL6.3</a>, <a href="/tag/R12/">R12</a></span></small></p>
+                <div class="entry-content">
+                    <p>一直想自己搭建个R12的环境学习学习，于是买了块500G的移动硬盘，想把R12安装在移动硬盘中。</p>
+<p>准备工作：</p>
+<p>先安装好虚拟机VMware Workstation。创建一个RHEL6.3的虚拟机，硬盘300G,足够R12的FRESH安装了。（如果想DEMO安装，建议还是再大点，以免出现空间不足）</p>
+<p>下载好R12的安装介质，我是下载的12.1.1.0版本的，当时通过代理断断续续下载了一个星期，真是坑爹。（下载完成注意核准MD5保证无损）</p>
+<p>以ROOT进入虚拟机环境中，配置RHEL6.3的网络，使用静态IP:192.168.133.129 /255.255.255.0   gateWay:0.0.0.0 DNS:192.168.133.1</p>
+<p>具体IP如何设置，可通过检查在虚拟机中能否PING通宿主机，以及能否PING通www.dengdezhao.cn来测试：）</p>
+<p>配置主机名信息等#vim …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/xu-ni-ji-huan-jing-rhel63an-zhuang-ebs-r12.html" rel="bookmark" title="Permalink to 虚拟机环境RHEL6.3安装EBS R12">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>虚拟机安装EBS R12时出现错误RW-50004 解决</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Sat 12 January 2013</span> - <span class="tags"><a href="/tag/rw-50004/">rw-50004</a></span></small></p>
+                <div class="entry-content">
+                    <p>一般出现这个错误多半应该是库文件导致的，查看日志得知是 需要的 unzip 版本过高，RHEL上安装的是6.0的，而R12.1.1.1只支持unzip 5.X 的，很坑爹，yum erase unzip 然后重新安装unzip 5.X rpm即可解决~~</p>
+
+<p>&nbsp;</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/xu-ni-ji-an-zhuang-ebs-r12shi-chu-xian-cuo-wu-rw-50004-jie-jue.html" rel="bookmark" title="Permalink to 虚拟机安装EBS R12时出现错误RW-50004 解决">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>OAF开发通过EXCEL导入数据时，用户需要将可能存在重复的主键信息提示出来</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 10 January 2013</span> - <span class="tags"><a href="/tag/oaf/">oaf</a></span></small></p>
+                <div class="entry-content">
+                    <p>OAF开发通过EXCEL导入数据时，用户需要将可能存在重复的主键信息提示出来.</p>
+
+<p>有以下两种主键冲突情况：</p>
+
+<p>1, 表中不存在重复数据，即将导入的数据中存在重复数据。比如表中记录为空，导入的EXCEL中存在记录ID007,ID008,ID009,ID007，此时OAF页面需要将ID007提示出来；</p>
+
+<p>2,表中存在重复数据。即表中原来已经存在一条记录ID007，此时导入的数据中也存在ID007，需要将ID007提示出来。</p>
+
+<p>解决方案：</p>
+
+<p>原本想通过查询数据库中ID007的记录是否存在再抛出OAException的做法来实现此需求，后来一想感觉好麻烦；便换种思路决定通过异常来判断。</p>
+
+<p>情况1，在ViewObject对象CreateRow()之后，给创建的新Row.setAttribute("id",007)时，如果VO中存在两个007的新ROW，会抛出TooManyObjectsException,此时捕获该异常并返回此ID值。</p>
+
+<p>情况2，难点也在这里，调用commit保存数据时，主键约束异常才会抛出来而且还不知道重复的ID值是多少。重写EO的doDML方法，在此方法中捕获DMLException异常，并且可以得到重复的ID值；
+<pre class="brush:java">  public void doDML(int i,TransactionEvent e)
+  {
+    try{
+    super.doDML(i …</pre></p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/oafkai-fa-tong-guo-exceldao-ru-shu-ju-shi-yong-hu-xu-yao-jiang-ke-neng-cun-zai-zhong-fu-de-zhu-jian-xin-xi-ti-shi-chu-lai.html" rel="bookmark" title="Permalink to OAF开发通过EXCEL导入数据时，用户需要将可能存在重复的主键信息提示出来">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>OAF 使用OAException输出中文时出现乱码 解决</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Wed 09 January 2013</span> - <span class="tags"><a href="/tag/oaf/">oaf</a></span></small></p>
+                <div class="entry-content">
+                    <p>使用throw new OAException(“你们好”,OAException.WARNING);时出现乱码，尝试new String("你们好”.getBytes("GBK"),"UTF-8")依然没用。</p>
+
+<p>检查JDEV的Preferences中ENCODING已经更改为“UTF-8”，纠结了好一阵子，才发现工程的Project Settings的Compiler里也有一个ENCODING没有改，囧改好之后再测试乱码问题即解决</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/oaf-shi-yong-oaexceptionshu-chu-zhong-wen-shi-chu-xian-luan-ma-jie-jue.html" rel="bookmark" title="Permalink to OAF 使用OAException输出中文时出现乱码 解决">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+</ul><!-- /#posts-list -->
+
+<div class="pagination pagination-centered">
+    <ul>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="http://pelican.dengdezhao.cncategory/ebs2/">2</a></li>
+    </ul>
+</div>
+</div><!-- /#content -->
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

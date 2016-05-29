@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>Blog - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+<h1>Blog</h1>
+
+<ul class="unstyled">
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"如何在页面碎片加载前调用逻辑"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Mon 23 September 2013</span> - <span class="tags"><a href="/tag/RegionController/">RegionController</a></span></small></p>
+                <div class="entry-content">
+                    <ul>
+<li>
+<p>平台:Jdeveloper 12c</p>
+</li>
+<li>
+<p>需求：在JSPX页面加载前如果需要调用逻辑可以通过重写PhaseListener实现，如果在JSFF页面碎片加载前（也即是region加载前）调用应该如何实现？</p>
+</li>
+</ul>
+<p><strong>实现方法</strong></p>
+<p>重写RegionController方法可以达到以上需求。</p>
+<ul>
+<li>重写 RegionController类，在refreshRegion方法中加入需要调用的逻辑即可在页面碎片加载之前调用。</li>
+</ul>
+<p>{% codeblock lang:java %}
+package cn.dengdezhao;
+import oracle.adf.model.RegionContext;
+import oracle.adf.model.RegionController;
+public class myController implements RegionController {
+    public myController() {
+        super();
+    }
+    @Override
+    public boolean refreshRegion(RegionContext regionContext) {
+        // TODO Implement this method
+        int flag=regionContext …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ru-he-zai-ye-mian-sui-pian-jia-zai-qian-diao-yong-luo-ji.html" rel="bookmark" title="Permalink to "如何在页面碎片加载前调用逻辑"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"如何获取web.xml中的context-param参数"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Wed 04 September 2013</span> - <span class="tags"><a href="/tag/context-param/">context-param</a></span></small></p>
+                <div class="entry-content">
+                    <p><strong>通过EL表达试获取</strong></p>
+<p _="%" endcodeblock="endcodeblock">以web.xml中的<context-param>参数：javax.faces.FACELETS_VIEW_MAPPINGS为例,
+可通过以下EL获取。  <br />
+{% codeblock lang:java %}  <br />
+${initParam['javax.faces.FACELETS_VIEW_MAPPINGS']}  <br /></p>
+<p _="%" endcodeblock="endcodeblock">如果参数名称很简单，比如：testParameter，EL表达式也可以写成以下方式：   <br />
+{% codeblock lang:java %}  <br />
+${initParam.testParameter}  <br /></p>
+<p><strong>通过JAVA代码获取</strong></p>
+<p _="%" endcodeblock="endcodeblock">如果需要在MB方法中获取该参数值，可以参照以下代码：
+{% codeblock lang:java %}  <br />
+    public String action() {
+        FacesContext fctx=FacesContext.getCurrentInstance();
+        ExternalContext ec=fctx.getExternalContext();
+        ServletContext servletContext=(ServletContext)ec.getContext();
+        String value=servletContext.getInitParameter …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ru-he-huo-qu-webxmlzhong-de-context-paramcan-shu.html" rel="bookmark" title="Permalink to "如何获取web.xml中的context-param参数"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"Centos下安装mysql5.6后忘记ROOT密码，重置密码"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 25 June 2013</span> - <span class="tags"><a href="/tag/mysql/">mysql</a></span></small></p>
+                <div class="entry-content">
+                    <p><strong>安装</strong></p>
+<p _="%" endcodeblock="endcodeblock">去<a href="https://edelivery.oracle.com/EPD/Search/handle_go">oracle官网</a>下载mysql5.6 for linux安装介质V38444-01.zip。  <br />
+解压缩之后  <br />
+{% codeblock lang:java %}
+MySQL-client-advanced-5.6.12-1.el6.i686.rpm
+MySQL-devel-advanced-5.6.12-1.el6.i686.rpm
+MySQL-embedded-advanced-5.6.12-1.el6.i686.rpm
+MySQL-server-advanced-5.6.12-1.el6.i686.rpm
+MySQL-shared-advanced-5.6.12-1.el6.i686.rpm
+MySQL-shared-compat-advanced-5.6.12-1.el6.i686.rpm
+MySQL-test-advanced-5.6 …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/centosxia-an-zhuang-mysql56hou-wang-ji-rootmi-ma-zhong-zhi-mi-ma.html" rel="bookmark" title="Permalink to "Centos下安装mysql5.6后忘记ROOT密码，重置密码"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"Attribute set for xxxAttribute in view object xxxVO failed问题解决"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Wed 19 June 2013</span> - <span class="tags"><a href="/tag/AttributeSet/">AttributeSet</a></span></small></p>
+                <div class="entry-content">
+                    <hr />
+<h2>平台：Jdeveloper 9i</h2>
+<p>异常描述：     </p>
+<p _="%" endcodeblock="endcodeblock">在表增加单选checkbox时，在VO中创建transient属性selector,最终在页面中无法勾选checkbox，发现值没法保存到VO中，页面抛出该异常：<br />
+{% codeblock lang:java %} <br />
+null - Attribute set for Selector in view object employeeVO1 failed</p>
+<p>解决方案：    </p>
+<ol>
+<li>检查VO中的transient属性selector是否设置为updatable</li>
+<li _="%" endcodeblock="endcodeblock">如果是在开发模式下，清空所有classes文件，重新编译；如果是在正式环境，删除该路径下的VO对象，可使用以下命令。  <br />
+{% codeblock lang:java %}
+exec jdr_utils.deletedocument('/oracle/apps/dengdezhao/test/server/employeeVO');  <br /></li>
+</ol>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/attribute-set-for-xxxattribute-in-view-object-xxxvo-failedwen-ti-jie-jue.html" rel="bookmark" title="Permalink to "Attribute set for xxxAttribute in view object xxxVO failed问题解决"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"从BackingBean中调用不带fragments的taskflow"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Sat 08 June 2013</span> - <span class="tags"><a href="/tag/taskflow/">taskflow</a></span></small></p>
+                <div class="entry-content">
+                    <p>有时候需要在backingBean中调用某一taskflow, 可以使用以下代码调用。不过只适用于可单独运行的taskflow，含有page fragments的taskflow不在此范围。    </p>
+<p _="%" endcodeblock="endcodeblock">代码如下：  <br />
+{% codeblock lang:java %}
+    public String callTaskFlow() {
+        FacesContext fctx = FacesContext.getCurrentInstance();
+        ControllerContext cc = ControllerContext.getInstance();
+        String taskflowId = "btf_task";
+        String taskflowDocument = "/WEB-INF/btf_task.xml";
+        Map<String, Object> params = new HashMap<String, Object>();
+        TaskFlowId tid = new TaskFlowId(taskflowDocument, taskflowId);
+        String taskflowURL = cc.getTaskFlowURL(false, tid, params);
+        ExtendedRenderKitService …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/cong-backingbeanzhong-diao-yong-bu-dai-fragmentsde-taskflow.html" rel="bookmark" title="Permalink to "从BackingBean中调用不带fragments的taskflow"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"<af:table>分页栏出现3个问号BUG解决"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 06 June 2013</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <hr />
+<p>平台：Jdeveloper 11.1.1.7.0</p>
+<hr />
+<p><strong>BUG描述</strong>
+标准控件af:table，“页”字前后出现三个问号。</p>
+<p><strong>原因分析</strong></p>
+<p _="%" endcodeblock="endcodeblock">查看LOG文件  <br />
+{% codeblock lang:java %}
+<RenderingContext> <getTranslatedString> 无法从外观 mySkin.desktop 获取资源关键字 页  <br /></p>
+<p>可见是RenderingContext类中getTranslatedString方法发生异常。  <br />
+查看源代码分析：    </p>
+<p><strong>找到源代码所在位置</strong>：  </p>
+<p><strong>将JAR包解压得到RenderingContext类，反编译查看</strong>    </p>
+<p _="%" endcodeblock="endcodeblock">结果如下<strong>RenderingContext.class</strong>：  <br />
+{% codeblock lang:java %}
+  public String getTranslatedString(String key)
+  {
+    if (key == null)
+      return null;
+    try
+    {
+      return getSkin().getTranslatedString(getLocaleContext(), key);
+    }
+    catch …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/fen-ye-lan-chu-xian-3ge-wen-hao-bugjie-jue.html" rel="bookmark" title="Permalink to "分页栏出现3个问号BUG解决"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"Groovy在ADF中的应用"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Sun 02 June 2013</span> - <span class="tags"><a href="/tag/groovy/">groovy</a></span></small></p>
+                <div class="entry-content">
+                    <p>使用Groovy脚本，在开发ADF应用中可以极大地提高开发效率，实现某些看似很复杂的功能。</p>
+<p _="%" endcodeblock="endcodeblock">比如在empVO中获取sequence值:  <br />
+{% codeblock lang:java %}
+db = adf.object.getDBTransaction()  <br />
+sq = new oracle.jbo.server.SequenceImpl("EMPLOYEES_SEQ",db)  <br />
+sq.getSequenceNumber()  <br /></p>
+<p _="%" endcodeblock="endcodeblock"><strong>在empVO中获取Salary字段最大值max：</strong>  <br />
+{% codeblock lang:java %}
+adf.object.getRowSet().max("Salary")</p>
+<p _="%" endcodeblock="endcodeblock"><strong>在empVO中获取Salary字段最小值min：</strong>  <br />
+{% codeblock lang:java %}
+adf.object.getRowSet().min("Salary")</p>
+<p _="%" endcodeblock="endcodeblock"><strong>在empVO中获取Salary字段合计sum：</strong>  <br />
+{% codeblock lang:java %}
+adf.object.getRowSet().sum("Salary")</p>
+<p _="%" endcodeblock="endcodeblock"><strong>在empVO中获取Salary字段均值avg：</strong>  <br />
+{% codeblock …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/groovyzai-adfzhong-de-ying-yong.html" rel="bookmark" title="Permalink to "Groovy在ADF中的应用"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"利用contextual event刷新Region"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Sat 01 June 2013</span> - <span class="tags"><a href="/tag/region/">region</a></span></small></p>
+                <div class="entry-content">
+                    <p>平台： Jdev 11.1.1.7.0  <br />
+需求：两个region，其中一个region对数据进行修改后，需要刷新另外一个region显示   </p>
+<hr />
+<hr />
+<h4>创建bound taskflow: btf_form</h4>
+<p><img alt="../../../wp-content/uploads/QQ截图20130601204146.jpg" src="../../../wp-content/uploads/QQ截图20130601204146.jpg" />    </p>
+<p>taskflow只包括一个页面碎片empForm.jsff，拖入employeeVO生成af:Form。  <br />
+<img alt="../../../wp-content/uploads/QQ截图20130601210114.jpg" src="../../../wp-content/uploads/QQ截图20130601210114.jpg" />    </p>
+<h3>创建bound taskflow: btf_table</h3>
+<p>同上，只有一个页面碎片empTable.jsff，拖入employeeVO生成af:table。   <br />
+<img alt="../../../wp-content/uploads/QQ截图20130601210258.jpg" src="../../../wp-content/uploads/QQ截图20130601210258.jpg" />        </p>
+<p>以上两个taskflow皆使用No Controller Transaction.</p>
+<h4>添加contextual event</h4>
+<p>需要在empTable.jsff页面中修改数据，单击commit按钮时，让empForm.jsff页面中的数据即时更新。因此，给commitbutton添加contextual event: saveEvent。  <br />
+<img alt="../../../wp-content/uploads/QQ截图20130601210725.jpg" src="../../../wp-content/uploads/QQ截图20130601210725.jpg" />    </p>
+<h4>创建mainPG页面引入以上taskflow生成region</h4>
+<p>创建一个两栏jspx页面mainPG.jspx， 分别拖入以上两taskflow生成region。  <br />
+给contextual event 绑定consumer。    </p>
+<p>切换到mainPG.jspx页面的pagedef页面，从structure窗口中执行以下操作 …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/li-yong-contextual-eventshua-xin-region.html" rel="bookmark" title="Permalink to "利用contextual event刷新Region"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Sat 01 June 2013</span> - <span class="tags"><a href="/tag/AppModuleImpl/">AppModuleImpl</a></span></small></p>
+                <div class="entry-content">
+                    <hr />
+<h2>平台: Jdev11.1.1.7.0</h2>
+<hr />
+<ol>
+<li _="%" endcodeblock="endcodeblock"><strong><em>*AM</em></strong>*中创建自定义方法sayHello  <br />
+{% codeblock lang:java %}
+    public void sayHello(String value){
+        System.out.println("hello world..."+value);
+    }</li>
+<li>
+<p>暴露该方法以便在ManagedBean中调用    </p>
+</li>
+<li>
+<p>从Data Controls中将该方法拖到页面生成Bindings或者手工添加该Bindings。   </p>
+</li>
+<li>
+<p>为了测试方便，创建了一个inputText，并绑定该inputText的valueChangeListener为ManagedBean中的valueChange方法.  <br />
+{% codeblock lang:java %}
+    public void valueChange(ValueChangeEvent valueChangeEvent) {
+        String newValue = valueChangeEvent.getNewValue().toString();
+        //方法一：调用bindings
+        BindingContainer bindings = ADFUtils.getBindingContainer();              <br />
+        OperationBinding refreshChecklist = bindings …</p></li></ol>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/zai-managedbeanzhong-diao-yong-appmoduleimplzhong-zi-ding-yi-fang-fa-de-liang-chong-fang-shi.html" rel="bookmark" title="Permalink to "在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"关于ApplicatoinModule类型总结"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 28 May 2013</span> - <span class="tags"><a href="/tag/am/">am</a></span></small></p>
+                <div class="entry-content">
+                    <h2>平台：Jdev11.1.2.3.0</h2>
+<h4>AM的类型</h4>
+<p><strong>1. Root AM</strong>  <br />
+<strong>2. Nested AM</strong>  <br />
+<strong>3. Shared AM</strong>    </p>
+<h4>三种类型AM的比较</h4>
+<p>首先谈谈RootAM的数量，RootAM原则上来说越少越好，因为当用户访问工程的时候数据库连接数量会根据RootAM的数量成倍增加极大地增加了数据库的压力。但是很多时候由于业务的复杂性，单一的AM无法满足实际开发的需求，所有的业务逻辑都写在一个AM里极不利于多个团队的协同开发。  <br />
+这个时候NestedAM就发挥其作用了，NestedAM是共享其父类RootAM的数据库连接的，所以不会额外增加连接数量，利用NestedAM可以将业务逻辑拆分开来，每个团队都可以使用自己单独的NestedAM，团队之间彼此冲突地可能性大大减少。
+再说SharedAM，大型项目中很多模块的功能是通用的，比如LOV或者一些在使用中基本不需要改变的固定配置数据等，这类数据对项目所有访问用户都是固定的，可以使用SharedAM来维护这类型数据。</p>
+<h4>三种类型的AM的创建方法</h4>
+<ol>
+<li>RootAM,默认创建的AM即是RootAM    </li>
+<li>
+<p>NestedAM创建方法  <br />
+   先创建两个RootAM(deptAm,empAm)，分别拥有VO instance（DeptVO,EmpVO)；  <br />
+再创建一个RootAM（rootAM)，双击该rootAM，在Data Model标签页中 …</p></li></ol>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-applicatoinmodulelei-xing-zong-jie.html" rel="bookmark" title="Permalink to "关于ApplicatoinModule类型总结"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+</ul><!-- /#posts-list -->
+
+<div class="pagination pagination-centered">
+    <ul>
+        <li><a href="http://pelican.dengdezhao.cn">1</a></li>
+        <li class="active"><a href="#">2</a></li>
+        <li><a href="http://pelican.dengdezhao.cnindex3/">3</a></li>
+        <li class="disabled"><a href="#">...</a></li>
+        <li><a href="http://pelican.dengdezhao.cnindex7/">7</a></li>
+    </ul>
+</div>
+</div><!-- /#content -->
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li class="active"><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>使用VPD对数据进行隔离 - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>使用VPD对数据进行隔离</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 28 June 2012</span> - <span class="tags"><a href="/tag/VPD/">VPD</a></span></small></p>
+        <div class="entry-content">
+        <p>项目需求：系统数据表删除操作是直接物理删除，不利于维护历史记录，需要变更为逻辑删除模式。</p>
+
+<p>解决方案：</p>
+
+<p>对表增加删除标记字段DEL_FLAG varchar2(1) default ‘0’;</p>
+
+<p>用户执行“删除”操作时，并不执行物理删除操作，而是将DEL_FLAG值设置为‘1’；</p>
+
+<p>针对数据展示时，删除标记为’1’的数据使用VPD技术屏蔽访问；</p>
+
+<p><strong>1．需要修改的基表[T]新增删除字段：</strong></p>
+
+<p><strong>alter table</strong> T <strong>add</strong> (DEL_FLAG varchar2(1) <strong>default</strong> '0');--缺省为0，逻辑删除改为1</p>
+
+<p><strong>2．创建VPD需要的函数：</strong><strong>f_limited_query_t</strong><strong></strong></p>
+
+<p><strong>CREATE OR REPLACE FUNCTION</strong> f_limited_query_t (s_schema <strong>IN</strong> VARCHAR2,</p>
+
+<p>s_object <strong>IN</strong> VARCHAR2)</p>
+
+<p><strong>RETURN</strong> VARCHAR2</p>
+
+<p><strong>AS</strong></p>
+
+<p><strong>BEGIN</strong></p>
+
+<p><strong>RETURN</strong> 'DEL_FLAG!='''||'1'||'''';</p>
+
+<p><strong>END;</strong></p>
+
+<p><strong>3．创建策略：</strong><strong>POLICY_LIMITED_QUERY_T</strong><strong></strong></p>
+
+<p><strong>BEGIN</strong>
+DBMS_RLS.add_policy (object_schema   =&gt; 'APPS',<br />
+object_name     =&gt; 'T',<br />
+policy_name     =&gt; 'POLICY_LIMITED_QUERY_T',<br />
+function_schema =&gt; 'APPS',<br />
+policy_function =&gt; 'F_LIMITED_QUERY_T');
+<strong>END</strong>;</p>
+
+<p><strong>取消策略：</strong><strong>(</strong>不用过滤时使用此命令<strong>)</strong></p>
+
+<p><strong>BEGIN</strong>
+DBMS_RLS.drop_policy (object_schema   =&gt; 'APPS',<br />
+object_name     =&gt; 'T',<br />
+policy_name     =&gt; 'POLICY_LIMITED_QUERY_T');
+<strong>END</strong>;<strong></strong></p>
+
+<p>&nbsp;</p>
+
+<p><strong>4．修改FORM中对相关数据表的删除逻辑为更新DEL_FLAG=1的操作；</strong></p>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

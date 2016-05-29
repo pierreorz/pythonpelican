@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>Tag AppModuleImpl - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+<h1>Blog</h1>
+
+<ul class="unstyled">
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Sat 01 June 2013</span> - <span class="tags"><a href="/tag/AppModuleImpl/">AppModuleImpl</a></span></small></p>
+                <div class="entry-content">
+                    <hr />
+<h2>平台: Jdev11.1.1.7.0</h2>
+<hr />
+<ol>
+<li _="%" endcodeblock="endcodeblock"><strong><em>*AM</em></strong>*中创建自定义方法sayHello  <br />
+{% codeblock lang:java %}
+    public void sayHello(String value){
+        System.out.println("hello world..."+value);
+    }</li>
+<li>
+<p>暴露该方法以便在ManagedBean中调用    </p>
+</li>
+<li>
+<p>从Data Controls中将该方法拖到页面生成Bindings或者手工添加该Bindings。   </p>
+</li>
+<li>
+<p>为了测试方便，创建了一个inputText，并绑定该inputText的valueChangeListener为ManagedBean中的valueChange方法.  <br />
+{% codeblock lang:java %}
+    public void valueChange(ValueChangeEvent valueChangeEvent) {
+        String newValue = valueChangeEvent.getNewValue().toString();
+        //方法一：调用bindings
+        BindingContainer bindings = ADFUtils.getBindingContainer();              <br />
+        OperationBinding refreshChecklist = bindings …</p></li></ol>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/zai-managedbeanzhong-diao-yong-appmoduleimplzhong-zi-ding-yi-fang-fa-de-liang-chong-fang-shi.html" rel="bookmark" title="Permalink to "在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+</ul><!-- /#posts-list -->
+
+<div class="pagination pagination-centered">
+    <ul>
+        <li class="active"><a href="#">1</a></li>
+    </ul>
+</div>
+</div><!-- /#content -->
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>Blog - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+<h1>Blog</h1>
+
+<ul class="unstyled">
+        <li>
+            <div>
+                <div class="header">
+                    <h2>SOA suite 环境搭建</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Sat 29 September 2012</span> - <span class="tags"><a href="/tag/soa/">soa</a></span></small></p>
+                <div class="entry-content">
+                    <p>好久没碰SOA，最近在win2003上准备搭建个环境玩玩。下载相关安装介质</p>
+
+<p>http://www.oracle.com/technetwork/middleware/soasuite/downloads/index.html</p>
+
+<p>1.<strong>Database</strong> 我用的是oracle 11G</p>
+
+<p>2.<strong>Oracle WebLogic Server </strong>安装的是10.3.6.0</p>
+
+<p>3.<strong>Repository Creation Utility 11.1.1.6.0 </strong>解压缩下载的压缩包，运行/rcuHome/Bin/rcu.bat.执行安装</p>
+
+<p>4.<strong>JDeveloper 11.1.1.6.0 </strong>安装开发工具JDEV，因自带weblogic是11 …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/soa-suite-huan-jing-da-jian.html" rel="bookmark" title="Permalink to SOA suite 环境搭建">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>EBS 并发请求调用SQL时，日志跟输出中文出现乱码问题</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 20 September 2012</span> - <span class="tags"><a href="/tag/reports/">reports</a></span></small></p>
+                <div class="entry-content">
+                    <p>已知数据库，数据库所在服务器字符集都是UTF8，在并发请求调用的SQL里，fnd_file.put_line(fnd_file.log,'中文')语句输出时，在EBS界面查看就是乱码。</p>
+
+<p>出现乱码的问题思路：</p>
+
+<p>1.查看客户端系统字符集是否支持中文。确认本机支持，并且NLS_LANG跟数据库都保持一致，可以排除此因素。</p>
+
+<p>2.查看数据库端字符集编码是否支持中文，得知是UTF8编码。</p>
+
+<p>3.查看服务器端是否支持中文编码</p>
+
+<p>发现以上三个因素都可以排除，EBS请求会在服务器端生成log文件，因此telnet到服务器直接查看生成的log文件看是否出现乱码</p>
+
+<p>cd $APPLPTMP</p>
+
+<p>发现生成的文件也是乱码，基本可以确定在数据库端生成文件即出现乱码，需要对中文字符进行转码输出。 exec find_file.put_file(fnd_file.log,convert('中文','UTF8','ZHS16GBK'))；</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ebs-bing-fa-qing-qiu-diao-yong-sqlshi-ri-zhi-gen-shu-chu-zhong-wen-chu-xian-luan-ma-wen-ti.html" rel="bookmark" title="Permalink to EBS 并发请求调用SQL时，日志跟输出中文出现乱码问题">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>EBS并发请求调用Oracle reports时，如何写入日志文件</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 11 September 2012</span> - <span class="tags"><a href="/tag/reports/">reports</a></span></small></p>
+                <div class="entry-content">
+                    <p>EBS并发请求调用procedure时，直接在被调用的procedure中使用fnd_file.put_line即可达到要求；</p>
+
+<p>如果并发请求调用的是oracle reports时，写入日志文件需要使用reports的方法。</p>
+
+<p>在Before/After report Trigger中使用SRW.message(0,'Message');</p>
+
+<p>中断报表执行使用SRW.break;</p>
+
+<p>&nbsp;</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ebsbing-fa-qing-qiu-diao-yong-oracle-reportsshi-ru-he-xie-ru-ri-zhi-wen-jian.html" rel="bookmark" title="Permalink to EBS并发请求调用Oracle reports时，如何写入日志文件">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>使用VPD对数据进行隔离</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 28 June 2012</span> - <span class="tags"><a href="/tag/VPD/">VPD</a></span></small></p>
+                <div class="entry-content">
+                    <p>项目需求：系统数据表删除操作是直接物理删除，不利于维护历史记录，需要变更为逻辑删除模式。</p>
+
+<p>解决方案：</p>
+
+<p>对表增加删除标记字段DEL_FLAG varchar2(1) default ‘0’;</p>
+
+<p>用户执行“删除”操作时，并不执行物理删除操作，而是将DEL_FLAG值设置为‘1’；</p>
+
+<p>针对数据展示时，删除标记为’1’的数据使用VPD技术屏蔽访问；</p>
+
+<p><strong>1．需要修改的基表[T]新增删除字段：</strong></p>
+
+<p><strong>alter table</strong> T <strong>add</strong> (DEL_FLAG varchar2(1) <strong>default</strong> '0');--缺省为0，逻辑删除改为1</p>
+
+<p><strong>2．创建VPD需要的函数：</strong><strong>f_limited_query_t</strong><strong></strong></p>
+
+<p><strong>CREATE OR REPLACE FUNCTION</strong> f_limited_query_t (s_schema <strong>IN</strong> VARCHAR2,</p>
+
+<p>s_object <strong>IN</strong> VARCHAR2)</p>
+
+<p><strong>RETURN …</strong></p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/shi-yong-vpddui-shu-ju-jin-xing-ge-chi.html" rel="bookmark" title="Permalink to 使用VPD对数据进行隔离">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>adf:tree做的树菜单如何过滤子节点的数据？</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>需求：项目中的树菜单需要权限用户的权限过滤显示子菜单，通过用户所在的用户组可以查看的页面ID（List)过滤子节点<br />
+解决方案：<br />
+因为树是通过viewLink关联自身的VO生成的，想在AM里添加方法，对VO进行过滤处理把结果返回。<br />
+但实现起来比较麻烦，调用方法之后要刷新页面，初始化的树数据过滤处理困难。<br />
+于是想重写VO的方法看能不能在VO层就过滤掉子节点。重写createViewLinkAccessorRS，此方法返回ViewLink的结果，也就是菜单的子节点数据
+<div>
+<blockquote>
+@Override<br />
+protected ViewRowSetImpl createViewLinkAccessorRS(AssociationDefImpl associationDefImpl,<br />
+ViewObjectImpl viewObjectImpl,<br />
+Row row,<br />
+Object[] object) {<br />
+ViewRowSetImpl viewRowSetImpl =<br />
+super.createViewLinkAccessorRS(associationDefImpl, viewObjectImpl,<br />
+row, object);<br />
+int count = 0;<br />
+// getList()拿到可以查看的pageId的列表，对比Row中的pageId属性，如果在List中存在，就取该Row，如果不存      //在，表示此子节点不予以显示，remove掉<br />
+if (this …</blockquote></div></p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html" rel="bookmark" title="Permalink to adf:tree做的树菜单如何过滤子节点的数据？">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>表内的checkbox当数据量大时发现部分行勾选不中</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>测试发现，当数据只有25行的时候，都可以正常勾选，超过25行的数据，总是勾选不中。</p>
+
+<p>问题产生原因：<br />
+由于自定制的checkbox是设置了immediate=true 即时给数据行的checkbox字段赋值。<br />
+VO的rangeSize 默认是25，<br />
+因此导致25条数据内是可选。25条之外的数据初始时没有取出来，因此对这些没取的数据行设置checkbox自然就不生效了（展现出来就是checkbox勾选不中）</p>
+
+<p>解决方案：<br />
+修正VO的rangeSize为-1，查询全部，即可解决此问题。</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html" rel="bookmark" title="Permalink to 表内的checkbox当数据量大时发现部分行勾选不中">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>EBS请求执行时抛出错误Ora-20100和Ora-06512 问题解决</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ora-20100/">ora-20100</a>, <a href="/tag/ora-06512/">ora-06512</a></span></small></p>
+                <div class="entry-content">
+                    <p>执行请求时抛出错误Ora-20100：xxxxx. Ora-06512:xxxxx错误，清空临时文件目录$APPLPTMP即可</p>
+
+<p>&nbsp;</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ebsqing-qiu-zhi-xing-shi-pao-chu-cuo-wu-ora-20100he-ora-06512-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to EBS请求执行时抛出错误Ora-20100和Ora-06512 问题解决">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>关于定制validator</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>一个时刻字段，要求输入00:00-12:60这样的时刻范围<br />
+使用如下的正则表达式，过滤掉了不合规则的数字之后，还差一个逻辑，结束时刻不能小于开始时刻，比如：10：00-9：00这样的输入也是不合法的。正则太折磨眼力了，应该也是可以做到这点的吧，为了偷懒，就定制个validator来处理这个点。
+<div>
+<blockquote>&lt;af:validateRegExp pattern="([0-1][0-9]|2[0-4])\:([0-5][0-9]|60)\-([0-1][0-9]|2[0-4])\:([0-5][0-9]|60)" messageDetailNoMatch="请输入时刻，例如 00：00-24：60 " hint="请输入时刻，例如 00：00-24：60"/&gt;</blockquote>
+</div>
+<strong>Step1</strong>。创建一个<strong>ValidatorTime</strong>类实现Validator接口
+<div>
+<blockquote>package …</blockquote></div></p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-ding-zhi-validator.html" rel="bookmark" title="Permalink to 关于定制validator">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>关于ManagedBean中多次执行构造方法时的问题</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>有时候需要在初始化时执行一些查询，但发现会多次执行。需要在构造方法里添加一行代码避免页面点击时多次执行初始化。<br />
+if (!(Boolean)ADFUtils.getBindObject("adfFacesContext.postback")) {<br />
+init()；<br />
+}</p>
+
+<p>通过页面是否postback来控制只初始化一次。</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html" rel="bookmark" title="Permalink to 关于ManagedBean中多次执行构造方法时的问题">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>关于selectBooleanCheckbox 的问题</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>页面的 selectBooleanCheckbox 选择后，总提示 不是数字（组件value是 true 或 false,数据库存的是Number），怎么解决</p>
+
+<p>方案有三个<br />
+1。如果是基于表的Number字段(假设字段名是Flag，值是1或者0），想生成selectBooleanCheckbox ，可以重写这个VO的的 setFlag()跟getFlag()方法如下：<br />
+public void setFlag(Boolean value){<br />
+this.flag=value==true?1:0;<br />
+}
+public Boolean getFlag(){<br />
+return this.flag==0?false:true;<br />
+}</p>
+
+<p>2。设置valueChangeListener.<br />
+在valueChange方法里捕获当前selectBooleanCheckbox 的值，然后转化成Number类型的传给VO</p>
+
+<p>3。如果是只读的表，可以在UI上通过EL表达式处理。</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html" rel="bookmark" title="Permalink to 关于selectBooleanCheckbox 的问题">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+</ul><!-- /#posts-list -->
+
+<div class="pagination pagination-centered">
+    <ul>
+        <li><a href="http://pelican.dengdezhao.cn">1</a></li>
+        <li class="disabled"><a href="#">...</a></li>
+        <li><a href="http://pelican.dengdezhao.cnindex4/">4</a></li>
+        <li class="active"><a href="#">5</a></li>
+        <li><a href="http://pelican.dengdezhao.cnindex6/">6</a></li>
+        <li><a href="http://pelican.dengdezhao.cnindex7/">7</a></li>
+    </ul>
+</div>
+</div><!-- /#content -->
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li class="active"><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

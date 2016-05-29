@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>Blog - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+<h1>Blog</h1>
+
+<ul class="unstyled">
+        <li>
+            <div>
+                <div class="header">
+                    <h2>关于VO的只读可写等属性设置</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>如果生成ViewObject 的时候选择的是只读的VO的话，会发现VO的source里有ReadOnly="true"。<br />
+需求1：在MB中我通过代码拿到这个VO的实例，我想通过以下代码添加Row
+<div>
+<blockquote>Row newRow=Vo.createRow();<br />
+newRow.setAttribute("attribute1","value1");<br />
+newRow.setAttribute("attribute2","value2");<br />
+newRow.setAttribute("attribute3","value3");<br />
+Vo.insertRow(newRow);</blockquote>
+</div>
+最终发现，只读VO无法插入数据。怎么办？将ReadOnly改成"false"之后测试，发现满足需求~！<br />
+需求2：满足需求1之后发现，Vo里的确插入数据了。如果页面上有保存按钮，也会将这个数据更改到数据库，而这个数据只是需要在MB中起过渡作用，不必将newRow的数据postChange到DB，怎么办？<br />
+VO里 这个属性DeleteParticipant 立功了。 DeleteParticipant就是控制数据是否保存到DB的。设置 DeleteParticipant="false"发现满足了需求！</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html" rel="bookmark" title="Permalink to 关于VO的只读可写等属性设置">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>immediate="true" 的异常</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>设置按钮的immediate="true" 可以避免因按钮提交FORM导致的页面刷新闪烁，但也会带来麻烦。<br />
+假如对表的取消按钮设置了此属性，可能会发生新增数据，然后点取消作rollback时数据显示异常。<br />
+开发时值得注意</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/immediatetrue-de-yi-chang.html" rel="bookmark" title="Permalink to immediate="true" 的异常">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>利用javaMail发送邮件功能实现</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/javamail/">javamail</a></span></small></p>
+                <div class="entry-content">
+                    <p>由于SMTP服务器需要采用SSL方式访问，所以蛋疼了，默认的连接25端口方式无法连接<br />
+改成465方式访问，又报连接错误，原来是证书文件的问题。<br />
+于是利用 InstallCert.java重新生成证书
+<div>
+<blockquote>java InstallCert smtp.dengdezhao.cn:465</blockquote>
+</div>
+将得到的证书cacert文件放置在任意路径下：比如C盘 c:/cacert</p>
+
+<p>程序中props属性里添加如下参数
+<div>
+<blockquote>props = System.getProperties();<br />
+props.put("mail.smtp.host", smtp.dengdezhao.cn); // 设置SMTP主机<br />
+props.put("mail.smtp.auth", "true");<br />
+props.put("mail.smtp.socketFactory.class",<br />
+"javax.net.ssl.SSLSocketFactory");<br />
+props.put …</blockquote></div></p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/li-yong-javamailfa-song-you-jian-gong-neng-shi-xian.html" rel="bookmark" title="Permalink to 利用javaMail发送邮件功能实现">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>oracle数据库用户被锁问题解决</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>运行AM的时候报个JDBC连接错误，ORA-280000:用户被锁的异常。<br />
+于是在PL/SQL DEV里切换成SYSTEM用户 alter user XXX account unlock;之后，用PL/SQL DEV测试 可以连上了<br />
+再运行AM的时候，又报了个用户被锁。很是蛋疼<br />
+于是换到命令行，尝试以SYSDBA的身份再执行一次alter account unlock;<br />
+发现连不上：报了以下错误：<br />
+ORA-28056: Writing audit records to Windows Event Log failed<br />
+这你妹的，原来是系统日志满了，解决方案：<br />
+打开windows 事件查看器，将应用程序日志清理一下，重新连接数据库，连接成功。</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle数据库用户被锁问题解决">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>如何在MB中对selectionListener collectionModel.makeCurrent调用</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>如何在MB中对Table的默认"#{bindings.PromotionVO1.collectionModel.makeCurrent}"进行调用？</p>
+
+<p>当需要重写adf:table的缺省的selectListener时，可以在自己绑定的MB的方法里，调用默认的makeCurrent方法。取得当前行的数据，进行自己的定制操作。方法如下：
+<div>
+<blockquote>//调用缺省makeCurrent<br />
+JSFUtils.resolveMethodExpression("#{bindings.yourVO.collectionModel.makeCurrent}",<br />
+new Class[] { SelectionEvent.class },<br />
+new Object[] { selectionEvent });</blockquote>
+</div>
+取得选中行的数据
+<div>
+<blockquote>Row selectedRow =<br />
+(Row)JSFUtils.resolveExpression("#{bindings.yourVOIterator.currentRow}");</blockquote>
+</div>
+然后就可以针对取得的数据进行定制开发了。</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html" rel="bookmark" title="Permalink to 如何在MB中对selectionListener collectionModel.makeCurrent调用">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>Table内增加全选checkbox</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>解决方案：     </p>
+<p>VO里新建Transient属性Checked(Boolean)    </p>
+<p>表内添加一个column如下：  <br />
+{% codeblock lang:java %}
+<af:column id="c10" headerText="选择" width="30" align="center" noWrap="true">
+<f:facet name="header" >
+<af:selectBooleanCheckbox valueChangeListener="#{backingBean.selectAll}"
+autoSubmit="true" id="selectAll"
+label="" value=""
+</f:facet>
+<af:selectBooleanCheckbox label="选中/非选中" id="sbc1"  autoSubmit="true" immediate="true"
+value="#{row.bindings.Checked.inputValue}"/></p>
+<p _="%" endcodeblock="endcodeblock"></af:column></p>
+<p>{% codeblock lang:java %}
+pupblic void selectAll(ValueChangeEvent valueChangeEvent) {
+CIteratorBinding it = ADFUtils.findIterator(REIM_HEADER_ITER);
+ViewObject vo = it.getViewObject();</p>
+<p>if (valueChangeEvent.getNewValue() != null) {
+Boolean selectAll =
+Boolean.parseBoolean(valueChangeEvent.getNewValue().toString());
+if (!selectAll) {
+for (Row temp : vo.getAllRowsInRange()) {
+temp.setAttribute("Checked", false);
+}
+} else {
+for (Row temp …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html" rel="bookmark" title="Permalink to Table内增加全选checkbox">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>weblogic定时启动程序</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>有个需求是要求程序在每天晚上3点钟的时候自动调用一个Job执行。</p>
+
+<p>解决方案：定制weblogic的启动类，用来运行Job执行。</p>
+
+<p>STEP1，启动类StartupTask：
+<div>
+<blockquote>public class StartupTask implements T3StartupDef {<br />
+public String startup(String name, Hashtable args) throws Exception {</blockquote></div></p>
+
+<p>Callplsql.main(null);</p>
+
+<p>return "Callplsql Startup successful completed";<br />
+}</p>
+
+<p>public void setServices(T3ServicesDef t3ServicesDef) {<br />
+}</p>
+
+<p>}
+
+Callplsql.java(  即是JOB类，是需要被调用的，要继承TimerTask  ）中的Main方法要有：
+<div>
+<blockquote>public static void main(String[] args) {<br />
+//任务执行间隔时间，默认24小时<br />
+long PERIOD_TIME=24 …</blockquote></div></p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html" rel="bookmark" title="Permalink to weblogic定时启动程序">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>硬盘安装fedora</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/fedora/">fedora</a></span></small></p>
+                <div class="entry-content">
+                    <p>下载好fedora16 ISO镜像文件放在C盘，解压出来images文件，及vmlinuz,initrd.img文件。使用grub引导硬盘安装，分区时报错：<br />
+you have not created a bootloader stage1 target device</p>
+
+<p>This can happen if there is not enough space on your hard drive(s) for the installation.</p>
+
+<p>解决方案：引导参数加上linux askmethod，选择正确的镜像路径sda1即可。</p>
+
+<p>grub&gt;root (hd0,0)<br />
+grub&gt;kernel (hd0,0)/vmlinuz <span style="color: red;">linux askmethod</span> (之前没有加此参数 …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ying-pan-an-zhuang-fedora.html" rel="bookmark" title="Permalink to 硬盘安装fedora">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Wed 20 July 2011</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>目前LOV控件在页面初始化时默认显示的是第一条记录，如果想让LOV初始化的时候不显示记录应该如何设置呢？</p>
+
+<p>方法一. 通过在BackingBean的构造函数里设置LOV的值为空字符串这种做法基本可以达到需求。但总感觉这种方法很别扭，走了弯路。</p>
+
+<p>本文介绍另外一种更为简单的方法。通过EL表达式实现需求。
+<pre class="brush:java">           &lt;af:inputListOfValues id="ilov1"
+                                    popupTitle="Search and Select: #{bindings.CodeType.hints.label}"
+                                    value="#{adfFacesContext.postback == false ? bindings.CodeType.nullValueString : bindings.CodeType.inputValue}"
+                                    label="#{bindings.CodeType.hints.label}"
+                                    model="#{bindings.CodeType.listOfValuesModel}"
+                                    required="#{bindings.CodeType.hints.mandatory}"
+                                    columns="#{bindings.CodeType.hints.displayWidth}"
+                                    shortDesc …</pre></p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html" rel="bookmark" title="Permalink to 如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>oracle 11g 数据库安装后改计算机名出现无法连接的问题解决</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Fri 15 July 2011</span> - <span class="tags"><a href="/tag/oracle/">oracle</a></span></small></p>
+                <div class="entry-content">
+                    <p>在局域网内一台机器上安装完oracle11g之后，本地测试OK 可以访问orcl。用局域网内另一台机器连接的时候不行。<br />
+两台机器可以PING通。<br />
+修改tnsname.ora  把默认的localhost 都改成了本机IP 试试还是不行。<br />
+然后改了下计算机名，各种测试，打开EM还是只看到实例正常，监听程序为状态为不可用，实例的代理连接状态为不可用。<br />
+很是蛋疼，手贱不应该改计算机名啊。。。<br />
+想想多有可能要改的都改好了。。。怎么还是连不上？<br />
+是不是刚改好的还没有生效？<br />
+lsnrctl stop<br />
+lsnrctl start<br />
+各种重启服务之后，终于见到了全绿~~~</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/oracle-11g-shu-ju-ku-an-zhuang-hou-gai-ji-suan-ji-ming-chu-xian-wu-fa-lian-jie-de-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle 11g 数据库安装后改计算机名出现无法连接的问题解决">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+</ul><!-- /#posts-list -->
+
+<div class="pagination pagination-centered">
+    <ul>
+        <li><a href="http://pelican.dengdezhao.cn">1</a></li>
+        <li class="disabled"><a href="#">...</a></li>
+        <li><a href="http://pelican.dengdezhao.cnindex5/">5</a></li>
+        <li class="active"><a href="#">6</a></li>
+        <li><a href="http://pelican.dengdezhao.cnindex7/">7</a></li>
+    </ul>
+</div>
+</div><!-- /#content -->
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li class="active"><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>"Centos下安装mysql5.6后忘记ROOT密码，重置密码" - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>"Centos下安装mysql5.6后忘记ROOT密码，重置密码"</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 25 June 2013</span> - <span class="tags"><a href="/tag/mysql/">mysql</a></span></small></p>
+        <div class="entry-content">
+        <p><strong>安装</strong></p>
+<p _="%" endcodeblock="endcodeblock">去<a href="https://edelivery.oracle.com/EPD/Search/handle_go">oracle官网</a>下载mysql5.6 for linux安装介质V38444-01.zip。  <br />
+解压缩之后  <br />
+{% codeblock lang:java %}
+MySQL-client-advanced-5.6.12-1.el6.i686.rpm
+MySQL-devel-advanced-5.6.12-1.el6.i686.rpm
+MySQL-embedded-advanced-5.6.12-1.el6.i686.rpm
+MySQL-server-advanced-5.6.12-1.el6.i686.rpm
+MySQL-shared-advanced-5.6.12-1.el6.i686.rpm
+MySQL-shared-compat-advanced-5.6.12-1.el6.i686.rpm
+MySQL-test-advanced-5.6.12-1.el6.i686.rpm</p>
+<p _="%" endcodeblock="endcodeblock">开始安装  <br />
+{% codeblock lang:java %}
+rpm -ivh MySQL-*</p>
+<p>Mysql5.6的安全机制加强了，默认安装时会随机给ROOT用户生成一个密码保存在安装用户目录下/root/.mysql_secret中。由于没认真看英文文档，我直接安装完就把这个文件里的随机密码给改掉了，就无法得知ROOT初始密码，也无法登录进数据库了，囧。</p>
+<p><strong>重置Mysql初始密码</strong></p>
+<p _="%" endcodeblock="endcodeblock">用ROOT用户登录，STOP数据库 <br />
+{% codeblock lang:java %}
+/etc/init.d/mysql stop</p>
+<p _="%" endcodeblock="endcodeblock">跳过授权表启动Mysql服务器   <br />
+{% codeblock lang:java %}
+mysqld_safe --skip-grant-tables&amp;  <br /></p>
+<p>输入CTRL+C中断进程后应该可以看到mysqld已经在运行了    </p>
+<p>{% codeblock lang:java %}
+mysql --user=root mysql</p>
+<p _="%" endcodeblock="endcodeblock">update user set Password=PASSWORD('new-password');
+flush privileges;
+exit; </p>
+<p>操作完以上变更密码的命令后，可以重启mysqld了。    </p>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+killall mysqld_safe&amp;  <br /></p>
+<p>按CTRL+C退出，接着正常启动mysql</p>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+/etc/init.d/mysql start</p>
+<p>用刚刚修改的新密码登录mysql即可    </p>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+mysql -uroot -p  <br /></p>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

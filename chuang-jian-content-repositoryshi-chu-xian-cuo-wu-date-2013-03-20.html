@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
   <head>
-    <title> - 邓德昭的技术博客</title>
+    <title>"创建Content Repository时出现错误"Date: 2013-03-20 - 邓德昭的技术博客</title>
     <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
@@ -15,18 +15,35 @@
     <div class="container">
       <div class="row">
         <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>"创建Content Repository时出现错误"Date: 2013-03-20</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Mon 25 August 2014</span> - <span class="tags"><a href="/tag/webcenter/">webcenter</a></span></small></p>
+        <div class="entry-content">
+        <h4><i class="icon-file"></i><strong>创建Content Repository时出现错误：</strong></h4>
+<blockquote>
+<p><strong>NOTE:</strong></p>
 <ul>
-    <li>ADF</li>
-    <li>ebs</li>
-    <li>java</li>
-    <li>linux</li>
-    <li>octopress</li>
-    <li>oracle</li>
-    <li>others</li>
-    <li>sinaapp</li>
-    <li>soa</li>
-    <li>webcenter</li>
+<li>Unable to load content server metadata model using GET_DOC_METADATA_INFO.</li>
+<li>Permission denied. Address 'XX.XX.XX.XX' is not an allowable remote socket address</li>
 </ul>
+</blockquote>
+<h4><i class="icon-file"></i> <strong>解决方法:</strong></h4>
+<blockquote>
+<ul>
+<li>
+<p><i class="icon-pencil"></i> 找到config.cfg   <br />
+<code>/u02/app/oraucm/fmw_home/user_projects/domains/ecm_domain/ucm/cs/config/config.cfg</code></p>
+</li>
+<li>
+<p><i class="icon-pencil"></i>在SocketHostAddressSecurityFilter值加上<code>|*.*.*.*</code>
+SocketHostAddressSecurityFilter=127.0.0.1|192.168.15.163|<code>*.*.*.*</code>即可</p>
+</li>
+</ul>
+</blockquote>
+        </div><!-- /.entry-content -->
+</div>
         </div>
         <div class="span3 offset1">
           <div class="well">

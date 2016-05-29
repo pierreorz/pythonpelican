@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
   <head>
-    <title> - 邓德昭的技术博客</title>
+    <title>wordpress的elegant-box主题跟syntax-highlighter-optimized插件的冲突解决 - 邓德昭的技术博客</title>
     <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
@@ -15,18 +15,33 @@
     <div class="container">
       <div class="row">
         <div class="span8">
-<ul>
-    <li>ADF</li>
-    <li>ebs</li>
-    <li>java</li>
-    <li>linux</li>
-    <li>octopress</li>
-    <li>oracle</li>
-    <li>others</li>
-    <li>sinaapp</li>
-    <li>soa</li>
-    <li>webcenter</li>
-</ul>
+<div id="content">
+    <div class="header">
+        <h1>wordpress的elegant-box主题跟syntax-highlighter-optimized插件的冲突解决</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 30 June 2011</span> - <span class="tags"><a href="/tag/wordpress/">wordpress</a></span></small></p>
+        <div class="entry-content">
+        <p>当这款主题跟高亮插件同时使用时，一个不兼容的细节表现了出来，具体症状表现参照下图：</p>
+
+<p><a href="../../../wp-content/uploads/2011/06/1.jpg"><img class="alignnone size-medium wp-image-22" title="1" src="../../../wp-content/uploads/2011/06/1-300x119.jpg" alt="" width="300" height="119" /></a></p>
+
+<p><a href="../../../wp-content/uploads/2011/06/21.jpg"><img class="alignnone size-medium wp-image-24" title="2" src="../../../wp-content/uploads/2011/06/21-300x118.jpg" alt="" width="300" height="118" /></a></p>
+
+<p>Feeds的下拉菜单被&lt;pre&gt;区域给挡住了，很影响美观。</p>
+
+<p>显示是z-index属性的问题。</p>
+
+<p>解决办法：</p>
+
+<p>Step.1 打开主题的header.php文件</p>
+
+<p>Step.2 替换160行的&lt;ul&gt;为&lt;ul <span style="color: #ff0000;">style="z-index:1"</span>&gt; 当然z-index的值&gt;0都是可以的，因为&lt;pre&gt;区域z-index属性没有设置，默认为0，只要菜单&lt;ul&gt;的z-index值大就会显示在&lt;pre&gt;区域之上。</p>
+
+<p>修改之后的效果图：</p>
+
+<p><a href="../../../wp-content/uploads/2011/06/3.jpg"><img class="alignnone size-medium wp-image-25" title="3" src="../../../wp-content/uploads/2011/06/3-300x118.jpg" alt="" width="300" height="118" /></a></p>
+        </div><!-- /.entry-content -->
+</div>
         </div>
         <div class="span3 offset1">
           <div class="well">

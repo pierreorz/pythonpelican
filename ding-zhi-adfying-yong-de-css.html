@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>定制ADF应用的CSS - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>定制ADF应用的CSS</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Mon 27 June 2011</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+        <div class="entry-content">
+        <p>客户的要求总是各种变态，如果需要定制默认的控件样式的话，那么以下的文章可能会对你有帮助。</p>
+<p>Step.1 首先我们需要定义自己的CSS文件 <span style="color: #0000ff;">CustomSkin.css</span>
+<pre class="brush:css">af|inputListOfValues::search-icon-style{
+  background-image:none;
+}</pre></p></p>
+<p>af|inputListOfValues::search-icon-style:hover{<br />
+  background-image:none;<br />
+}
+af|inputListOfValues::search-icon-style:active{<br />
+  background-image:none;<br />
+}
+af|inputListOfValues::search-icon-style:info{<br />
+  background-image:none;<br />
+}
+Step.2 接着创建 <span style="color: #0000ff;">trinidad-skins.xml</span>
+<pre class="brush:xml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+&lt;skins xmlns="http://myfaces.apache.org/trinidad/skin"&gt;
+  &lt;skin&gt;
+    &lt;id&gt;customSkin.desktop&lt;/id&gt;
+    &lt;family&gt;CustomSkin&lt;/family&gt;
+    &lt;extends&gt;blafplus-rich.desktop&lt;/extends&gt;
+    &lt;render-kit-id&gt;org.apache.myfaces.trinidad.desktop&lt;/render-kit-id&gt;
+    &lt;style-sheet-name&gt;css/CustomSkin.css&lt;/style-sheet-name&gt;
+  &lt;/skin&gt;
+&lt;/skins&gt;</pre>
+Step.3 修改 <span style="color: #0000ff;">trinidad-config.xml</span>
+<pre class="brush:xml"> &lt;skin-family&gt;CustomSkin&lt;/skin-family&gt;</pre>
+Step.4 修改<span style="color: #0000ff;">web.xml</span>
+<pre class="brush:xml">&lt;context-param&gt;
+    &lt;description&gt;If this parameter is true, there will be an automatic check of the modification date of your JSPs, and saved state will be discarded when JSP's change. It will also automatically check if your skinning css files have changed without you having to restart the server. This makes development easier, but adds overhead. For this reason this parameter should be set to false when your application is deployed.&lt;/description&gt;
+    &lt;param-name&gt;org.apache.myfaces.trinidad.CHECK_FILE_MODIFICATION&lt;/param-name&gt;
+    &lt;param-value&gt;true&lt;/param-value&gt;
+  &lt;/context-param&gt;</pre></p>
+
+<p>&lt;context-param&gt;<br />
+    &lt;description&gt;No obfuscation of CSS.&lt;/description&gt;<br />
+    &lt;param-name&gt;org.apache.myfaces.trinidad.DISABLE_CONTENT_COMPRESSION&lt;/param-name&gt;<br />
+    &lt;param-value&gt;true&lt;/param-value&gt;<br />
+  &lt;/context-param&gt;
+重启下应用就会发现控件样式已经采用自定义CSS文件里的样式了！<span style="color: #0000ff;">
+</span></p>
+
+<p>&nbsp;</p>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

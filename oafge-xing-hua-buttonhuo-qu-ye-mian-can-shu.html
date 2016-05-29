@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>"OAF个性化Button获取页面参数" - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>"OAF个性化Button获取页面参数"</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 03 June 2014</span> - <span class="tags"><a href="/tag/oaf/">oaf</a></span></small></p>
+        <div class="entry-content">
+        <ul>
+<li>平台: R12    </li>
+<li>需求: 需要个性化一个button的Destination URI属性，并添附上一个参数。</li>
+</ul>
+<p>实现方法：</p>
+<ol>
+<li>
+<p>本来重写CO便很容易实现该需求，但是涉及到修改代码以及各个环境更新就很麻烦了，所以如果个性化button的URL是最方便了。</p>
+</li>
+<li>
+<p>个性化又涉及到如何在URL里传递参数的问题。  </p>
+</li>
+</ol>
+<p>右键当前页面，查看源代码如下：      </p>
+<div class="highlight"><pre><span></span>&lt;form id=&quot;DefaultFormName&quot; name=&quot;DefaultFormName&quot; style=&quot;margin:0px&quot; method=&quot;POST&quot;          action=&quot;/OA_HTML/OA.jsp?page=/oracle/apps/pa/deliverable/webui/CrUpDeliverablePG&amp;paCallingPage=DLVLIST&amp;paCallingMode=VIEW&amp;paProjectId=106691&amp;paDeliverableId=113287&amp;paDlvrItemId=106962&amp;&amp;addBreadCrumb=RP&amp;_ti=1696581738&amp;PersonalizationParam=PersonalizationParamAdmin&amp;retainAM=Y&amp;oapc=28&quot;&gt;
+</pre></div>
+
+
+<p>需要将当前页面中form标签的action属性中的paDlvrItemId参数的值获取过来。拼接成形如:http://dengdezhao.cn?erpid={:paDlvrItemId}形式的URL赋给button的destinationURI属性。</p>
+<ol>
+<li>
+<p>使用{@itemName}这种方式只能在table控件中才行，在此处不适用。因此考虑使用JS查找当前页面获取到参数然后拼接形成URL。</p>
+<div class="highlight"><pre><span></span>http://192.168.15.141/login/LoginSSO.jsp?flowCode=AM02&amp;erpid=&#39;+unescape(document.DefaultFormName.action.match(new RegExp(&quot;(^|&amp;)&quot; + &#39;paDlvrItemId&#39; + &quot;=([^&amp;]*)(&amp;|$)&quot;, &quot;i&quot;))[2])+&#39;&amp;workcode=&#39; + document.getElementById(&#39;AdditionalInfo&#39;).rows[4].cells[1].innerText + &#39;
+</pre></div>
+
+
+</li>
+<li>
+<p>将以上URL个性化赋值给button即可满足需求。</p>
+</li>
+</ol>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

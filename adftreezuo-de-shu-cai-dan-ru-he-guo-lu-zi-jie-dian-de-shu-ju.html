@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>adf:tree做的树菜单如何过滤子节点的数据？ - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>adf:tree做的树菜单如何过滤子节点的数据？</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+        <div class="entry-content">
+        <p>需求：项目中的树菜单需要权限用户的权限过滤显示子菜单，通过用户所在的用户组可以查看的页面ID（List)过滤子节点<br />
+解决方案：<br />
+因为树是通过viewLink关联自身的VO生成的，想在AM里添加方法，对VO进行过滤处理把结果返回。<br />
+但实现起来比较麻烦，调用方法之后要刷新页面，初始化的树数据过滤处理困难。<br />
+于是想重写VO的方法看能不能在VO层就过滤掉子节点。重写createViewLinkAccessorRS，此方法返回ViewLink的结果，也就是菜单的子节点数据
+<div>
+<blockquote>
+@Override<br />
+protected ViewRowSetImpl createViewLinkAccessorRS(AssociationDefImpl associationDefImpl,<br />
+ViewObjectImpl viewObjectImpl,<br />
+Row row,<br />
+Object[] object) {<br />
+ViewRowSetImpl viewRowSetImpl =<br />
+super.createViewLinkAccessorRS(associationDefImpl, viewObjectImpl,<br />
+row, object);<br />
+int count = 0;<br />
+// getList()拿到可以查看的pageId的列表，对比Row中的pageId属性，如果在List中存在，就取该Row，如果不存      //在，表示此子节点不予以显示，remove掉<br />
+if (this.getList() != null &amp;&amp; this.getList().size() != 0 &amp;&amp;<br />
+viewRowSetImpl != null) {<br />
+for (int m = 0; m &lt; viewRowSetImpl.getRowCount(); m++) {<br />
+if (viewRowSetImpl.getRow(m).getAttribute("pageId") ==<br />
+null) {<br />
+continue;<br />
+}
+for (int i = 0; i &lt; this.getList().size(); i++) {<br />
+if (this.getList().get(i).equals(viewRowSetImpl.getRow(m).getAttribute("pageId"))) {<br />
+count++;<br />
+}
+}<br />
+if (count == 0) {<br />
+viewRowSetImpl.removeRowAt(m);<br />
+//因为remove掉一行之后，viewRowSetImpl的RowCount就少了1，需要给m也减一，不然可漏掉一行数据未处理。<br />
+m--;<br />
+}
+count = 0;<br />
+}
+}</blockquote></div></p>
+
+<p>return viewRowSetImpl;</p>
+
+<p>}
+
+如此重写了这个方法之后，在调用的时候需要给List赋值，以方便过滤。因此需要给List的 SetList()方法生成Client接口。<br />
+在VO中为setList()添加clientInterface.
+<div>
+<blockquote>&lt;ClientInterface&gt;<br />
+&lt;Method<br />
+Name="setList"&gt;<br />
+&lt;Return<br />
+Type="void"/&gt;<br />
+&lt;Parameter<br />
+Name="list"<br />
+Type="java.util.ArrayList"<br />
+IsGeneric="true"&gt;<br />
+&lt;Element<br />
+Type="java.lang.String"/&gt;<br />
+&lt;/Parameter&gt;<br />
+&lt;/Method&gt;<br />
+&lt;/ClientInterface&gt;</blockquote>
+</div>
+这样，只需要在页面初始化的时候，给这个VO的list赋值，就可以过滤子节点了
+<div>
+<blockquote>DCIteratorBinding it2 = ADFUtils.findIterator("MenuVO1Iterator");<br />
+MenuVOImpl vo2 = (MenuVOImpl)it2.getViewObject();<br />
+vo2.setList(list);    //给VO的List赋值。<br />
+vo2.executeQuery();</blockquote>
+</div></p>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

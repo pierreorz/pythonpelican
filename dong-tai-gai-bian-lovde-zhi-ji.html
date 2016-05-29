@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
   <head>
-    <title> - 邓德昭的技术博客</title>
+    <title>"动态改变LOV的值集" - 邓德昭的技术博客</title>
     <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
@@ -15,18 +15,51 @@
     <div class="container">
       <div class="row">
         <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>"动态改变LOV的值集"</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Wed 17 September 2014</span> - <span class="tags"><a href="/tag/LOV/">LOV</a></span></small></p>
+        <div class="entry-content">
+        <h4><i class="icon-file"></i>   需求：</h4>
+<p>LOV的值集需要根据传入的用户角色类型(A,B,C)动态改变，A时查询所有，B时过滤字段1，C时过滤字段2.</p>
+<p><strong>基础VO的SQL如下:</strong>
+{% codeblock lang:sql %}
+ SELECT DISTINCT U.USER_ID, U.USER_NAME, F.FULL_NAME AS DESCRIPTION
+  FROM FND_USER U, PO_HEADERS_ALL P, PO_VENDORS V, PER_PEOPLE_F F
+ WHERE U.EMPLOYEE_ID = P.AGENT_ID
+   AND P.VENDOR_ID = V.VENDOR_ID
+   AND F.PERSON_ID(+) = U.EMPLOYEE_ID
+   AND P.APPROVED_FLAG = 'Y'
+   AND ((P.VENDOR_ID = :VARVENDORID AND :VARUSERTYPE = 'B') OR
+       (:VARUSERTYPE = 'A') OR
+       (:VARUSERTYPE = 'C' AND U.USER_ID = :VARUSERID))
+{% endcodeblock %}
+创建VARUSERTYPE VARUSERID VARVENDORID 三个绑定变量。</p>
+<h4><i class="icon-folder-open"></i> 创建LOV VO</h4>
+<p><strong>LVO的SQL如下:</strong>
+{% codeblock lang:sql %}
+ SELECT NULL         AS USER_ID,
+       NULL         AS USER_NAME,
+       NULL         AS DESCRIPTION,
+       :VARTYPE     AS USERTYPE,<br />
+       :VARVENDORID AS VENDORID,
+       :VARUSERID   AS CURRENTUSERID
+  FROM DUAL
+{% endcodeblock %}
+技巧在这里，LVO同样创建三个绑定变量，并把绑定变量作为VO的attribute暴露出来，然后通过view Accessors传递给基础VO</p>
+<h4><i class="icon-pencil"></i> 设置View Accessors</h4>
 <ul>
-    <li>ADF</li>
-    <li>ebs</li>
-    <li>java</li>
-    <li>linux</li>
-    <li>octopress</li>
-    <li>oracle</li>
-    <li>others</li>
-    <li>sinaapp</li>
-    <li>soa</li>
-    <li>webcenter</li>
+<li>
+<p>创建LOV    </p>
+</li>
+<li>
+<p>设置View Accessors    </p>
+</li>
 </ul>
+<p>这样就可以实现动态切换LOV的基础数据源了。</p>
+        </div><!-- /.entry-content -->
+</div>
         </div>
         <div class="span3 offset1">
           <div class="well">

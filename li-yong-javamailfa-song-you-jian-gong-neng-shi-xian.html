@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
   <head>
-    <title> - 邓德昭的技术博客</title>
+    <title>利用javaMail发送邮件功能实现 - 邓德昭的技术博客</title>
     <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
@@ -15,18 +15,38 @@
     <div class="container">
       <div class="row">
         <div class="span8">
-<ul>
-    <li>ADF</li>
-    <li>ebs</li>
-    <li>java</li>
-    <li>linux</li>
-    <li>octopress</li>
-    <li>oracle</li>
-    <li>others</li>
-    <li>sinaapp</li>
-    <li>soa</li>
-    <li>webcenter</li>
-</ul>
+<div id="content">
+    <div class="header">
+        <h1>利用javaMail发送邮件功能实现</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/javamail/">javamail</a></span></small></p>
+        <div class="entry-content">
+        <p>由于SMTP服务器需要采用SSL方式访问，所以蛋疼了，默认的连接25端口方式无法连接<br />
+改成465方式访问，又报连接错误，原来是证书文件的问题。<br />
+于是利用 InstallCert.java重新生成证书
+<div>
+<blockquote>java InstallCert smtp.dengdezhao.cn:465</blockquote>
+</div>
+将得到的证书cacert文件放置在任意路径下：比如C盘 c:/cacert</p>
+
+<p>程序中props属性里添加如下参数
+<div>
+<blockquote>props = System.getProperties();<br />
+props.put("mail.smtp.host", smtp.dengdezhao.cn); // 设置SMTP主机<br />
+props.put("mail.smtp.auth", "true");<br />
+props.put("mail.smtp.socketFactory.class",<br />
+"javax.net.ssl.SSLSocketFactory");<br />
+props.put("mail.smtp.socketFactory.fallback", "false");<br />
+props.put("mail.smtp.socketFactory.port", "465");<br />
+props.put("mail.debug", "true");<br />
+props.put("javax.net.ssl.keyStore", "c:\\cacert");<br />
+props.put("javax.net.ssl.trustStore", "c:\\cacert");</blockquote>
+</div>
+即可。</p>
+
+<p>&nbsp;</p>
+        </div><!-- /.entry-content -->
+</div>
         </div>
         <div class="span3 offset1">
           <div class="well">

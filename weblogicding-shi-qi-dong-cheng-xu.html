@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
   <head>
-    <title>test - 邓德昭的技术博客</title>
+    <title>weblogic定时启动程序 - 邓德昭的技术博客</title>
     <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
@@ -17,11 +17,59 @@
         <div class="span8">
 <div id="content">
     <div class="header">
-        <h1>test</h1>
+        <h1>weblogic定时启动程序</h1>
     </div>
-    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Mon 30 May 2016</span> - <span class="tags"><a href="/tag/test/">test</a></span></small></p>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
         <div class="entry-content">
-        <p>this is a test</p>
+        <p>有个需求是要求程序在每天晚上3点钟的时候自动调用一个Job执行。</p>
+
+<p>解决方案：定制weblogic的启动类，用来运行Job执行。</p>
+
+<p>STEP1，启动类StartupTask：
+<div>
+<blockquote>public class StartupTask implements T3StartupDef {<br />
+public String startup(String name, Hashtable args) throws Exception {</blockquote></div></p>
+
+<p>Callplsql.main(null);</p>
+
+<p>return "Callplsql Startup successful completed";<br />
+}</p>
+
+<p>public void setServices(T3ServicesDef t3ServicesDef) {<br />
+}</p>
+
+<p>}
+
+Callplsql.java(  即是JOB类，是需要被调用的，要继承TimerTask  ）中的Main方法要有：
+<div>
+<blockquote>public static void main(String[] args) {<br />
+//任务执行间隔时间，默认24小时<br />
+long PERIOD_TIME=24*60*60*1000;<br />
+long delay=0;<br />
+//任务首次启动时间，默认零晨3点<br />
+Calendar end=Calendar.getInstance();<br />
+end.set(Calendar.HOUR_OF_DAY, 3);<br />
+end.set(Calendar.MINUTE, 0);<br />
+end.set(Calendar.SECOND, 0);<br />
+Calendar now=Calendar.getInstance();<br />
+delay=end.getTime().getTime()-now.getTime().getTime();<br />
+if(delay&lt;=0){<br />
+delay=PERIOD_TIME+delay;<br />
+}
+System.out.println("当前时间："+now.getTime());<br />
+System.out.println("首次启动SAP同步程序时间："+end.getTime());<br />
+System.out.println("延时："+delay+"毫秒启动SAP同步程序！");</blockquote></div></p>
+
+<p>//      待执行的任务<br />
+Timer time=new Timer();<br />
+Callplsql task=new Callplsql();<br />
+time.schedule(task,delay,PERIOD_TIME);</p>
+
+<p>}
+
+通过time.schedule每天零晨3：00循环调用JOB。</p>
+
+<p>编译好StartupTask类后，要在weblogic控制台设置好启动类即可实现此需求。</p>
         </div><!-- /.entry-content -->
 </div>
         </div>

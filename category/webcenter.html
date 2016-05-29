@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>Blog - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+<h2>Articles in the webcenter category</h2>
+
+<ul class="unstyled">
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"使用RIDC在webcenter portal集成ECM的文档查询功能"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Fri 28 November 2014</span> - <span class="tags"><a href="/tag/ECM/">ECM</a></span></small></p>
+                <div class="entry-content">
+                    <h4><i class="icon-file"></i>   需求：</h4>
+<p>标准的document service很不灵活，实际开发中少不了要开发定制。那么问题来了，通过RIDC很灵活的查询出了需要的文档，如何集成到portal上去呢</p>
+<h4><i class="icon-folder-open"></i> 分析：</h4>
+<p>使用RIDC查询出需要的文档，存放在POJO等数据模型中
+利用POJO生成dataControl，开发taskflow等UI层
+将以上功能开发成为extend.spaces.webapp，扩展到webcenter spaces
+以下主要展现第一步：通过RIDC查询及POJO生成数据模型。</p>
+<h4><i class="icon-pencil"></i> 技术实现：</h4>
+<ul>
+<li>使用RIDC查询文档</li>
+</ul>
+<p>以下是主要查询方法, query传入的即是ECM的queryText，例如：
+{% codeblock lang:java %}
+dDocType <matches> <code>PJT-INTERFACE-DOC</code>
+{% endcodeblock %}
+通过拼接好需要的查询条件以及用户便可以查询出文档。
+{% codeblock lang:java %}
+        public List<Document> search(String username, String query) {
+        ServiceResponse serviceResponse = null;
+        List<Document> list = new ArrayList<Document>();</p>
+<div class="highlight"><pre><span></span>    <span class="nt">try</span> <span class="p">{</span>
+        <span class="n">if …</span></pre></div>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/shi-yong-ridczai-webcenter-portalji-cheng-ecmde-wen-dang-cha-xun-gong-neng.html" rel="bookmark" title="Permalink to "使用RIDC在webcenter portal集成ECM的文档查询功能"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"定制webcenter的people connection组件"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 23 October 2014</span> - <span class="tags"><a href="/tag/peopleConnection/">peopleConnection</a></span></small></p>
+                <div class="entry-content">
+                    <h4><i class="icon-file"></i>   需求：</h4>
+<p>webcenter的people connection类似于微博的关注粉丝功能，现在需要利用程序让某一用户自动关注一批人员。比如某一用户所在项目<code>(PROJECT1)</code>下有10个成员，则该用户进入portal的时候默认就展示其项目下的10个成员在某一分组<code>(PROJECT1)</code>下。</p>
+<h4><i class="icon-folder-open"></i> 分析：</h4>
+<p>根据项目PROJECT1可以查询出10个成员名；
+利用API将10个成员添加到Connections中；
+利用API创建Connection list，也即是分组名<code>(PROJECT1)</code>；
+将10个成员的Connection 添加到分组PROJECT1中。</p>
+<h4><i class="icon-pencil"></i> 技术实现：</h4>
+<ul>
+<li>
+<p _="%" endcodeblock="endcodeblock">根据项目PROJECT1可以查询出10个成员名；
+在AMimpl中创建查询成员名方法以List返回结果。
+{% codeblock lang:sql %}
+    public List<String> getAllMembersByProjectId(String proId){
+        List<String> result=new ArrayList<String>();
+        result.add("CG02");
+        result.add("CG03");
+        result.add("CG04");
+        result.add("CG05");
+        result.add("pierre");
+        result …</string></string></string></p></li></ul>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/ding-zhi-webcenterde-people-connectionzu-jian.html" rel="bookmark" title="Permalink to "定制webcenter的people connection组件"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"webcenter portal调用document service"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 August 2014</span> - <span class="tags"><a href="/tag/documentservice/">documentservice</a></span></small></p>
+                <div class="entry-content">
+                    <p><strong>平台:</strong> webcenter 1.8</p>
+<h4><i class="icon-file"></i> Webcenter Contents端配置</h4>
+<blockquote>
+<p><strong>步骤:</strong></p>
+<ul>
+<li>进入webcenter contents http://192.168.15.251:16210/cs/idcplg</li>
+<li>展开administration目录</li>
+<li>Admin Server节点</li>
+<li>Component Manager 里</li>
+<li>开启以下特性<code>FrameworkFolders</code>(原<code>Floder_g</code>，已被<code>FrameworkFolders</code>替代)，<code>WebCenterConfigure</code>, <code>DynamicConverter</code></li>
+<li>重启UCM</li>
+</ul>
+</blockquote>
+<h4><i class="icon-file"></i>  Webcenter Portal端配置</h4>
+<blockquote>
+<p><strong>进入Portal管理界面:</strong></p>
+<ul>
+<li>切换到Portals标签</li>
+<li>Tools and Services菜单里</li>
+<li>设置Documents服务为enabled即可</li>
+</ul>
+</blockquote>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/webcenter-portaldiao-yong-document-service.html" rel="bookmark" title="Permalink to "webcenter portal调用document service"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"创建Content Repository时出现错误"Date: 2013-03-20</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Mon 25 August 2014</span> - <span class="tags"><a href="/tag/webcenter/">webcenter</a></span></small></p>
+                <div class="entry-content">
+                    <h4><i class="icon-file"></i><strong>创建Content Repository时出现错误：</strong></h4>
+<blockquote>
+<p><strong>NOTE:</strong></p>
+<ul>
+<li>Unable to load content server metadata model using GET_DOC_METADATA_INFO.</li>
+<li>Permission denied. Address 'XX.XX.XX.XX' is not an allowable remote socket address</li>
+</ul>
+</blockquote>
+<h4><i class="icon-file"></i> <strong>解决方法:</strong></h4>
+<blockquote>
+<ul>
+<li>
+<p><i class="icon-pencil"></i> 找到config.cfg   <br />
+<code>/u02/app/oraucm/fmw_home/user_projects/domains/ecm_domain/ucm/cs/config/config.cfg</code></p>
+</li>
+<li>
+<p><i class="icon-pencil"></i>在SocketHostAddressSecurityFilter值加上<code>|*.*.*.*</code>
+SocketHostAddressSecurityFilter=127.0.0.1|192.168.15 …</p></li></ul></blockquote>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/chuang-jian-content-repositoryshi-chu-xian-cuo-wu-date-2013-03-20.html" rel="bookmark" title="Permalink to "创建Content Repository时出现错误"Date: 2013-03-20">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"Jive Forums admin console 管理员账户密码重置"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Wed 20 March 2013</span> - <span class="tags"><a href="/tag/Jive/">Jive</a></span></small></p>
+                <div class="entry-content">
+                    <h4><i class="icon-file"></i>   需求：</h4>
+<p>webcenter集成AD 之后发现Discussion控件用不了，使用weblogic账号也无法进入Jive forums的控制台，但是weblogic控制台可以登录。于是想重置Jive Forums的管理账号密码。</p>
+<h4><i class="icon-folder-open"></i> 分析：</h4>
+<p>修改jiveuser表将管理员账户密码更新即可。</p>
+<h4><i class="icon-pencil"></i> 技术实现：</h4>
+<ul>
+<li>连接到FM_DISCUSSIONS schema，查询jiveuser，发现passwordhash字段值变为了"-"字符，可能是集成AD之后这边的数据被覆盖了，按字段名推测密码应该是hash加密后的密文，于是将weblogic用户的密码通过MD5加密生成密文更新该字段，重启webcenter之后，问题解决。</li>
+</ul>
+<p _="%" endcodeblock="endcodeblock">附：
+{% codeblock lang:java %}
+//password: Welcome1 
+update jiveuser set passwordhash='b56e0b4ea4962283bee762525c2d490f' where username='weblogic'</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/jive-forums-admin-console-guan-li-yuan-zhang-hu-mi-ma-zhong-zhi.html" rel="bookmark" title="Permalink to "Jive Forums admin console 管理员账户密码重置"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+</ul><!-- /#posts-list -->
+
+<div class="pagination pagination-centered">
+    <ul>
+        <li class="active"><a href="#">1</a></li>
+    </ul>
+</div>
+</div><!-- /#content -->
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

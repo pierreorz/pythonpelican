@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>"<af:table>分页栏出现3个问号BUG解决" - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>"<af:table>分页栏出现3个问号BUG解决"</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 06 June 2013</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+        <div class="entry-content">
+        <hr />
+<p>平台：Jdeveloper 11.1.1.7.0</p>
+<hr />
+<p><strong>BUG描述</strong>
+标准控件af:table，“页”字前后出现三个问号。</p>
+<p><strong>原因分析</strong></p>
+<p _="%" endcodeblock="endcodeblock">查看LOG文件  <br />
+{% codeblock lang:java %}
+<RenderingContext> <getTranslatedString> 无法从外观 mySkin.desktop 获取资源关键字 页  <br /></p>
+<p>可见是RenderingContext类中getTranslatedString方法发生异常。  <br />
+查看源代码分析：    </p>
+<p><strong>找到源代码所在位置</strong>：  </p>
+<p><strong>将JAR包解压得到RenderingContext类，反编译查看</strong>    </p>
+<p _="%" endcodeblock="endcodeblock">结果如下<strong>RenderingContext.class</strong>：  <br />
+{% codeblock lang:java %}
+  public String getTranslatedString(String key)
+  {
+    if (key == null)
+      return null;
+    try
+    {
+      return getSkin().getTranslatedString(getLocaleContext(), key);
+    }
+    catch (MissingResourceException mre)
+    {
+      _LOG.severe("CANNOT_GET_RESOURCE_KEY", new String[] { key, getSkin().getId() }); }
+    return "???" + key + "???";
+  }</p>
+<p>可知在调用getTranslatedString获取Resource时，发生MissingResourceException异常所以返回了带"???"+Key+"???"字样的字符串。    </p>
+<p><strong>解决方案：</strong></p>
+<p>根据以上分析基本可知出现问号的原因是在获取resourcebundle时，找不到Key为页的resource，所以直接返回了"???" + key + "???"，就出现分页显示出现问号的BUG。    </p>
+<p><strong>方案一：</strong>重写ResourceBundle类，增加KEY值为“页”的资源。
+步骤如下：    </p>
+<ul>
+<li>
+<p _="%" endcodeblock="endcodeblock">创建SkinBundle类 extends ListResourceBundle   <br />
+{% codeblock lang:java %}
+package cn.dengdezhao.bundle
+public class SkinBundle extends ListResourceBundle {
+    @Override
+    public Object[][] getContents() {
+        System.out.println("executing...");
+        return  new Object[][]{ { "页", "页" } };
+    }
+}</p>
+</li>
+<li>
+<p _="%" endcodeblock="endcodeblock">创建trinidad-skins.xml文件注册定制化Skin  <br />
+{% codeblock lang:xml %}
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+    <skin>
+        <id>mySkin.desktop</id>
+        <family>mySkin</family>
+        <extends>skyros-v1.desktop</extends> 
+        <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+        <style-sheet-name>css/mySkin.css</style-sheet-name>
+        <bundle-name>cn.dengdezhao.bundle.SkinBundle</bundle-name>
+        <!--<bundle-name>ApplicationBundle</bundle-name>-->
+    </skin>
+</skins></p>
+</li>
+<li>
+<p _="%" endcodeblock="endcodeblock">修改trinidad-config.xml文件如下：  <br />
+{% codeblock lang:xml %}
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<trinidad-config xmlns="http://myfaces.apache.org/trinidad/config">
+  <skin-family>mySkin</skin-family>
+</trinidad-config></p>
+</li>
+<li>
+<p>创建css/mySkin.css文件（内容默认CSS即可）</p>
+</li>
+</ul>
+<p>运行即发现问号消失。</p>
+<p _="%" endcodeblock="endcodeblock"><strong>方案二：</strong>其实原理跟方案一一样，也是通过改resourcebundle实现。resourcebundle支持三种类型，一种是以上的扩展ListResourceBundle类实现，一种是通过配置文件properties实现，另外一种是xliff实现。也可创建一个ApplicationBundle.properties文件，内容如下:  <br />
+{% codeblock lang:java %}
+页 = 页</p>
+<p>trinidad-skins.xml里的bundle-name节点设置成ApplicationBundle也可实现同样效果。</p>
+<p>定制CSS可参照["定制CSS"]</p>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

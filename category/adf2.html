@@ -1,0 +1,412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>Blog - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+<h2>Articles in the ADF category</h2>
+
+<ul class="unstyled">
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Sat 01 June 2013</span> - <span class="tags"><a href="/tag/AppModuleImpl/">AppModuleImpl</a></span></small></p>
+                <div class="entry-content">
+                    <hr />
+<h2>平台: Jdev11.1.1.7.0</h2>
+<hr />
+<ol>
+<li _="%" endcodeblock="endcodeblock"><strong><em>*AM</em></strong>*中创建自定义方法sayHello  <br />
+{% codeblock lang:java %}
+    public void sayHello(String value){
+        System.out.println("hello world..."+value);
+    }</li>
+<li>
+<p>暴露该方法以便在ManagedBean中调用    </p>
+</li>
+<li>
+<p>从Data Controls中将该方法拖到页面生成Bindings或者手工添加该Bindings。   </p>
+</li>
+<li>
+<p>为了测试方便，创建了一个inputText，并绑定该inputText的valueChangeListener为ManagedBean中的valueChange方法.  <br />
+{% codeblock lang:java %}
+    public void valueChange(ValueChangeEvent valueChangeEvent) {
+        String newValue = valueChangeEvent.getNewValue().toString();
+        //方法一：调用bindings
+        BindingContainer bindings = ADFUtils.getBindingContainer();              <br />
+        OperationBinding refreshChecklist = bindings …</p></li></ol>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/zai-managedbeanzhong-diao-yong-appmoduleimplzhong-zi-ding-yi-fang-fa-de-liang-chong-fang-shi.html" rel="bookmark" title="Permalink to "在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"关于ApplicatoinModule类型总结"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 28 May 2013</span> - <span class="tags"><a href="/tag/am/">am</a></span></small></p>
+                <div class="entry-content">
+                    <h2>平台：Jdev11.1.2.3.0</h2>
+<h4>AM的类型</h4>
+<p><strong>1. Root AM</strong>  <br />
+<strong>2. Nested AM</strong>  <br />
+<strong>3. Shared AM</strong>    </p>
+<h4>三种类型AM的比较</h4>
+<p>首先谈谈RootAM的数量，RootAM原则上来说越少越好，因为当用户访问工程的时候数据库连接数量会根据RootAM的数量成倍增加极大地增加了数据库的压力。但是很多时候由于业务的复杂性，单一的AM无法满足实际开发的需求，所有的业务逻辑都写在一个AM里极不利于多个团队的协同开发。  <br />
+这个时候NestedAM就发挥其作用了，NestedAM是共享其父类RootAM的数据库连接的，所以不会额外增加连接数量，利用NestedAM可以将业务逻辑拆分开来，每个团队都可以使用自己单独的NestedAM，团队之间彼此冲突地可能性大大减少。
+再说SharedAM，大型项目中很多模块的功能是通用的，比如LOV或者一些在使用中基本不需要改变的固定配置数据等，这类数据对项目所有访问用户都是固定的，可以使用SharedAM来维护这类型数据。</p>
+<h4>三种类型的AM的创建方法</h4>
+<ol>
+<li>RootAM,默认创建的AM即是RootAM    </li>
+<li>
+<p>NestedAM创建方法  <br />
+   先创建两个RootAM(deptAm,empAm)，分别拥有VO instance（DeptVO,EmpVO)；  <br />
+再创建一个RootAM（rootAM)，双击该rootAM，在Data Model标签页中 …</p></li></ol>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-applicatoinmodulelei-xing-zong-jie.html" rel="bookmark" title="Permalink to "关于ApplicatoinModule类型总结"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"ADF类似心跳程序实现"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Wed 24 April 2013</span> - <span class="tags"><a href="/tag/poll/">poll</a></span></small></p>
+                <div class="entry-content">
+                    <p>使用ADF框架开发WEB应用时，其中令人苦恼的一个需求就是：在两个页面同时展示一个数据源时，如果其中一个页面对数据源作了变更操作，另外一个页面没办法自动获得变更后的数据，需要手工刷新页面才能得到变更后的新数据源。   </p>
+<p>其实ADF自带的<code>&lt;af:poll/&gt;</code>组件即可实现此需求。</p>
+<p>例子：</p>
+<ul>
+<li>创建一个可更新的af:table 基于HR的Department表</li>
+</ul>
+<p>可以更改表数据并提交，用多浏览器窗口打开该页面来模拟多用户操作。</p>
+<p>将<code>&lt;af:poll/&gt;</code>控件拖入到页面中，控件属性设置如下：    </p>
+<p>设置间隔为1分钟，并绑定PollListener</p>
+<ul>
+<li>给该页面绑定ManagedBean，并添加PollListener，方法内容如下：    </li>
+</ul>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+    public void heartBeat(PollEvent pollEvent) {
+        System.out.println("start poll...");      <br />
+        DCIteratorBinding it = ADFUtils.findIterator("Departments1Iterator");
+        ViewObject vo = it.getViewObject();
+        vo.executeQuery …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/adflei-si-xin-tiao-cheng-xu-shi-xian.html" rel="bookmark" title="Permalink to "ADF类似心跳程序实现"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"ADF学习总结(一)"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Fri 19 April 2013</span> - <span class="tags"><a href="/tag/ViewCriteria/">ViewCriteria</a></span></small></p>
+                <div class="entry-content">
+                    <h4>改变VO查询条件</h4>
+<ul>
+<li>使用WhereClause改变查询条件</li>
+<li>使用Criteria改变查询条件</li>
+<li>使用Bind Variables改变查询条件</li>
+</ul>
+<h4>使用WhereClause改变查询条件</h4>
+<ul>
+<li><strong>setWhereClause</strong>    </li>
+</ul>
+<p _="%" endcodeblock="endcodeblock">通过VO对象的setWhereClause方法改变查询条件
+{% codeblock lang:java %}
+DCIteratorBinding dc = ADFUtils.findIterator("DepartmentsView1Iterator");  <br />
+ViewObject vo = dc.getViewObject();     <br />
+vo.setWhereClause(" 1=1 ");  <br />
+vo.executeQuery();   <br /></p>
+<ul>
+<li><strong>addWhereClause</strong></li>
+</ul>
+<p>addWhereClause是在原有whereClause基础上添加新的查询条件；  <br />
+跟setWhereClause替换原有whereClaue不同；</p>
+<h4>使用ViewCriteria改变查询条件</h4>
+<ul>
+<li><strong>使用定义好的ViewCriteria</strong>    </li>
+</ul>
+<p>事先在创建VO的时候，定义好几种Criteria：DepartmentsViewCriteria    </p>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+DCIteratorBinding dc = ADFUtils.findIterator("DepartmentsView1Iterator");      <br />
+ViewObject vo = dc.getViewObject();         <br />
+ViewCriteriaManager vcm=vo.getViewCriteriaManager …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/adfxue-xi-zong-jie-yi.html" rel="bookmark" title="Permalink to "ADF学习总结(一)"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>"getRowAtRangeIndex(int)方法的局限性"</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 16 April 2013</span> - <span class="tags"><a href="/tag/excel/">excel</a></span></small></p>
+                <div class="entry-content">
+                    <p _="%" endcodeblock="endcodeblock">导出VO中的数据到EXCEL中时，循环VO中的Row，写入HSSFRow，是通过getRowAtRangeIndex(int)方法循环取Row，代码如下：  <br />
+{% codeblock lang:java %}
+ ViewObject vo8=am.findViewObject("ChReport1VO1");
+ if(vo8!=null)
+ {
+      int rowcount8=vo8.getRowCount();
+      for(int i=0;i&lt;rowcount8;i++)
+      {
+           Row vo_row8=vo8.getRowAtRangeIndex(i);
+           //...TODO
+      }
+ }</p>
+<p>这样如果VO里有300条数据，但是pageRange设置为100，这里其实只能取到第一页的100条数据，想要导出所有300条数据则需要一页一页导出，很麻烦。于是考虑不用getRowAtRangeIndex方法取ROW数据,改用RowSetIterator。</p>
+<p>{% codeblock lang:java %}
+ViewObject vo8=am.findViewObject("ChReport1VO1 …</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/getrowatrangeindexintfang-fa-de-ju-xian-xing.html" rel="bookmark" title="Permalink to "getRowAtRangeIndex(int)方法的局限性"">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>adf:tree做的树菜单如何过滤子节点的数据？</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>需求：项目中的树菜单需要权限用户的权限过滤显示子菜单，通过用户所在的用户组可以查看的页面ID（List)过滤子节点<br />
+解决方案：<br />
+因为树是通过viewLink关联自身的VO生成的，想在AM里添加方法，对VO进行过滤处理把结果返回。<br />
+但实现起来比较麻烦，调用方法之后要刷新页面，初始化的树数据过滤处理困难。<br />
+于是想重写VO的方法看能不能在VO层就过滤掉子节点。重写createViewLinkAccessorRS，此方法返回ViewLink的结果，也就是菜单的子节点数据
+<div>
+<blockquote>
+@Override<br />
+protected ViewRowSetImpl createViewLinkAccessorRS(AssociationDefImpl associationDefImpl,<br />
+ViewObjectImpl viewObjectImpl,<br />
+Row row,<br />
+Object[] object) {<br />
+ViewRowSetImpl viewRowSetImpl =<br />
+super.createViewLinkAccessorRS(associationDefImpl, viewObjectImpl,<br />
+row, object);<br />
+int count = 0;<br />
+// getList()拿到可以查看的pageId的列表，对比Row中的pageId属性，如果在List中存在，就取该Row，如果不存      //在，表示此子节点不予以显示，remove掉<br />
+if (this …</blockquote></div></p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html" rel="bookmark" title="Permalink to adf:tree做的树菜单如何过滤子节点的数据？">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>表内的checkbox当数据量大时发现部分行勾选不中</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>测试发现，当数据只有25行的时候，都可以正常勾选，超过25行的数据，总是勾选不中。</p>
+
+<p>问题产生原因：<br />
+由于自定制的checkbox是设置了immediate=true 即时给数据行的checkbox字段赋值。<br />
+VO的rangeSize 默认是25，<br />
+因此导致25条数据内是可选。25条之外的数据初始时没有取出来，因此对这些没取的数据行设置checkbox自然就不生效了（展现出来就是checkbox勾选不中）</p>
+
+<p>解决方案：<br />
+修正VO的rangeSize为-1，查询全部，即可解决此问题。</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html" rel="bookmark" title="Permalink to 表内的checkbox当数据量大时发现部分行勾选不中">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>关于定制validator</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>一个时刻字段，要求输入00:00-12:60这样的时刻范围<br />
+使用如下的正则表达式，过滤掉了不合规则的数字之后，还差一个逻辑，结束时刻不能小于开始时刻，比如：10：00-9：00这样的输入也是不合法的。正则太折磨眼力了，应该也是可以做到这点的吧，为了偷懒，就定制个validator来处理这个点。
+<div>
+<blockquote>&lt;af:validateRegExp pattern="([0-1][0-9]|2[0-4])\:([0-5][0-9]|60)\-([0-1][0-9]|2[0-4])\:([0-5][0-9]|60)" messageDetailNoMatch="请输入时刻，例如 00：00-24：60 " hint="请输入时刻，例如 00：00-24：60"/&gt;</blockquote>
+</div>
+<strong>Step1</strong>。创建一个<strong>ValidatorTime</strong>类实现Validator接口
+<div>
+<blockquote>package …</blockquote></div></p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-ding-zhi-validator.html" rel="bookmark" title="Permalink to 关于定制validator">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>关于ManagedBean中多次执行构造方法时的问题</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>有时候需要在初始化时执行一些查询，但发现会多次执行。需要在构造方法里添加一行代码避免页面点击时多次执行初始化。<br />
+if (!(Boolean)ADFUtils.getBindObject("adfFacesContext.postback")) {<br />
+init()；<br />
+}</p>
+
+<p>通过页面是否postback来控制只初始化一次。</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html" rel="bookmark" title="Permalink to 关于ManagedBean中多次执行构造方法时的问题">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>关于selectBooleanCheckbox 的问题</h2>
+                </div>
+                <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 26 June 2012</span> - <span class="tags"><a href="/tag/ADF/">ADF</a></span></small></p>
+                <div class="entry-content">
+                    <p>页面的 selectBooleanCheckbox 选择后，总提示 不是数字（组件value是 true 或 false,数据库存的是Number），怎么解决</p>
+
+<p>方案有三个<br />
+1。如果是基于表的Number字段(假设字段名是Flag，值是1或者0），想生成selectBooleanCheckbox ，可以重写这个VO的的 setFlag()跟getFlag()方法如下：<br />
+public void setFlag(Boolean value){<br />
+this.flag=value==true?1:0;<br />
+}
+public Boolean getFlag(){<br />
+return this.flag==0?false:true;<br />
+}</p>
+
+<p>2。设置valueChangeListener.<br />
+在valueChange方法里捕获当前selectBooleanCheckbox 的值，然后转化成Number类型的传给VO</p>
+
+<p>3。如果是只读的表，可以在UI上通过EL表达式处理。</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html" rel="bookmark" title="Permalink to 关于selectBooleanCheckbox 的问题">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li><hr /></li>
+</ul><!-- /#posts-list -->
+
+<div class="pagination pagination-centered">
+    <ul>
+        <li><a href="http://pelican.dengdezhao.cn">1</a></li>
+        <li class="active"><a href="#">2</a></li>
+        <li><a href="http://pelican.dengdezhao.cncategory/adf3/">3</a></li>
+        <li><a href="http://pelican.dengdezhao.cncategory/adf4/">4</a></li>
+    </ul>
+</div>
+</div><!-- /#content -->
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
   <head>
-    <title>test - 邓德昭的技术博客</title>
+    <title>"在ManagedBean中调用AppModuleImpl中自定义方法的两种方式" - 邓德昭的技术博客</title>
     <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
@@ -17,11 +17,46 @@
         <div class="span8">
 <div id="content">
     <div class="header">
-        <h1>test</h1>
+        <h1>"在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"</h1>
     </div>
-    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Mon 30 May 2016</span> - <span class="tags"><a href="/tag/test/">test</a></span></small></p>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Sat 01 June 2013</span> - <span class="tags"><a href="/tag/AppModuleImpl/">AppModuleImpl</a></span></small></p>
         <div class="entry-content">
-        <p>this is a test</p>
+        <hr />
+<h2>平台: Jdev11.1.1.7.0</h2>
+<hr />
+<ol>
+<li _="%" endcodeblock="endcodeblock"><strong><em>*AM</em></strong>*中创建自定义方法sayHello  <br />
+{% codeblock lang:java %}
+    public void sayHello(String value){
+        System.out.println("hello world..."+value);
+    }</li>
+<li>
+<p>暴露该方法以便在ManagedBean中调用    </p>
+</li>
+<li>
+<p>从Data Controls中将该方法拖到页面生成Bindings或者手工添加该Bindings。   </p>
+</li>
+<li>
+<p>为了测试方便，创建了一个inputText，并绑定该inputText的valueChangeListener为ManagedBean中的valueChange方法.  <br />
+{% codeblock lang:java %}
+    public void valueChange(ValueChangeEvent valueChangeEvent) {
+        String newValue = valueChangeEvent.getNewValue().toString();
+        //方法一：调用bindings
+        BindingContainer bindings = ADFUtils.getBindingContainer();              <br />
+        OperationBinding refreshChecklist = bindings.getOperationBinding("sayHello");
+        refreshChecklist.getParamsMap().put("value", newValue); 
+        refreshChecklist.execute();</p>
+<div class="highlight"><pre><span></span>//方法二：直接调用AM，通过AM调用该方法
+AppModuleImpl am = (AppModuleImpl)ADFUtils.
+getApplicationModuleForDataControl(&quot;AppModuleDataControl&quot;);
+am.sayHello(newValue);
+</pre></div>
+
+
+<p _="%" endcodeblock="endcodeblock">}</p>
+</li>
+</ol>
+<p>以上两种方式均可以调用AM中的自定义方法。</p>
         </div><!-- /.entry-content -->
 </div>
         </div>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>"Groovy在ADF中的应用" - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>"Groovy在ADF中的应用"</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Sun 02 June 2013</span> - <span class="tags"><a href="/tag/groovy/">groovy</a></span></small></p>
+        <div class="entry-content">
+        <p>使用Groovy脚本，在开发ADF应用中可以极大地提高开发效率，实现某些看似很复杂的功能。</p>
+<p _="%" endcodeblock="endcodeblock">比如在empVO中获取sequence值:  <br />
+{% codeblock lang:java %}
+db = adf.object.getDBTransaction()  <br />
+sq = new oracle.jbo.server.SequenceImpl("EMPLOYEES_SEQ",db)  <br />
+sq.getSequenceNumber()  <br /></p>
+<p _="%" endcodeblock="endcodeblock"><strong>在empVO中获取Salary字段最大值max：</strong>  <br />
+{% codeblock lang:java %}
+adf.object.getRowSet().max("Salary")</p>
+<p _="%" endcodeblock="endcodeblock"><strong>在empVO中获取Salary字段最小值min：</strong>  <br />
+{% codeblock lang:java %}
+adf.object.getRowSet().min("Salary")</p>
+<p _="%" endcodeblock="endcodeblock"><strong>在empVO中获取Salary字段合计sum：</strong>  <br />
+{% codeblock lang:java %}
+adf.object.getRowSet().sum("Salary")</p>
+<p _="%" endcodeblock="endcodeblock"><strong>在empVO中获取Salary字段均值avg：</strong>  <br />
+{% codeblock lang:java %}
+adf.object.getRowSet().avg("Salary")</p>
+<p _="%" endcodeblock="endcodeblock"><strong>在empVO中获取Salary字段数量count：</strong>  <br />
+{% codeblock lang:java %}
+adf.object.getRowSet().count("Salary")</p>
+<p _="%" endcodeblock="endcodeblock"><strong>import JAVA类库</strong>  <br />
+导入SimpleDateFormat类，对当前日期格式化成String对象输出  <br />
+{% codeblock lang:java %}
+import java.text.SimpleDateFormat
+df = new SimpleDateFormat("yyyy-MM-dd")
+df.format(adf.currentDate)</p>
+<p _="%" endcodeblock="endcodeblock"><strong>获取当前行中Attribute值</strong>  <br />
+{% codeblock lang:java %}
+source.Salary 
+source.getAttribute("Salary")</p>
+<p><strong>调用EntityImpl中的方法</strong> <br />
+在EntityImpl中定义的方法均可以通过<strong>adf.object</strong>.yourMethod()方式调用  <br />
+其它如：  <br />
+<strong>adf.object.entityState</strong>  <br />
+<strong>adf.object.postState</strong>  <br />
+<strong>adf.userSession</strong> //获得Session <br />
+<strong>adf.context</strong> //获得AdfContext对象     </p>
+<p _="%" endcodeblock="endcodeblock"><strong>调用AM中的自定义方法getHelloWorld()</strong>  <br />
+{% codeblock lang:java %}
+structureDef.getApplicationModule().getHelloWorld()</p>
+<p>Groovy脚本的用处还有很多，以上只是总结了部分常用的调用方法。</p>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

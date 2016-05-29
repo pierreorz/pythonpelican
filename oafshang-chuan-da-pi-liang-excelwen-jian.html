@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>"OAF上传大批量EXCEL文件" - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>"OAF上传大批量EXCEL文件"</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Tue 09 April 2013</span> - <span class="tags"><a href="/tag/oaf/">oaf</a></span></small></p>
+        <div class="entry-content">
+        <p>客户有个需求：大量数据通过EXCEL导入系统表，并能提供效验及去重功能。</p>
+<h4>设计思路</h4>
+<ul>
+<li>采用POI解析EXCEL文件；</li>
+<li>bulk insert 插入数据到临时表</li>
+<li>临时表结合正式表去除重复</li>
+</ul>
+<h4>POI解析EXCEL</h4>
+<p>在CO的<code>processFormRequest</code>方法中添加如下:  <br />
+{% codeblock lang:java %}
+  public void processFormRequest(OAPageContext pageContext, OAWebBean webBean)
+  {
+    super.processFormRequest(pageContext, webBean);
+    OAApplicationModule am = pageContext.getApplicationModule(webBean);</p>
+<div class="highlight"><pre><span></span>if (pageContext.getParameter(&quot;uploadBtn&quot;) != null)
+{
+  DataObject fileUploadData = (DataObject)pageContext.getNamedDataObject(&quot;uploadFile&quot;);
+  String fileName = null;
+  try {
+    fileName = (String)fileUploadData.selectValue(null, &quot;UPLOAD_FILE_NAME&quot;);
+  } catch(NullPointerException ex)
+  {
+    throw new OAException(&quot;请先选择需要上传的文件&quot;, OAException.INFORMATION);
+  }
+
+  if(fileName.endsWith(&quot;.xlsx&quot;))
+  {
+            throw new OAException(&quot;不支持高版本EXCEL文件,请转换成2003版本的EXCEL再上传&quot;,OAException.WARNING);
+  }else if(!fileName.endsWith(&quot;.xls&quot;))
+  {
+            throw new OAException(&quot;请上传EXCEL类型文件&quot;,OAException.ERROR);
+  }
+
+  BlobDomain uploadedByteStream = (BlobDomain)fileUploadData.selectValue(null, fileName);
+  Serializable aserializable2[] = {uploadedByteStream};
+  Class aclass2[] = {BlobDomain.class };
+  am.invokeMethod(&quot;importFile&quot;, aserializable2,aclass2);   
+}
+</pre></div>
+
+
+<p _="%" endcodeblock="endcodeblock">}</p>
+<h4>在AM中编写importFile方法</h4>
+<p>{% codeblock lang:java %}
+  public void importFile(BlobDomain fileData) 
+  {
+    InputStream inStr = fileData.getInputStream();
+    HSSFWorkbook workbook=null;
+    try{
+     workbook= new HSSFWorkbook(inStr);
+    }catch(java.io.IOException e)
+    {
+      throw new OAException("读取上传的文件出错,请检查上传的文件是否为97-2003版本的EXCEL可读文件.",OAException.ERROR);
+    }
+    //信号1
+    if(workbook==null)
+    {
+      throw new OAException("ERROR001:workbook为空,请重新上传文件.",OAException.ERROR);
+    }
+    HSSFSheet sheet1 = workbook.getSheet("1");
+    if(sheet1==null)
+    {
+      throw new OAException("ERROR002:sheet1为空,上传文件中找不到名字为'1'的工作表,请检查工作表命名是否符合规则.",OAException.ERROR);
+    }
+    int rowCount1 = sheet1.getLastRowNum();
+    int realCount1=0;</p>
+<div class="highlight"><pre><span></span><span class="nt">Object</span><span class="cp">[]</span> <span class="nt">o_vin1</span><span class="o">=</span><span class="nt">new</span> <span class="nt">Object</span><span class="cp">[</span><span class="nx">rowCount1</span><span class="cp">]</span><span class="o">,</span>
+<span class="nt">o_type1</span><span class="o">=</span><span class="nt">new</span> <span class="nt">Object</span><span class="cp">[</span><span class="nx">rowCount1</span><span class="cp">]</span><span class="o">,</span>
+<span class="nt">o_color1</span><span class="o">=</span><span class="nt">new</span> <span class="nt">Object</span><span class="cp">[</span><span class="nx">rowCount1</span><span class="cp">]</span><span class="o">,</span>
+<span class="nt">o_date1</span><span class="o">=</span><span class="nt">new</span> <span class="nt">Object</span><span class="cp">[</span><span class="nx">rowCount1</span><span class="cp">]</span><span class="o">,</span>
+<span class="nt">o_des1</span><span class="o">=</span><span class="nt">new</span> <span class="nt">Object</span><span class="cp">[</span><span class="nx">rowCount1</span><span class="cp">]</span><span class="o">;</span>
+<span class="nt">String</span> <span class="nt">vin1</span><span class="o">=</span><span class="nt">null</span><span class="o">,</span><span class="nt">type1</span><span class="o">=</span><span class="nt">null</span><span class="o">,</span><span class="nt">color1</span><span class="o">=</span><span class="nt">null</span><span class="o">;</span>
+<span class="nt">java</span><span class="nc">.util.Date</span> <span class="nt">vdate1</span><span class="o">=</span><span class="nt">null</span><span class="o">;</span>
+<span class="nt">for</span> <span class="o">(</span><span class="nt">int</span> <span class="nt">r1</span><span class="o">=</span><span class="nt">1</span><span class="o">;</span> <span class="nt">r1</span> <span class="o">&lt;=</span> <span class="nt">rowCount1</span><span class="o">;</span> <span class="nt">r1</span><span class="o">++)</span>
+<span class="p">{</span>
+  <span class="n">HSSFRow</span> <span class="n">tempRow1</span><span class="o">=</span><span class="n">sheet1</span><span class="o">.</span><span class="n">getRow</span><span class="p">(</span><span class="n">r1</span><span class="p">);</span>
+  <span class="n">if</span><span class="p">(</span><span class="n">tempRow1</span><span class="o">==</span><span class="n">null</span><span class="p">)</span>
+  <span class="err">{</span>
+    <span class="n">throw</span> <span class="n">new</span> <span class="n">OAException</span><span class="p">(</span><span class="s2">&quot;INFO:sheet</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="s2">中第&quot;</span><span class="o">+</span><span class="p">(</span><span class="n">r1</span><span class="o">+</span><span class="m">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;行数据异常,请检查上传文件&quot;</span><span class="o">,</span><span class="n">OAException</span><span class="o">.</span><span class="n">INFORMATION</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nt">if</span><span class="o">(</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">0</span><span class="o">)==</span><span class="nt">null</span><span class="o">||</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">0</span><span class="o">)</span><span class="nc">.getStringCellValue</span><span class="o">()==</span><span class="nt">null</span><span class="o">||</span><span class="s2">&quot;&quot;</span><span class="nc">.equals</span><span class="o">(</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">0</span><span class="o">)</span><span class="nc">.getStringCellValue</span><span class="o">()</span><span class="nc">.trim</span><span class="o">()))</span>
+  <span class="p">{</span>
+    <span class="n">throw</span> <span class="n">new</span> <span class="n">OAException</span><span class="p">(</span><span class="s2">&quot;INFO:sheet</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="s2">中第&quot;</span><span class="o">+</span><span class="p">(</span><span class="n">r1</span><span class="o">+</span><span class="m">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;行第1列数据异常,请检查上传文件&quot;</span><span class="o">,</span><span class="n">OAException</span><span class="o">.</span><span class="n">INFORMATION</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nt">if</span><span class="o">(</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">1</span><span class="o">)==</span><span class="nt">null</span><span class="o">||</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">1</span><span class="o">)</span><span class="nc">.getStringCellValue</span><span class="o">()==</span><span class="nt">null</span><span class="o">)</span>
+  <span class="p">{</span>
+    <span class="n">throw</span> <span class="n">new</span> <span class="n">OAException</span><span class="p">(</span><span class="s2">&quot;INFO:sheet</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="s2">中第&quot;</span><span class="o">+</span><span class="p">(</span><span class="n">r1</span><span class="o">+</span><span class="m">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;行第2列数据异常,请检查上传文件&quot;</span><span class="o">,</span><span class="n">OAException</span><span class="o">.</span><span class="n">INFORMATION</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nt">if</span><span class="o">(</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">2</span><span class="o">)==</span><span class="nt">null</span><span class="o">||</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">2</span><span class="o">)</span><span class="nc">.getStringCellValue</span><span class="o">()==</span><span class="nt">null</span><span class="o">)</span>
+  <span class="p">{</span>
+    <span class="n">throw</span> <span class="n">new</span> <span class="n">OAException</span><span class="p">(</span><span class="s2">&quot;INFO:sheet</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="s2">中第&quot;</span><span class="o">+</span><span class="p">(</span><span class="n">r1</span><span class="o">+</span><span class="m">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;行第3列数据异常,请检查上传文件&quot;</span><span class="o">,</span><span class="n">OAException</span><span class="o">.</span><span class="n">INFORMATION</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nt">if</span><span class="o">(</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">3</span><span class="o">)==</span><span class="nt">null</span><span class="o">||</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">3</span><span class="o">)</span><span class="nc">.getDateCellValue</span><span class="o">()==</span><span class="nt">null</span><span class="o">)</span>
+  <span class="p">{</span>
+    <span class="n">throw</span> <span class="n">new</span> <span class="n">OAException</span><span class="p">(</span><span class="s2">&quot;INFO:sheet</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="s2">中第&quot;</span><span class="o">+</span><span class="p">(</span><span class="n">r1</span><span class="o">+</span><span class="m">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;行第4列数据异常,请检查上传文件&quot;</span><span class="o">,</span><span class="n">OAException</span><span class="o">.</span><span class="n">INFORMATION</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nt">vin1</span><span class="o">=</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">0</span><span class="o">)</span><span class="nc">.getStringCellValue</span><span class="o">()</span><span class="nc">.trim</span><span class="o">();</span>
+  <span class="nt">type1</span><span class="o">=</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">1</span><span class="o">)</span><span class="nc">.getStringCellValue</span><span class="o">()</span><span class="nc">.trim</span><span class="o">();</span>
+  <span class="nt">color1</span><span class="o">=</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">2</span><span class="o">)</span><span class="nc">.getStringCellValue</span><span class="o">()</span><span class="nc">.trim</span><span class="o">();</span>
+  <span class="nt">vdate1</span><span class="o">=</span><span class="nt">tempRow1</span><span class="nc">.getCell</span><span class="o">((</span><span class="nt">short</span><span class="o">)</span><span class="nt">3</span><span class="o">)</span><span class="nc">.getDateCellValue</span><span class="o">();</span>
+
+  <span class="nt">o_vin1</span><span class="cp">[</span><span class="nx">r1</span><span class="o">-</span><span class="mi">1</span><span class="cp">]</span><span class="o">=</span><span class="nt">vin1</span><span class="o">;</span>
+  <span class="nt">o_type1</span><span class="cp">[</span><span class="nx">r1</span><span class="o">-</span><span class="mi">1</span><span class="cp">]</span><span class="o">=</span><span class="nt">type1</span><span class="o">;</span>
+  <span class="nt">o_color1</span><span class="cp">[</span><span class="nx">r1</span><span class="o">-</span><span class="mi">1</span><span class="cp">]</span><span class="o">=</span><span class="nt">color1</span><span class="o">;</span>
+  <span class="nt">o_date1</span><span class="cp">[</span><span class="nx">r1</span><span class="o">-</span><span class="mi">1</span><span class="cp">]</span><span class="o">=</span><span class="nt">new</span> <span class="nt">oracle</span><span class="nc">.jbo.domain.Date</span><span class="o">(</span><span class="nt">new</span> <span class="nt">java</span><span class="nc">.sql.Date</span><span class="o">(</span><span class="nt">vdate1</span><span class="nc">.getTime</span><span class="o">()));</span>
+  <span class="nt">o_des1</span><span class="cp">[</span><span class="nx">r1</span><span class="o">-</span><span class="mi">1</span><span class="cp">]</span><span class="o">=</span><span class="nt">null</span><span class="o">;</span>
+  <span class="nt">realCount1</span><span class="o">++;</span>      
+<span class="err">}</span>
+
+<span class="nt">List</span> <span class="nt">exceptions</span> <span class="o">=</span> <span class="nt">new</span> <span class="nt">ArrayList</span><span class="o">();</span>
+<span class="nt">exceptions</span><span class="nc">.add</span><span class="o">(</span><span class="nt">new</span> <span class="nt">OAException</span><span class="o">(</span><span class="s2">&quot;解析出上传EXCEL文件中信号1表&quot;</span><span class="o">+</span><span class="nt">realCount1</span><span class="o">+</span><span class="s2">&quot;条记录&quot;</span><span class="o">,</span><span class="nt">OAException</span><span class="nc">.INFORMATION</span> <span class="o">));</span>
+<span class="o">//</span><span class="nt">bulkinsert</span><span class="o">...</span>
+<span class="nt">exceptions</span><span class="nc">.add</span><span class="o">(</span><span class="nt">new</span> <span class="nt">OAException</span><span class="o">(</span><span class="s2">&quot;开始插入信号1临时表&quot;</span><span class="o">,</span><span class="nt">OAException</span><span class="nc">.INFORMATION</span> <span class="o">));</span>    
+<span class="nt">String</span> <span class="nt">result</span><span class="o">=</span><span class="nt">this</span><span class="nc">.bulkInsert1</span><span class="o">(</span><span class="nt">o_vin1</span><span class="o">,</span><span class="nt">o_type1</span><span class="o">,</span><span class="nt">o_color1</span><span class="o">,</span><span class="nt">o_date1</span><span class="o">,</span><span class="nt">o_des1</span><span class="o">);</span>
+<span class="nt">exceptions</span><span class="nc">.add</span><span class="o">(</span><span class="nt">new</span> <span class="nt">OAException</span><span class="o">(</span><span class="s2">&quot;结果:&quot;</span><span class="o">+</span><span class="nt">result</span><span class="o">,</span><span class="nt">OAException</span><span class="nc">.INFORMATION</span> <span class="o">));</span>        
+<span class="nt">exceptions</span><span class="nc">.add</span><span class="o">(</span><span class="nt">new</span> <span class="nt">OAException</span><span class="o">(</span><span class="s2">&quot;结束插入信号1临时表&quot;</span><span class="o">,</span><span class="nt">OAException</span><span class="nc">.INFORMATION</span> <span class="o">));</span>
+
+<span class="nt">OAException</span><span class="nc">.raiseBundledOAException</span><span class="o">(</span><span class="nt">exceptions</span><span class="o">);</span>
+</pre></div>
+
+
+<p _="%" endcodeblock="endcodeblock">}</p>
+<h4>OAF调用bulk insert插入大批量数据</h4>
+<p>{% codeblock lang:java %}
+ public String bulkInsert1(Object[] vin,Object[] type,Object[] color,Object[] vdate, Object[] des) 
+    {
+        CallableStatement st = null;
+        String result="";
+        String stmt = "{ call ch_report_pkg.INSERTREPORT1(?,?,?,?,?,?) }";
+        try {
+            st=this.getDBTransaction().createCallableStatement(stmt,0);
+            ArrayDescriptor T_VARCHAR30=null,
+             T_VARCHAR10=null,
+             T_VARCHAR200=null,
+             T_DATE=null;
+            ARRAY a_vin=null,a_type=null,a_color=null,a_vdate=null,a_des=null;
+            T_VARCHAR30=oracle.sql.ArrayDescriptor.createDescriptor("T_VARCHAR30",st.getConnection());
+            T_VARCHAR10=oracle.sql.ArrayDescriptor.createDescriptor("T_VARCHAR10",st.getConnection());
+            T_VARCHAR200=oracle.sql.ArrayDescriptor.createDescriptor("T_VARCHAR200",st.getConnection());
+            T_DATE=oracle.sql.ArrayDescriptor.createDescriptor("T_DATE",st.getConnection());
+            a_vin=new ARRAY(T_VARCHAR30,st.getConnection(),vin);
+            a_type=new ARRAY(T_VARCHAR30,st.getConnection(),type);
+            a_color=new ARRAY(T_VARCHAR10,st.getConnection(),color);
+            a_vdate=new ARRAY(T_DATE,st.getConnection(),vdate);          <br />
+            a_des=new ARRAY(T_VARCHAR200,st.getConnection(),des);            <br />
+            st.setArray(1,a_vin);
+            st.setArray(2,a_type);
+            st.setArray(3,a_color);
+            st.setArray(4,a_vdate);
+            st.setArray(5,a_des);
+            st.registerOutParameter(6, OracleTypes.VARCHAR);
+            st.execute();<br />
+            result=st.getString(6);
+            return result;
+        } catch (Exception e) {
+            throw new JboException(e);
+        } finally {        <br />
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }      <br />
+    }</p>
+<p>{% endcodeblock %}</p>
+<p _="%" endcodeblock="endcodeblock">将POI解析出来的数据，包装成Object对象作为参数传递给数据库ch_report_pkg包中的INSERTREPORT1方法，bulk insert到数据库，极大地提高了插入数据效率。
+{% codeblock lang:sql %}
+PROCEDURE INSERTREPORT1(I_VIN      IN T_VARCHAR30,
+                          I_CAR_TYPE IN T_VARCHAR30,
+                          I_COLOR    IN T_VARCHAR10,
+                          I_VDATE    IN T_DATE,
+                          I_DES      IN T_VARCHAR200,
+                          MESSAGE    OUT VARCHAR2) IS
+    I INTEGER;
+  BEGIN
+    DELETE FROM CH_REPORT_1_TEMP;
+    COMMIT;
+    FORALL I IN 1 .. I_VIN.COUNT
+      INSERT INTO CH_REPORT_1_TEMP
+        (VIN, CAR_TYPE, COLOR, VDATE, DESCRIPTION)
+      VALUES
+        (I_VIN(I), I_CAR_TYPE(I), I_COLOR(I), I_VDATE(I), I_DES(I));
+    MESSAGE := I_VIN.COUNT || '条数据正常插入!';
+    COMMIT;
+  EXCEPTION
+    WHEN OTHERS THEN
+      MESSAGE := '出现异常，错误代码如下：' || SQLERRM;
+      ROLLBACK;
+  END;</p>
+<p _="%" endcodeblock="endcodeblock">此外，需要先根据表结构定义出字段类型如下：
+{% codeblock lang:sql %}
+create or replace TYPE T_VARCHAR30 IS TABLE OF VARCHAR2(30);
+create or replace TYPE T_VARCHAR10 IS TABLE OF VARCHAR2(10);
+create or replace TYPE T_VARCHAR200 IS TABLE OF VARCHAR2(200);
+create or replace TYPE T_DATE IS TABLE OF DATE;</p>
+<p>那么数据就顺利批量插入到临时表中了。</p>
+<h4>数据去除重复</h4>
+<p>需要根据插入数据的主键VIN判断是否跟数据库中存在的数据重复，  <br />
+在程序中对比的话效率很低，所以采用在数据库中通过语句  <br />
+<code>select count(vin) from (table union temp_table) group by vin</code>  <br />
+来判断，count数量大于1表示有重复。</p>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>

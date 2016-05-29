@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>"ADF创建两个AM基于不同的DB连接" - 邓德昭的技术博客</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://pelican.dengdezhao.cn/theme/pastie.css" />
+    <link href="http://pelican.dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="邓德昭的技术博客 Atom Feed" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>"ADF创建两个AM基于不同的DB连接"</h1>
+    </div>
+    <p class="meta"><small><span><a href="http://pelican.dengdezhao.cn/author/pierreorz/">pierreorz</a> - </span><span>Thu 23 May 2013</span> - <span class="tags"></span></small></p>
+        <div class="entry-content">
+        <ul>
+<li>ADF</li>
+<li>AM</li>
+<li>JNDI</li>
+<li>JDBC</li>
+</ul>
+<hr />
+<hr />
+<p>平台：Jdev11.1.2.3.0</p>
+<p>需求描述：  <br />
+有两个表，基于不同的Schema（或者基于不同的数据库)，需要在project中创建两个基于不同DB连接的AM/EO/EO等供页面使用；</p>
+<hr />
+<p>以HR/HR 跟 SCOTT/TIGER 为例：    </p>
+<ul>
+<li><strong><em>*创建DB连接</em></strong>*</li>
+</ul>
+<p><img alt="../../../wp-content/uploads/QQ截图20130523131132.jpg" src="../../../wp-content/uploads/QQ截图20130523131132.jpg" />  <br />
+<img alt="../../../wp-content/uploads/QQ截图20130523131209.jpg" src="../../../wp-content/uploads/QQ截图20130523131209.jpg" />  </p>
+<ul>
+<li>
+<p><strong><em>*创建AM/EO/VO</em></strong>*    </p>
+</li>
+<li>
+<p>右键MODEL工程属性，先将DB连接初始为HR
+<img alt="../../../wp-content/uploads/QQ截图20130523131810.jpg" src="../../../wp-content/uploads/QQ截图20130523131810.jpg" />    </p>
+</li>
+<li>创建HrAM及EmployeesEO，EmployeesVO；</li>
+<li>重复1~2步骤，将MODEL工程属性的DB连接切换为SCOTT并创建ScottAM及DeptEO,DeptVO;</li>
+</ul>
+<p>目前HrAM的DB连接基于HR Schema，并且data model是基于HR下的Employees表；ScottAM的DB连接基于SCOTT Schema，data model基于SCOTT下的DEPT表；</p>
+<ul>
+<li><strong><em>*修改bc4j.xcfg文件</em></strong>*  <br />
+由于设置DB连接时会自动修改AM的配置文件将Custom JDBCDataSource替换成一致的，所以需要手工修改bc4j.xcfg文件，给两个AM配置不同的JDBCdatasource；    </li>
+</ul>
+<p>右建任一AM，选configurations，修改以下内容如图：    </p>
+<p><img alt="../../../wp-content/uploads/QQ截图20130523133007.jpg" src="../../../wp-content/uploads/QQ截图20130523133007.jpg" />    </p>
+<ul>
+<li><strong><em>*修改工程的weblogic deployment属性</em></strong>*  <br />
+右键Application，选Applicatoin properties,设置如下图：</li>
+</ul>
+<p><img alt="../../../wp-content/uploads/QQ截图20130523133613.jpg" src="../../../wp-content/uploads/QQ截图20130523133613.jpg" /></p>
+<p>不需要在发布时自动配置JDBC连接描述文件，因为下一步会在weblogic中配置JDBC数据源，如果该项勾选上可能会在发布时出现问题不能同时连接两个Schema；    </p>
+<ul>
+<li>
+<p><strong><em>*配置JDBC数据源</em></strong>*  <br />
+启动Jdev自带的Weblogic服务器；进入<a href="http://127.0.0.1:7101/console" title="Weblogic控制台">http://127.0.0.1:7101/console</a>  <br />
+配置如下两个数据源hrDS/scottDS（JDNI名与bc4j.xcfg中配置的保持一致)  <br />
+<img alt="../../../wp-content/uploads/QQ截图20130523134225.jpg" src="../../../wp-content/uploads/QQ截图20130523134225.jpg" /></p>
+</li>
+<li>
+<p><strong><em>*测试效果</em></strong>*  <br />
+创建一个测试页面，将HrAM/ScottAM中的Datacontrol拖到页面上生成两个af:table查看运行之后能否取出数据；</p>
+</li>
+</ul>
+<p><img alt="../../../wp-content/uploads/QQ截图20130523134714.jpg" src="../../../wp-content/uploads/QQ截图20130523134714.jpg" /></p>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="http://pelican.dengdezhao.cn">Index</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/tags/">Tags</a></li>
+              <li ><a href="http://pelican.dengdezhao.cn/archives/">Archiv</a></li>
+              <li class="nav-header">Links</li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>
