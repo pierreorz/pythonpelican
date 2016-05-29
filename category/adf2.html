@@ -1,212 +1,467 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh_cn">
 <head>
-        <title>dengdezhao - ADF</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="http://pelican.dengdezhao.cn/theme/css/main.css" type="text/css" />
-        <link href="http://pelican.dengdezhao.cn/None" type="application/atom+xml" rel="alternate" title="dengdezhao ATOM Feed" />
+    <meta charset="utf-8">
+    <title>dengdezhao - ADF</title>
+    <meta name="description" content="">
+    <meta name="author" content="pierreorz">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://pelican.dengdezhao.cn/theme/html5.js"></script>
+    <![endif]-->
 
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie.css"/>
-                <script src="http://pelican.dengdezhao.cn/js/IE8.js" type="text/javascript"></script><![endif]-->
+    <!-- Le styles -->
+    <link href="http://pelican.dengdezhao.cn/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/local.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/pygments.css" rel="stylesheet">
 
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie6.css"/><![endif]-->
+    <!-- So Firefox can bookmark->"abo this site" -->
 
 </head>
 
 <body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="http://pelican.dengdezhao.cn">dengdezhao</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="http://pelican.dengdezhao.cn">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            
+        </ul>
+        </div>
         
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
         
 
-            <header>
-                <h1><a href="http://pelican.dengdezhao.cn" id="site-title">dengdezhao </a> : <a href="http://pelican.dengdezhao.cn/dong-tai-gai-bian-lovde-zhi-ji.html" id="page-title">"动态改变LOV的值集"</a></h1>
-<time datetime="2014-09-17T00:00:00+08:00">2014-09-17(Wednesday) 00:00</time>            </header>
+        
 
-            <article>
-                <h4><i class="icon-file"></i>   需求：</h4>
-<p>LOV的值集需要根据传入的用户角色类型(A,B,C)动态改变，A时查询所有，B时过滤字段1，C时过滤字段2.</p>
-<p><strong>基础VO的SQL如下:</strong>
-{% codeblock lang:sql %}
- SELECT DISTINCT U.USER_ID, U.USER_NAME, F.FULL_NAME AS DESCRIPTION
-  FROM FND_USER U, PO_HEADERS_ALL P, PO_VENDORS V, PER_PEOPLE_F F
- WHERE U.EMPLOYEE_ID = P.AGENT_ID
-   AND P.VENDOR_ID = V.VENDOR_ID
-   AND F.PERSON_ID(+) = U.EMPLOYEE_ID
-   AND P.APPROVED_FLAG = 'Y'
-   AND ((P.VENDOR_ID = :VARVENDORID AND :VARUSERTYPE = 'B') OR
-       (:VARUSERTYPE = 'A') OR
-       (:VARUSERTYPE = 'C' AND U.USER_ID = :VARUSERID))
-{% endcodeblock %}
-创建VARUSERTYPE VARUSERID VARVENDORID 三个绑定变量。</p>
-<h4><i class="icon-folder-open"></i> 创建LOV VO</h4>
-<p><strong>LVO的SQL如下:</strong>
-{% codeblock lang:sql %}
- SELECT NULL         AS USER_ID,
-       NULL         AS USER_NAME,
-       NULL         AS DESCRIPTION,
-       :VARTYPE     AS USERTYPE,<br />
-       :VARVENDORID AS VENDORID,
-       :VARUSERID   AS CURRENTUSERID
-  FROM DUAL
-{% endcodeblock %}
-技巧在这里，LVO同样创建三个绑定变量，并把绑定变量作为VO的attribute暴露出来，然后通过view Accessors传递给基础VO</p>
-<h4><i class="icon-pencil"></i> 设置View Accessors</h4>
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/zai-managedbeanzhong-diao-yong-appmoduleimplzhong-zi-ding-yi-fang-fa-de-liang-chong-fang-shi.html"><h2>"在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"</h2></a>
+        <div class= "well small"> 2013-06-01(Saturday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><hr />
+<h2>平台: Jdev11.1.1.7.0</h2>
+<hr />
+<ol>
+<li _="%" endcodeblock="endcodeblock"><strong><em>*AM</em></strong>*中创建自定义方法sayHello  <br />
+{% codeblock lang:java %}
+    public void sayHello(String value){
+        System.out.println("hello world..."+value);
+    }</li>
+<li>
+<p>暴露该方法以便在ManagedBean中调用    </p>
+</li>
+<li>
+<p>从Data Controls中将该方法拖到页面生成Bindings或者手工添加该Bindings。   </p>
+</li>
+<li>
+<p>为了测试方便，创建了一个inputText，并绑定该inputText的valueChangeListener为ManagedBean中的valueChange方法.  <br />
+{% codeblock lang:java %}
+    public void valueChange(ValueChangeEvent valueChangeEvent) {
+        String newValue = valueChangeEvent.getNewValue().toString();
+        //方法一：调用bindings
+        BindingContainer bindings = ADFUtils.getBindingContainer();              <br />
+        OperationBinding refreshChecklist = bindings …</p></li></ol> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/zai-managedbeanzhong-diao-yong-appmoduleimplzhong-zi-ding-yi-fang-fa-de-liang-chong-fang-shi.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/guan-yu-applicatoinmodulelei-xing-zong-jie.html"><h2>"关于ApplicatoinModule类型总结"</h2></a>
+        <div class= "well small"> 2013-05-28(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><h2>平台：Jdev11.1.2.3.0</h2>
+<h4>AM的类型</h4>
+<p><strong>1. Root AM</strong>  <br />
+<strong>2. Nested AM</strong>  <br />
+<strong>3. Shared AM</strong>    </p>
+<h4>三种类型AM的比较</h4>
+<p>首先谈谈RootAM的数量，RootAM原则上来说越少越好，因为当用户访问工程的时候数据库连接数量会根据RootAM的数量成倍增加极大地增加了数据库的压力。但是很多时候由于业务的复杂性，单一的AM无法满足实际开发的需求，所有的业务逻辑都写在一个AM里极不利于多个团队的协同开发。  <br />
+这个时候NestedAM就发挥其作用了，NestedAM是共享其父类RootAM的数据库连接的，所以不会额外增加连接数量，利用NestedAM可以将业务逻辑拆分开来，每个团队都可以使用自己单独的NestedAM，团队之间彼此冲突地可能性大大减少。
+再说SharedAM，大型项目中很多模块的功能是通用的，比如LOV或者一些在使用中基本不需要改变的固定配置数据等，这类数据对项目所有访问用户都是固定的，可以使用SharedAM来维护这类型数据。</p>
+<h4>三种类型的AM的创建方法</h4>
+<ol>
+<li>RootAM,默认创建的AM即是RootAM    </li>
+<li>
+<p>NestedAM创建方法  <br />
+   先创建两个RootAM(deptAm,empAm)，分别拥有VO instance（DeptVO,EmpVO)；  <br />
+再创建一个RootAM（rootAM)，双击该rootAM，在Data Model标签页中 …</p></li></ol> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/guan-yu-applicatoinmodulelei-xing-zong-jie.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/adflei-si-xin-tiao-cheng-xu-shi-xian.html"><h2>"ADF类似心跳程序实现"</h2></a>
+        <div class= "well small"> 2013-04-24(Wednesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>使用ADF框架开发WEB应用时，其中令人苦恼的一个需求就是：在两个页面同时展示一个数据源时，如果其中一个页面对数据源作了变更操作，另外一个页面没办法自动获得变更后的数据，需要手工刷新页面才能得到变更后的新数据源。   </p>
+<p>其实ADF自带的<code>&lt;af:poll/&gt;</code>组件即可实现此需求。</p>
+<p>例子：</p>
 <ul>
-<li>
-<p>创建LOV    </p>
-</li>
-<li>
-<p>设置View Accessors    </p>
-</li>
+<li>创建一个可更新的af:table 基于HR的Department表</li>
 </ul>
-<p>这样就可以实现动态切换LOV的基础数据源了。</p>            </article>
-                <section id="article-list">
-                    <h2>All posts</h2>
-                    <ol>
+<p>可以更改表数据并提交，用多浏览器窗口打开该页面来模拟多用户操作。</p>
+<p>将<code>&lt;af:poll/&gt;</code>控件拖入到页面中，控件属性设置如下：    </p>
+<p>设置间隔为1分钟，并绑定PollListener</p>
+<ul>
+<li>给该页面绑定ManagedBean，并添加PollListener，方法内容如下：    </li>
+</ul>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+    public void heartBeat(PollEvent pollEvent) {
+        System.out.println("start poll...");      <br />
+        DCIteratorBinding it = ADFUtils.findIterator("Departments1Iterator");
+        ViewObject vo = it.getViewObject();
+        vo.executeQuery …</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/adflei-si-xin-tiao-cheng-xu-shi-xian.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
-            <li><a href="http://pelican.dengdezhao.cn/ding-zhi-el-function.html" rel="bookmark" title="Permalink to "定制EL function"">"定制EL function"</a></li>
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/adfxue-xi-zong-jie-yi.html"><h2>"ADF学习总结(一)"</h2></a>
+        <div class= "well small"> 2013-04-19(Friday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><h4>改变VO查询条件</h4>
+<ul>
+<li>使用WhereClause改变查询条件</li>
+<li>使用Criteria改变查询条件</li>
+<li>使用Bind Variables改变查询条件</li>
+</ul>
+<h4>使用WhereClause改变查询条件</h4>
+<ul>
+<li><strong>setWhereClause</strong>    </li>
+</ul>
+<p _="%" endcodeblock="endcodeblock">通过VO对象的setWhereClause方法改变查询条件
+{% codeblock lang:java %}
+DCIteratorBinding dc = ADFUtils.findIterator("DepartmentsView1Iterator");  <br />
+ViewObject vo = dc.getViewObject();     <br />
+vo.setWhereClause(" 1=1 ");  <br />
+vo.executeQuery();   <br /></p>
+<ul>
+<li><strong>addWhereClause</strong></li>
+</ul>
+<p>addWhereClause是在原有whereClause基础上添加新的查询条件；  <br />
+跟setWhereClause替换原有whereClaue不同；</p>
+<h4>使用ViewCriteria改变查询条件</h4>
+<ul>
+<li><strong>使用定义好的ViewCriteria</strong>    </li>
+</ul>
+<p>事先在创建VO的时候，定义好几种Criteria：DepartmentsViewCriteria    </p>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+DCIteratorBinding dc = ADFUtils.findIterator("DepartmentsView1Iterator");      <br />
+ViewObject vo = dc.getViewObject();         <br />
+ViewCriteriaManager vcm=vo.getViewCriteriaManager …</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/adfxue-xi-zong-jie-yi.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
-            <li><a href="http://pelican.dengdezhao.cn/kong-jian-afiteratoryi-ji-afforeachde-dui-bi.html" rel="bookmark" title="Permalink to "控件af:iterator以及af:forEach的对比"">"控件af:iterator以及af:forEach的对比"</a></li>
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/getrowatrangeindexintfang-fa-de-ju-xian-xing.html"><h2>"getRowAtRangeIndex(int)方法的局限性"</h2></a>
+        <div class= "well small"> 2013-04-16(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p _="%" endcodeblock="endcodeblock">导出VO中的数据到EXCEL中时，循环VO中的Row，写入HSSFRow，是通过getRowAtRangeIndex(int)方法循环取Row，代码如下：  <br />
+{% codeblock lang:java %}
+ ViewObject vo8=am.findViewObject("ChReport1VO1");
+ if(vo8!=null)
+ {
+      int rowcount8=vo8.getRowCount();
+      for(int i=0;i&lt;rowcount8;i++)
+      {
+           Row vo_row8=vo8.getRowAtRangeIndex(i);
+           //...TODO
+      }
+ }</p>
+<p>这样如果VO里有300条数据，但是pageRange设置为100，这里其实只能取到第一页的100条数据，想要导出所有300条数据则需要一页一页导出，很麻烦。于是考虑不用getRowAtRangeIndex方法取ROW数据,改用RowSetIterator。</p>
+<p>{% codeblock lang:java %}
+ViewObject vo8=am.findViewObject("ChReport1VO1 …</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/getrowatrangeindexintfang-fa-de-ju-xian-xing.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-zai-ye-mian-sui-pian-jia-zai-qian-diao-yong-luo-ji.html" rel="bookmark" title="Permalink to "如何在页面碎片加载前调用逻辑"">"如何在页面碎片加载前调用逻辑"</a></li>
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html"><h2>adf:tree做的树菜单如何过滤子节点的数据？</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>需求：项目中的树菜单需要权限用户的权限过滤显示子菜单，通过用户所在的用户组可以查看的页面ID（List)过滤子节点<br />
+解决方案：<br />
+因为树是通过viewLink关联自身的VO生成的，想在AM里添加方法，对VO进行过滤处理把结果返回。<br />
+但实现起来比较麻烦，调用方法之后要刷新页面，初始化的树数据过滤处理困难。<br />
+于是想重写VO的方法看能不能在VO层就过滤掉子节点。重写createViewLinkAccessorRS，此方法返回ViewLink的结果，也就是菜单的子节点数据
+<div>
+<blockquote>
+@Override<br />
+protected ViewRowSetImpl createViewLinkAccessorRS(AssociationDefImpl associationDefImpl,<br />
+ViewObjectImpl viewObjectImpl,<br />
+Row row,<br />
+Object[] object) {<br />
+ViewRowSetImpl viewRowSetImpl =<br />
+super.createViewLinkAccessorRS(associationDefImpl, viewObjectImpl,<br />
+row, object);<br />
+int count = 0;<br />
+// getList()拿到可以查看的pageId的列表，对比Row中的pageId属性，如果在List中存在，就取该Row，如果不存      //在，表示此子节点不予以显示，remove掉<br />
+if (this …</blockquote></div></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-huo-qu-webxmlzhong-de-context-paramcan-shu.html" rel="bookmark" title="Permalink to "如何获取web.xml中的context-param参数"">"如何获取web.xml中的context-param参数"</a></li>
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html"><h2>表内的checkbox当数据量大时发现部分行勾选不中</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>测试发现，当数据只有25行的时候，都可以正常勾选，超过25行的数据，总是勾选不中。</p>
+
+<p>问题产生原因：<br />
+由于自定制的checkbox是设置了immediate=true 即时给数据行的checkbox字段赋值。<br />
+VO的rangeSize 默认是25，<br />
+因此导致25条数据内是可选。25条之外的数据初始时没有取出来，因此对这些没取的数据行设置checkbox自然就不生效了（展现出来就是checkbox勾选不中）</p>
+
+<p>解决方案：<br />
+修正VO的rangeSize为-1，查询全部，即可解决此问题。</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
-            <li><a href="http://pelican.dengdezhao.cn/attribute-set-for-xxxattribute-in-view-object-xxxvo-failedwen-ti-jie-jue.html" rel="bookmark" title="Permalink to "Attribute set for xxxAttribute in view object xxxVO failed问题解决"">"Attribute set for xxxAttribute in view object xxxVO failed问题解决"</a></li>
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/guan-yu-ding-zhi-validator.html"><h2>关于定制validator</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>一个时刻字段，要求输入00:00-12:60这样的时刻范围<br />
+使用如下的正则表达式，过滤掉了不合规则的数字之后，还差一个逻辑，结束时刻不能小于开始时刻，比如：10：00-9：00这样的输入也是不合法的。正则太折磨眼力了，应该也是可以做到这点的吧，为了偷懒，就定制个validator来处理这个点。
+<div>
+<blockquote>&lt;af:validateRegExp pattern="([0-1][0-9]|2[0-4])\:([0-5][0-9]|60)\-([0-1][0-9]|2[0-4])\:([0-5][0-9]|60)" messageDetailNoMatch="请输入时刻，例如 00：00-24：60 " hint="请输入时刻，例如 00：00-24：60"/&gt;</blockquote>
+</div>
+<strong>Step1</strong>。创建一个<strong>ValidatorTime</strong>类实现Validator接口
+<div>
+<blockquote>package …</blockquote></div></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/guan-yu-ding-zhi-validator.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
-            <li><a href="http://pelican.dengdezhao.cn/cong-backingbeanzhong-diao-yong-bu-dai-fragmentsde-taskflow.html" rel="bookmark" title="Permalink to "从BackingBean中调用不带fragments的taskflow"">"从BackingBean中调用不带fragments的taskflow"</a></li>
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html"><h2>关于ManagedBean中多次执行构造方法时的问题</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>有时候需要在初始化时执行一些查询，但发现会多次执行。需要在构造方法里添加一行代码避免页面点击时多次执行初始化。<br />
+if (!(Boolean)ADFUtils.getBindObject("adfFacesContext.postback")) {<br />
+init()；<br />
+}</p>
+
+<p>通过页面是否postback来控制只初始化一次。</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
-            <li><a href="http://pelican.dengdezhao.cn/fen-ye-lan-chu-xian-3ge-wen-hao-bugjie-jue.html" rel="bookmark" title="Permalink to "分页栏出现3个问号BUG解决"">"<af:table>分页栏出现3个问号BUG解决"</a></li>
-        
 
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html"><h2>关于selectBooleanCheckbox 的问题</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
  
-            <li><a href="http://pelican.dengdezhao.cn/groovyzai-adfzhong-de-ying-yong.html" rel="bookmark" title="Permalink to "Groovy在ADF中的应用"">"Groovy在ADF中的应用"</a></li>
-        
 
+
+ </div>
+        <div class="summary"><p>页面的 selectBooleanCheckbox 选择后，总提示 不是数字（组件value是 true 或 false,数据库存的是Number），怎么解决</p>
+
+<p>方案有三个<br />
+1。如果是基于表的Number字段(假设字段名是Flag，值是1或者0），想生成selectBooleanCheckbox ，可以重写这个VO的的 setFlag()跟getFlag()方法如下：<br />
+public void setFlag(Boolean value){<br />
+this.flag=value==true?1:0;<br />
+}
+public Boolean getFlag(){<br />
+return this.flag==0?false:true;<br />
+}</p>
+
+<p>2。设置valueChangeListener.<br />
+在valueChange方法里捕获当前selectBooleanCheckbox 的值，然后转化成Number类型的传给VO</p>
+
+<p>3。如果是只读的表，可以在UI上通过EL表达式处理。</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html">read more</a></div>
+    </div>	
+				
+<div class="pagination">
+<ul>
+    <li class="prev"><a href="http://pelican.dengdezhao.cn/category/adf.html">&larr; Previous</a></li>
+
+    <li class=""><a href="http://pelican.dengdezhao.cn/category/adf.html">1</a></li>
+    <li class="active"><a href="http://pelican.dengdezhao.cn/category/adf2.html">2</a></li>
+    <li class=""><a href="http://pelican.dengdezhao.cn/category/adf3.html">3</a></li>
+    <li class=""><a href="http://pelican.dengdezhao.cn/category/adf4.html">4</a></li>
+
+    <li class="next"><a href="http://pelican.dengdezhao.cn/category/adf3.html">Next &rarr;</a></li>
+
+</ul>
+</div>
  
-            <li><a href="http://pelican.dengdezhao.cn/li-yong-contextual-eventshua-xin-region.html" rel="bookmark" title="Permalink to "利用contextual event刷新Region"">"利用contextual event刷新Region"</a></li>
+  
+        </div>
         
+        <div class="span3">
 
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="http://pelican.dengdezhao.cn/archives.html">Archives</a>
+                <li><a href="http://pelican.dengdezhao.cn/tags.html">Tags</a>
+
+
+
+
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="http://pelican.dengdezhao.cn/category/adf.html">ADF</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/ebs.html">ebs</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/java.html">java</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/linux.html">linux</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/octopress.html">octopress</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/oracle.html">oracle</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/others.html">others</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/sinaapp.html">sinaapp</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/soa.html">soa</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/webcenter.html">webcenter</a></li>
+                   
+            </ul>
+            </div>
+
+
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="#">You can add links in your config file</a></li>
+                <li><a href="#">Another social link</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="http://pelican.dengdezhao.cn">dengdezhao</a> &copy; pierreorz 2014</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://pelican.dengdezhao.cn/theme/bootstrap-collapse.js"></script>
  
-            <li><a href="http://pelican.dengdezhao.cn/zai-managedbeanzhong-diao-yong-appmoduleimplzhong-zi-ding-yi-fang-fa-de-liang-chong-fang-shi.html" rel="bookmark" title="Permalink to "在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"">"在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-applicatoinmodulelei-xing-zong-jie.html" rel="bookmark" title="Permalink to "关于ApplicatoinModule类型总结"">"关于ApplicatoinModule类型总结"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adflei-si-xin-tiao-cheng-xu-shi-xian.html" rel="bookmark" title="Permalink to "ADF类似心跳程序实现"">"ADF类似心跳程序实现"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adfxue-xi-zong-jie-yi.html" rel="bookmark" title="Permalink to "ADF学习总结(一)"">"ADF学习总结(一)"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/getrowatrangeindexintfang-fa-de-ju-xian-xing.html" rel="bookmark" title="Permalink to "getRowAtRangeIndex(int)方法的局限性"">"getRowAtRangeIndex(int)方法的局限性"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html" rel="bookmark" title="Permalink to adf:tree做的树菜单如何过滤子节点的数据？">adf:tree做的树菜单如何过滤子节点的数据？</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html" rel="bookmark" title="Permalink to 表内的checkbox当数据量大时发现部分行勾选不中">表内的checkbox当数据量大时发现部分行勾选不中</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-ding-zhi-validator.html" rel="bookmark" title="Permalink to 关于定制validator">关于定制validator</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html" rel="bookmark" title="Permalink to 关于ManagedBean中多次执行构造方法时的问题">关于ManagedBean中多次执行构造方法时的问题</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html" rel="bookmark" title="Permalink to 关于selectBooleanCheckbox 的问题">关于selectBooleanCheckbox 的问题</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html" rel="bookmark" title="Permalink to 关于VO的只读可写等属性设置">关于VO的只读可写等属性设置</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/immediatetrue-de-yi-chang.html" rel="bookmark" title="Permalink to immediate="true" 的异常">immediate="true" 的异常</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle数据库用户被锁问题解决">oracle数据库用户被锁问题解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html" rel="bookmark" title="Permalink to 如何在MB中对selectionListener collectionModel.makeCurrent调用">如何在MB中对selectionListener collectionModel.makeCurrent调用</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html" rel="bookmark" title="Permalink to Table内增加全选checkbox">Table内增加全选checkbox</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html" rel="bookmark" title="Permalink to weblogic定时启动程序">weblogic定时启动程序</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html" rel="bookmark" title="Permalink to 如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row">如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-rang-adfri-qi-zu-jian-xian-shi-shi-fen-miao.html" rel="bookmark" title="Permalink to 如何让ADF日期组件显示时分秒">如何让ADF日期组件显示时分秒</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/duo-yu-yan-qie-huan-gong-neng-shi-xian.html" rel="bookmark" title="Permalink to 多语言切换功能实现">多语言切换功能实现</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adfying-yong-zhong-ru-he-zai-backingbeanzhong-diao-yong-javascriptkong-zhi-ui.html" rel="bookmark" title="Permalink to ADF应用中如何在BackingBean中调用javascript控制UI">ADF应用中如何在BackingBean中调用javascript控制UI</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/javaxelpropertynotfoundexceptioncuo-wu-jie-jue.html" rel="bookmark" title="Permalink to javax.el.PropertyNotFoundException错误解决">javax.el.PropertyNotFoundException错误解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adfying-yong-remote-deployment-failedcuo-wu-jie-jue.html" rel="bookmark" title="Permalink to ADF应用“Remote deployment failed”错误解决">ADF应用“Remote deployment failed”错误解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ding-zhi-adfying-yong-de-css.html" rel="bookmark" title="Permalink to 定制ADF应用的CSS">定制ADF应用的CSS</a></li>
-    </ol>
-    </section><!-- #article-list -->
-
-        <footer>
-            <nav>
-                <ul>
-                    <li>:: <a href="http://pelican.dengdezhao.cn/categories.html">Categories</a></li>
-                    <li>:: <a href="http://pelican.dengdezhao.cn/tags.html">Tags</a></li>
-                </ul>
-            </nav>
-                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
-        </footer>
-
 </body>
 </html>

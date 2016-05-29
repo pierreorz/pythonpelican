@@ -1,199 +1,423 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh_cn">
 <head>
-        <title>dengdezhao - ADF</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="http://pelican.dengdezhao.cn/theme/css/main.css" type="text/css" />
-        <link href="http://pelican.dengdezhao.cn/None" type="application/atom+xml" rel="alternate" title="dengdezhao ATOM Feed" />
+    <meta charset="utf-8">
+    <title>dengdezhao - ADF</title>
+    <meta name="description" content="">
+    <meta name="author" content="pierreorz">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://pelican.dengdezhao.cn/theme/html5.js"></script>
+    <![endif]-->
 
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie.css"/>
-                <script src="http://pelican.dengdezhao.cn/js/IE8.js" type="text/javascript"></script><![endif]-->
+    <!-- Le styles -->
+    <link href="http://pelican.dengdezhao.cn/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/local.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/pygments.css" rel="stylesheet">
 
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie6.css"/><![endif]-->
+    <!-- So Firefox can bookmark->"abo this site" -->
 
 </head>
 
 <body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="http://pelican.dengdezhao.cn">dengdezhao</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="http://pelican.dengdezhao.cn">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            
+        </ul>
+        </div>
         
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
         
 
-            <header>
-                <h1><a href="http://pelican.dengdezhao.cn" id="site-title">dengdezhao </a> : <a href="http://pelican.dengdezhao.cn/fen-ye-lan-chu-xian-3ge-wen-hao-bugjie-jue.html" id="page-title">"<af:table>分页栏出现3个问号BUG解决"</a></h1>
-<time datetime="2013-06-06T00:00:00+08:00">2013-06-06(Thursday) 00:00</time>            </header>
+        
 
-            <article>
-                <hr />
-<p>平台：Jdeveloper 11.1.1.7.0</p>
-<hr />
-<p><strong>BUG描述</strong>
-标准控件af:table，“页”字前后出现三个问号。</p>
-<p><strong>原因分析</strong></p>
-<p _="%" endcodeblock="endcodeblock">查看LOG文件  <br />
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html"><h2>Table内增加全选checkbox</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>解决方案：     </p>
+<p>VO里新建Transient属性Checked(Boolean)    </p>
+<p>表内添加一个column如下：  <br />
 {% codeblock lang:java %}
-<RenderingContext> <getTranslatedString> 无法从外观 mySkin.desktop 获取资源关键字 页  <br /></p>
-<p>可见是RenderingContext类中getTranslatedString方法发生异常。  <br />
-查看源代码分析：    </p>
-<p><strong>找到源代码所在位置</strong>：  </p>
-<p><strong>将JAR包解压得到RenderingContext类，反编译查看</strong>    </p>
-<p _="%" endcodeblock="endcodeblock">结果如下<strong>RenderingContext.class</strong>：  <br />
-{% codeblock lang:java %}
-  public String getTranslatedString(String key)
-  {
-    if (key == null)
-      return null;
-    try
-    {
-      return getSkin().getTranslatedString(getLocaleContext(), key);
-    }
-    catch (MissingResourceException mre)
-    {
-      _LOG.severe("CANNOT_GET_RESOURCE_KEY", new String[] { key, getSkin().getId() }); }
-    return "???" + key + "???";
-  }</p>
-<p>可知在调用getTranslatedString获取Resource时，发生MissingResourceException异常所以返回了带"???"+Key+"???"字样的字符串。    </p>
-<p><strong>解决方案：</strong></p>
-<p>根据以上分析基本可知出现问号的原因是在获取resourcebundle时，找不到Key为页的resource，所以直接返回了"???" + key + "???"，就出现分页显示出现问号的BUG。    </p>
-<p><strong>方案一：</strong>重写ResourceBundle类，增加KEY值为“页”的资源。
-步骤如下：    </p>
-<ul>
-<li>
-<p _="%" endcodeblock="endcodeblock">创建SkinBundle类 extends ListResourceBundle   <br />
-{% codeblock lang:java %}
-package cn.dengdezhao.bundle
-public class SkinBundle extends ListResourceBundle {
-    @Override
-    public Object[][] getContents() {
-        System.out.println("executing...");
-        return  new Object[][]{ { "页", "页" } };
-    }
+<af:column id="c10" headerText="选择" width="30" align="center" noWrap="true">
+<f:facet name="header" >
+<af:selectBooleanCheckbox valueChangeListener="#{backingBean.selectAll}"
+autoSubmit="true" id="selectAll"
+label="" value=""
+</f:facet>
+<af:selectBooleanCheckbox label="选中/非选中" id="sbc1"  autoSubmit="true" immediate="true"
+value="#{row.bindings.Checked.inputValue}"/></p>
+<p _="%" endcodeblock="endcodeblock"></af:column></p>
+<p>{% codeblock lang:java %}
+pupblic void selectAll(ValueChangeEvent valueChangeEvent) {
+CIteratorBinding it = ADFUtils.findIterator(REIM_HEADER_ITER);
+ViewObject vo = it.getViewObject();</p>
+<p>if (valueChangeEvent.getNewValue() != null) {
+Boolean selectAll =
+Boolean.parseBoolean(valueChangeEvent.getNewValue().toString());
+if (!selectAll) {
+for (Row temp : vo.getAllRowsInRange()) {
+temp.setAttribute("Checked", false);
+}
+} else {
+for (Row temp …</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html"><h2>weblogic定时启动程序</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>有个需求是要求程序在每天晚上3点钟的时候自动调用一个Job执行。</p>
+
+<p>解决方案：定制weblogic的启动类，用来运行Job执行。</p>
+
+<p>STEP1，启动类StartupTask：
+<div>
+<blockquote>public class StartupTask implements T3StartupDef {<br />
+public String startup(String name, Hashtable args) throws Exception {</blockquote></div></p>
+
+<p>Callplsql.main(null);</p>
+
+<p>return "Callplsql Startup successful completed";<br />
 }</p>
-</li>
-<li>
-<p _="%" endcodeblock="endcodeblock">创建trinidad-skins.xml文件注册定制化Skin  <br />
-{% codeblock lang:xml %}
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-<skins xmlns="http://myfaces.apache.org/trinidad/skin">
-    <skin>
-        <id>mySkin.desktop</id>
-        <family>mySkin</family>
-        <extends>skyros-v1.desktop</extends> 
-        <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
-        <style-sheet-name>css/mySkin.css</style-sheet-name>
-        <bundle-name>cn.dengdezhao.bundle.SkinBundle</bundle-name>
-        <!--<bundle-name>ApplicationBundle</bundle-name>-->
-    </skin>
-</skins></p>
-</li>
-<li>
-<p _="%" endcodeblock="endcodeblock">修改trinidad-config.xml文件如下：  <br />
-{% codeblock lang:xml %}
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-<trinidad-config xmlns="http://myfaces.apache.org/trinidad/config">
-  <skin-family>mySkin</skin-family>
-</trinidad-config></p>
-</li>
-<li>
-<p>创建css/mySkin.css文件（内容默认CSS即可）</p>
-</li>
+
+<p>public void setServices(T3ServicesDef t3ServicesDef) {<br />
+}</p>
+
+<p>}
+
+Callplsql.java(  即是JOB类，是需要被调用的，要继承TimerTask  ）中的Main方法要有：
+<div>
+<blockquote>public static void main(String[] args) {<br />
+//任务执行间隔时间，默认24小时<br />
+long PERIOD_TIME=24 …</blockquote></div></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html"><h2>如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row</h2></a>
+        <div class= "well small"> 2011-07-20(Wednesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>目前LOV控件在页面初始化时默认显示的是第一条记录，如果想让LOV初始化的时候不显示记录应该如何设置呢？</p>
+
+<p>方法一. 通过在BackingBean的构造函数里设置LOV的值为空字符串这种做法基本可以达到需求。但总感觉这种方法很别扭，走了弯路。</p>
+
+<p>本文介绍另外一种更为简单的方法。通过EL表达式实现需求。
+<pre class="brush:java">           &lt;af:inputListOfValues id="ilov1"
+                                    popupTitle="Search and Select: #{bindings.CodeType.hints.label}"
+                                    value="#{adfFacesContext.postback == false ? bindings.CodeType.nullValueString : bindings.CodeType.inputValue}"
+                                    label="#{bindings.CodeType.hints.label}"
+                                    model="#{bindings.CodeType.listOfValuesModel}"
+                                    required="#{bindings.CodeType.hints.mandatory}"
+                                    columns="#{bindings.CodeType.hints.displayWidth}"
+                                    shortDesc …</pre></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/ru-he-rang-adfri-qi-zu-jian-xian-shi-shi-fen-miao.html"><h2>如何让ADF日期组件显示时分秒</h2></a>
+        <div class= "well small"> 2011-07-15(Friday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>默认的ADF的inputDate组件是不显示时分秒的，客户的需求要精确到时分秒的显示。其实只需要一个很小的改动就可以实现这个需求。</p>
+
+<p>以HR的Employee表为例</p>
+
+<p><strong>Step.1 </strong>创建Business Components from table，得到EO，VO等。</p>
+
+<p><strong>Step.2</strong> 双击Employees EO，</p>
+
+<p><strong>Step.3</strong> 找到日期属性HireDate,双击打开属性编辑页，作如下修改（<span style="color: #ff0000;">Format Type: Simple Date; Format: yyyy-MM-dd HH:mm:ss</span>), OK。</p>
+
+<p><strong>Step.4 </strong>切换到Source页，将HireDate属性的类型type="oracle.jbo.domain.Date"改为下图所示的"oracle.jbo.domain.Timestamp"类型，保存即可。<strong>
+</strong></p>
+
+<p><strong>Step.5</strong> 将Employees VO生成的DataControl拖到页面上生成一个ADF …</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/ru-he-rang-adfri-qi-zu-jian-xian-shi-shi-fen-miao.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/duo-yu-yan-qie-huan-gong-neng-shi-xian.html"><h2>多语言切换功能实现</h2></a>
+        <div class= "well small"> 2011-07-13(Wednesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p><strong>Step.1 </strong>新建测试工程<strong> Fusion Web Application(ADF)</strong>。</p>
+
+<p><strong>Step.2 </strong>创建resource Bundle 文件，如下所示，我创建了三个语言版本的文件。
+<blockquote><span style="color: #ff0000;">ScreenConfig</span>_<span style="color: #0000ff;">en</span>_<span style="color: #ff00ff;">US</span>.properties</blockquote></p>
+
+<p><span style="color: #ff0000;">ScreenConfig</span>_<span style="color: #0000ff;">zh</span>_<span style="color: #ff00ff;">CN</span>.properties</p>
+
+<p><span style="color: #ff0000;">ScreenConfig</span>_<span style="color: #0000ff;">ja</span>_<span style="color: #ff00ff;">JP</span>.properties
+<strong>Step.3</strong> 在faces-config.xml中注册以上三个文件。
+<blockquote>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br />
+&lt;faces-config version="1.2" xmlns="http://java.sun …</blockquote></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/duo-yu-yan-qie-huan-gong-neng-shi-xian.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/adfying-yong-zhong-ru-he-zai-backingbeanzhong-diao-yong-javascriptkong-zhi-ui.html"><h2>ADF应用中如何在BackingBean中调用javascript控制UI</h2></a>
+        <div class= "well small"> 2011-06-29(Wednesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>当你需要在ManagedBean中控制页面控制的属性的时候，可以使用以下代码调用javascript实现。</p>
+
+<p>&nbsp;
+<pre class="brush:java">//import org.apache.myfaces.trinidad.util.Service;
+String script="你的javascript代码";</pre></p>
+
+<p>FacesContext context = <br />
+        FacesContext.getCurrentInstance();</p>
+
+<p>ExtendedRenderKitService erks = <br />
+        (ExtendedRenderKitService)Service.<br />
+        getService(context.getRenderKit(), <br />
+        ExtendedRenderKitService.class);</p>
+
+<p>erks.addScript(context, script);
+&nbsp;</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/adfying-yong-zhong-ru-he-zai-backingbeanzhong-diao-yong-javascriptkong-zhi-ui.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/javaxelpropertynotfoundexceptioncuo-wu-jie-jue.html"><h2>javax.el.PropertyNotFoundException错误解决</h2></a>
+        <div class= "well small"> 2011-06-29(Wednesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>有时候明明没有什么错误，一样的代码在别人机器上跑没问题，自己机器上跑却会出现以下这样的错误：
+<pre class="brush:java">javax.el.PropertyNotFoundException: Target Unreachable, identifier 'bindings' resolved to null</pre>
+这样的错误会随着代码量的增加而越发频繁，是IDE的缓存的BUG，如果重启jdeveloper 还不能解决的话，把报错的那个bindings的pagedef文件改动下（加一行空格）保存，然后clean all，再重新build下，基本能够解决这个问题。</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/javaxelpropertynotfoundexceptioncuo-wu-jie-jue.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/adfying-yong-remote-deployment-failedcuo-wu-jie-jue.html"><h2>ADF应用“Remote deployment failed”错误解决</h2></a>
+        <div class= "well small"> 2011-06-28(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>ADF应用debug模式下最常出现的问题就是远程发布失败了。控制台打印的错误信息如下：
+<pre class="brush:plain">[07:21:55 PM] ####  Deployment incomplete.  ####
+[07:21:55 PM] Remote deployment failed (oracle.jdevimpl.deploy.common.Jsr88RemoteDeployer)
+#### Cannot run application XXX due to error deploying to IntegratedWebLogicServer.
+[Application XXX stopped and undeployed from Server Instance IntegratedWebLogicServer]
+&lt;Logger&gt;&lt;error&gt; ServletContainerAdapter manager not initialized correctly.</pre>
+解决方法有两种：</p>
+
+<p>方法一：进入weblogic控制台<span style="color: #0000ff;">http …</span></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/adfying-yong-remote-deployment-failedcuo-wu-jie-jue.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/ding-zhi-adfying-yong-de-css.html"><h2>定制ADF应用的CSS</h2></a>
+        <div class= "well small"> 2011-06-27(Monday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>客户的要求总是各种变态，如果需要定制默认的控件样式的话，那么以下的文章可能会对你有帮助。</p>
+<p>Step.1 首先我们需要定义自己的CSS文件 <span style="color: #0000ff;">CustomSkin.css</span>
+<pre class="brush:css">af|inputListOfValues::search-icon-style{
+  background-image:none;
+}</pre></p></p>
+<p>af|inputListOfValues::search-icon-style:hover{<br />
+  background-image:none;<br />
+}
+af|inputListOfValues::search-icon-style:active{<br />
+  background-image:none;<br />
+}
+af|inputListOfValues::search-icon-style:info{<br />
+  background-image:none;<br />
+}
+Step.2 接着创建 <span style="color: #0000ff;">trinidad-skins.xml</span>
+<pre class="brush:xml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+&lt;skins xmlns="http://myfaces.apache.org/trinidad/skin …</pre></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/ding-zhi-adfying-yong-de-css.html">read more</a></div>
+    </div>	
+				
+<div class="pagination">
+<ul>
+    <li class="prev"><a href="http://pelican.dengdezhao.cn/tag/adf.html">&larr; Previous</a></li>
+
+    <li class=""><a href="http://pelican.dengdezhao.cn/tag/adf.html">1</a></li>
+    <li class="active"><a href="http://pelican.dengdezhao.cn/tag/adf2.html">2</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
 </ul>
-<p>运行即发现问号消失。</p>
-<p _="%" endcodeblock="endcodeblock"><strong>方案二：</strong>其实原理跟方案一一样，也是通过改resourcebundle实现。resourcebundle支持三种类型，一种是以上的扩展ListResourceBundle类实现，一种是通过配置文件properties实现，另外一种是xliff实现。也可创建一个ApplicationBundle.properties文件，内容如下:  <br />
-{% codeblock lang:java %}
-页 = 页</p>
-<p>trinidad-skins.xml里的bundle-name节点设置成ApplicationBundle也可实现同样效果。</p>
-<p>定制CSS可参照["定制CSS"]</p>            </article>
-                <section id="article-list">
-                    <h2>All posts</h2>
-                    <ol>
-        
-
+</div>
  
-            <li><a href="http://pelican.dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html" rel="bookmark" title="Permalink to adf:tree做的树菜单如何过滤子节点的数据？">adf:tree做的树菜单如何过滤子节点的数据？</a></li>
+  
+        </div>
         
+        <div class="span3">
 
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="http://pelican.dengdezhao.cn/archives.html">Archives</a>
+                <li><a href="http://pelican.dengdezhao.cn/tags.html">Tags</a>
+
+
+
+
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="http://pelican.dengdezhao.cn/category/adf.html">ADF</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/ebs.html">ebs</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/java.html">java</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/linux.html">linux</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/octopress.html">octopress</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/oracle.html">oracle</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/others.html">others</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/sinaapp.html">sinaapp</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/soa.html">soa</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/webcenter.html">webcenter</a></li>
+                   
+            </ul>
+            </div>
+
+
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="#">You can add links in your config file</a></li>
+                <li><a href="#">Another social link</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="http://pelican.dengdezhao.cn">dengdezhao</a> &copy; pierreorz 2013</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://pelican.dengdezhao.cn/theme/bootstrap-collapse.js"></script>
  
-            <li><a href="http://pelican.dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html" rel="bookmark" title="Permalink to 表内的checkbox当数据量大时发现部分行勾选不中">表内的checkbox当数据量大时发现部分行勾选不中</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-ding-zhi-validator.html" rel="bookmark" title="Permalink to 关于定制validator">关于定制validator</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html" rel="bookmark" title="Permalink to 关于ManagedBean中多次执行构造方法时的问题">关于ManagedBean中多次执行构造方法时的问题</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html" rel="bookmark" title="Permalink to 关于selectBooleanCheckbox 的问题">关于selectBooleanCheckbox 的问题</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html" rel="bookmark" title="Permalink to 关于VO的只读可写等属性设置">关于VO的只读可写等属性设置</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/immediatetrue-de-yi-chang.html" rel="bookmark" title="Permalink to immediate="true" 的异常">immediate="true" 的异常</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle数据库用户被锁问题解决">oracle数据库用户被锁问题解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html" rel="bookmark" title="Permalink to 如何在MB中对selectionListener collectionModel.makeCurrent调用">如何在MB中对selectionListener collectionModel.makeCurrent调用</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html" rel="bookmark" title="Permalink to Table内增加全选checkbox">Table内增加全选checkbox</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html" rel="bookmark" title="Permalink to weblogic定时启动程序">weblogic定时启动程序</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html" rel="bookmark" title="Permalink to 如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row">如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-rang-adfri-qi-zu-jian-xian-shi-shi-fen-miao.html" rel="bookmark" title="Permalink to 如何让ADF日期组件显示时分秒">如何让ADF日期组件显示时分秒</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/duo-yu-yan-qie-huan-gong-neng-shi-xian.html" rel="bookmark" title="Permalink to 多语言切换功能实现">多语言切换功能实现</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adfying-yong-zhong-ru-he-zai-backingbeanzhong-diao-yong-javascriptkong-zhi-ui.html" rel="bookmark" title="Permalink to ADF应用中如何在BackingBean中调用javascript控制UI">ADF应用中如何在BackingBean中调用javascript控制UI</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/javaxelpropertynotfoundexceptioncuo-wu-jie-jue.html" rel="bookmark" title="Permalink to javax.el.PropertyNotFoundException错误解决">javax.el.PropertyNotFoundException错误解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adfying-yong-remote-deployment-failedcuo-wu-jie-jue.html" rel="bookmark" title="Permalink to ADF应用“Remote deployment failed”错误解决">ADF应用“Remote deployment failed”错误解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ding-zhi-adfying-yong-de-css.html" rel="bookmark" title="Permalink to 定制ADF应用的CSS">定制ADF应用的CSS</a></li>
-    </ol>
-    </section><!-- #article-list -->
-
-        <footer>
-            <nav>
-                <ul>
-                    <li>:: <a href="http://pelican.dengdezhao.cn/categories.html">Categories</a></li>
-                    <li>:: <a href="http://pelican.dengdezhao.cn/tags.html">Tags</a></li>
-                </ul>
-            </nav>
-                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
-        </footer>
-
 </body>
 </html>

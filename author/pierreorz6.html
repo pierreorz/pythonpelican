@@ -1,462 +1,448 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh_cn">
 <head>
-        <title>dengdezhao - pierreorz</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="http://pelican.dengdezhao.cn/theme/css/main.css" type="text/css" />
-        <link href="http://pelican.dengdezhao.cn/None" type="application/atom+xml" rel="alternate" title="dengdezhao ATOM Feed" />
+    <meta charset="utf-8">
+    <title>dengdezhao - pierreorz</title>
+    <meta name="description" content="">
+    <meta name="author" content="pierreorz">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://pelican.dengdezhao.cn/theme/html5.js"></script>
+    <![endif]-->
 
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie.css"/>
-                <script src="http://pelican.dengdezhao.cn/js/IE8.js" type="text/javascript"></script><![endif]-->
+    <!-- Le styles -->
+    <link href="http://pelican.dengdezhao.cn/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/local.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/pygments.css" rel="stylesheet">
 
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie6.css"/><![endif]-->
+    <!-- So Firefox can bookmark->"abo this site" -->
 
 </head>
 
 <body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="http://pelican.dengdezhao.cn">dengdezhao</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="http://pelican.dengdezhao.cn">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            
+        </ul>
+        </div>
         
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
         
 
-            <header>
-                <h1><a href="http://pelican.dengdezhao.cn" id="site-title">dengdezhao </a> : <a href="http://pelican.dengdezhao.cn/shi-yong-ridczai-webcenter-portalji-cheng-ecmde-wen-dang-cha-xun-gong-neng.html" id="page-title">"使用RIDC在webcenter portal集成ECM的文档查询功能"</a></h1>
-<time datetime="2014-11-28T00:00:00+08:00">2014-11-28(Friday) 00:00</time>            </header>
+        
 
-            <article>
-                <h4><i class="icon-file"></i>   需求：</h4>
-<p>标准的document service很不灵活，实际开发中少不了要开发定制。那么问题来了，通过RIDC很灵活的查询出了需要的文档，如何集成到portal上去呢</p>
-<h4><i class="icon-folder-open"></i> 分析：</h4>
-<p>使用RIDC查询出需要的文档，存放在POJO等数据模型中
-利用POJO生成dataControl，开发taskflow等UI层
-将以上功能开发成为extend.spaces.webapp，扩展到webcenter spaces
-以下主要展现第一步：通过RIDC查询及POJO生成数据模型。</p>
-<h4><i class="icon-pencil"></i> 技术实现：</h4>
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html"><h2>关于VO的只读可写等属性设置</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>如果生成ViewObject 的时候选择的是只读的VO的话，会发现VO的source里有ReadOnly="true"。<br />
+需求1：在MB中我通过代码拿到这个VO的实例，我想通过以下代码添加Row
+<div>
+<blockquote>Row newRow=Vo.createRow();<br />
+newRow.setAttribute("attribute1","value1");<br />
+newRow.setAttribute("attribute2","value2");<br />
+newRow.setAttribute("attribute3","value3");<br />
+Vo.insertRow(newRow);</blockquote>
+</div>
+最终发现，只读VO无法插入数据。怎么办？将ReadOnly改成"false"之后测试，发现满足需求~！<br />
+需求2：满足需求1之后发现，Vo里的确插入数据了。如果页面上有保存按钮，也会将这个数据更改到数据库，而这个数据只是需要在MB中起过渡作用，不必将newRow的数据postChange到DB，怎么办？<br />
+VO里 这个属性DeleteParticipant 立功了。 DeleteParticipant就是控制数据是否保存到DB的。设置 DeleteParticipant="false"发现满足了需求！</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/immediatetrue-de-yi-chang.html"><h2>immediate="true" 的异常</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>设置按钮的immediate="true" 可以避免因按钮提交FORM导致的页面刷新闪烁，但也会带来麻烦。<br />
+假如对表的取消按钮设置了此属性，可能会发生新增数据，然后点取消作rollback时数据显示异常。<br />
+开发时值得注意</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/immediatetrue-de-yi-chang.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/li-yong-javamailfa-song-you-jian-gong-neng-shi-xian.html"><h2>利用javaMail发送邮件功能实现</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>由于SMTP服务器需要采用SSL方式访问，所以蛋疼了，默认的连接25端口方式无法连接<br />
+改成465方式访问，又报连接错误，原来是证书文件的问题。<br />
+于是利用 InstallCert.java重新生成证书
+<div>
+<blockquote>java InstallCert smtp.dengdezhao.cn:465</blockquote>
+</div>
+将得到的证书cacert文件放置在任意路径下：比如C盘 c:/cacert</p>
+
+<p>程序中props属性里添加如下参数
+<div>
+<blockquote>props = System.getProperties();<br />
+props.put("mail.smtp.host", smtp.dengdezhao.cn); // 设置SMTP主机<br />
+props.put("mail.smtp.auth", "true");<br />
+props.put("mail.smtp.socketFactory.class",<br />
+"javax.net.ssl.SSLSocketFactory");<br />
+props.put …</blockquote></div></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/li-yong-javamailfa-song-you-jian-gong-neng-shi-xian.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html"><h2>oracle数据库用户被锁问题解决</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>运行AM的时候报个JDBC连接错误，ORA-280000:用户被锁的异常。<br />
+于是在PL/SQL DEV里切换成SYSTEM用户 alter user XXX account unlock;之后，用PL/SQL DEV测试 可以连上了<br />
+再运行AM的时候，又报了个用户被锁。很是蛋疼<br />
+于是换到命令行，尝试以SYSDBA的身份再执行一次alter account unlock;<br />
+发现连不上：报了以下错误：<br />
+ORA-28056: Writing audit records to Windows Event Log failed<br />
+这你妹的，原来是系统日志满了，解决方案：<br />
+打开windows 事件查看器，将应用程序日志清理一下，重新连接数据库，连接成功。</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html"><h2>如何在MB中对selectionListener collectionModel.makeCurrent调用</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>如何在MB中对Table的默认"#{bindings.PromotionVO1.collectionModel.makeCurrent}"进行调用？</p>
+
+<p>当需要重写adf:table的缺省的selectListener时，可以在自己绑定的MB的方法里，调用默认的makeCurrent方法。取得当前行的数据，进行自己的定制操作。方法如下：
+<div>
+<blockquote>//调用缺省makeCurrent<br />
+JSFUtils.resolveMethodExpression("#{bindings.yourVO.collectionModel.makeCurrent}",<br />
+new Class[] { SelectionEvent.class },<br />
+new Object[] { selectionEvent });</blockquote>
+</div>
+取得选中行的数据
+<div>
+<blockquote>Row selectedRow =<br />
+(Row)JSFUtils.resolveExpression("#{bindings.yourVOIterator.currentRow}");</blockquote>
+</div>
+然后就可以针对取得的数据进行定制开发了。</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html"><h2>Table内增加全选checkbox</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>解决方案：     </p>
+<p>VO里新建Transient属性Checked(Boolean)    </p>
+<p>表内添加一个column如下：  <br />
+{% codeblock lang:java %}
+<af:column id="c10" headerText="选择" width="30" align="center" noWrap="true">
+<f:facet name="header" >
+<af:selectBooleanCheckbox valueChangeListener="#{backingBean.selectAll}"
+autoSubmit="true" id="selectAll"
+label="" value=""
+</f:facet>
+<af:selectBooleanCheckbox label="选中/非选中" id="sbc1"  autoSubmit="true" immediate="true"
+value="#{row.bindings.Checked.inputValue}"/></p>
+<p _="%" endcodeblock="endcodeblock"></af:column></p>
+<p>{% codeblock lang:java %}
+pupblic void selectAll(ValueChangeEvent valueChangeEvent) {
+CIteratorBinding it = ADFUtils.findIterator(REIM_HEADER_ITER);
+ViewObject vo = it.getViewObject();</p>
+<p>if (valueChangeEvent.getNewValue() != null) {
+Boolean selectAll =
+Boolean.parseBoolean(valueChangeEvent.getNewValue().toString());
+if (!selectAll) {
+for (Row temp : vo.getAllRowsInRange()) {
+temp.setAttribute("Checked", false);
+}
+} else {
+for (Row temp …</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html"><h2>weblogic定时启动程序</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>有个需求是要求程序在每天晚上3点钟的时候自动调用一个Job执行。</p>
+
+<p>解决方案：定制weblogic的启动类，用来运行Job执行。</p>
+
+<p>STEP1，启动类StartupTask：
+<div>
+<blockquote>public class StartupTask implements T3StartupDef {<br />
+public String startup(String name, Hashtable args) throws Exception {</blockquote></div></p>
+
+<p>Callplsql.main(null);</p>
+
+<p>return "Callplsql Startup successful completed";<br />
+}</p>
+
+<p>public void setServices(T3ServicesDef t3ServicesDef) {<br />
+}</p>
+
+<p>}
+
+Callplsql.java(  即是JOB类，是需要被调用的，要继承TimerTask  ）中的Main方法要有：
+<div>
+<blockquote>public static void main(String[] args) {<br />
+//任务执行间隔时间，默认24小时<br />
+long PERIOD_TIME=24 …</blockquote></div></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/ying-pan-an-zhuang-fedora.html"><h2>硬盘安装fedora</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>下载好fedora16 ISO镜像文件放在C盘，解压出来images文件，及vmlinuz,initrd.img文件。使用grub引导硬盘安装，分区时报错：<br />
+you have not created a bootloader stage1 target device</p>
+
+<p>This can happen if there is not enough space on your hard drive(s) for the installation.</p>
+
+<p>解决方案：引导参数加上linux askmethod，选择正确的镜像路径sda1即可。</p>
+
+<p>grub&gt;root (hd0,0)<br />
+grub&gt;kernel (hd0,0)/vmlinuz <span style="color: red;">linux askmethod</span> (之前没有加此参数 …</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/ying-pan-an-zhuang-fedora.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html"><h2>如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row</h2></a>
+        <div class= "well small"> 2011-07-20(Wednesday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>目前LOV控件在页面初始化时默认显示的是第一条记录，如果想让LOV初始化的时候不显示记录应该如何设置呢？</p>
+
+<p>方法一. 通过在BackingBean的构造函数里设置LOV的值为空字符串这种做法基本可以达到需求。但总感觉这种方法很别扭，走了弯路。</p>
+
+<p>本文介绍另外一种更为简单的方法。通过EL表达式实现需求。
+<pre class="brush:java">           &lt;af:inputListOfValues id="ilov1"
+                                    popupTitle="Search and Select: #{bindings.CodeType.hints.label}"
+                                    value="#{adfFacesContext.postback == false ? bindings.CodeType.nullValueString : bindings.CodeType.inputValue}"
+                                    label="#{bindings.CodeType.hints.label}"
+                                    model="#{bindings.CodeType.listOfValuesModel}"
+                                    required="#{bindings.CodeType.hints.mandatory}"
+                                    columns="#{bindings.CodeType.hints.displayWidth}"
+                                    shortDesc …</pre></p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://pelican.dengdezhao.cn/oracle-11g-shu-ju-ku-an-zhuang-hou-gai-ji-suan-ji-ming-chu-xian-wu-fa-lian-jie-de-wen-ti-jie-jue.html"><h2>oracle 11g 数据库安装后改计算机名出现无法连接的问题解决</h2></a>
+        <div class= "well small"> 2011-07-15(Friday) 00:00
+
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>在局域网内一台机器上安装完oracle11g之后，本地测试OK 可以访问orcl。用局域网内另一台机器连接的时候不行。<br />
+两台机器可以PING通。<br />
+修改tnsname.ora  把默认的localhost 都改成了本机IP 试试还是不行。<br />
+然后改了下计算机名，各种测试，打开EM还是只看到实例正常，监听程序为状态为不可用，实例的代理连接状态为不可用。<br />
+很是蛋疼，手贱不应该改计算机名啊。。。<br />
+想想多有可能要改的都改好了。。。怎么还是连不上？<br />
+是不是刚改好的还没有生效？<br />
+lsnrctl stop<br />
+lsnrctl start<br />
+各种重启服务之后，终于见到了全绿~~~</p> <a class="btn btn-info xsmall" href="http://pelican.dengdezhao.cn/oracle-11g-shu-ju-ku-an-zhuang-hou-gai-ji-suan-ji-ming-chu-xian-wu-fa-lian-jie-de-wen-ti-jie-jue.html">read more</a></div>
+    </div>	
+				
+<div class="pagination">
 <ul>
-<li>使用RIDC查询文档</li>
+    <li class="prev"><a href="http://pelican.dengdezhao.cn/author/pierreorz5.html">&larr; Previous</a></li>
+
+    <li class=""><a href="http://pelican.dengdezhao.cn/author/pierreorz.html">1</a></li>
+    <li class=""><a href="http://pelican.dengdezhao.cn/author/pierreorz2.html">2</a></li>
+    <li class=""><a href="http://pelican.dengdezhao.cn/author/pierreorz3.html">3</a></li>
+    <li class=""><a href="http://pelican.dengdezhao.cn/author/pierreorz4.html">4</a></li>
+    <li class=""><a href="http://pelican.dengdezhao.cn/author/pierreorz5.html">5</a></li>
+    <li class="active"><a href="http://pelican.dengdezhao.cn/author/pierreorz6.html">6</a></li>
+    <li class=""><a href="http://pelican.dengdezhao.cn/author/pierreorz7.html">7</a></li>
+
+    <li class="next"><a href="http://pelican.dengdezhao.cn/author/pierreorz7.html">Next &rarr;</a></li>
+
 </ul>
-<p>以下是主要查询方法, query传入的即是ECM的queryText，例如：
-{% codeblock lang:java %}
-dDocType <matches> <code>PJT-INTERFACE-DOC</code>
-{% endcodeblock %}
-通过拼接好需要的查询条件以及用户便可以查询出文档。
-{% codeblock lang:java %}
-        public List<Document> search(String username, String query) {
-        ServiceResponse serviceResponse = null;
-        List<Document> list = new ArrayList<Document>();</p>
-<div class="highlight"><pre><span></span>    <span class="nt">try</span> <span class="p">{</span>
-        <span class="n">if</span> <span class="p">(</span><span class="n">query</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span> <span class="err">{</span>
-            <span class="n">return</span> <span class="n">list</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="nt">IdcClient</span> <span class="nt">client</span> <span class="o">=</span> <span class="nt">getIdcClient</span><span class="o">();</span>
-        <span class="nt">DataBinder</span> <span class="nt">dataBinderReq</span> <span class="o">=</span> <span class="nt">client</span><span class="nc">.createBinder</span><span class="o">();</span>
-        <span class="nt">dataBinderReq</span><span class="nc">.putLocal</span><span class="o">(</span><span class="s2">&quot;IdcService&quot;</span><span class="o">,</span> <span class="s2">&quot;GET_SEARCH_RESULTS&quot;</span><span class="o">);</span>
-        <span class="nt">dataBinderReq</span><span class="nc">.putLocal</span><span class="o">(</span><span class="s2">&quot;QueryText&quot;</span><span class="o">,</span> <span class="nt">query</span><span class="nc">.toString</span><span class="o">());</span>
-        <span class="nt">dataBinderReq</span><span class="nc">.putLocal</span><span class="o">(</span><span class="s2">&quot;ResultCount&quot;</span><span class="o">,</span> <span class="s2">&quot;100&quot;</span><span class="o">);</span>
-        <span class="nt">serviceResponse</span> <span class="o">=</span>
-                <span class="nt">client</span><span class="nc">.sendRequest</span><span class="o">(</span><span class="nt">new</span> <span class="nt">IdcContext</span><span class="o">(</span><span class="nt">username</span><span class="o">),</span> <span class="nt">dataBinderReq</span><span class="o">);</span>
-        <span class="nt">DataBinder</span> <span class="nt">dataBinderRes</span> <span class="o">=</span> <span class="nt">serviceResponse</span><span class="nc">.getResponseAsBinder</span><span class="o">();</span>
-        <span class="nt">DataResultSet</span> <span class="nt">resultSet</span> <span class="o">=</span>
-            <span class="nt">dataBinderRes</span><span class="nc">.getResultSet</span><span class="o">(</span><span class="s2">&quot;SearchResults&quot;</span><span class="o">);</span>
-        <span class="nt">for</span> <span class="o">(</span><span class="nt">DataObject</span> <span class="nt">dataObject</span> <span class="o">:</span> <span class="nt">resultSet</span><span class="nc">.getRows</span><span class="o">())</span> <span class="p">{</span>
-            <span class="n">Document</span> <span class="n">d</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Document</span><span class="p">();</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setContentId</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dDocName&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setDocumentId</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dID&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setOwner</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dDocAuthor&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dDocTitle&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setDocType</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dDocType&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setXspeciality</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;xSPECIALTY&quot;</span><span class="p">));</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setXrcvMajor</span><span class="p">(</span><span class="n">dataObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;xRCV_MAJOR&quot;</span><span class="p">));</span>
-            <span class="n">Date</span> <span class="n">date</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">getDate</span><span class="p">(</span><span class="s2">&quot;dInDate&quot;</span><span class="p">);</span>
-            <span class="n">SimpleDateFormat</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s2">&quot;yyyy/mm/dd&quot;</span><span class="p">);</span>
-            <span class="n">String</span> <span class="n">format</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="p">);</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">setDindate</span><span class="p">(</span><span class="n">format</span><span class="p">);</span>
-            <span class="n">list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="err">}</span> <span class="nt">catch</span> <span class="o">(</span><span class="nt">Exception</span> <span class="nt">ex</span><span class="o">)</span> <span class="p">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Error Search: &quot;</span> <span class="o">+</span> <span class="n">ex</span><span class="o">.</span><span class="n">getMessage</span><span class="p">());</span>
-    <span class="p">}</span> <span class="nt">finally</span> <span class="p">{</span>
-        <span class="n">if</span> <span class="p">(</span><span class="n">serviceResponse</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="err">{</span>
-            <span class="n">serviceResponse</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="err">}</span>
-    <span class="nt">return</span> <span class="nt">list</span><span class="o">;</span>
-<span class="err">}</span> <span class="o">//</span>
-</pre></div>
-
-
-<p _="%" endcodeblock="endcodeblock">{% endcodeblock %}
-其中Document.java即是POJO类
-{% codeblock lang:java %}
-public class Document {
-    private String contentId;
-    private String documentId;
-    private String owner;
-    private String title;
-    private String doctype;
-    private String securitygroup;
-    private String dindate;
-    private String xDesignPhase;
-    private String xspeciality;//send
-    private String xrcvMajor;//receive
-       ......get set accessor......
-}//end class</p>
-<p>创建facade类：MyCondition.java，主要是调用search方法接受RIDC查询的结果集，生成dataControl供UI层使用。参考代码如下：
-{% codeblock lang:java %}
-public class MyCondition {
-    private static final ADFLogger LOGGER = ADFLogger.createADFLogger(MyCondition.class);
-    private ArrayList<Document> receiveDocumentList;
-    private ArrayList<Document> sendDocumentList;
-    public MyCondition() {
-        this.receiveDocumentList=new ArrayList<Document>();
-        this.sendDocumentList=new ArrayList<Document>();
-    }
-    /<strong><em>*</em></strong>
-     * 初始化，调用RIDC API查询出文档数据集
-     * <strong><em>*</em>/
-    public String init(){
-        LOGGER.severe("start init....");
-        Object userId = JSFUtils.resolveExpression("#{securityContext.userName}");
-        Object projectCode = JSFUtils.resolveExpression("#{pageFlowScope.inputProjectCode}");
-        List<String> spcCode = (List<String>)(JSFUtils.resolveExpression("#{pageFlowScope.spcCode}")==null?null:JSFUtils.resolveExpression("#{pageFlowScope.spcCode}"));
-        if(userId==null||"".equals(userId)){
-            LOGGER.severe("userId is null ");
-            FacesMessage msg = new FacesMessage("用户为空请重试!");
-            JSFUtils.getFacesContext().addMessage(null, msg);
-            return "NO";
-        }
-        if(projectCode==null||"".equals(projectCode)){
-            LOGGER.severe("projectCode is null ");
-            FacesMessage msg = new FacesMessage("项目ID为空请重试!");
-            JSFUtils.getFacesContext().addMessage(null, msg);
-            return "NO";
-        }
-        /</strong><strong><em>*
-         * 
-         * 生成发出专业SQL,生成接受专业SQL
-         * 
-         * </em></strong><em>/
-        String sendSql=" xSPECIALTY <matches> <code>NULL</code> ";
-        String receiveSql=" xRCV_MAJOR <matches> <code>NULL</code> ";
-        if(spcCode==null||spcCode.size()==0){
-            LOGGER.severe("spcCode is null or size is 0");
-            return "NO";
-        }
-        for(int i=0;i<spcCode.size();i++){
-            sendSql=sendSql+" <OR> "+"xSPECIALTY <matches> <code>"+spcCode.get(i)+"</code> ";
-            receiveSql=receiveSql+" <OR> "+"xRCV_MAJOR <matches> <code>"+spcCode.get(i)+"</code> ";
-        }
-        sendSql="("+sendSql+") <AND> dDocType <matches> <code>PJT-INTERFACE-DOC</code> <AND> xPROJECT_NUM <starts> <code>"+projectCode+"</code>";
-        receiveSql="("+receiveSql+") <AND> dDocType <matches> <code>PJT-INTERFACE-DOC</code> <AND> xPROJECT_NUM <starts> <code>"+projectCode+"</code>";
-        LOGGER.severe("sendSql:"+sendSql);
-        LOGGER.severe("receiveSql:"+receiveSql);
-        /<strong><em> 
-         * 查询当前用户在该项目中的专业（ME,EL等)，拼接QueryText
-         * dDocType <matches> <code>PJT-INTERFACE-DOC</code>
-         * </em></strong></em>**/
-        UCMAdapter ap=new UCMAdapter();
-        this.sendDocumentList = (ArrayList<Document>)ap.search(userId.toString(), sendSql);
-        this.receiveDocumentList = (ArrayList<Document>)ap.search(userId.toString(), receiveSql);
-        LOGGER.severe("success init...YES.");
-        return "YES";
-    }</p>
-<div class="highlight"><pre><span></span>public void setReceiveDocumentList(ArrayList&lt;Document&gt; receiveDocumentList) {
-    this.receiveDocumentList = receiveDocumentList;
-}
-
-public ArrayList&lt;Document&gt; getReceiveDocumentList() {
-    return receiveDocumentList;
-}
-
-public void setSendDocumentList(ArrayList&lt;Document&gt; sendDocumentList) {
-    this.sendDocumentList = sendDocumentList;
-}
-
-public ArrayList&lt;Document&gt; getSendDocumentList() {
-    return sendDocumentList;
-}
-</pre></div>
-
-
-<p _="%" endcodeblock="endcodeblock">}</p>            </article>
-                <section id="article-list">
-                    <h2>All posts</h2>
-                    <ol>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ding-zhi-webcenterde-people-connectionzu-jian.html" rel="bookmark" title="Permalink to "定制webcenter的people connection组件"">"定制webcenter的people connection组件"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/dong-tai-gai-bian-lovde-zhi-ji.html" rel="bookmark" title="Permalink to "动态改变LOV的值集"">"动态改变LOV的值集"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/webcenter-portaldiao-yong-document-service.html" rel="bookmark" title="Permalink to "webcenter portal调用document service"">"webcenter portal调用document service"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/chuang-jian-content-repositoryshi-chu-xian-cuo-wu-date-2013-03-20.html" rel="bookmark" title="Permalink to "创建Content Repository时出现错误"Date: 2013-03-20">"创建Content Repository时出现错误"Date: 2013-03-20</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/oafge-xing-hua-buttonhuo-qu-ye-mian-can-shu.html" rel="bookmark" title="Permalink to "OAF个性化Button获取页面参数"">"OAF个性化Button获取页面参数"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/an-zhuang-rcu17yu-dao-de-xiao-wen-ti.html" rel="bookmark" title="Permalink to "安装RCU1.7遇到的小问题"">"安装RCU1.7遇到的小问题"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ding-zhi-el-function.html" rel="bookmark" title="Permalink to "定制EL function"">"定制EL function"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/you-yi-wai-duan-dian-dao-zhi-oracle11gqi-dong-bu-qi-lai-de-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to "由意外断电导致oracle11g启动不起来的问题解决"">"由意外断电导致oracle11g启动不起来的问题解决"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/kong-jian-afiteratoryi-ji-afforeachde-dui-bi.html" rel="bookmark" title="Permalink to "控件af:iterator以及af:forEach的对比"">"控件af:iterator以及af:forEach的对比"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-zai-ye-mian-sui-pian-jia-zai-qian-diao-yong-luo-ji.html" rel="bookmark" title="Permalink to "如何在页面碎片加载前调用逻辑"">"如何在页面碎片加载前调用逻辑"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-huo-qu-webxmlzhong-de-context-paramcan-shu.html" rel="bookmark" title="Permalink to "如何获取web.xml中的context-param参数"">"如何获取web.xml中的context-param参数"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/centosxia-an-zhuang-mysql56hou-wang-ji-rootmi-ma-zhong-zhi-mi-ma.html" rel="bookmark" title="Permalink to "Centos下安装mysql5.6后忘记ROOT密码，重置密码"">"Centos下安装mysql5.6后忘记ROOT密码，重置密码"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/attribute-set-for-xxxattribute-in-view-object-xxxvo-failedwen-ti-jie-jue.html" rel="bookmark" title="Permalink to "Attribute set for xxxAttribute in view object xxxVO failed问题解决"">"Attribute set for xxxAttribute in view object xxxVO failed问题解决"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/cong-backingbeanzhong-diao-yong-bu-dai-fragmentsde-taskflow.html" rel="bookmark" title="Permalink to "从BackingBean中调用不带fragments的taskflow"">"从BackingBean中调用不带fragments的taskflow"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/fen-ye-lan-chu-xian-3ge-wen-hao-bugjie-jue.html" rel="bookmark" title="Permalink to "分页栏出现3个问号BUG解决"">"<af:table>分页栏出现3个问号BUG解决"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/groovyzai-adfzhong-de-ying-yong.html" rel="bookmark" title="Permalink to "Groovy在ADF中的应用"">"Groovy在ADF中的应用"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/li-yong-contextual-eventshua-xin-region.html" rel="bookmark" title="Permalink to "利用contextual event刷新Region"">"利用contextual event刷新Region"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/zai-managedbeanzhong-diao-yong-appmoduleimplzhong-zi-ding-yi-fang-fa-de-liang-chong-fang-shi.html" rel="bookmark" title="Permalink to "在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"">"在ManagedBean中调用AppModuleImpl中自定义方法的两种方式"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-applicatoinmodulelei-xing-zong-jie.html" rel="bookmark" title="Permalink to "关于ApplicatoinModule类型总结"">"关于ApplicatoinModule类型总结"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adflei-si-xin-tiao-cheng-xu-shi-xian.html" rel="bookmark" title="Permalink to "ADF类似心跳程序实现"">"ADF类似心跳程序实现"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adfxue-xi-zong-jie-yi.html" rel="bookmark" title="Permalink to "ADF学习总结(一)"">"ADF学习总结(一)"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/oafzhong-chuang-jian-lov.html" rel="bookmark" title="Permalink to "OAF中创建LOV"">"OAF中创建LOV"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/pei-zhi-oafkai-fa-huan-jing.html" rel="bookmark" title="Permalink to "配置OAF开发环境"">"配置OAF开发环境"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/getrowatrangeindexintfang-fa-de-ju-xian-xing.html" rel="bookmark" title="Permalink to "getRowAtRangeIndex(int)方法的局限性"">"getRowAtRangeIndex(int)方法的局限性"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/oafshang-chuan-da-pi-liang-excelwen-jian.html" rel="bookmark" title="Permalink to "OAF上传大批量EXCEL文件"">"OAF上传大批量EXCEL文件"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/jdeveloperyun-xing-su-du-you-hua.html" rel="bookmark" title="Permalink to "Jdeveloper运行速度优化"">"Jdeveloper运行速度优化"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/javamailfa-song-you-jian-zhong-wen-luan-ma.html" rel="bookmark" title="Permalink to "JavaMail发送邮件中文乱码"">"JavaMail发送邮件中文乱码"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/jive-forums-admin-console-guan-li-yuan-zhang-hu-mi-ma-zhong-zhi.html" rel="bookmark" title="Permalink to "Jive Forums admin console 管理员账户密码重置"">"Jive Forums admin console 管理员账户密码重置"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/oafdan-xuan-shan-chu-xing-gong-neng.html" rel="bookmark" title="Permalink to "OAF单选删除行功能"">"OAF单选删除行功能"</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/qian-yi-wordpressbo-ke-zhi-octopress.html" rel="bookmark" title="Permalink to 迁移WordPress博客至Octopress">迁移WordPress博客至Octopress</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/solvedlong-mode-not-supported-rebooting-press-any-key-to-reboot.html" rel="bookmark" title="Permalink to ! '[SOLVED]Long mode not supported, rebooting Press any key to reboot'">! '[SOLVED]Long mode not supported, rebooting Press any key to reboot'</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/firefoxsheng-ji-18zhi-hou-autoproxyshi-xiao-goagentwu-fa-shi-yong-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to firefox升级18之后,autoproxy失效,goagent无法使用问题解决">firefox升级18之后,autoproxy失效,goagent无法使用问题解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/use-javascript-in-oaf.html" rel="bookmark" title="Permalink to Use Javascript in OAF">Use Javascript in OAF</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/xu-ni-ji-huan-jing-rhel63an-zhuang-ebs-r12.html" rel="bookmark" title="Permalink to 虚拟机环境RHEL6.3安装EBS R12">虚拟机环境RHEL6.3安装EBS R12</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/xu-ni-ji-an-zhuang-ebs-r12shi-chu-xian-cuo-wu-rw-50004-jie-jue.html" rel="bookmark" title="Permalink to 虚拟机安装EBS R12时出现错误RW-50004 解决">虚拟机安装EBS R12时出现错误RW-50004 解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/oafkai-fa-tong-guo-exceldao-ru-shu-ju-shi-yong-hu-xu-yao-jiang-ke-neng-cun-zai-zhong-fu-de-zhu-jian-xin-xi-ti-shi-chu-lai.html" rel="bookmark" title="Permalink to OAF开发通过EXCEL导入数据时，用户需要将可能存在重复的主键信息提示出来">OAF开发通过EXCEL导入数据时，用户需要将可能存在重复的主键信息提示出来</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/oaf-shi-yong-oaexceptionshu-chu-zhong-wen-shi-chu-xian-luan-ma-jie-jue.html" rel="bookmark" title="Permalink to OAF 使用OAException输出中文时出现乱码 解决">OAF 使用OAException输出中文时出现乱码 解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/xin-lang-ru-men-ying-yong-zhi-da-ben-zhong.html" rel="bookmark" title="Permalink to 新浪入门应用之---大笨钟">新浪入门应用之---大笨钟</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ora-1222tnsno-such-protocol-adapter-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to ORA-1222：TNS:no such protocol adapter 问题解决">ORA-1222：TNS:no such protocol adapter  问题解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/soa-suite-huan-jing-da-jian.html" rel="bookmark" title="Permalink to SOA suite 环境搭建">SOA suite 环境搭建</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ebs-bing-fa-qing-qiu-diao-yong-sqlshi-ri-zhi-gen-shu-chu-zhong-wen-chu-xian-luan-ma-wen-ti.html" rel="bookmark" title="Permalink to EBS 并发请求调用SQL时，日志跟输出中文出现乱码问题">EBS 并发请求调用SQL时，日志跟输出中文出现乱码问题</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ebsbing-fa-qing-qiu-diao-yong-oracle-reportsshi-ru-he-xie-ru-ri-zhi-wen-jian.html" rel="bookmark" title="Permalink to EBS并发请求调用Oracle reports时，如何写入日志文件">EBS并发请求调用Oracle reports时，如何写入日志文件</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/shi-yong-vpddui-shu-ju-jin-xing-ge-chi.html" rel="bookmark" title="Permalink to 使用VPD对数据进行隔离">使用VPD对数据进行隔离</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html" rel="bookmark" title="Permalink to adf:tree做的树菜单如何过滤子节点的数据？">adf:tree做的树菜单如何过滤子节点的数据？</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html" rel="bookmark" title="Permalink to 表内的checkbox当数据量大时发现部分行勾选不中">表内的checkbox当数据量大时发现部分行勾选不中</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ebsqing-qiu-zhi-xing-shi-pao-chu-cuo-wu-ora-20100he-ora-06512-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to EBS请求执行时抛出错误Ora-20100和Ora-06512 问题解决">EBS请求执行时抛出错误Ora-20100和Ora-06512 问题解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-ding-zhi-validator.html" rel="bookmark" title="Permalink to 关于定制validator">关于定制validator</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html" rel="bookmark" title="Permalink to 关于ManagedBean中多次执行构造方法时的问题">关于ManagedBean中多次执行构造方法时的问题</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html" rel="bookmark" title="Permalink to 关于selectBooleanCheckbox 的问题">关于selectBooleanCheckbox 的问题</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html" rel="bookmark" title="Permalink to 关于VO的只读可写等属性设置">关于VO的只读可写等属性设置</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/immediatetrue-de-yi-chang.html" rel="bookmark" title="Permalink to immediate="true" 的异常">immediate="true" 的异常</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/li-yong-javamailfa-song-you-jian-gong-neng-shi-xian.html" rel="bookmark" title="Permalink to 利用javaMail发送邮件功能实现">利用javaMail发送邮件功能实现</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle数据库用户被锁问题解决">oracle数据库用户被锁问题解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html" rel="bookmark" title="Permalink to 如何在MB中对selectionListener collectionModel.makeCurrent调用">如何在MB中对selectionListener collectionModel.makeCurrent调用</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html" rel="bookmark" title="Permalink to Table内增加全选checkbox">Table内增加全选checkbox</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html" rel="bookmark" title="Permalink to weblogic定时启动程序">weblogic定时启动程序</a></li>
-        
-
+</div>
+ 
+  
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="http://pelican.dengdezhao.cn/archives.html">Archives</a>
+                <li><a href="http://pelican.dengdezhao.cn/tags.html">Tags</a>
+
+
+
+
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="http://pelican.dengdezhao.cn/category/adf.html">ADF</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/ebs.html">ebs</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/java.html">java</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/linux.html">linux</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/octopress.html">octopress</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/oracle.html">oracle</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/others.html">others</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/sinaapp.html">sinaapp</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/soa.html">soa</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/webcenter.html">webcenter</a></li>
+                   
+            </ul>
+            </div>
+
+
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="#">You can add links in your config file</a></li>
+                <li><a href="#">Another social link</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="http://pelican.dengdezhao.cn">dengdezhao</a> &copy; pierreorz 2014</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://pelican.dengdezhao.cn/theme/bootstrap-collapse.js"></script>
  
-            <li><a href="http://pelican.dengdezhao.cn/ying-pan-an-zhuang-fedora.html" rel="bookmark" title="Permalink to 硬盘安装fedora">硬盘安装fedora</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html" rel="bookmark" title="Permalink to 如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row">如何让af:inputListOfValues（LOV）的初始值显示为Blank而不是默认的VO的First Row</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/oracle-11g-shu-ju-ku-an-zhuang-hou-gai-ji-suan-ji-ming-chu-xian-wu-fa-lian-jie-de-wen-ti-jie-jue.html" rel="bookmark" title="Permalink to oracle 11g 数据库安装后改计算机名出现无法连接的问题解决">oracle 11g 数据库安装后改计算机名出现无法连接的问题解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ru-he-rang-adfri-qi-zu-jian-xian-shi-shi-fen-miao.html" rel="bookmark" title="Permalink to 如何让ADF日期组件显示时分秒">如何让ADF日期组件显示时分秒</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/duo-yu-yan-qie-huan-gong-neng-shi-xian.html" rel="bookmark" title="Permalink to 多语言切换功能实现">多语言切换功能实现</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adfying-yong-zhong-ru-he-zai-backingbeanzhong-diao-yong-javascriptkong-zhi-ui.html" rel="bookmark" title="Permalink to ADF应用中如何在BackingBean中调用javascript控制UI">ADF应用中如何在BackingBean中调用javascript控制UI</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/javaxelpropertynotfoundexceptioncuo-wu-jie-jue.html" rel="bookmark" title="Permalink to javax.el.PropertyNotFoundException错误解决">javax.el.PropertyNotFoundException错误解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/adfying-yong-remote-deployment-failedcuo-wu-jie-jue.html" rel="bookmark" title="Permalink to ADF应用“Remote deployment failed”错误解决">ADF应用“Remote deployment failed”错误解决</a></li>
-        
-
- 
-            <li><a href="http://pelican.dengdezhao.cn/ding-zhi-adfying-yong-de-css.html" rel="bookmark" title="Permalink to 定制ADF应用的CSS">定制ADF应用的CSS</a></li>
-    </ol>
-    </section><!-- #article-list -->
-
-        <footer>
-            <nav>
-                <ul>
-                    <li>:: <a href="http://pelican.dengdezhao.cn/categories.html">Categories</a></li>
-                    <li>:: <a href="http://pelican.dengdezhao.cn/tags.html">Tags</a></li>
-                </ul>
-            </nav>
-                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
-        </footer>
-
 </body>
 </html>

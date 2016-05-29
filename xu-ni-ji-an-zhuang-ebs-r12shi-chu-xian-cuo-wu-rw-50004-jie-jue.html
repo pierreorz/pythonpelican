@@ -1,44 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh_cn">
 <head>
-        <title>dengdezhao : 虚拟机安装EBS R12时出现错误RW-50004 解决</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="http://pelican.dengdezhao.cn/theme/css/main.css" type="text/css" />
-        <link href="http://pelican.dengdezhao.cn/None" type="application/atom+xml" rel="alternate" title="dengdezhao ATOM Feed" />
+    <meta charset="utf-8">
+    <title>dengdezhao - 虚拟机安装EBS R12时出现错误RW-50004 解决</title>
+    <meta name="description" content="">
+    <meta name="author" content="pierreorz">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://pelican.dengdezhao.cn/theme/html5.js"></script>
+    <![endif]-->
 
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie.css"/>
-                <script src="http://pelican.dengdezhao.cn/js/IE8.js" type="text/javascript"></script><![endif]-->
+    <!-- Le styles -->
+    <link href="http://pelican.dengdezhao.cn/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/local.css" rel="stylesheet">
+    <link href="http://pelican.dengdezhao.cn/theme/pygments.css" rel="stylesheet">
 
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="http://pelican.dengdezhao.cn/css/ie6.css"/><![endif]-->
+    <!-- So Firefox can bookmark->"abo this site" -->
 
 </head>
 
 <body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="http://pelican.dengdezhao.cn">dengdezhao</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="http://pelican.dengdezhao.cn">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            
+        </ul>
+        </div>
         
-<header>
-    <h1><a href="http://pelican.dengdezhao.cn" id="site-title">dengdezhao </a> :
-        <a href="http://pelican.dengdezhao.cn/xu-ni-ji-an-zhuang-ebs-r12shi-chu-xian-cuo-wu-rw-50004-jie-jue.html" id="page-title">虚拟机安装EBS R12时出现错误RW-50004 解决</a></h1>
-<time datetime="2013-01-12T00:00:00+08:00">2013-01-12(Saturday) 00:00</time></header>
-<article>
-    <p>一般出现这个错误多半应该是库文件导致的，查看日志得知是 需要的 unzip 版本过高，RHEL上安装的是6.0的，而R12.1.1.1只支持unzip 5.X 的，很坑爹，yum erase unzip 然后重新安装unzip 5.X rpm即可解决~~</p>
+    </div>
+    </div>
+</div>
 
-<p>&nbsp;</p>
-</article>
+<div class="container">
+    <div class="content">
+    <div class="row">
 
-        <footer>
-            <nav>
-                <ul>
-                    <li>:: <a href="http://pelican.dengdezhao.cn/categories.html">Categories</a></li>
-                    <li>:: <a href="http://pelican.dengdezhao.cn/tags.html">Tags</a></li>
-                </ul>
-            </nav>
-                <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
-        </footer>
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>虚拟机安装EBS R12时出现错误RW-50004 解决</h1>
+2013-01-12(Saturday) 00:00
 
+by <a class="url fn" href="http://pelican.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+        </div>
+	
+        <div><p>一般出现这个错误多半应该是库文件导致的，查看日志得知是 需要的 unzip 版本过高，RHEL上安装的是6.0的，而R12.1.1.1只支持unzip 5.X 的，很坑爹，yum erase unzip 然后重新安装unzip 5.X rpm即可解决~~</p>
+
+<p>&nbsp;</p></div>
+	
+        <hr>
+
+    </div>
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="http://pelican.dengdezhao.cn/archives.html">Archives</a>
+                <li><a href="http://pelican.dengdezhao.cn/tags.html">Tags</a>
+
+
+
+
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="http://pelican.dengdezhao.cn/category/adf.html">ADF</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/ebs.html">ebs</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/java.html">java</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/linux.html">linux</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/octopress.html">octopress</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/oracle.html">oracle</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/others.html">others</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/sinaapp.html">sinaapp</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/soa.html">soa</a></li>
+                <li><a href="http://pelican.dengdezhao.cn/category/webcenter.html">webcenter</a></li>
+                   
+            </ul>
+            </div>
+
+
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="#">You can add links in your config file</a></li>
+                <li><a href="#">Another social link</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="http://pelican.dengdezhao.cn">dengdezhao</a> &copy; pierreorz 2014</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://pelican.dengdezhao.cn/theme/bootstrap-collapse.js"></script>
+ 
 </body>
 </html>
