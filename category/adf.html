@@ -136,16 +136,25 @@ by <a class="url fn" href="http://www.dengdezhao.cn/author/pierreorz.html">pierr
 <h4>实现方法</h4>
 <p>创建一个空的java Project：Taglib</p>
 <ul>
-<li>创建Java类：SplitString.java    </li>
-</ul>
-<p>{% codeblock lang:java %}</p>
+<li>
+<p>创建Java类：SplitString.java    </p>
 <p>package cn.dengdezhao.taglib;</p>
 <p>public class SplitString {</p>
 <div class="highlight"><pre><span></span>public static String getString(String string) {
-    String[] strings = string.split(&quot;:&quot;, 3);
-    if (strings.length &gt; 2) {
-        return strings[2];
-    } else …</pre></div> <a class="btn btn-info xsmall" href="http://www.dengdezhao.cn/ding-zhi-el-function.html">read more</a></div>
+String[] strings = string.split(&quot;:&quot;, 3);
+if (strings.length &gt; 2) {
+    return strings[2];
+} else {
+    return &quot;&quot;;
+}
+}
+</pre></div>
+
+
+<p>}</p>
+</li>
+<li>
+<p>创建taglib描述文件splitString.tld …</p></li></ul> <a class="btn btn-info xsmall" href="http://www.dengdezhao.cn/ding-zhi-el-function.html">read more</a></div>
     </div>	
 				
 
@@ -483,7 +492,6 @@ by <a class="url fn" href="http://www.dengdezhao.cn/author/pierreorz.html">pierr
                 Categories
                 </li>
                 
-                <li><a href="http://www.dengdezhao.cn/category/about.html">About</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/adf.html">ADF</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/ebs.html">ebs</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/java.html">java</a></li>

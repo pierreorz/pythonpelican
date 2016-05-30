@@ -66,14 +66,17 @@ by <a class="url fn" href="http://www.dengdezhao.cn/author/pierreorz.html">pierr
 	
         <div><ul>
 <li>环境：此前安装过soa1.6，最近重新安装soa1.7时遇到的问题</li>
-<li>安装Rcu1.7时，发现无法运行./rcu,错误提示如下：</li>
+<li>
+<p>安装Rcu1.7时，发现无法运行./rcu,错误提示如下：</p>
+<p>rcuHome/jdk/jre/bin/java: cannot execute binary file.</p>
+</li>
 </ul>
-<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
-rcuHome/jdk/jre/bin/java: cannot execute binary file.</p>
 <p>查看操作系统发现是32bit,而rcu只有64bit的。</p>
-<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
-$getconf LONG_BIT  <br />
-32  <br /></p>
+<div class="highlight"><pre><span></span><span class="p">$</span><span class="nv">getconf</span><span class="x"> LONG_BIT    </span>
+<span class="x">32</span>
+</pre></div>
+
+
 <p>在32bit系统上安装64bit软件向下兼容应该是可以安装的，因此怀疑是jdk的问题。</p>
 <p>修改rcu文件最后几行的jre_home 为中间件文件夹中的JDK：/home/pierre/Oracle/Middleware/jdk160_24/bin/java 后，重新运行即可解决该问题。</p>
 <ul>
@@ -114,7 +117,6 @@ $getconf LONG_BIT  <br />
                 Categories
                 </li>
                 
-                <li><a href="http://www.dengdezhao.cn/category/about.html">About</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/adf.html">ADF</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/ebs.html">ebs</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/java.html">java</a></li>
@@ -137,7 +139,7 @@ $getconf LONG_BIT  <br />
     </div>     </div> 
 <footer>
 <br />
-<p><a href="http://www.dengdezhao.cn">邓德昭的技术博客</a> &copy; pierreorz 2016</p>
+<p><a href="http://www.dengdezhao.cn">邓德昭的技术博客</a> &copy; pierreorz 2014</p>
 </footer>
 
 </div> <!-- /container -->

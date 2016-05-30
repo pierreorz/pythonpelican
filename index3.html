@@ -60,39 +60,6 @@
  
 
     <div class='article'>
-        <a href="http://www.dengdezhao.cn/guan-yu-applicatoinmodulelei-xing-zong-jie.html"><h2>"关于ApplicatoinModule类型总结"</h2></a>
-        <div class= "well small"> 2013-05-28(Tuesday) 00:00
-
-by <a class="url fn" href="http://www.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
- 
-
-
- </div>
-        <div class="summary"><h2>平台：Jdev11.1.2.3.0</h2>
-<h4>AM的类型</h4>
-<p><strong>1. Root AM</strong>  <br />
-<strong>2. Nested AM</strong>  <br />
-<strong>3. Shared AM</strong>    </p>
-<h4>三种类型AM的比较</h4>
-<p>首先谈谈RootAM的数量，RootAM原则上来说越少越好，因为当用户访问工程的时候数据库连接数量会根据RootAM的数量成倍增加极大地增加了数据库的压力。但是很多时候由于业务的复杂性，单一的AM无法满足实际开发的需求，所有的业务逻辑都写在一个AM里极不利于多个团队的协同开发。  <br />
-这个时候NestedAM就发挥其作用了，NestedAM是共享其父类RootAM的数据库连接的，所以不会额外增加连接数量，利用NestedAM可以将业务逻辑拆分开来，每个团队都可以使用自己单独的NestedAM，团队之间彼此冲突地可能性大大减少。
-再说SharedAM，大型项目中很多模块的功能是通用的，比如LOV或者一些在使用中基本不需要改变的固定配置数据等，这类数据对项目所有访问用户都是固定的，可以使用SharedAM来维护这类型数据。</p>
-<h4>三种类型的AM的创建方法</h4>
-<ol>
-<li>RootAM,默认创建的AM即是RootAM    </li>
-<li>
-<p>NestedAM创建方法  <br />
-   先创建两个RootAM(deptAm,empAm)，分别拥有VO instance（DeptVO,EmpVO)；  <br />
-再创建一个RootAM（rootAM)，双击该rootAM，在Data Model标签页中 …</p></li></ol> <a class="btn btn-info xsmall" href="http://www.dengdezhao.cn/guan-yu-applicatoinmodulelei-xing-zong-jie.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
         <a href="http://www.dengdezhao.cn/adflei-si-xin-tiao-cheng-xu-shi-xian.html"><h2>"ADF类似心跳程序实现"</h2></a>
         <div class= "well small"> 2013-04-24(Wednesday) 00:00
 
@@ -386,10 +353,54 @@ by <a class="url fn" href="http://www.dengdezhao.cn/author/pierreorz.html">pierr
 <ul>
 <li>连接到FM_DISCUSSIONS schema，查询jiveuser，发现passwordhash字段值变为了"-"字符，可能是集成AD之后这边的数据被覆盖了，按字段名推测密码应该是hash加密后的密文，于是将weblogic用户的密码通过MD5加密生成密文更新该字段，重启webcenter之后，问题解决。</li>
 </ul>
-<p _="%" endcodeblock="endcodeblock">附：
-{% codeblock lang:java %}
-//password: Welcome1 
-update jiveuser set passwordhash='b56e0b4ea4962283bee762525c2d490f' where username='weblogic'</p> <a class="btn btn-info xsmall" href="http://www.dengdezhao.cn/jive-forums-admin-console-guan-li-yuan-zhang-hu-mi-ma-zhong-zhi.html">read more</a></div>
+<p>附：</p>
+<div class="highlight"><pre><span></span>//password: Welcome1 
+update jiveuser set passwordhash=&#39;b56e0b4ea4962283bee762525c2d490f&#39; where username=&#39;weblogic&#39;
+</pre></div> <a class="btn btn-info xsmall" href="http://www.dengdezhao.cn/jive-forums-admin-console-guan-li-yuan-zhang-hu-mi-ma-zhong-zhi.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.dengdezhao.cn/oafdan-xuan-shan-chu-xing-gong-neng.html"><h2>"OAF单选删除行功能"</h2></a>
+        <div class= "well small"> 2013-03-20(Wednesday) 00:00
+
+by <a class="url fn" href="http://www.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><hr />
+<p>平台：Jdeveloper 9i    </p>
+<hr />
+<p><strong>一般实现步骤：</strong></p>
+<ol>
+<li>在VO中添加新transient属性selector，updatable设置为always。    </li>
+<li>在PG中给table添加singleSelection方法，并绑定view Instance为VO的instance，View Attribute为刚刚新建的transient属性seletor。        </li>
+<li>这样当用户勾选checkbox时，会给transient属性变量赋值为Y，因此，在删除逻辑中循环判断VO中的transient属性，当其为Y时执行remove该行即可实现选择删除功能。  <br />
+<strong>相关代码如下：</strong></li>
+</ol>
+<p><strong>CO中processFormRequest里添加代码如下：</strong></p>
+<p>{% codeblock lang:java %}
+    //当单击deleteBtn按钮时执行AM中的deleteAutoSequenceVO方法  <br />
+    if (pageContext.getParameter("deleteBtn")!=null)
+    {
+      am.invokeMethod("deleteAutoSequenceVO");</p>
+<div class="highlight"><pre><span></span>}
+</pre></div>
+
+
+<p>{% endcodeblock %}</p>
+<p><strong>AM中代码如下：</strong></p>
+<p>{% codeblock lang:java %}
+    public void deleteAutoSequenceVO() {
+        OAViewObject vo = this.getChAutoSequenceVO1();
+        RowSetIterator iter = vo.createRowSetIterator("delete");
+        if (vo != null …</p> <a class="btn btn-info xsmall" href="http://www.dengdezhao.cn/oafdan-xuan-shan-chu-xing-gong-neng.html">read more</a></div>
     </div>	
 				
 <div class="pagination">
@@ -436,7 +447,6 @@ update jiveuser set passwordhash='b56e0b4ea4962283bee762525c2d490f' where userna
                 Categories
                 </li>
                 
-                <li><a href="http://www.dengdezhao.cn/category/about.html">About</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/adf.html">ADF</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/ebs.html">ebs</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/java.html">java</a></li>
@@ -459,7 +469,7 @@ update jiveuser set passwordhash='b56e0b4ea4962283bee762525c2d490f' where userna
     </div>     </div> 
 <footer>
 <br />
-<p><a href="http://www.dengdezhao.cn">邓德昭的技术博客</a> &copy; pierreorz 2016</p>
+<p><a href="http://www.dengdezhao.cn">邓德昭的技术博客</a> &copy; pierreorz 2014</p>
 </footer>
 
 </div> <!-- /container -->

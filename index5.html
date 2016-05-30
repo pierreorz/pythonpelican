@@ -60,40 +60,6 @@
  
 
     <div class='article'>
-        <a href="http://www.dengdezhao.cn/ora-1222tnsno-such-protocol-adapter-wen-ti-jie-jue.html"><h2>ORA-1222：TNS:no such protocol adapter  问题解决</h2></a>
-        <div class= "well small"> 2012-12-03(Monday) 00:00
-
-by <a class="url fn" href="http://www.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
- 
-
-
- </div>
-        <div class="summary"><p>机器上安装的是instantOracleclient-basic-win32-11.2.0.1.0客户端，本来使用PLSQL developer是可以正常连接数据库的；</p>
-
-<p>后来开发需求装上了Form6<em>i，</em>发现连接数据库时弹出来ORA-1222：TNS:no such protocol adapter这个错误；</p>
-
-<p>解决方案：</p>
-
-<p><strong>1.配置PL/SQL Developer -&gt; Preferences ，OracleHome设置为Form6i的路径；</strong></p>
-
-<p><strong>2.我的电脑 -&gt; 用户变量 设置ORACLE_HOME 为Form6i路径</strong></p>
-
-<p><strong>或者可以直接编辑注册表，修改oracle_home的值为[Form安装的HOME文件夹]/[oracle客户端文件夹]；</strong></p>
-
-<p><strong>如果需要切换按以上步骤修改oracle_home再重启PLSQL Developer即可以正常连接数据库；
-</strong></p>
-
-<p><em>
-</em></p> <a class="btn btn-info xsmall" href="http://www.dengdezhao.cn/ora-1222tnsno-such-protocol-adapter-wen-ti-jie-jue.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
         <a href="http://www.dengdezhao.cn/soa-suite-huan-jing-da-jian.html"><h2>SOA suite 环境搭建</h2></a>
         <div class= "well small"> 2012-09-29(Saturday) 00:00
 
@@ -340,6 +306,38 @@ init()；<br />
 <p>通过页面是否postback来控制只初始化一次。</p> <a class="btn btn-info xsmall" href="http://www.dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html">read more</a></div>
     </div>	
 				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html"><h2>关于selectBooleanCheckbox 的问题</h2></a>
+        <div class= "well small"> 2012-06-26(Tuesday) 00:00
+
+by <a class="url fn" href="http://www.dengdezhao.cn/author/pierreorz.html">pierreorz</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>页面的 selectBooleanCheckbox 选择后，总提示 不是数字（组件value是 true 或 false,数据库存的是Number），怎么解决</p>
+
+<p>方案有三个<br />
+1。如果是基于表的Number字段(假设字段名是Flag，值是1或者0），想生成selectBooleanCheckbox ，可以重写这个VO的的 setFlag()跟getFlag()方法如下：<br />
+public void setFlag(Boolean value){<br />
+this.flag=value==true?1:0;<br />
+}
+public Boolean getFlag(){<br />
+return this.flag==0?false:true;<br />
+}</p>
+
+<p>2。设置valueChangeListener.<br />
+在valueChange方法里捕获当前selectBooleanCheckbox 的值，然后转化成Number类型的传给VO</p>
+
+<p>3。如果是只读的表，可以在UI上通过EL表达式处理。</p> <a class="btn btn-info xsmall" href="http://www.dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html">read more</a></div>
+    </div>	
+				
 <div class="pagination">
 <ul>
     <li class="prev"><a href="http://www.dengdezhao.cn/index4.html">&larr; Previous</a></li>
@@ -384,7 +382,6 @@ init()；<br />
                 Categories
                 </li>
                 
-                <li><a href="http://www.dengdezhao.cn/category/about.html">About</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/adf.html">ADF</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/ebs.html">ebs</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/java.html">java</a></li>
@@ -407,7 +404,7 @@ init()；<br />
     </div>     </div> 
 <footer>
 <br />
-<p><a href="http://www.dengdezhao.cn">邓德昭的技术博客</a> &copy; pierreorz 2016</p>
+<p><a href="http://www.dengdezhao.cn">邓德昭的技术博客</a> &copy; pierreorz 2014</p>
 </footer>
 
 </div> <!-- /container -->

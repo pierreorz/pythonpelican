@@ -89,18 +89,18 @@ by <a class="url fn" href="http://www.dengdezhao.cn/author/pierreorz.html">pierr
 <p>检查/etc/hosts文件，没有发现异常。    </p>
 </li>
 <li>
-<dl>
-<dt>因为未改动任何配置文件，所以基本可以确定是断电造成文件损坏而引起。于是使用<code>relink all</code>看看能否解决该问题。</dt>
-<dt>{% codeblock lang:java %}</dt>
-<dt># cd $ORACLE_HOME/bin</dt>
-<dt># relink all</dt>
-<dt>{% endcodeblock %}</dt>
-<dt>执行<code>relink all</code>命令之后，再执行<code>lsnrctrl start</code>时，发现不报之前的错误了，出现了新的错误：</dt>
-<dt>{% codeblock lang:java %}</dt>
-<dt>symbol lookup error: $ORACLE_HOME/lib/libclntsh.so.11.1</dt>
-<dd _="%" endcodeblock="endcodeblock">undefined symbol: nnftboot</dd>
-</dl>
+<p>因为未改动任何配置文件，所以基本可以确定是断电造成文件损坏而引起。于是使用<code>relink all</code>看看能否解决该问题。</p>
+<p># cd $ORACLE_HOME/bin  <br />
+ # relink all</p>
 </li>
+</ul>
+<p>执行<code>relink all</code>命令之后，再执行<code>lsnrctrl start</code>时，发现不报之前的错误了，出现了新的错误：</p>
+<div class="highlight"><pre><span></span><span class="x"> symbol lookup error: </span><span class="p">$</span><span class="nv">ORACLE_HOME</span><span class="x">/lib/libclntsh.so.11.1    </span>
+<span class="x">: undefined symbol: nnftboot</span>
+</pre></div>
+
+
+<ul>
 <li>
 <p>看来是这个libclntsh.so.11.1出了问题，于是尝试去下载该文件替换掉。   </p>
 </li>
@@ -109,13 +109,11 @@ by <a class="url fn" href="http://www.dengdezhao.cn/author/pierreorz.html">pierr
 </li>
 <li>
 <p>使用rpm2cpio命令抽取出里面的libclntsh.so.11.1</p>
-</li>
-</ul>
-<p>{% codeblock lang:java %}     </p>
 <h1>rpm2cpio oracle-instance-client-xxx.rpm | cpio -div</h1>
-<p>{% endcodeblock %}</p>
-<ul>
-<li>将得到的libclntsh.so.11.1文件替换掉$ORACLE_HOME/lib下的重名文件即可。    </li>
+</li>
+<li>
+<p>将得到的libclntsh.so.11.1文件替换掉$ORACLE_HOME/lib下的重名文件即可。    </p>
+</li>
 </ul></div>
         <hr />
     </div>
@@ -185,7 +183,6 @@ lsnrctl start<br />
                 Categories
                 </li>
                 
-                <li><a href="http://www.dengdezhao.cn/category/about.html">About</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/adf.html">ADF</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/ebs.html">ebs</a></li>
                 <li><a href="http://www.dengdezhao.cn/category/java.html">java</a></li>
