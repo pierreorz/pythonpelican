@@ -10,7 +10,7 @@
     <meta name="kittycheck_position" content="top=60,right=60" />
 
     <!-- Le styles -->
-    <link rel="stylesheet" href="http://localhost:8000/theme/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="http://dengdezhao.cn/theme/css/bootstrap.min.css" type="text/css" />
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -32,9 +32,9 @@
         font-size: 6pt;
      }
     </style>
-    <link href="http://localhost:8000/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="http://localhost:8000/theme/css/font-awesome.css" rel="stylesheet">
-    <link href="http://localhost:8000/theme/css/pygments.css" rel="stylesheet">
+    <link href="http://dengdezhao.cn/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://dengdezhao.cn/theme/css/font-awesome.css" rel="stylesheet">
+    <link href="http://dengdezhao.cn/theme/css/pygments.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -42,13 +42,13 @@
     <![endif]-->
 
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="http://localhost:8000/theme/img/favicon.ico">
-    <link rel="apple-touch-icon" href="http://localhost:8000/theme/img/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:8000/theme/img/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:8000/theme/img/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="http://dengdezhao.cn/theme/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://dengdezhao.cn/theme/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://dengdezhao.cn/theme/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://dengdezhao.cn/theme/img/apple-touch-icon-114x114.png">
 
-    <link href="http://localhost:8000/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
-    <link href="http://localhost:8000/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
+    <link href="http://dengdezhao.cn/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
+    <link href="http://dengdezhao.cn/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
   </head>
   <body>
     <div class="navbar navbar-fixed-top">
@@ -59,14 +59,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="http://localhost:8000/index.html">Dengdezhao </a>
+          <a class="brand" href="http://dengdezhao.cn/index.html">Dengdezhao </a>
           <div class="nav-collapse">
             <ul class="nav">
-                  <li><a href="#">Home</a></li>
+                  <li><a href="http://dengdezhao.cn">Home</a></li>
                   <li><a href="about.html">About</a></li>
                 <li class="divider-vertical"></li>
             <!--  <ul class="nav pull-right">
-                    <li><a href="http://localhost:8000/"><i class="icon-th-list"></i>Archives</a></li>
+                    <li><a href="http://dengdezhao.cn/"><i class="icon-th-list"></i>Archives</a></li>
               </ul>
 		-->
             </ul>
@@ -85,17 +85,17 @@
 <abbr class="published" title="2013-01-15T00:00:00+08:00">
     <i class="icon-calendar"></i>&nbsp;2013-01-15(Tuesday) 00:00
 </abbr>
-<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+<br/><a href="http://dengdezhao.cn/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
 
 
 <br/>
-	&nbsp;&nbsp;<a href="http://localhost:8000/tag/rhel63.html" class="label"><i class="icon-tag"></i>&nbsp;RHEL6.3</a>
-	&nbsp;&nbsp;<a href="http://localhost:8000/tag/r12.html" class="label"><i class="icon-tag"></i>&nbsp;R12</a>
+	&nbsp;&nbsp;<a href="http://dengdezhao.cn/tag/rhel63.html" class="label"><i class="icon-tag"></i>&nbsp;RHEL6.3</a>
+	&nbsp;&nbsp;<a href="http://dengdezhao.cn/tag/r12.html" class="label"><i class="icon-tag"></i>&nbsp;R12</a>
 </footer><!-- /.post-info --></div>
     </div>
     <div class="span6">
         <div class="article well">
-            <h1><a href="http://localhost:8000/xu-ni-ji-huan-jing-rhel63an-zhuang-ebs-r12.html">虚拟机环境RHEL6.3安装EBS R12</a></h1>
+            <h1><a href="http://dengdezhao.cn/xu-ni-ji-huan-jing-rhel63an-zhuang-ebs-r12.html">虚拟机环境RHEL6.3安装EBS R12</a></h1>
             <div class="summary"><p>一直想自己搭建个R12的环境学习学习，于是买了块500G的移动硬盘，想把R12安装在移动硬盘中。</p>
 <p>准备工作：</p>
 <p>先安装好虚拟机VMware Workstation。创建一个RHEL6.3的虚拟机，硬盘300G,足够R12的FRESH安装了。（如果想DEMO安装，建议还是再大点，以免出现空间不足）</p>
@@ -103,7 +103,7 @@
 <p>以ROOT进入虚拟机环境中，配置RHEL6.3的网络，使用静态IP:192.168.133.129 /255.255.255.0   gateWay:0.0.0.0 DNS:192.168.133.1</p>
 <p>具体IP如何设置，可通过检查在虚拟机中能否PING通宿主机，以及能否PING通www.dengdezhao.cn来测试：）</p>
 <p>配置主机名信息等#vim ...</p>
-                <a class="btn btn-small" href="http://localhost:8000/xu-ni-ji-huan-jing-rhel63an-zhuang-ebs-r12.html">点我客官</a>
+                <a class="btn btn-small" href="http://dengdezhao.cn/xu-ni-ji-huan-jing-rhel63an-zhuang-ebs-r12.html">点我客官</a>
             </div>
         </div>
     </div>
@@ -120,57 +120,62 @@
 
 <li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
 <li>
-<a href="http://localhost:8000/category/adf.html">
+<a href="http://dengdezhao.cn/category/adf.html">
     <i class="icon-folder-open icon-large"></i>ADF
 </a>
 </li>
 <li>
-<a href="http://localhost:8000/category/ebs.html">
+<a href="http://dengdezhao.cn/category/ebs.html">
     <i class="icon-folder-open icon-large"></i>ebs
 </a>
 </li>
 <li>
-<a href="http://localhost:8000/category/java.html">
+<a href="http://dengdezhao.cn/category/hide.html">
+    <i class="icon-folder-open icon-large"></i>hide
+</a>
+</li>
+<li>
+<a href="http://dengdezhao.cn/category/java.html">
     <i class="icon-folder-open icon-large"></i>java
 </a>
 </li>
 <li>
-<a href="http://localhost:8000/category/linux.html">
+<a href="http://dengdezhao.cn/category/linux.html">
     <i class="icon-folder-open icon-large"></i>linux
 </a>
 </li>
 <li>
-<a href="http://localhost:8000/category/octopress.html">
+<a href="http://dengdezhao.cn/category/octopress.html">
     <i class="icon-folder-open icon-large"></i>octopress
 </a>
 </li>
 <li>
-<a href="http://localhost:8000/category/oracle.html">
+<a href="http://dengdezhao.cn/category/oracle.html">
     <i class="icon-folder-open icon-large"></i>oracle
 </a>
 </li>
 <li>
-<a href="http://localhost:8000/category/others.html">
+<a href="http://dengdezhao.cn/category/others.html">
     <i class="icon-folder-open icon-large"></i>others
 </a>
 </li>
 <li>
-<a href="http://localhost:8000/category/sinaapp.html">
+<a href="http://dengdezhao.cn/category/sinaapp.html">
     <i class="icon-folder-open icon-large"></i>sinaapp
 </a>
 </li>
 <li>
-<a href="http://localhost:8000/category/soa.html">
+<a href="http://dengdezhao.cn/category/soa.html">
     <i class="icon-folder-open icon-large"></i>soa
 </a>
 </li>
 <li>
-<a href="http://localhost:8000/category/webcenter.html">
+<a href="http://dengdezhao.cn/category/webcenter.html">
     <i class="icon-folder-open icon-large"></i>webcenter
 </a>
 </li>
 <li>
-<a href="http://localhost:8000/category/weblogic.html">
+<a href="http://dengdezhao.cn/category/weblogic.html">
     <i class="icon-folder-open icon-large"></i>weblogic
 </a>
 </li>
@@ -188,7 +193,7 @@
 
     <!-- Le javascript -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://localhost:8000/theme/js/jquery-1.7.2.min.js"></script>
-    <script src="http://localhost:8000/theme/js/bootstrap.min.js"></script>
+    <script src="http://dengdezhao.cn/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="http://dengdezhao.cn/theme/js/bootstrap.min.js"></script>
   </body>
 </html>

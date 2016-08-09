@@ -4,945 +4,959 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>http://localhost:8000/</loc>
-<lastmod>2016-08-09T22:30:29-00:00</lastmod>
+<loc>http://dengdezhao.cn/</loc>
+<lastmod>2016-08-09T23:04:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/archives.html</loc>
-<lastmod>2016-08-09T22:30:29-00:00</lastmod>
+<loc>http://dengdezhao.cn/archives.html</loc>
+<lastmod>2016-08-09T23:04:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tags.html</loc>
-<lastmod>2016-08-09T22:30:29-00:00</lastmod>
+<loc>http://dengdezhao.cn/tags.html</loc>
+<lastmod>2016-08-09T23:04:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/categories.html</loc>
-<lastmod>2016-08-09T22:30:29-00:00</lastmod>
+<loc>http://dengdezhao.cn/categories.html</loc>
+<lastmod>2016-08-09T23:04:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/weblogic-ssl.html</loc>
+<loc>http://dengdezhao.cn/weblogic-ssl.html</loc>
 <lastmod>2016-06-29T22:20:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/weblogic-dbauthenticator.html</loc>
+<loc>http://dengdezhao.cn/weblogic-dbauthenticator.html</loc>
 <lastmod>2016-06-14T22:20:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/weblogic-jython.html</loc>
+<loc>http://dengdezhao.cn/weblogic-jython.html</loc>
 <lastmod>2016-05-17T22:20:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/weblogic-tibco.html</loc>
+<loc>http://dengdezhao.cn/weblogic-tibco.html</loc>
 <lastmod>2016-05-14T22:20:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/shi-yong-ridczai-webcenter-portalji-cheng-ecmde-wen-dang-cha-xun-gong-neng.html</loc>
+<loc>http://dengdezhao.cn/shi-yong-ridczai-webcenter-portalji-cheng-ecmde-wen-dang-cha-xun-gong-neng.html</loc>
 <lastmod>2014-11-28T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ding-zhi-webcenterde-people-connectionzu-jian.html</loc>
+<loc>http://dengdezhao.cn/ding-zhi-webcenterde-people-connectionzu-jian.html</loc>
 <lastmod>2014-10-23T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/dong-tai-gai-bian-lovde-zhi-ji.html</loc>
+<loc>http://dengdezhao.cn/dong-tai-gai-bian-lovde-zhi-ji.html</loc>
 <lastmod>2014-09-17T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/webcenter-portaldiao-yong-document-service.html</loc>
+<loc>http://dengdezhao.cn/webcenter-portaldiao-yong-document-service.html</loc>
 <lastmod>2014-08-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/chuang-jian-content-repositoryshi-chu-xian-cuo-wu.html</loc>
+<loc>http://dengdezhao.cn/chuang-jian-content-repositoryshi-chu-xian-cuo-wu.html</loc>
 <lastmod>2014-08-25T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/oafge-xing-hua-buttonhuo-qu-ye-mian-can-shu.html</loc>
+<loc>http://dengdezhao.cn/oafge-xing-hua-buttonhuo-qu-ye-mian-can-shu.html</loc>
 <lastmod>2014-06-03T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/an-zhuang-rcu17yu-dao-de-xiao-wen-ti.html</loc>
+<loc>http://dengdezhao.cn/an-zhuang-rcu17yu-dao-de-xiao-wen-ti.html</loc>
 <lastmod>2014-04-18T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ding-zhi-el-function.html</loc>
+<loc>http://dengdezhao.cn/ding-zhi-el-function.html</loc>
 <lastmod>2014-02-07T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/you-yi-wai-duan-dian-dao-zhi-oracle11gqi-dong-bu-qi-lai-de-wen-ti-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/you-yi-wai-duan-dian-dao-zhi-oracle11gqi-dong-bu-qi-lai-de-wen-ti-jie-jue.html</loc>
 <lastmod>2013-11-09T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/kong-jian-afiteratoryi-ji-afforeachde-dui-bi.html</loc>
+<loc>http://dengdezhao.cn/kong-jian-afiteratoryi-ji-afforeachde-dui-bi.html</loc>
 <lastmod>2013-09-23T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ru-he-zai-ye-mian-sui-pian-jia-zai-qian-diao-yong-luo-ji.html</loc>
+<loc>http://dengdezhao.cn/ru-he-zai-ye-mian-sui-pian-jia-zai-qian-diao-yong-luo-ji.html</loc>
 <lastmod>2013-09-23T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ru-he-huo-qu-webxmlzhong-de-context-paramcan-shu.html</loc>
+<loc>http://dengdezhao.cn/ru-he-huo-qu-webxmlzhong-de-context-paramcan-shu.html</loc>
 <lastmod>2013-09-04T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/centosxia-an-zhuang-mysql56hou-wang-ji-rootmi-ma-zhong-zhi-mi-ma.html</loc>
+<loc>http://dengdezhao.cn/centosxia-an-zhuang-mysql56hou-wang-ji-rootmi-ma-zhong-zhi-mi-ma.html</loc>
 <lastmod>2013-06-25T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/attribute-set-for-xxxattribute-in-view-object-xxxvo-failedwen-ti-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/attribute-set-for-xxxattribute-in-view-object-xxxvo-failedwen-ti-jie-jue.html</loc>
 <lastmod>2013-06-19T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/cong-backingbeanzhong-diao-yong-bu-dai-fragmentsde-taskflow.html</loc>
+<loc>http://dengdezhao.cn/cong-backingbeanzhong-diao-yong-bu-dai-fragmentsde-taskflow.html</loc>
 <lastmod>2013-06-08T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/fen-ye-lan-chu-xian-3ge-wen-hao-bugjie-jue.html</loc>
+<loc>http://dengdezhao.cn/fen-ye-lan-chu-xian-3ge-wen-hao-bugjie-jue.html</loc>
 <lastmod>2013-06-06T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/groovyzai-adfzhong-de-ying-yong.html</loc>
+<loc>http://dengdezhao.cn/groovyzai-adfzhong-de-ying-yong.html</loc>
 <lastmod>2013-06-02T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/li-yong-contextual-eventshua-xin-region.html</loc>
+<loc>http://dengdezhao.cn/li-yong-contextual-eventshua-xin-region.html</loc>
 <lastmod>2013-06-01T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/zai-managedbeanzhong-diao-yong-appmoduleimplzhong-zi-ding-yi-fang-fa-de-liang-chong-fang-shi.html</loc>
+<loc>http://dengdezhao.cn/zai-managedbeanzhong-diao-yong-appmoduleimplzhong-zi-ding-yi-fang-fa-de-liang-chong-fang-shi.html</loc>
 <lastmod>2013-06-01T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/guan-yu-applicatoinmodulelei-xing-zong-jie.html</loc>
+<loc>http://dengdezhao.cn/guan-yu-applicatoinmodulelei-xing-zong-jie.html</loc>
 <lastmod>2013-05-28T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/adflei-si-xin-tiao-cheng-xu-shi-xian.html</loc>
+<loc>http://dengdezhao.cn/adflei-si-xin-tiao-cheng-xu-shi-xian.html</loc>
 <lastmod>2013-04-24T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/adfxue-xi-zong-jie-yi.html</loc>
+<loc>http://dengdezhao.cn/adfxue-xi-zong-jie-yi.html</loc>
 <lastmod>2013-04-19T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/oafzhong-chuang-jian-lov.html</loc>
+<loc>http://dengdezhao.cn/oafzhong-chuang-jian-lov.html</loc>
 <lastmod>2013-04-18T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/pei-zhi-oafkai-fa-huan-jing.html</loc>
+<loc>http://dengdezhao.cn/pei-zhi-oafkai-fa-huan-jing.html</loc>
 <lastmod>2013-04-17T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/getrowatrangeindexintfang-fa-de-ju-xian-xing.html</loc>
+<loc>http://dengdezhao.cn/getrowatrangeindexintfang-fa-de-ju-xian-xing.html</loc>
 <lastmod>2013-04-16T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/oafshang-chuan-da-pi-liang-excelwen-jian.html</loc>
+<loc>http://dengdezhao.cn/oafshang-chuan-da-pi-liang-excelwen-jian.html</loc>
 <lastmod>2013-04-09T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/jdeveloperyun-xing-su-du-you-hua.html</loc>
+<loc>http://dengdezhao.cn/jdeveloperyun-xing-su-du-you-hua.html</loc>
 <lastmod>2013-04-04T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/javamailfa-song-you-jian-zhong-wen-luan-ma.html</loc>
+<loc>http://dengdezhao.cn/javamailfa-song-you-jian-zhong-wen-luan-ma.html</loc>
 <lastmod>2013-03-20T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/jive-forums-admin-console-guan-li-yuan-zhang-hu-mi-ma-zhong-zhi.html</loc>
+<loc>http://dengdezhao.cn/jive-forums-admin-console-guan-li-yuan-zhang-hu-mi-ma-zhong-zhi.html</loc>
 <lastmod>2013-03-20T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/oafdan-xuan-shan-chu-xing-gong-neng.html</loc>
+<loc>http://dengdezhao.cn/oafdan-xuan-shan-chu-xing-gong-neng.html</loc>
 <lastmod>2013-03-20T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/qian-yi-wordpressbo-ke-zhi-octopress.html</loc>
+<loc>http://dengdezhao.cn/qian-yi-wordpressbo-ke-zhi-octopress.html</loc>
 <lastmod>2013-03-19T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/solvedlong-mode-not-supported-rebooting-press-any-key-to-reboot.html</loc>
+<loc>http://dengdezhao.cn/solvedlong-mode-not-supported-rebooting-press-any-key-to-reboot.html</loc>
 <lastmod>2013-01-31T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/firefoxsheng-ji-18zhi-hou-autoproxyshi-xiao-goagentwu-fa-shi-yong-wen-ti-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/firefoxsheng-ji-18zhi-hou-autoproxyshi-xiao-goagentwu-fa-shi-yong-wen-ti-jie-jue.html</loc>
 <lastmod>2013-01-30T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/use-javascript-in-oaf.html</loc>
+<loc>http://dengdezhao.cn/use-javascript-in-oaf.html</loc>
 <lastmod>2013-01-30T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/xu-ni-ji-huan-jing-rhel63an-zhuang-ebs-r12.html</loc>
+<loc>http://dengdezhao.cn/xu-ni-ji-huan-jing-rhel63an-zhuang-ebs-r12.html</loc>
 <lastmod>2013-01-15T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/xu-ni-ji-an-zhuang-ebs-r12shi-chu-xian-cuo-wu-rw-50004-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/xu-ni-ji-an-zhuang-ebs-r12shi-chu-xian-cuo-wu-rw-50004-jie-jue.html</loc>
 <lastmod>2013-01-12T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/oafkai-fa-tong-guo-exceldao-ru-shu-ju-shi-yong-hu-xu-yao-jiang-ke-neng-cun-zai-zhong-fu-de-zhu-jian-xin-xi-ti-shi-chu-lai.html</loc>
+<loc>http://dengdezhao.cn/oafkai-fa-tong-guo-exceldao-ru-shu-ju-shi-yong-hu-xu-yao-jiang-ke-neng-cun-zai-zhong-fu-de-zhu-jian-xin-xi-ti-shi-chu-lai.html</loc>
 <lastmod>2013-01-10T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/oaf-shi-yong-oaexceptionshu-chu-zhong-wen-shi-chu-xian-luan-ma-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/oaf-shi-yong-oaexceptionshu-chu-zhong-wen-shi-chu-xian-luan-ma-jie-jue.html</loc>
 <lastmod>2013-01-09T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/xin-lang-ru-men-ying-yong-zhi-da-ben-zhong.html</loc>
+<loc>http://dengdezhao.cn/xin-lang-ru-men-ying-yong-zhi-da-ben-zhong.html</loc>
 <lastmod>2012-12-14T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ora-1222tnsno-such-protocol-adapter-wen-ti-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/ora-1222tnsno-such-protocol-adapter-wen-ti-jie-jue.html</loc>
 <lastmod>2012-12-03T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/soa-suite-huan-jing-da-jian.html</loc>
+<loc>http://dengdezhao.cn/soa-suite-huan-jing-da-jian.html</loc>
 <lastmod>2012-09-29T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ebs-bing-fa-qing-qiu-diao-yong-sqlshi-ri-zhi-gen-shu-chu-zhong-wen-chu-xian-luan-ma-wen-ti.html</loc>
+<loc>http://dengdezhao.cn/ebs-bing-fa-qing-qiu-diao-yong-sqlshi-ri-zhi-gen-shu-chu-zhong-wen-chu-xian-luan-ma-wen-ti.html</loc>
 <lastmod>2012-09-20T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ebsbing-fa-qing-qiu-diao-yong-oracle-reportsshi-ru-he-xie-ru-ri-zhi-wen-jian.html</loc>
+<loc>http://dengdezhao.cn/ebsbing-fa-qing-qiu-diao-yong-oracle-reportsshi-ru-he-xie-ru-ri-zhi-wen-jian.html</loc>
 <lastmod>2012-09-11T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/shi-yong-vpddui-shu-ju-jin-xing-ge-chi.html</loc>
+<loc>http://dengdezhao.cn/shi-yong-vpddui-shu-ju-jin-xing-ge-chi.html</loc>
 <lastmod>2012-06-28T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html</loc>
+<loc>http://dengdezhao.cn/adftreezuo-de-shu-cai-dan-ru-he-guo-lu-zi-jie-dian-de-shu-ju.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html</loc>
+<loc>http://dengdezhao.cn/biao-nei-de-checkboxdang-shu-ju-liang-da-shi-fa-xian-bu-fen-xing-gou-xuan-bu-zhong.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ebsqing-qiu-zhi-xing-shi-pao-chu-cuo-wu-ora-20100he-ora-06512-wen-ti-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/ebsqing-qiu-zhi-xing-shi-pao-chu-cuo-wu-ora-20100he-ora-06512-wen-ti-jie-jue.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/guan-yu-ding-zhi-validator.html</loc>
+<loc>http://dengdezhao.cn/guan-yu-ding-zhi-validator.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html</loc>
+<loc>http://dengdezhao.cn/guan-yu-managedbeanzhong-duo-ci-zhi-xing-gou-zao-fang-fa-shi-de-wen-ti.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/guan-yu-selectbooleancheckbox-de-wen-ti.html</loc>
+<loc>http://dengdezhao.cn/guan-yu-selectbooleancheckbox-de-wen-ti.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html</loc>
+<loc>http://dengdezhao.cn/guan-yu-vode-zhi-du-ke-xie-deng-shu-xing-she-zhi.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/immediatetrue-de-yi-chang.html</loc>
+<loc>http://dengdezhao.cn/immediatetrue-de-yi-chang.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/li-yong-javamailfa-song-you-jian-gong-neng-shi-xian.html</loc>
+<loc>http://dengdezhao.cn/li-yong-javamailfa-song-you-jian-gong-neng-shi-xian.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/oracleshu-ju-ku-yong-hu-bei-suo-wen-ti-jie-jue.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html</loc>
+<loc>http://dengdezhao.cn/ru-he-zai-mbzhong-dui-selectionlistener-collectionmodelmakecurrentdiao-yong.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tablenei-zeng-jia-quan-xuan-checkbox.html</loc>
+<loc>http://dengdezhao.cn/tablenei-zeng-jia-quan-xuan-checkbox.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/weblogicding-shi-qi-dong-cheng-xu.html</loc>
+<loc>http://dengdezhao.cn/weblogicding-shi-qi-dong-cheng-xu.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ying-pan-an-zhuang-fedora.html</loc>
+<loc>http://dengdezhao.cn/ying-pan-an-zhuang-fedora.html</loc>
 <lastmod>2012-06-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html</loc>
+<loc>http://dengdezhao.cn/ru-he-rang-afinputlistofvalueslovde-chu-shi-zhi-xian-shi-wei-blanker-bu-shi-mo-ren-de-vode-first-row.html</loc>
 <lastmod>2011-07-20T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/oracle-11g-shu-ju-ku-an-zhuang-hou-gai-ji-suan-ji-ming-chu-xian-wu-fa-lian-jie-de-wen-ti-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/oracle-11g-shu-ju-ku-an-zhuang-hou-gai-ji-suan-ji-ming-chu-xian-wu-fa-lian-jie-de-wen-ti-jie-jue.html</loc>
 <lastmod>2011-07-15T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ru-he-rang-adfri-qi-zu-jian-xian-shi-shi-fen-miao.html</loc>
+<loc>http://dengdezhao.cn/ru-he-rang-adfri-qi-zu-jian-xian-shi-shi-fen-miao.html</loc>
 <lastmod>2011-07-15T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/duo-yu-yan-qie-huan-gong-neng-shi-xian.html</loc>
+<loc>http://dengdezhao.cn/duo-yu-yan-qie-huan-gong-neng-shi-xian.html</loc>
 <lastmod>2011-07-13T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/adfying-yong-zhong-ru-he-zai-backingbeanzhong-diao-yong-javascriptkong-zhi-ui.html</loc>
+<loc>http://dengdezhao.cn/adfying-yong-zhong-ru-he-zai-backingbeanzhong-diao-yong-javascriptkong-zhi-ui.html</loc>
 <lastmod>2011-06-29T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/javaxelpropertynotfoundexceptioncuo-wu-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/javaxelpropertynotfoundexceptioncuo-wu-jie-jue.html</loc>
 <lastmod>2011-06-29T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/adfying-yong-remote-deployment-failedcuo-wu-jie-jue.html</loc>
+<loc>http://dengdezhao.cn/adfying-yong-remote-deployment-failedcuo-wu-jie-jue.html</loc>
 <lastmod>2011-06-28T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/ding-zhi-adfying-yong-de-css.html</loc>
+<loc>http://dengdezhao.cn/ding-zhi-adfying-yong-de-css.html</loc>
 <lastmod>2011-06-27T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/adf.html</loc>
+<loc>http://dengdezhao.cn/about.html</loc>
+<lastmod>2000-08-09T22:56:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+
+<url>
+<loc>http://dengdezhao.cn/category/adf.html</loc>
 <lastmod>2014-09-17T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/ebs.html</loc>
+<loc>http://dengdezhao.cn/category/ebs.html</loc>
 <lastmod>2014-06-03T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/java.html</loc>
+<loc>http://dengdezhao.cn/category/hide.html</loc>
+<lastmod>2000-08-09T22:56:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://dengdezhao.cn/category/java.html</loc>
 <lastmod>2013-04-04T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/linux.html</loc>
+<loc>http://dengdezhao.cn/category/linux.html</loc>
 <lastmod>2013-06-25T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/octopress.html</loc>
+<loc>http://dengdezhao.cn/category/octopress.html</loc>
 <lastmod>2013-03-19T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/oracle.html</loc>
+<loc>http://dengdezhao.cn/category/oracle.html</loc>
 <lastmod>2013-11-09T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/others.html</loc>
+<loc>http://dengdezhao.cn/category/others.html</loc>
 <lastmod>2013-01-31T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/sinaapp.html</loc>
+<loc>http://dengdezhao.cn/category/sinaapp.html</loc>
 <lastmod>2012-12-14T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/soa.html</loc>
+<loc>http://dengdezhao.cn/category/soa.html</loc>
 <lastmod>2014-04-18T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/webcenter.html</loc>
+<loc>http://dengdezhao.cn/category/webcenter.html</loc>
 <lastmod>2014-11-28T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/weblogic.html</loc>
+<loc>http://dengdezhao.cn/category/weblogic.html</loc>
 <lastmod>2016-06-29T22:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/soa.html</loc>
+<loc>http://dengdezhao.cn/tag/soa.html</loc>
 <lastmod>2014-04-18T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/el.html</loc>
+<loc>http://dengdezhao.cn/tag/el.html</loc>
 <lastmod>2014-02-07T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/viewcriteria.html</loc>
+<loc>http://dengdezhao.cn/tag/viewcriteria.html</loc>
 <lastmod>2013-04-19T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/iterator.html</loc>
+<loc>http://dengdezhao.cn/tag/iterator.html</loc>
 <lastmod>2013-09-23T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/documentservice.html</loc>
+<loc>http://dengdezhao.cn/tag/documentservice.html</loc>
 <lastmod>2014-08-26T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/attributeset.html</loc>
+<loc>http://dengdezhao.cn/tag/attributeset.html</loc>
 <lastmod>2013-06-19T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/r12.html</loc>
+<loc>http://dengdezhao.cn/tag/r12.html</loc>
 <lastmod>2013-01-15T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/mysql.html</loc>
+<loc>http://dengdezhao.cn/tag/mysql.html</loc>
 <lastmod>2013-06-25T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/firefox.html</loc>
+<loc>http://dengdezhao.cn/tag/firefox.html</loc>
 <lastmod>2013-01-30T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/jdeveloper.html</loc>
+<loc>http://dengdezhao.cn/tag/jdeveloper.html</loc>
 <lastmod>2013-04-04T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/poll.html</loc>
+<loc>http://dengdezhao.cn/tag/poll.html</loc>
 <lastmod>2013-04-24T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/regioncontroller.html</loc>
+<loc>http://dengdezhao.cn/tag/regioncontroller.html</loc>
 <lastmod>2013-09-23T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/vmware.html</loc>
+<loc>http://dengdezhao.cn/tag/vmware.html</loc>
 <lastmod>2013-01-31T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/oaf.html</loc>
+<loc>http://dengdezhao.cn/tag/oaf.html</loc>
 <lastmod>2014-06-03T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/fedora.html</loc>
+<loc>http://dengdezhao.cn/tag/fedora.html</loc>
 <lastmod>2012-06-26T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/dbauthenticator.html</loc>
+<loc>http://dengdezhao.cn/tag/dbauthenticator.html</loc>
 <lastmod>2016-06-14T22:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/ora-20100.html</loc>
+<loc>http://dengdezhao.cn/tag/ora-20100.html</loc>
 <lastmod>2012-06-26T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/octopress.html</loc>
+<loc>http://dengdezhao.cn/tag/octopress.html</loc>
 <lastmod>2013-03-19T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/excel.html</loc>
+<loc>http://dengdezhao.cn/tag/excel.html</loc>
 <lastmod>2013-04-16T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/appmoduleimpl.html</loc>
+<loc>http://dengdezhao.cn/tag/appmoduleimpl.html</loc>
 <lastmod>2013-06-01T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/adf.html</loc>
+<loc>http://dengdezhao.cn/tag/adf.html</loc>
 <lastmod>2013-06-06T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/weblogic.html</loc>
+<loc>http://dengdezhao.cn/tag/weblogic.html</loc>
 <lastmod>2016-06-29T22:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/foreach.html</loc>
+<loc>http://dengdezhao.cn/tag/foreach.html</loc>
 <lastmod>2013-09-23T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/jive.html</loc>
+<loc>http://dengdezhao.cn/tag/jive.html</loc>
 <lastmod>2013-03-20T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/lov.html</loc>
+<loc>http://dengdezhao.cn/tag/lov.html</loc>
 <lastmod>2014-09-17T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/ora-1222.html</loc>
+<loc>http://dengdezhao.cn/tag/ora-1222.html</loc>
 <lastmod>2012-12-03T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/webcenter.html</loc>
+<loc>http://dengdezhao.cn/tag/webcenter.html</loc>
 <lastmod>2014-08-25T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/jython.html</loc>
+<loc>http://dengdezhao.cn/tag/jython.html</loc>
 <lastmod>2016-05-17T22:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/rw-50004.html</loc>
+<loc>http://dengdezhao.cn/tag/rw-50004.html</loc>
 <lastmod>2013-01-12T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/context-param.html</loc>
+<loc>http://dengdezhao.cn/tag/context-param.html</loc>
 <lastmod>2013-09-04T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/am.html</loc>
+<loc>http://dengdezhao.cn/tag/am.html</loc>
 <lastmod>2013-05-28T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/ecm.html</loc>
+<loc>http://dengdezhao.cn/tag/ecm.html</loc>
 <lastmod>2014-11-28T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/javascript.html</loc>
+<loc>http://dengdezhao.cn/tag/javascript.html</loc>
 <lastmod>2013-01-30T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/goagent.html</loc>
+<loc>http://dengdezhao.cn/tag/goagent.html</loc>
 <lastmod>2013-01-30T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/taskflow.html</loc>
+<loc>http://dengdezhao.cn/tag/taskflow.html</loc>
 <lastmod>2013-06-08T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/ssl.html</loc>
+<loc>http://dengdezhao.cn/tag/ssl.html</loc>
 <lastmod>2016-06-29T22:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/javamail.html</loc>
+<loc>http://dengdezhao.cn/tag/javamail.html</loc>
 <lastmod>2013-03-20T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/tibco.html</loc>
+<loc>http://dengdezhao.cn/tag/tibco.html</loc>
 <lastmod>2016-05-14T22:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/wordpress.html</loc>
+<loc>http://dengdezhao.cn/tag/wordpress.html</loc>
 <lastmod>2013-03-19T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/rhel63.html</loc>
+<loc>http://dengdezhao.cn/tag/rhel63.html</loc>
 <lastmod>2013-01-15T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/groovy.html</loc>
+<loc>http://dengdezhao.cn/tag/groovy.html</loc>
 <lastmod>2013-06-02T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/addvmoption.html</loc>
+<loc>http://dengdezhao.cn/tag/addvmoption.html</loc>
 <lastmod>2013-04-04T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/vpd.html</loc>
+<loc>http://dengdezhao.cn/tag/vpd.html</loc>
 <lastmod>2012-06-28T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/region.html</loc>
+<loc>http://dengdezhao.cn/tag/region.html</loc>
 <lastmod>2013-06-01T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/reports.html</loc>
+<loc>http://dengdezhao.cn/tag/reports.html</loc>
 <lastmod>2012-09-20T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/peopleconnection.html</loc>
+<loc>http://dengdezhao.cn/tag/peopleconnection.html</loc>
 <lastmod>2014-10-23T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/oracle.html</loc>
+<loc>http://dengdezhao.cn/tag/oracle.html</loc>
 <lastmod>2013-11-09T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/ora-06512.html</loc>
+<loc>http://dengdezhao.cn/tag/ora-06512.html</loc>
 <lastmod>2012-06-26T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/sinapp.html</loc>
+<loc>http://dengdezhao.cn/tag/sinapp.html</loc>
 <lastmod>2012-12-14T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/author/pierreorz.html</loc>
+<loc>http://dengdezhao.cn/author/pierreorz.html</loc>
 <lastmod>2016-06-29T22:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
