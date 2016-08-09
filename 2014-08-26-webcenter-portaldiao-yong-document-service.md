@@ -1,4 +1,4 @@
-Title: "webcenter portal调用document service"
+Title: webcenter portal调用document service
 Date: 2014-08-26
 Category: webcenter
 Tags: documentservice

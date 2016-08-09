@@ -16,8 +16,6 @@ webcenter集成AD 之后发现Discussion控件用不了，使用weblogic账号�
 - 连接到FM_DISCUSSIONS schema，查询jiveuser，发现passwordhash字段值变为了"-"字符，可能是集成AD之后这边的数据被覆盖了，按字段名推测密码应该是hash加密后的密文，于是将weblogic用户的密码通过MD5加密生成密文更新该字段，重启webcenter之后，问题解决。
 
 附：
-{% codeblock lang:java %}
-//password: Welcome1 
-update jiveuser set passwordhash='b56e0b4ea4962283bee762525c2d490f' where username='weblogic'
-{% endcodeblock %}
+		//password: Welcome1 
+		update jiveuser set passwordhash='b56e0b4ea4962283bee762525c2d490f' where username='weblogic'
 

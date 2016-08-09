@@ -1,4 +1,4 @@
-Title: "OAF个性化Button获取页面参数"
+Title: OAF个性化Button获取页面参数
 Date: 2014-06-03
 Category: ebs
 Tags: oaf
