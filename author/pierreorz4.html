@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dengdezhao - pierreorz | Dengdezhao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="pierreorz" />
+    <meta name="kittycheck_rumble" content="true" />
+    <meta name="kittycheck_position" content="top=60,right=60" />
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://localhost:8000/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="http://localhost:8000/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/font-awesome.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://localhost:8000/theme/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://localhost:8000/theme/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:8000/theme/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:8000/theme/img/apple-touch-icon-114x114.png">
+
+    <link href="http://localhost:8000/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
+    <link href="http://localhost:8000/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://localhost:8000/index.html">Dengdezhao </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                <li class="divider-vertical"></li>
+            <!--  <ul class="nav pull-right">
+                    <li><a href="http://localhost:8000/"><i class="icon-th-list"></i>Archives</a></li>
+              </ul>
+		-->
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span8" id="content">
+<div class="row">
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-04-04T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-04-04(Thursday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/jdeveloper.html" class="label"><i class="icon-tag"></i>&nbsp;jdeveloper</a>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/addvmoption.html" class="label"><i class="icon-tag"></i>&nbsp;AddVMOption</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/jdeveloperyun-xing-su-du-you-hua.html">"Jdeveloper运行速度优化"</a></h1>
+            <div class="summary"><h4 id="jdev"><em>本文适合木有高配机却不得不在JDEV下开发的屌丝程序员</em></h4>
+<h4 id="jdev_1">先来了解下Jdev的两个配置文件</h4>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+E:\Oracle\Middleware11.1.2.3.0\jdeveloper\ide\bin\ide.conf  <br />
+E:\Oracle\Middleware11.1.2.3.0\jdeveloper\jdev\bin\jdev.conf</p>
+<p _="%" endcodeblock="endcodeblock">几个关键参数：
+{% codeblock lang:java %}
+AddVMOption  -Xmx        //堆大小的最大值，在机器物理内存允许的基础上该值越大越好
+AddVMOption  -Xms        //堆大小的初始值（默认给个128差不多）
+AddVMOption  -XX:MaxPermSize //PermGen大小，太小会报OutOfMemoryError错误<br /></p>
+<p _="%" endcodeblock="endcodeblock">这几个参数设置得不合适的话JDEV会无法启动并报以下错误：
+{% codeblock lang:java ...</p>
+                <a class="btn btn-small" href="http://localhost:8000/jdeveloperyun-xing-su-du-you-hua.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-03-20T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-03-20(Wednesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/javamail.html" class="label"><i class="icon-tag"></i>&nbsp;javamail</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/javamailfa-song-you-jian-zhong-wen-luan-ma.html">"JavaMail发送邮件中文乱码"</a></h1>
+            <div class="summary"><p>使用JavaMail发送邮件时，邮件主题以及发件人中有中文字符时出现乱码</p>
+<p>邮件正文正常。</p>
+<p>尝试对中文字符串进行转码：</p>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+    public String encode(String str) {
+        sun.misc.BASE64Encoder enc = new sun.misc.BASE64Encoder();
+        try {
+            return &ldquo;=?UTF-8?B?&rdquo; + enc.encode(str.getBytes(&ldquo;UTF-8&rdquo;)) + &ldquo;?=&rdquo;;
+        } catch (UnsupportedEncodingException e) {
+            return &ldquo;UnsupportedEncodingException&rdquo;;
+        }
+    }</p>
+<p _="%" endcodeblock="endcodeblock">测试发送之后返回<code>邮件主题</code>内容仍然是乱码
+{% codeblock lang:java %}
+=?UTF-8?B?WzIwMTMtMDMtMTld5pyq5qOA5pyq5Lqk5pWw5o2uLOaAu+ijhei9pumXtOaVhemanOi9puWBnOi9</p>
+<p>通过返回字符串<code>=?UTF-8?B?</code>得知已经转码成功，但为啥邮件主题仍然乱码？百思不得其解 ...</p>
+                <a class="btn btn-small" href="http://localhost:8000/javamailfa-song-you-jian-zhong-wen-luan-ma.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-03-20T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-03-20(Wednesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/jive.html" class="label"><i class="icon-tag"></i>&nbsp;Jive</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/jive-forums-admin-console-guan-li-yuan-zhang-hu-mi-ma-zhong-zhi.html">"Jive Forums admin console 管理员账户密码重置"</a></h1>
+            <div class="summary"><h4 id="_1"><i class="icon-file"></i>   需求：</h4>
+<p>webcenter集成AD 之后发现Discussion控件用不了，使用weblogic账号也无法进入Jive forums的控制台，但是weblogic控制台可以登录。于是想重置Jive Forums的管理账号密码。</p>
+<h4 id="_2"><i class="icon-folder-open"></i> 分析：</h4>
+<p>修改jiveuser表将管理员账户密码更新即可。</p>
+<h4 id="_3"><i class="icon-pencil"></i> 技术实现：</h4>
+<ul>
+<li>连接到FM_DISCUSSIONS schema，查询jiveuser，发现passwordhash字段值变为了&rdquo;-&ldquo;字符，可能是集成AD之后这边的数据被覆盖了，按字段名推测密码应该是hash加密后的密文，于是将weblogic用户的密码通过MD5加密生成密文更新该字段，重启webcenter之后，问题解决。</li>
+</ul>
+<p>附：
+        //password: Welcome1 
+        update jiveuser set passwordhash=&rsquo;b56e0b4ea4962283bee762525c2d490f&rsquo; where username=&rsquo;weblogic&rsquo;</p>
+                <a class="btn btn-small" href="http://localhost:8000/jive-forums-admin-console-guan-li-yuan-zhang-hu-mi-ma-zhong-zhi.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-03-20T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-03-20(Wednesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/oafdan-xuan-shan-chu-xing-gong-neng.html">"OAF单选删除行功能"</a></h1>
+            <div class="summary"><hr />
+<p>平台：Jdeveloper 9i    </p>
+<hr />
+<p><strong>一般实现步骤：</strong></p>
+<ol>
+<li>在VO中添加新transient属性selector，updatable设置为always。    </li>
+<li>在PG中给table添加singleSelection方法，并绑定view Instance为VO的instance，View Attribute为刚刚新建的transient属性seletor。        </li>
+<li>这样当用户勾选checkbox时，会给transient属性变量赋值为Y，因此，在删除逻辑中循环判断VO中的transient属性，当其为Y时执行remove该行即可实现选择删除功能。  <br />
+<strong>相关代码如下：</strong></li>
+</ol>
+<p><strong>CO中processFormRequest里添加代码如下：</strong></p>
+<p>{% codeblock lang:java %}
+    //当单击deleteBtn按钮时执行AM中的deleteAutoSequenceVO方法  <br />
+    if (pageContext.getParameter(&ldquo;deleteBtn&rdquo;)!=null)
+    {
+      am.invokeMethod(&ldquo;deleteAutoSequenceVO&rdquo;);</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>}
+</pre></div>
+
+
+<p>{% endcodeblock %}</p>
+<p><strong>AM中代码如下：</strong></p>
+<p>{% codeblock lang:java %}
+    public void deleteAutoSequenceVO() {
+        OAViewObject vo = this.getChAutoSequenceVO1();
+        RowSetIterator iter = vo.createRowSetIterator(&ldquo;delete&rdquo;);
+        if (vo != null ...</p>
+                <a class="btn btn-small" href="http://localhost:8000/oafdan-xuan-shan-chu-xing-gong-neng.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-03-19T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-03-19(Tuesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/wordpress.html" class="label"><i class="icon-tag"></i>&nbsp;wordpress</a>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/octopress.html" class="label"><i class="icon-tag"></i>&nbsp;octopress</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/qian-yi-wordpressbo-ke-zhi-octopress.html">迁移WordPress博客至Octopress</a></h1>
+            <div class="summary"><h4 id="git">安装GIT</h4>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+yum -y install git</p>
+<h4 id="rvm">安装RVM需要的包</h4>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+sudo yum install bash curl patch</p>
+<h4 id="rvm_1">安装RVM</h4>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+curl -L https://get.rvm.io | bash -s stable &ndash;ruby</p>
+<h4 id="ruby">安装Ruby需要的包</h4>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+sudo yum install gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel openssl-devel make bzip2 ...</p>
+                <a class="btn btn-small" href="http://localhost:8000/qian-yi-wordpressbo-ke-zhi-octopress.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-01-31T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-01-31(Thursday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/vmware.html" class="label"><i class="icon-tag"></i>&nbsp;vmware</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/solvedlong-mode-not-supported-rebooting-press-any-key-to-reboot.html">! '[SOLVED]Long mode not supported, rebooting Press any key to reboot'</a></h1>
+            <div class="summary"><p>虚拟机安装solaris 11的时候弹出
+<blockquote>Long mode not supported, rebooting Press any key to reboot........</blockquote>
+原因是solaris11只支持64位，需要把BIOS的CPU选项里Inter Virtualization Technology和Inter VT均设置为ENABLE，</p>
+
+<p>然后将虚拟机的设置如下：
+<blockquote>Virtual Machine Setting-&gt;Processors-&gt;Virtualizatoin engine-&gt;Preferred mode=Intel VT-x/EPT or AMD-v/RVI</blockquote></p>
+                <a class="btn btn-small" href="http://localhost:8000/solvedlong-mode-not-supported-rebooting-press-any-key-to-reboot.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-01-30T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-01-30(Wednesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/firefox.html" class="label"><i class="icon-tag"></i>&nbsp;firefox</a>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/goagent.html" class="label"><i class="icon-tag"></i>&nbsp;goagent</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/firefoxsheng-ji-18zhi-hou-autoproxyshi-xiao-goagentwu-fa-shi-yong-wen-ti-jie-jue.html">firefox升级18之后,autoproxy失效,goagent无法使用问题解决</a></h1>
+            <div class="summary"><p>之前使用的是17版本的firefox，配置好了autoproxy使用goagent能够正常代理，之后升级firefox18之后，却代理不了了。重装过firefox,重装过goagent，重装过autoproxy都无效。</p>
+
+<p>试过使用IE，设置代理127.0.0.1:8087+goagent可以正常代理，因此排除goagent问题。</p>
+
+<p>后来查看firefox18的版本说明，才发现由于安全性禁用了部分功能猜测可能由此导致无法代理</p>
+
+<p>firefox说明：
+<blockquote>禁用不安全内容：Firefox 可以禁用HTTPS安全网页中的不安全内容，来维护用户在互联网通信中的隐私。目前可以在about:config中启用这个特性。</blockquote>
+打开about:config，过滤栏输入：proxy  修改如下选项</p>
+
+<p>extensions.autoproxy.proxyMode   <strong>auto</strong>
+network.proxy.type               <strong>1</strong>
+signon.autologin.proxy           <strong>true</strong>
+即可解决问题。</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                <a class="btn btn-small" href="http://localhost:8000/firefoxsheng-ji-18zhi-hou-autoproxyshi-xiao-goagentwu-fa-shi-yong-wen-ti-jie-jue.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-01-30T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-01-30(Wednesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/javascript.html" class="label"><i class="icon-tag"></i>&nbsp;javascript</a>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/use-javascript-in-oaf.html">Use Javascript in OAF</a></h1>
+            <div class="summary"><h4 id="js">使用Js脚本库</h4>
+<p _="%" endcodeblock="endcodeblock">在CO的<em>processRequest</em>中引入JS库<br />
+编写JS库:Calendar2013.js
+{% codeblock lang:java %}
+pageContext.putJavaScriptLibrary(&ldquo;Calendar&rdquo;,&rdquo;Calendar2013.js&rdquo;); 
+((OAMessageTextInputBean)webBean
+.findChildRecursive(&ldquo;inputDate&rdquo;))
+.setOnClick(&ldquo;setday(this)&rdquo;);</p>
+<p>需要把Calendar2013.js放置在$<strong>COMMON_TOP</strong>/html下。</p>
+<h4 id="javascript">直接引用javaScript</h4>
+<p _="%" endcodeblock="endcodeblock">编写<em>JavaScript</em>:
+{% codeblock lang:java %}
+String javaScript=&rdquo;JAVASCRIPT:function setday(){&hellip;}&rdquo;;</p>
+<p>在<strong>CO</strong>的<em>processRequest</em>中加载<em>javascript</em></p>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+pageContext.putJavaScriptFunction(&ldquo;sayday()&rdquo;,javaScript ...</p>
+                <a class="btn btn-small" href="http://localhost:8000/use-javascript-in-oaf.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-01-15T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-01-15(Tuesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/rhel63.html" class="label"><i class="icon-tag"></i>&nbsp;RHEL6.3</a>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/r12.html" class="label"><i class="icon-tag"></i>&nbsp;R12</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/xu-ni-ji-huan-jing-rhel63an-zhuang-ebs-r12.html">虚拟机环境RHEL6.3安装EBS R12</a></h1>
+            <div class="summary"><p>一直想自己搭建个R12的环境学习学习，于是买了块500G的移动硬盘，想把R12安装在移动硬盘中。</p>
+<p>准备工作：</p>
+<p>先安装好虚拟机VMware Workstation。创建一个RHEL6.3的虚拟机，硬盘300G,足够R12的FRESH安装了。（如果想DEMO安装，建议还是再大点，以免出现空间不足）</p>
+<p>下载好R12的安装介质，我是下载的12.1.1.0版本的，当时通过代理断断续续下载了一个星期，真是坑爹。（下载完成注意核准MD5保证无损）</p>
+<p>以ROOT进入虚拟机环境中，配置RHEL6.3的网络，使用静态IP:192.168.133.129 /255.255.255.0   gateWay:0.0.0.0 DNS:192.168.133.1</p>
+<p>具体IP如何设置，可通过检查在虚拟机中能否PING通宿主机，以及能否PING通www.dengdezhao.cn来测试：）</p>
+<p>配置主机名信息等#vim ...</p>
+                <a class="btn btn-small" href="http://localhost:8000/xu-ni-ji-huan-jing-rhel63an-zhuang-ebs-r12.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-01-12T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-01-12(Saturday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/rw-50004.html" class="label"><i class="icon-tag"></i>&nbsp;rw-50004</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/xu-ni-ji-an-zhuang-ebs-r12shi-chu-xian-cuo-wu-rw-50004-jie-jue.html">虚拟机安装EBS R12时出现错误RW-50004 解决</a></h1>
+            <div class="summary"><p>一般出现这个错误多半应该是库文件导致的，查看日志得知是 需要的 unzip 版本过高，RHEL上安装的是6.0的，而R12.1.1.1只支持unzip 5.X 的，很坑爹，yum erase unzip 然后重新安装unzip 5.X rpm即可解决~~</p>
+
+<p>&nbsp;</p>
+                <a class="btn btn-small" href="http://localhost:8000/xu-ni-ji-an-zhuang-ebs-r12shi-chu-xian-cuo-wu-rw-50004-jie-jue.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+
+<div class="span6">
+<div class="pagination">
+<ul>
+        <li class="prev"><a href="http://localhost:8000/author/pierreorz3.html">&larr; Previous</a></li>
+        <li class=""><a href="http://localhost:8000/author/pierreorz.html">1</a></li>
+        <li class=""><a href="http://localhost:8000/author/pierreorz2.html">2</a></li>
+        <li class=""><a href="http://localhost:8000/author/pierreorz3.html">3</a></li>
+        <li class="active"><a href="http://localhost:8000/author/pierreorz4.html">4</a></li>
+        <li class=""><a href="http://localhost:8000/author/pierreorz5.html">5</a></li>
+        <li class=""><a href="http://localhost:8000/author/pierreorz6.html">6</a></li>
+        <li class=""><a href="http://localhost:8000/author/pierreorz7.html">7</a></li>
+        <li class="next"><a href="http://localhost:8000/author/pierreorz5.html">Next &rarr;</a></li>
+</ul>
+</div>
+</div>
+</div>
+        </div><!--/span-->
+        <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="http://localhost:8000/category/adf.html">
+    <i class="icon-folder-open icon-large"></i>ADF
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/ebs.html">
+    <i class="icon-folder-open icon-large"></i>ebs
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/java.html">
+    <i class="icon-folder-open icon-large"></i>java
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>linux
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/octopress.html">
+    <i class="icon-folder-open icon-large"></i>octopress
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/oracle.html">
+    <i class="icon-folder-open icon-large"></i>oracle
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/others.html">
+    <i class="icon-folder-open icon-large"></i>others
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/sinaapp.html">
+    <i class="icon-folder-open icon-large"></i>sinaapp
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/soa.html">
+    <i class="icon-folder-open icon-large"></i>soa
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/webcenter.html">
+    <i class="icon-folder-open icon-large"></i>webcenter
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/weblogic.html">
+    <i class="icon-folder-open icon-large"></i>weblogic
+</a>
+</li>
+
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+    </div><!--/.fluid-container-->
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://localhost:8000/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="http://localhost:8000/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>"利用contextual event刷新Region" | Dengdezhao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="pierreorz" />
+    <meta name="kittycheck_rumble" content="true" />
+    <meta name="kittycheck_position" content="top=60,right=60" />
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://localhost:8000/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="http://localhost:8000/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/font-awesome.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://localhost:8000/theme/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://localhost:8000/theme/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:8000/theme/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:8000/theme/img/apple-touch-icon-114x114.png">
+
+    <link href="http://localhost:8000/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
+    <link href="http://localhost:8000/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://localhost:8000/index.html">Dengdezhao </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                <li class="divider-vertical"></li>
+            <!--  <ul class="nav pull-right">
+                    <li><a href="http://localhost:8000/"><i class="icon-th-list"></i>Archives</a></li>
+              </ul>
+		-->
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span8" id="content">
+<div class="row">
+    <div class="span2">
+        <div class="well">
+<footer class="post-info">
+<abbr class="published" title="2013-06-01T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-06-01(Saturday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/region.html" class="label"><i class="icon-tag"></i>&nbsp;region</a>
+</footer><!-- /.post-info -->        </div>
+    </div>
+    <div class="span6">
+<section id="content" class="well">
+    <article>
+        <header>
+            <h1>
+                <a href=""
+                        rel="bookmark"
+                        title="Permalink to "利用contextual event刷新Region"">
+                        "利用contextual event刷新Region"
+                </a>
+            </h1>
+        </header>
+        <div class="entry-content">
+
+        <p>平台： Jdev 11.1.1.7.0  <br />
+需求：两个region，其中一个region对数据进行修改后，需要刷新另外一个region显示   </p>
+<hr />
+<hr />
+<h4 id="bound-taskflow-btf_form">创建bound taskflow: btf_form</h4>
+<p><img alt="../../../wp-content/uploads/QQ截图20130601204146.jpg" src="../../../wp-content/uploads/QQ截图20130601204146.jpg" />    </p>
+<p>taskflow只包括一个页面碎片empForm.jsff，拖入employeeVO生成af:Form。  <br />
+<img alt="../../../wp-content/uploads/QQ截图20130601210114.jpg" src="../../../wp-content/uploads/QQ截图20130601210114.jpg" />    </p>
+<h3 id="bound-taskflow-btf_table">创建bound taskflow: btf_table</h3>
+<p>同上，只有一个页面碎片empTable.jsff，拖入employeeVO生成af:table。   <br />
+<img alt="../../../wp-content/uploads/QQ截图20130601210258.jpg" src="../../../wp-content/uploads/QQ截图20130601210258.jpg" />        </p>
+<p>以上两个taskflow皆使用No Controller Transaction.</p>
+<h4 id="contextual-event">添加contextual event</h4>
+<p>需要在empTable.jsff页面中修改数据，单击commit按钮时，让empForm.jsff页面中的数据即时更新。因此，给commitbutton添加contextual event: saveEvent。  <br />
+<img alt="../../../wp-content/uploads/QQ截图20130601210725.jpg" src="../../../wp-content/uploads/QQ截图20130601210725.jpg" />    </p>
+<h4 id="mainpgtaskflowregion">创建mainPG页面引入以上taskflow生成region</h4>
+<p>创建一个两栏jspx页面mainPG.jspx， 分别拖入以上两taskflow生成region。  <br />
+给contextual event 绑定consumer。    </p>
+<p>切换到mainPG.jspx页面的pagedef页面，从structure窗口中执行以下操作；  <br />
+<img alt="../../../wp-content/uploads/QQ截图20130601211338.jpg" src="../../../wp-content/uploads/QQ截图20130601211338.jpg" />    </p>
+<p><img alt="../../../wp-content/uploads/QQ截图20130601211438.jpg" src="../../../wp-content/uploads/QQ截图20130601211438.jpg" />    </p>
+<p>producer即为contextual event的事件源，由btf_table中的commitbutton产生，consumer即为btf_form中的execute消耗，即btf_table中每commit一次，btf_form即执行一次execute操作刷新页面。</p>
+<p>以上只是简单了解下contextual event的工作原理，contextual event还可以带参在region之间传值等。</p>
+        </div><!-- /.entry-content -->
+    </article>
+</section>
+</div>
+</div>
+        </div><!--/span-->
+        <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="http://localhost:8000/category/adf.html">
+    <i class="icon-folder-open icon-large"></i>ADF
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/ebs.html">
+    <i class="icon-folder-open icon-large"></i>ebs
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/java.html">
+    <i class="icon-folder-open icon-large"></i>java
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>linux
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/octopress.html">
+    <i class="icon-folder-open icon-large"></i>octopress
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/oracle.html">
+    <i class="icon-folder-open icon-large"></i>oracle
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/others.html">
+    <i class="icon-folder-open icon-large"></i>others
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/sinaapp.html">
+    <i class="icon-folder-open icon-large"></i>sinaapp
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/soa.html">
+    <i class="icon-folder-open icon-large"></i>soa
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/webcenter.html">
+    <i class="icon-folder-open icon-large"></i>webcenter
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/weblogic.html">
+    <i class="icon-folder-open icon-large"></i>weblogic
+</a>
+</li>
+
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+    </div><!--/.fluid-container-->
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://localhost:8000/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="http://localhost:8000/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

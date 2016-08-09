@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>"由意外断电导致oracle11g启动不起来的问题解决" | Dengdezhao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="pierreorz" />
+    <meta name="kittycheck_rumble" content="true" />
+    <meta name="kittycheck_position" content="top=60,right=60" />
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://localhost:8000/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="http://localhost:8000/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/font-awesome.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://localhost:8000/theme/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://localhost:8000/theme/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:8000/theme/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:8000/theme/img/apple-touch-icon-114x114.png">
+
+    <link href="http://localhost:8000/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
+    <link href="http://localhost:8000/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://localhost:8000/index.html">Dengdezhao </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                <li class="divider-vertical"></li>
+            <!--  <ul class="nav pull-right">
+                    <li><a href="http://localhost:8000/"><i class="icon-th-list"></i>Archives</a></li>
+              </ul>
+		-->
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span8" id="content">
+<div class="row">
+    <div class="span2">
+        <div class="well">
+<footer class="post-info">
+<abbr class="published" title="2013-11-09T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-11-09(Saturday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oracle.html" class="label"><i class="icon-tag"></i>&nbsp;oracle</a>
+</footer><!-- /.post-info -->        </div>
+    </div>
+    <div class="span6">
+<section id="content" class="well">
+    <article>
+        <header>
+            <h1>
+                <a href=""
+                        rel="bookmark"
+                        title="Permalink to "由意外断电导致oracle11g启动不起来的问题解决"">
+                        "由意外断电导致oracle11g启动不起来的问题解决"
+                </a>
+            </h1>
+        </header>
+        <div class="entry-content">
+
+        <ul>
+<li>
+<p>平台: linux + oracle 11g    </p>
+</li>
+<li>
+<p>故障: 意外断电之后，监听启动不了</p>
+</li>
+</ul>
+<h4 id="_1">解决方法</h4>
+<p>执行<code>lsnrctrl start</code>命令时报错误代码如下： </p>
+<p><code>TNS-12537</code>  <br />
+<code>TNS-12560</code>  <br />
+<code>TNS-00507</code>  <br />
+<code>Linux Error:29</code>    </p>
+<ul>
+<li>
+<p>检查/etc/hosts文件，没有发现异常。    </p>
+</li>
+<li>
+<dl>
+<dt>因为未改动任何配置文件，所以基本可以确定是断电造成文件损坏而引起。于是使用<code>relink all</code>看看能否解决该问题。</dt>
+<dt>{% codeblock lang:java %}</dt>
+<dt># cd $ORACLE_HOME/bin</dt>
+<dt># relink all</dt>
+<dt>{% endcodeblock %}</dt>
+<dt>执行<code>relink all</code>命令之后，再执行<code>lsnrctrl start</code>时，发现不报之前的错误了，出现了新的错误：</dt>
+<dt>{% codeblock lang:java %}</dt>
+<dt>symbol lookup error: $ORACLE_HOME/lib/libclntsh.so.11.1</dt>
+<dd _="%" endcodeblock="endcodeblock">undefined symbol: nnftboot</dd>
+</dl>
+</li>
+<li>
+<p>看来是这个libclntsh.so.11.1出了问题，于是尝试去下载该文件替换掉。   </p>
+</li>
+<li>
+<p>从RPM search网站上下载到oracle-instance-client的RPM文件到本地。</p>
+</li>
+<li>
+<p>使用rpm2cpio命令抽取出里面的libclntsh.so.11.1</p>
+</li>
+</ul>
+<p>{% codeblock lang:java %}     </p>
+<h1 id="rpm2cpio-oracle-instance-client-xxxrpm-cpio-div">rpm2cpio oracle-instance-client-xxx.rpm | cpio -div</h1>
+<p>{% endcodeblock %}</p>
+<ul>
+<li>将得到的libclntsh.so.11.1文件替换掉$ORACLE_HOME/lib下的重名文件即可。    </li>
+</ul>
+        </div><!-- /.entry-content -->
+    </article>
+</section>
+</div>
+</div>
+        </div><!--/span-->
+        <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="http://localhost:8000/category/adf.html">
+    <i class="icon-folder-open icon-large"></i>ADF
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/ebs.html">
+    <i class="icon-folder-open icon-large"></i>ebs
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/java.html">
+    <i class="icon-folder-open icon-large"></i>java
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>linux
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/octopress.html">
+    <i class="icon-folder-open icon-large"></i>octopress
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/oracle.html">
+    <i class="icon-folder-open icon-large"></i>oracle
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/others.html">
+    <i class="icon-folder-open icon-large"></i>others
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/sinaapp.html">
+    <i class="icon-folder-open icon-large"></i>sinaapp
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/soa.html">
+    <i class="icon-folder-open icon-large"></i>soa
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/webcenter.html">
+    <i class="icon-folder-open icon-large"></i>webcenter
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/weblogic.html">
+    <i class="icon-folder-open icon-large"></i>weblogic
+</a>
+</li>
+
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+    </div><!--/.fluid-container-->
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://localhost:8000/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="http://localhost:8000/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

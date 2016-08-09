@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>"配置OAF开发环境" | Dengdezhao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="pierreorz" />
+    <meta name="kittycheck_rumble" content="true" />
+    <meta name="kittycheck_position" content="top=60,right=60" />
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://localhost:8000/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="http://localhost:8000/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/font-awesome.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://localhost:8000/theme/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://localhost:8000/theme/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:8000/theme/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:8000/theme/img/apple-touch-icon-114x114.png">
+
+    <link href="http://localhost:8000/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
+    <link href="http://localhost:8000/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://localhost:8000/index.html">Dengdezhao </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                <li class="divider-vertical"></li>
+            <!--  <ul class="nav pull-right">
+                    <li><a href="http://localhost:8000/"><i class="icon-th-list"></i>Archives</a></li>
+              </ul>
+		-->
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span8" id="content">
+<div class="row">
+    <div class="span2">
+        <div class="well">
+<footer class="post-info">
+<abbr class="published" title="2013-04-17T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-04-17(Wednesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info -->        </div>
+    </div>
+    <div class="span6">
+<section id="content" class="well">
+    <article>
+        <header>
+            <h1>
+                <a href=""
+                        rel="bookmark"
+                        title="Permalink to "配置OAF开发环境"">
+                        "配置OAF开发环境"
+                </a>
+            </h1>
+        </header>
+        <div class="entry-content">
+
+        <h4 id="ebsoa">查看EBS系统OA版本信息</h4>
+<p>方法一：使用OPERATIONS用户登陆EBS系统，选择“Diagnostics”后，在页下脚选择“About this Page”后选择“Technology Components”标签可查看相应版本信息。</p>
+<p _="%" endcodeblock="endcodeblock">方法二：访问URI：<em>R12不可用</em>  <br />
+{% codeblock lang:java %}
+http://<HOST>:<PORT>/OA_HTML/OAInfo.jsp  <br /></p>
+<h4 id="oafjdev">查看OAF版本下载相应JDEV开发工具</h4>
+<p>metalink document id: 787209.1 &amp; 416708.1</p>
+<p>例如：p4141787_11i_GENERIC.zip</p>
+<p>解压缩后把“/jdevhome/jdev”路径加到系统变量中，变量名：      JDEV_USER_HOME=F:\p4141787_11i_GENERIC\jdevhome\jdev</p>
+<h4 id="dbc">配置DBC文件</h4>
+<p>确认当前EBS系统使用的dbc文件.</p>
+<p _="%" endcodeblock="endcodeblock">连接EBS数据库，执行以下SQL查询：
+{% codeblock lang:sql %}
+select host_name||&rsquo;_&rsquo;||instance_name from v$instance;</p>
+<p _="%" endcodeblock="endcodeblock">telnet到EBS系统，查找dbc文件的的位置并拷贝下来放在jdevhome\jdev\dbc_files\secure目录下:  <br />
+{% codeblock lang:java %}
+ls –a|$FND_SECURE/*.dbc</p>
+<p _="%" endcodeblock="endcodeblock">检验DBC文件是否EBS系统正在使用的DBC可用以下命令：  <br />
+{% codeblock lang:java %}
+java oracle.apps.fnd.security.AdminAppServer apps/apps STATUS DBC=/u01/dev/devappl/fnd/11.5.0/secure/SIT.dbc</p>
+<p>确认系统是否使用这个dbc文件可以在路径
+$APPL_TOP/admin/[SID]_[host].xml
+查找_dbc_file_name，跟上面说的dbc文件一致即可</p>
+<h4 id="jdev">配置JDEV工程属性</h4>
+<p>以上准备工作都完成之后，配置JDEV的Preferences中编码为UTF-8    </p>
+<p>配置project setting中编译器编码    </p>
+<p>然后配置DBC文件路径，测试EBS账户名及密码，所属职责等.</p>
+        </div><!-- /.entry-content -->
+    </article>
+</section>
+</div>
+</div>
+        </div><!--/span-->
+        <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="http://localhost:8000/category/adf.html">
+    <i class="icon-folder-open icon-large"></i>ADF
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/ebs.html">
+    <i class="icon-folder-open icon-large"></i>ebs
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/java.html">
+    <i class="icon-folder-open icon-large"></i>java
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>linux
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/octopress.html">
+    <i class="icon-folder-open icon-large"></i>octopress
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/oracle.html">
+    <i class="icon-folder-open icon-large"></i>oracle
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/others.html">
+    <i class="icon-folder-open icon-large"></i>others
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/sinaapp.html">
+    <i class="icon-folder-open icon-large"></i>sinaapp
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/soa.html">
+    <i class="icon-folder-open icon-large"></i>soa
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/webcenter.html">
+    <i class="icon-folder-open icon-large"></i>webcenter
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/weblogic.html">
+    <i class="icon-folder-open icon-large"></i>weblogic
+</a>
+</li>
+
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+    </div><!--/.fluid-container-->
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://localhost:8000/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="http://localhost:8000/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

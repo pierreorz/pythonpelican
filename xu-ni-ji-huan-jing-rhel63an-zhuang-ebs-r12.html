@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>虚拟机环境RHEL6.3安装EBS R12 | Dengdezhao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="pierreorz" />
+    <meta name="kittycheck_rumble" content="true" />
+    <meta name="kittycheck_position" content="top=60,right=60" />
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://localhost:8000/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="http://localhost:8000/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/font-awesome.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://localhost:8000/theme/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://localhost:8000/theme/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:8000/theme/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:8000/theme/img/apple-touch-icon-114x114.png">
+
+    <link href="http://localhost:8000/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
+    <link href="http://localhost:8000/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://localhost:8000/index.html">Dengdezhao </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                <li class="divider-vertical"></li>
+            <!--  <ul class="nav pull-right">
+                    <li><a href="http://localhost:8000/"><i class="icon-th-list"></i>Archives</a></li>
+              </ul>
+		-->
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span8" id="content">
+<div class="row">
+    <div class="span2">
+        <div class="well">
+<footer class="post-info">
+<abbr class="published" title="2013-01-15T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-01-15(Tuesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/rhel63.html" class="label"><i class="icon-tag"></i>&nbsp;RHEL6.3</a>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/r12.html" class="label"><i class="icon-tag"></i>&nbsp;R12</a>
+</footer><!-- /.post-info -->        </div>
+    </div>
+    <div class="span6">
+<section id="content" class="well">
+    <article>
+        <header>
+            <h1>
+                <a href=""
+                        rel="bookmark"
+                        title="Permalink to 虚拟机环境RHEL6.3安装EBS R12">
+                        虚拟机环境RHEL6.3安装EBS R12
+                </a>
+            </h1>
+        </header>
+        <div class="entry-content">
+
+        <p>一直想自己搭建个R12的环境学习学习，于是买了块500G的移动硬盘，想把R12安装在移动硬盘中。</p>
+<p>准备工作：</p>
+<p>先安装好虚拟机VMware Workstation。创建一个RHEL6.3的虚拟机，硬盘300G,足够R12的FRESH安装了。（如果想DEMO安装，建议还是再大点，以免出现空间不足）</p>
+<p>下载好R12的安装介质，我是下载的12.1.1.0版本的，当时通过代理断断续续下载了一个星期，真是坑爹。（下载完成注意核准MD5保证无损）</p>
+<p>以ROOT进入虚拟机环境中，配置RHEL6.3的网络，使用静态IP:192.168.133.129 /255.255.255.0   gateWay:0.0.0.0 DNS:192.168.133.1</p>
+<p>具体IP如何设置，可通过检查在虚拟机中能否PING通宿主机，以及能否PING通www.dengdezhao.cn来测试：）</p>
+<p>配置主机名信息等#vim /etc/hosts</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>127.0.0.1           localhost.localdomain   localhost
+</pre></div>
+
+
+<p>192.168.133.129     erp.dengdezhao.cn         erp 检查#vim /etc/sysconfig/network 是否有以下主机名信息</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>HOSTNAME=erp.dengdezhao.cn
+</pre></div>
+
+
+<p>重命名#mv /etc/sysconfig/networking/profiles/default/network /etc/sysconfig/networking/profiles/default/network_bak</p>
+<p>检查网络是否正常：</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>#ping erp
+</pre></div>
+
+
+<h1 id="ping-192168133129">ping 192.168.133.129</h1>
+<h1 id="ping-erpdengdezhaocn">ping erp.dengdezhao.cn</h1>
+<h1 id="ping-wwwdengdezhaocn-vim-etcsysctlconf">ping www.dengdezhao.cn 文件末尾追加如下信息  #vim /etc/sysctl.conf</h1>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>kernel.sem = 256 32000 100 142
+kernel.shmall = 2097152
+kernel.shmmax = 2147483648
+kernel.shmmni = 4096
+kernel.msgmax = 8192
+kernel.msgmnb = 65535
+kernel.msgmni = 2878
+fs.file-max = 65536
+net.ipv4.ip_local_port_range = 1024 65000
+net.core.rmem_default = 262144
+net.core.rmem_max = 262144
+net.core.wmem_default = 262144
+net.core.wmem_max = 262144
+</pre></div>
+
+
+<p>执行命令 #sysctl –p反应以上变更到系统中</p>
+<p>追加以下信息# vim /etc/security/limits.conf</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>hard nofile 65535
+soft nofile 4096
+hard nproc 16384
+soft nproc 2047
+</pre></div>
+
+
+<p>查看分区信息：#df -h   发现/home下空间有200多G，于是决定将R12安装在/home下</p>
+<h1 id="mkdir-homed01">mkdir  /home/d01                          ##用来存放数据库层，应用层和数据库文件等</h1>
+<h1 id="chmod-r-777-homed01">chmod  -R 777  /home/d01</h1>
+<h1 id="mkdir-homed01stage12">mkdir  /home/d01/stage12                    ##用来存放安装文件</h1>
+<h1 id="chmod-r-777-homed01stage12">chmod  -R 777  /home/d01/stage12</h1>
+<p>创建系统用户Oracle</p>
+<h1 id="usrsbingroupadd-dba">/usr/sbin/groupadd dba                               ##增加一个用户组</h1>
+<h1 id="usrsbinuseradd-g-dba-d-homed01-oracle-homed01">/usr/sbin/useradd –g dba –d /home/d01 oracle    ##增加一个用户，主目录是/home/d01</h1>
+<h1 id="usrsbinpasswd-oracle-oracle">/usr/sbin/passwd oracle                                ##给oracle添加密码</h1>
+<p>（注意：看过很多文档都是用以上命令创建用户，不知道是不是BUG的原因，我在虚拟机环境RHEL6.3中使用以上命令创建用户时.bash_profile始终不能自动生成，于是我进入图形桌面，使用“系统”-“管理”-“用户和组群”功能创建用户即可，这个原因害我重装了R12两次才发现）</p>
+<p>重装YUM以便RHEL6能更新（非注册用户不能直接更新）</p>
+<p>缷载原有YUM</p>
+<p>rpm -aq|grep yum|xargs rpm -e –nodeps</p>
+<p>下载163的RPM重新安装</p>
+<p>wget http://mirrors.163.com/centos/6/os/x86_64/Packages/yum-3.2.27-14.el6.centos.noarch.rpm
+wget http://mirrors.163.com/centos/6/os/x86_64/Packages/yum-metadata-parser-1.1.2-14.1.el6.x86_64.rpm
+wget http://mirrors.163.com/centos/6/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.26-11.el6.noarch.rpm
+wget http://mirrors.163.com/centos/6/os/x86_64/Packages/python-iniparse-0.3.1-2.1.el6.noarch.rpm</p>
+<p>安装YUM</p>
+<p>rpm -ivh python-iniparse-0.3.1-2.1.el6.noarch.rpm
+rpm -ivh yum-metadata-parser-1.1.2-14.1.el6.x86_64.rpm
+rpm -ivh yum-3.2.27-14.el6.centos.noarch.rpm um-plugin-fastestmirror-1.1.26-11.el6.noarch.rpm</p>
+<p>进入 # cd /etc/yum.repos.d</p>
+<p>wget http://mirrors.163.com/.help/CentOS-Base-163.repo</p>
+<h1 id="vim-centos-base-163repo">vim CentOS-Base-163.repo</h1>
+<p>将其中$releasever都替换成6.3  $basearch替换成i386</p>
+<h1 id="yum-clean-all">yum clean all</h1>
+<h1 id="yum-install-gcc">yum install gcc测试下看行不行</h1>
+<p>检查RHEL6.3是否存在以下R12必需的软件包</p>
+<p>rpm -q glibc-2.3.4-2.25
+rpm -q glibc-common-2.3.4-2.25
+rpm -q binutils-2.15.92.0.2-21
+rpm -q compat-libstdc++-296-2.96-132.7.2
+rpm -q gcc-3.4.6-3.1
+rpm -q gcc-c++-3.4.6-3.1
+rpm -q libgcc-3.4.6-3
+rpm -q libstdc++-3.4.6-3.1
+rpm -q libstdc++-devel-3.4.6-3
+rpm –q libaio_0.3.105-2
+rpm –q libaio_devel_0.3.105-2
+rpm -q openmotif21-2.1.30-11.RHEL4.6
+rpm -q pdksh-5.2.14-30.3
+rpm -q setarch-1.6-1
+rpm -q make-3.80-6.EL4
+rpm -q gnome-libs-1.4.1.2.90-44.1
+rpm -q sysstat-5.0.5-11.rhel4
+rpm -q compat-db-4.1.25-9
+rpm -q control-center-2.8.0-12.rhel4.5
+rpm -q xscreensaver-4.18-5.rhel4.11</p>
+<p>这些包一定要保证都有，或者版本比列出来的高（注意：检查一下unzip的版本是不是5.x！！！一定必须是5.x的版本，否则会导致安装R12完成后OHS启动不了，害我重装了一次）</p>
+<p>打补丁：6078836   拷贝libdb.so.2到/usr/lib</p>
+<p>确认所有包都下载安装好了之后执行命令#ldconfig –v</p>
+<p>以oracle用户登录系统，修改oracle用户的登录文件.bash_profile，追加如下两行：</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>LD_ASSUME_KERNEL=2.6.9-78 #这个可以通过在Linux运行uname –r来获得
+
+export LD_ASSUME_KERNEL
+</pre></div>
+
+
+<p>执行：$ mkdir /home/d01/oraInventory</p>
+<p>以ROOT登录系统创建文件：/etc/ oraInst.loc 内容：inventory_loc=/d01/oraInventory</p>
+<p>开始根据文档安装R12</p>
+<p>安装完成之后，复制.bash_profile文件</p>
+<p>$cp .bash_profile .ora</p>
+<p>追加一行：(. 和/中间有一个空格，红色是版本号及主机名，因人而异，注意修改好）</p>
+<p>. /home/d01/oracle/PROD/db/tech_st/11.1.0/PROD_erp.env
+$cp .bash_profile .app</p>
+<p>最后加一行</p>
+<p>. /home/d01/oracle/PROD/apps/apps_st/appl/APPSPROD_erp.env
+编写停止及启动DB和APP的脚本：</p>
+<h1 id="vim-start_dbsh">vim start_db.sh</h1>
+<p>cd ~</p>
+<p>source .ora</p>
+<p>cd /home/d01/oracle/PROD/db/tech_st/11.1.0/appsutil/scripts/PROD_erp</p>
+<p>./addlnctl.sh start PROD</p>
+<p>./addbctl.sh start</p>
+<h1 id="vim-start_appsh">vim start_app.sh</h1>
+<p>cd ~</p>
+<p>source .app</p>
+<p>cd /home/d01/oracle/PROD/inst/apps/PROD_erp/admin/scripts</p>
+<p>./adstrtal.sh apps/apps</p>
+<h1 id="vim-stop_appsh">vim stop_app.sh</h1>
+<p>cd ~</p>
+<p>source .app</p>
+<p>cd /home/d01/oracle/PROD/inst/apps/PROD_erp/admin/scripts</p>
+<p>./adstpall.sh apps/apps</p>
+<h1 id="vim-stop_dbsh">vim stop_db.sh</h1>
+<p>cd ~</p>
+<p>source .ora</p>
+<p>cd /home/d01/oracle/PROD/db/tech_st/11.1.0/appsutil/scripts/PROD_erp</p>
+<p>./addlnctl.sh stop PROD</p>
+<p>./addbctl.sh stop
+给脚本权限</p>
+<h1 id="chmod-r-777-start_">chmod -R 777 start_*</h1>
+<h1 id="chmod-r-777-stop_">chmod -R 777 stop_*</h1>
+<p>这样启动关闭R12就方便多了,执行如下命令即可启动R12：</p>
+<h1 id="start_dbsh">./start_db.sh</h1>
+<h1 id="start_appsh">./start_app.sh</h1>
+<p>关闭R12：</p>
+<h1 id="stop_appsh">./stop_app.sh</h1>
+<h1 id="stop_dbsh">./stop_db.sh</h1>
+<p>最终需要在宿主机上访问虚拟机中的R12</p>
+<p>除了在c:\windows\system32\drivers\etc\hosts中添加</p>
+<p>192.168.133.129   erp.dengdezhao.cn</p>
+<p>之外，还要在虚拟机中将8000端口打开（“系统”-“管理”-“防火墙设置”-“其它端口”-“添加”-“用户定义的” TCP 8000</p>
+<p>然后打开firefox即可访问虚拟机中的R12：http://erp.dengdezhao.cn:8000</p>
+<p>参照文档：Hui.Sir著EBS_R12_Install_Linux32_PROD_Ver02.doc </p>
+        </div><!-- /.entry-content -->
+    </article>
+</section>
+</div>
+</div>
+        </div><!--/span-->
+        <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="http://localhost:8000/category/adf.html">
+    <i class="icon-folder-open icon-large"></i>ADF
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/ebs.html">
+    <i class="icon-folder-open icon-large"></i>ebs
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/java.html">
+    <i class="icon-folder-open icon-large"></i>java
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>linux
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/octopress.html">
+    <i class="icon-folder-open icon-large"></i>octopress
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/oracle.html">
+    <i class="icon-folder-open icon-large"></i>oracle
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/others.html">
+    <i class="icon-folder-open icon-large"></i>others
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/sinaapp.html">
+    <i class="icon-folder-open icon-large"></i>sinaapp
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/soa.html">
+    <i class="icon-folder-open icon-large"></i>soa
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/webcenter.html">
+    <i class="icon-folder-open icon-large"></i>webcenter
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/weblogic.html">
+    <i class="icon-folder-open icon-large"></i>weblogic
+</a>
+</li>
+
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+    </div><!--/.fluid-container-->
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://localhost:8000/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="http://localhost:8000/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

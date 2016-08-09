@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>使用RIDC在webcenter portal集成ECM的文档查询功能 | Dengdezhao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="pierreorz" />
+    <meta name="kittycheck_rumble" content="true" />
+    <meta name="kittycheck_position" content="top=60,right=60" />
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://localhost:8000/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="http://localhost:8000/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/font-awesome.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://localhost:8000/theme/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://localhost:8000/theme/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:8000/theme/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:8000/theme/img/apple-touch-icon-114x114.png">
+
+    <link href="http://localhost:8000/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
+    <link href="http://localhost:8000/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://localhost:8000/index.html">Dengdezhao </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                <li class="divider-vertical"></li>
+            <!--  <ul class="nav pull-right">
+                    <li><a href="http://localhost:8000/"><i class="icon-th-list"></i>Archives</a></li>
+              </ul>
+		-->
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span8" id="content">
+<div class="row">
+    <div class="span2">
+        <div class="well">
+<footer class="post-info">
+<abbr class="published" title="2014-11-28T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2014-11-28(Friday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/ecm.html" class="label"><i class="icon-tag"></i>&nbsp;ECM</a>
+</footer><!-- /.post-info -->        </div>
+    </div>
+    <div class="span6">
+<section id="content" class="well">
+    <article>
+        <header>
+            <h1>
+                <a href=""
+                        rel="bookmark"
+                        title="Permalink to 使用RIDC在webcenter portal集成ECM的文档查询功能">
+                        使用RIDC在webcenter portal集成ECM的文档查询功能
+                </a>
+            </h1>
+        </header>
+        <div class="entry-content">
+
+        <h4 id="_1"><i class="icon-file"></i>   需求：</h4>
+<p>标准的document service很不灵活，实际开发中少不了要开发定制。那么问题来了，通过RIDC很灵活的查询出了需要的文档，如何集成到portal上去呢</p>
+<h4 id="_2"><i class="icon-folder-open"></i> 分析：</h4>
+<p>使用RIDC查询出需要的文档，存放在POJO等数据模型中
+利用POJO生成dataControl，开发taskflow等UI层
+将以上功能开发成为extend.spaces.webapp，扩展到webcenter spaces
+以下主要展现第一步：通过RIDC查询及POJO生成数据模型。</p>
+<h4 id="_3"><i class="icon-pencil"></i> 技术实现：</h4>
+<ul>
+<li>使用RIDC查询文档</li>
+</ul>
+<p>以下是主要查询方法, query传入的即是ECM的queryText，例如：
+        dDocType <matches> <code>PJT-INTERFACE-DOC</code>
+通过拼接好需要的查询条件以及用户便可以查询出文档。</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    public List&lt;Document&gt; search(String username, String query) {
+        ServiceResponse serviceResponse = null;
+        List&lt;Document&gt; list = new ArrayList&lt;Document&gt;();
+        try {
+            if (query == null) {
+                return list;
+            }
+    IdcClient client = getIdcClient();
+            DataBinder dataBinderReq = client.createBinder();
+        dataBinderReq.putLocal(&quot;IdcService&quot;, &quot;GET_SEARCH_RESULTS&quot;);
+            dataBinderReq.putLocal(&quot;QueryText&quot;, query.toString());
+            dataBinderReq.putLocal(&quot;ResultCount&quot;, &quot;100&quot;);
+            serviceResponse =
+                client.sendRequest(new IdcContext(username), dataBinderReq);
+            DataBinder dataBinderRes = serviceResponse.getResponseAsBinder();
+            DataResultSet resultSet =
+            dataBinderRes.getResultSet(&quot;SearchResults&quot;);
+            for (DataObject dataObject : resultSet.getRows()) {
+                Document d = new Document();
+                d.setContentId(dataObject.get(&quot;dDocName&quot;));
+                d.setDocumentId(dataObject.get(&quot;dID&quot;));
+                d.setOwner(dataObject.get(&quot;dDocAuthor&quot;));
+                d.setTitle(dataObject.get(&quot;dDocTitle&quot;));
+                d.setDocType(dataObject.get(&quot;dDocType&quot;));
+                d.setXspeciality(dataObject.get(&quot;xSPECIALTY&quot;));
+                d.setXrcvMajor(dataObject.get(&quot;xRCV_MAJOR&quot;));
+                Date date = dataObject.getDate(&quot;dInDate&quot;);
+                SimpleDateFormat sf = new SimpleDateFormat(&quot;yyyy/mm/dd&quot;);
+                String format = sf.format(date);
+                d.setDindate(format);
+                list.add(d);
+        }
+        } catch (Exception ex) {
+             System.out.println(&quot;Error Search: &quot; + ex.getMessage());
+        } finally {
+            if (serviceResponse != null) {
+                serviceResponse.close();
+            }
+        }
+        return list;
+    } //
+</pre></div>
+
+
+<p>其中Document.java即是POJO类</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    public class Document {
+        private String contentId;
+        private String documentId;
+        private String owner;
+        private String title;
+        private String doctype;
+        private String securitygroup;
+        private String dindate;
+        private String xDesignPhase;
+        private String xspeciality;//send
+        private String xrcvMajor;//receive
+    ......get set accessor......
+    }//end class
+</pre></div>
+
+
+<p>创建facade类：MyCondition.java，主要是调用search方法接受RIDC查询的结果集，生成dataControl供UI层使用。参考代码如下：</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    public class MyCondition {
+        private static final ADFLogger LOGGER = ADFLogger.createADFLogger(MyCondition.class);
+        private ArrayList&lt;Document&gt; receiveDocumentList;
+        private ArrayList&lt;Document&gt; sendDocumentList;
+        public MyCondition() {
+        this.receiveDocumentList=new ArrayList&lt;Document&gt;();
+        this.sendDocumentList=new ArrayList&lt;Document&gt;();
+        }
+        /*******
+        * 初始化，调用RIDC API查询出文档数据集
+        * *****/
+        public String init(){
+        LOGGER.severe(&quot;start init....&quot;);
+        Object userId = JSFUtils.resolveExpression(&quot;#{securityContext.userName}&quot;);
+        Object projectCode = JSFUtils.resolveExpression(&quot;#{pageFlowScope.inputProjectCode}&quot;);
+        List&lt;String&gt; spcCode = (List&lt;String&gt;)(JSFUtils.resolveExpression(&quot;#{pageFlowScope.spcCode}&quot;)==null?null:JSFUtils.resolveExpression(&quot;#{pageFlowScope.spcCode}&quot;));
+        if(userId==null||&quot;&quot;.equals(userId)){
+            LOGGER.severe(&quot;userId is null &quot;);
+            FacesMessage msg = new FacesMessage(&quot;用户为空请重试!&quot;);
+            JSFUtils.getFacesContext().addMessage(null, msg);
+            return &quot;NO&quot;;
+        }
+        if(projectCode==null||&quot;&quot;.equals(projectCode)){
+            LOGGER.severe(&quot;projectCode is null &quot;);
+            FacesMessage msg = new FacesMessage(&quot;项目ID为空请重试!&quot;);
+            JSFUtils.getFacesContext().addMessage(null, msg);
+            return &quot;NO&quot;;
+        }
+        /******
+         * 
+         * 生成发出专业SQL,生成接受专业SQL
+         * 
+         * ****/
+        String sendSql=&quot; xSPECIALTY &lt;matches&gt; `NULL` &quot;;
+        String receiveSql=&quot; xRCV_MAJOR &lt;matches&gt; `NULL` &quot;;
+        if(spcCode==null||spcCode.size()==0){
+            LOGGER.severe(&quot;spcCode is null or size is 0&quot;);  
+            return &quot;NO&quot;;
+        }
+        for(int i=0;i&lt;spcCode.size();i++){
+            sendSql=sendSql+&quot; &lt;OR&gt; &quot;+&quot;xSPECIALTY &lt;matches&gt; `&quot;+spcCode.get(i)+&quot;` &quot;;
+            receiveSql=receiveSql+&quot; &lt;OR&gt; &quot;+&quot;xRCV_MAJOR &lt;matches&gt; `&quot;+spcCode.get(i)+&quot;` &quot;;
+        }
+        sendSql=&quot;(&quot;+sendSql+&quot;) &lt;AND&gt; dDocType &lt;matches&gt; `PJT-INTERFACE-DOC` &lt;AND&gt; xPROJECT_NUM &lt;starts&gt; `&quot;+projectCode+&quot;`&quot;;
+        receiveSql=&quot;(&quot;+receiveSql+&quot;) &lt;AND&gt; dDocType &lt;matches&gt; `PJT-INTERFACE-DOC` &lt;AND&gt; xPROJECT_NUM &lt;starts&gt; `&quot;+projectCode+&quot;`&quot;;
+        LOGGER.severe(&quot;sendSql:&quot;+sendSql);
+        LOGGER.severe(&quot;receiveSql:&quot;+receiveSql);
+        /*** 
+         * 查询当前用户在该项目中的专业（ME,EL等)，拼接QueryText
+         * dDocType &lt;matches&gt; `PJT-INTERFACE-DOC`
+         * ******/
+        UCMAdapter ap=new UCMAdapter();
+        this.sendDocumentList = (ArrayList&lt;Document&gt;)ap.search(userId.toString(), sendSql);
+        this.receiveDocumentList = (ArrayList&lt;Document&gt;)ap.search(userId.toString(), receiveSql);
+        LOGGER.severe(&quot;success init...YES.&quot;);
+        return &quot;YES&quot;;
+    }
+
+    public void setReceiveDocumentList(ArrayList&lt;Document&gt; receiveDocumentList) {
+        this.receiveDocumentList = receiveDocumentList;
+    }
+
+    public ArrayList&lt;Document&gt; getReceiveDocumentList() {
+        return receiveDocumentList;
+    }
+
+    public void setSendDocumentList(ArrayList&lt;Document&gt; sendDocumentList) {
+        this.sendDocumentList = sendDocumentList;
+    }
+
+    public ArrayList&lt;Document&gt; getSendDocumentList() {
+        return sendDocumentList;
+    }
+}
+</pre></div>
+        </div><!-- /.entry-content -->
+    </article>
+</section>
+</div>
+</div>
+        </div><!--/span-->
+        <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="http://localhost:8000/category/adf.html">
+    <i class="icon-folder-open icon-large"></i>ADF
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/ebs.html">
+    <i class="icon-folder-open icon-large"></i>ebs
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/java.html">
+    <i class="icon-folder-open icon-large"></i>java
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>linux
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/octopress.html">
+    <i class="icon-folder-open icon-large"></i>octopress
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/oracle.html">
+    <i class="icon-folder-open icon-large"></i>oracle
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/others.html">
+    <i class="icon-folder-open icon-large"></i>others
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/sinaapp.html">
+    <i class="icon-folder-open icon-large"></i>sinaapp
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/soa.html">
+    <i class="icon-folder-open icon-large"></i>soa
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/webcenter.html">
+    <i class="icon-folder-open icon-large"></i>webcenter
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/weblogic.html">
+    <i class="icon-folder-open icon-large"></i>weblogic
+</a>
+</li>
+
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+    </div><!--/.fluid-container-->
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://localhost:8000/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="http://localhost:8000/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

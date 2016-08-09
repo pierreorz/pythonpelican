@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>"OAF上传大批量EXCEL文件" | Dengdezhao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="pierreorz" />
+    <meta name="kittycheck_rumble" content="true" />
+    <meta name="kittycheck_position" content="top=60,right=60" />
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://localhost:8000/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="http://localhost:8000/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/font-awesome.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://localhost:8000/theme/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://localhost:8000/theme/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:8000/theme/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:8000/theme/img/apple-touch-icon-114x114.png">
+
+    <link href="http://localhost:8000/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
+    <link href="http://localhost:8000/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://localhost:8000/index.html">Dengdezhao </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                <li class="divider-vertical"></li>
+            <!--  <ul class="nav pull-right">
+                    <li><a href="http://localhost:8000/"><i class="icon-th-list"></i>Archives</a></li>
+              </ul>
+		-->
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span8" id="content">
+<div class="row">
+    <div class="span2">
+        <div class="well">
+<footer class="post-info">
+<abbr class="published" title="2013-04-09T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-04-09(Tuesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info -->        </div>
+    </div>
+    <div class="span6">
+<section id="content" class="well">
+    <article>
+        <header>
+            <h1>
+                <a href=""
+                        rel="bookmark"
+                        title="Permalink to "OAF上传大批量EXCEL文件"">
+                        "OAF上传大批量EXCEL文件"
+                </a>
+            </h1>
+        </header>
+        <div class="entry-content">
+
+        <p>客户有个需求：大量数据通过EXCEL导入系统表，并能提供效验及去重功能。</p>
+<h4 id="_1">设计思路</h4>
+<ul>
+<li>采用POI解析EXCEL文件；</li>
+<li>bulk insert 插入数据到临时表</li>
+<li>临时表结合正式表去除重复</li>
+</ul>
+<h4 id="poiexcel">POI解析EXCEL</h4>
+<p>在CO的<code>processFormRequest</code>方法中添加如下:  <br />
+{% codeblock lang:java %}
+  public void processFormRequest(OAPageContext pageContext, OAWebBean webBean)
+  {
+    super.processFormRequest(pageContext, webBean);
+    OAApplicationModule am = pageContext.getApplicationModule(webBean);</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>if (pageContext.getParameter(&quot;uploadBtn&quot;) != null)
+{
+  DataObject fileUploadData = (DataObject)pageContext.getNamedDataObject(&quot;uploadFile&quot;);
+  String fileName = null;
+  try {
+    fileName = (String)fileUploadData.selectValue(null, &quot;UPLOAD_FILE_NAME&quot;);
+  } catch(NullPointerException ex)
+  {
+    throw new OAException(&quot;请先选择需要上传的文件&quot;, OAException.INFORMATION);
+  }
+
+  if(fileName.endsWith(&quot;.xlsx&quot;))
+  {
+            throw new OAException(&quot;不支持高版本EXCEL文件,请转换成2003版本的EXCEL再上传&quot;,OAException.WARNING);
+  }else if(!fileName.endsWith(&quot;.xls&quot;))
+  {
+            throw new OAException(&quot;请上传EXCEL类型文件&quot;,OAException.ERROR);
+  }
+
+  BlobDomain uploadedByteStream = (BlobDomain)fileUploadData.selectValue(null, fileName);
+  Serializable aserializable2[] = {uploadedByteStream};
+  Class aclass2[] = {BlobDomain.class };
+  am.invokeMethod(&quot;importFile&quot;, aserializable2,aclass2);   
+}
+</pre></div>
+
+
+<p _="%" endcodeblock="endcodeblock">}</p>
+<h4 id="amimportfile">在AM中编写importFile方法</h4>
+<p>{% codeblock lang:java %}
+  public void importFile(BlobDomain fileData) 
+  {
+    InputStream inStr = fileData.getInputStream();
+    HSSFWorkbook workbook=null;
+    try{
+     workbook= new HSSFWorkbook(inStr);
+    }catch(java.io.IOException e)
+    {
+      throw new OAException(&ldquo;读取上传的文件出错,请检查上传的文件是否为97-2003版本的EXCEL可读文件.&rdquo;,OAException.ERROR);
+    }
+    //信号1
+    if(workbook==null)
+    {
+      throw new OAException(&ldquo;ERROR001:workbook为空,请重新上传文件.&rdquo;,OAException.ERROR);
+    }
+    HSSFSheet sheet1 = workbook.getSheet(&ldquo;1&rdquo;);
+    if(sheet1==null)
+    {
+      throw new OAException(&ldquo;ERROR002:sheet1为空,上传文件中找不到名字为&lsquo;1&rsquo;的工作表,请检查工作表命名是否符合规则.&rdquo;,OAException.ERROR);
+    }
+    int rowCount1 = sheet1.getLastRowNum();
+    int realCount1=0;</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Object[] o_vin1=new Object[rowCount1],
+o_type1=new Object[rowCount1],
+o_color1=new Object[rowCount1],
+o_date1=new Object[rowCount1],
+o_des1=new Object[rowCount1];
+String vin1=null,type1=null,color1=null;
+java.util.Date vdate1=null;
+for (int r1=1; r1 &lt;= rowCount1; r1++)
+{
+  HSSFRow tempRow1=sheet1.getRow(r1);
+  if(tempRow1==null)
+  {
+    throw new OAException(&quot;INFO:sheet[1]中第&quot;+(r1+1)+&quot;行数据异常,请检查上传文件&quot;,OAException.INFORMATION);
+  }
+  if(tempRow1.getCell((short)0)==null||tempRow1.getCell((short)0).getStringCellValue()==null||&quot;&quot;.equals(tempRow1.getCell((short)0).getStringCellValue().trim()))
+  {
+    throw new OAException(&quot;INFO:sheet[1]中第&quot;+(r1+1)+&quot;行第1列数据异常,请检查上传文件&quot;,OAException.INFORMATION);
+  }
+
+  if(tempRow1.getCell((short)1)==null||tempRow1.getCell((short)1).getStringCellValue()==null)
+  {
+    throw new OAException(&quot;INFO:sheet[1]中第&quot;+(r1+1)+&quot;行第2列数据异常,请检查上传文件&quot;,OAException.INFORMATION);
+  }
+
+  if(tempRow1.getCell((short)2)==null||tempRow1.getCell((short)2).getStringCellValue()==null)
+  {
+    throw new OAException(&quot;INFO:sheet[1]中第&quot;+(r1+1)+&quot;行第3列数据异常,请检查上传文件&quot;,OAException.INFORMATION);
+  }
+  if(tempRow1.getCell((short)3)==null||tempRow1.getCell((short)3).getDateCellValue()==null)
+  {
+    throw new OAException(&quot;INFO:sheet[1]中第&quot;+(r1+1)+&quot;行第4列数据异常,请检查上传文件&quot;,OAException.INFORMATION);
+  }
+  vin1=tempRow1.getCell((short)0).getStringCellValue().trim();
+  type1=tempRow1.getCell((short)1).getStringCellValue().trim();
+  color1=tempRow1.getCell((short)2).getStringCellValue().trim();
+  vdate1=tempRow1.getCell((short)3).getDateCellValue();
+
+  o_vin1[r1-1]=vin1;
+  o_type1[r1-1]=type1;
+  o_color1[r1-1]=color1;
+  o_date1[r1-1]=new oracle.jbo.domain.Date(new java.sql.Date(vdate1.getTime()));
+  o_des1[r1-1]=null;
+  realCount1++;      
+}
+
+List exceptions = new ArrayList();
+exceptions.add(new OAException(&quot;解析出上传EXCEL文件中信号1表&quot;+realCount1+&quot;条记录&quot;,OAException.INFORMATION ));
+//bulkinsert...
+exceptions.add(new OAException(&quot;开始插入信号1临时表&quot;,OAException.INFORMATION ));    
+String result=this.bulkInsert1(o_vin1,o_type1,o_color1,o_date1,o_des1);
+exceptions.add(new OAException(&quot;结果:&quot;+result,OAException.INFORMATION ));        
+exceptions.add(new OAException(&quot;结束插入信号1临时表&quot;,OAException.INFORMATION ));
+
+OAException.raiseBundledOAException(exceptions);
+</pre></div>
+
+
+<p _="%" endcodeblock="endcodeblock">}</p>
+<h4 id="oafbulk-insert">OAF调用bulk insert插入大批量数据</h4>
+<p>{% codeblock lang:java %}
+ public String bulkInsert1(Object[] vin,Object[] type,Object[] color,Object[] vdate, Object[] des) 
+    {
+        CallableStatement st = null;
+        String result=&rdquo;&ldquo;;
+        String stmt = &ldquo;{ call ch_report_pkg.INSERTREPORT1(?,?,?,?,?,?) }&rdquo;;
+        try {
+            st=this.getDBTransaction().createCallableStatement(stmt,0);
+            ArrayDescriptor T_VARCHAR30=null,
+             T_VARCHAR10=null,
+             T_VARCHAR200=null,
+             T_DATE=null;
+            ARRAY a_vin=null,a_type=null,a_color=null,a_vdate=null,a_des=null;
+            T_VARCHAR30=oracle.sql.ArrayDescriptor.createDescriptor(&ldquo;T_VARCHAR30&rdquo;,st.getConnection());
+            T_VARCHAR10=oracle.sql.ArrayDescriptor.createDescriptor(&ldquo;T_VARCHAR10&rdquo;,st.getConnection());
+            T_VARCHAR200=oracle.sql.ArrayDescriptor.createDescriptor(&ldquo;T_VARCHAR200&rdquo;,st.getConnection());
+            T_DATE=oracle.sql.ArrayDescriptor.createDescriptor(&ldquo;T_DATE&rdquo;,st.getConnection());
+            a_vin=new ARRAY(T_VARCHAR30,st.getConnection(),vin);
+            a_type=new ARRAY(T_VARCHAR30,st.getConnection(),type);
+            a_color=new ARRAY(T_VARCHAR10,st.getConnection(),color);
+            a_vdate=new ARRAY(T_DATE,st.getConnection(),vdate);          <br />
+            a_des=new ARRAY(T_VARCHAR200,st.getConnection(),des);            <br />
+            st.setArray(1,a_vin);
+            st.setArray(2,a_type);
+            st.setArray(3,a_color);
+            st.setArray(4,a_vdate);
+            st.setArray(5,a_des);
+            st.registerOutParameter(6, OracleTypes.VARCHAR);
+            st.execute();<br />
+            result=st.getString(6);
+            return result;
+        } catch (Exception e) {
+            throw new JboException(e);
+        } finally {        <br />
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }      <br />
+    }</p>
+<p>{% endcodeblock %}</p>
+<p _="%" endcodeblock="endcodeblock">将POI解析出来的数据，包装成Object对象作为参数传递给数据库ch_report_pkg包中的INSERTREPORT1方法，bulk insert到数据库，极大地提高了插入数据效率。
+{% codeblock lang:sql %}
+PROCEDURE INSERTREPORT1(I_VIN      IN T_VARCHAR30,
+                          I_CAR_TYPE IN T_VARCHAR30,
+                          I_COLOR    IN T_VARCHAR10,
+                          I_VDATE    IN T_DATE,
+                          I_DES      IN T_VARCHAR200,
+                          MESSAGE    OUT VARCHAR2) IS
+    I INTEGER;
+  BEGIN
+    DELETE FROM CH_REPORT_1_TEMP;
+    COMMIT;
+    FORALL I IN 1 .. I_VIN.COUNT
+      INSERT INTO CH_REPORT_1_TEMP
+        (VIN, CAR_TYPE, COLOR, VDATE, DESCRIPTION)
+      VALUES
+        (I_VIN(I), I_CAR_TYPE(I), I_COLOR(I), I_VDATE(I), I_DES(I));
+    MESSAGE := I_VIN.COUNT || &lsquo;条数据正常插入!&rsquo;;
+    COMMIT;
+  EXCEPTION
+    WHEN OTHERS THEN
+      MESSAGE := &lsquo;出现异常，错误代码如下：&rsquo; || SQLERRM;
+      ROLLBACK;
+  END;</p>
+<p _="%" endcodeblock="endcodeblock">此外，需要先根据表结构定义出字段类型如下：
+{% codeblock lang:sql %}
+create or replace TYPE T_VARCHAR30 IS TABLE OF VARCHAR2(30);
+create or replace TYPE T_VARCHAR10 IS TABLE OF VARCHAR2(10);
+create or replace TYPE T_VARCHAR200 IS TABLE OF VARCHAR2(200);
+create or replace TYPE T_DATE IS TABLE OF DATE;</p>
+<p>那么数据就顺利批量插入到临时表中了。</p>
+<h4 id="_2">数据去除重复</h4>
+<p>需要根据插入数据的主键VIN判断是否跟数据库中存在的数据重复，  <br />
+在程序中对比的话效率很低，所以采用在数据库中通过语句  <br />
+<code>select count(vin) from (table union temp_table) group by vin</code>  <br />
+来判断，count数量大于1表示有重复。</p>
+        </div><!-- /.entry-content -->
+    </article>
+</section>
+</div>
+</div>
+        </div><!--/span-->
+        <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="http://localhost:8000/category/adf.html">
+    <i class="icon-folder-open icon-large"></i>ADF
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/ebs.html">
+    <i class="icon-folder-open icon-large"></i>ebs
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/java.html">
+    <i class="icon-folder-open icon-large"></i>java
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>linux
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/octopress.html">
+    <i class="icon-folder-open icon-large"></i>octopress
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/oracle.html">
+    <i class="icon-folder-open icon-large"></i>oracle
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/others.html">
+    <i class="icon-folder-open icon-large"></i>others
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/sinaapp.html">
+    <i class="icon-folder-open icon-large"></i>sinaapp
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/soa.html">
+    <i class="icon-folder-open icon-large"></i>soa
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/webcenter.html">
+    <i class="icon-folder-open icon-large"></i>webcenter
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/weblogic.html">
+    <i class="icon-folder-open icon-large"></i>weblogic
+</a>
+</li>
+
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+    </div><!--/.fluid-container-->
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://localhost:8000/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="http://localhost:8000/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

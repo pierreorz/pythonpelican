@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dengdezhao - oaf | Dengdezhao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="pierreorz" />
+    <meta name="kittycheck_rumble" content="true" />
+    <meta name="kittycheck_position" content="top=60,right=60" />
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://localhost:8000/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="http://localhost:8000/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/font-awesome.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://localhost:8000/theme/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://localhost:8000/theme/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:8000/theme/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:8000/theme/img/apple-touch-icon-114x114.png">
+
+    <link href="http://localhost:8000/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
+    <link href="http://localhost:8000/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://localhost:8000/index.html">Dengdezhao </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                <li class="divider-vertical"></li>
+            <!--  <ul class="nav pull-right">
+                    <li><a href="http://localhost:8000/"><i class="icon-th-list"></i>Archives</a></li>
+              </ul>
+		-->
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span8" id="content">
+<div class="row">
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2014-06-03T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2014-06-03(Tuesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/oafge-xing-hua-buttonhuo-qu-ye-mian-can-shu.html">OAF个性化Button获取页面参数</a></h1>
+            <div class="summary"><ul>
+<li>平台: R12    </li>
+<li>需求: 需要个性化一个button的Destination URI属性，并添附上一个参数。</li>
+</ul>
+<p>实现方法：</p>
+<ol>
+<li>
+<p>本来重写CO便很容易实现该需求，但是涉及到修改代码以及各个环境更新就很麻烦了，所以如果个性化button的URL是最方便了。</p>
+</li>
+<li>
+<p>个性化又涉及到如何在URL里传递参数的问题。  </p>
+</li>
+</ol>
+<p>右键当前页面，查看源代码如下：      </p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;form id=&quot;DefaultFormName&quot; name=&quot;DefaultFormName&quot; style=&quot;margin:0px&quot; method=&quot;POST&quot;          action=&quot;/OA_HTML/OA.jsp?page=/oracle/apps/pa/deliverable/webui/CrUpDeliverablePG&amp;paCallingPage=DLVLIST&amp;paCallingMode=VIEW&amp;paProjectId=106691&amp;paDeliverableId=113287&amp;paDlvrItemId=106962&amp;&amp;addBreadCrumb=RP&amp;_ti=1696581738&amp;PersonalizationParam=PersonalizationParamAdmin ...</pre></div>
+                <a class="btn btn-small" href="http://localhost:8000/oafge-xing-hua-buttonhuo-qu-ye-mian-can-shu.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-04-18T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-04-18(Thursday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/oafzhong-chuang-jian-lov.html">"OAF中创建LOV"</a></h1>
+            <div class="summary"><p>环境：Oracle9i Jdeveloper+R11i</p>
+<h4 id="am">首先创建AM</h4>
+<p>创建一个LovAM，默认配置即可。</p>
+<h4 id="vo">创建VO</h4>
+<p _="%" endcodeblock="endcodeblock">创建LovVO，不需要基于EO，输入查询SQL如下：
+{% codeblock lang:sql %}
+select distinct INVENTORY_ITEM_ID,concatenated_segments 
+from MTL_SYSTEM_ITEMS_KFV where organization_id=85</p>
+<p>将创建好的VO添加到AM的data module中</p>
+<h4 id="rn">创建RN</h4>
+<p>右键工程，创建一个RN，Scope设置为public.    </p>
+<p>选中创建好的LovRN.xml，在structure Window窗口中选中LovRN右建New Region Using Wizard.找到之前创建的LovVO.    </p>
+<p>修改字段属性如下：   <br />
+Search Allowed : true   <br />
+Selective Search Criteria : true    </p>
+<h4 id="pglov">创建PG页面引用LOV</h4>
+<p>创建一个PG页面LovPG.xml，AM Definition设置为之前创建的LovAM路径 ...</p>
+                <a class="btn btn-small" href="http://localhost:8000/oafzhong-chuang-jian-lov.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-04-17T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-04-17(Wednesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/pei-zhi-oafkai-fa-huan-jing.html">"配置OAF开发环境"</a></h1>
+            <div class="summary"><h4 id="ebsoa">查看EBS系统OA版本信息</h4>
+<p>方法一：使用OPERATIONS用户登陆EBS系统，选择“Diagnostics”后，在页下脚选择“About this Page”后选择“Technology Components”标签可查看相应版本信息。</p>
+<p _="%" endcodeblock="endcodeblock">方法二：访问URI：<em>R12不可用</em>  <br />
+{% codeblock lang:java %}
+http://<HOST>:<PORT>/OA_HTML/OAInfo.jsp  <br /></p>
+<h4 id="oafjdev">查看OAF版本下载相应JDEV开发工具</h4>
+<p>metalink document id: 787209.1 &amp; 416708.1</p>
+<p>例如：p4141787_11i_GENERIC.zip</p>
+<p>解压缩后把“/jdevhome/jdev”路径加到系统变量中，变量名：      JDEV_USER_HOME=F:\p4141787_11i_GENERIC\jdevhome\jdev</p>
+<h4 id="dbc">配置DBC文件</h4>
+<p>确认当前EBS系统使用的dbc文件.</p>
+<p _="%" endcodeblock="endcodeblock">连接EBS数据库，执行以下SQL查询：
+{% codeblock ...</p>
+                <a class="btn btn-small" href="http://localhost:8000/pei-zhi-oafkai-fa-huan-jing.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-04-09T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-04-09(Tuesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/oafshang-chuan-da-pi-liang-excelwen-jian.html">"OAF上传大批量EXCEL文件"</a></h1>
+            <div class="summary"><p>客户有个需求：大量数据通过EXCEL导入系统表，并能提供效验及去重功能。</p>
+<h4 id="_1">设计思路</h4>
+<ul>
+<li>采用POI解析EXCEL文件；</li>
+<li>bulk insert 插入数据到临时表</li>
+<li>临时表结合正式表去除重复</li>
+</ul>
+<h4 id="poiexcel">POI解析EXCEL</h4>
+<p>在CO的<code>processFormRequest</code>方法中添加如下:  <br />
+{% codeblock lang:java %}
+  public void processFormRequest(OAPageContext pageContext, OAWebBean webBean)
+  {
+    super.processFormRequest(pageContext, webBean);
+    OAApplicationModule am = pageContext.getApplicationModule(webBean);</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>if (pageContext.getParameter(&quot;uploadBtn&quot;) != null)
+{
+  DataObject fileUploadData = (DataObject)pageContext.getNamedDataObject(&quot;uploadFile&quot;);
+  String fileName = null;
+  try {
+    fileName = (String)fileUploadData ...</pre></div>
+                <a class="btn btn-small" href="http://localhost:8000/oafshang-chuan-da-pi-liang-excelwen-jian.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-03-20T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-03-20(Wednesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/oafdan-xuan-shan-chu-xing-gong-neng.html">"OAF单选删除行功能"</a></h1>
+            <div class="summary"><hr />
+<p>平台：Jdeveloper 9i    </p>
+<hr />
+<p><strong>一般实现步骤：</strong></p>
+<ol>
+<li>在VO中添加新transient属性selector，updatable设置为always。    </li>
+<li>在PG中给table添加singleSelection方法，并绑定view Instance为VO的instance，View Attribute为刚刚新建的transient属性seletor。        </li>
+<li>这样当用户勾选checkbox时，会给transient属性变量赋值为Y，因此，在删除逻辑中循环判断VO中的transient属性，当其为Y时执行remove该行即可实现选择删除功能。  <br />
+<strong>相关代码如下：</strong></li>
+</ol>
+<p><strong>CO中processFormRequest里添加代码如下：</strong></p>
+<p>{% codeblock lang:java %}
+    //当单击deleteBtn按钮时执行AM中的deleteAutoSequenceVO方法  <br />
+    if (pageContext.getParameter(&ldquo;deleteBtn&rdquo;)!=null)
+    {
+      am.invokeMethod(&ldquo;deleteAutoSequenceVO&rdquo;);</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>}
+</pre></div>
+
+
+<p>{% endcodeblock %}</p>
+<p><strong>AM中代码如下：</strong></p>
+<p>{% codeblock lang:java %}
+    public void deleteAutoSequenceVO() {
+        OAViewObject vo = this.getChAutoSequenceVO1();
+        RowSetIterator iter = vo.createRowSetIterator(&ldquo;delete&rdquo;);
+        if (vo != null ...</p>
+                <a class="btn btn-small" href="http://localhost:8000/oafdan-xuan-shan-chu-xing-gong-neng.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-01-30T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-01-30(Wednesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/javascript.html" class="label"><i class="icon-tag"></i>&nbsp;javascript</a>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/use-javascript-in-oaf.html">Use Javascript in OAF</a></h1>
+            <div class="summary"><h4 id="js">使用Js脚本库</h4>
+<p _="%" endcodeblock="endcodeblock">在CO的<em>processRequest</em>中引入JS库<br />
+编写JS库:Calendar2013.js
+{% codeblock lang:java %}
+pageContext.putJavaScriptLibrary(&ldquo;Calendar&rdquo;,&rdquo;Calendar2013.js&rdquo;); 
+((OAMessageTextInputBean)webBean
+.findChildRecursive(&ldquo;inputDate&rdquo;))
+.setOnClick(&ldquo;setday(this)&rdquo;);</p>
+<p>需要把Calendar2013.js放置在$<strong>COMMON_TOP</strong>/html下。</p>
+<h4 id="javascript">直接引用javaScript</h4>
+<p _="%" endcodeblock="endcodeblock">编写<em>JavaScript</em>:
+{% codeblock lang:java %}
+String javaScript=&rdquo;JAVASCRIPT:function setday(){&hellip;}&rdquo;;</p>
+<p>在<strong>CO</strong>的<em>processRequest</em>中加载<em>javascript</em></p>
+<p _="%" endcodeblock="endcodeblock">{% codeblock lang:java %}
+pageContext.putJavaScriptFunction(&ldquo;sayday()&rdquo;,javaScript ...</p>
+                <a class="btn btn-small" href="http://localhost:8000/use-javascript-in-oaf.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-01-10T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-01-10(Thursday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/oafkai-fa-tong-guo-exceldao-ru-shu-ju-shi-yong-hu-xu-yao-jiang-ke-neng-cun-zai-zhong-fu-de-zhu-jian-xin-xi-ti-shi-chu-lai.html">OAF开发通过EXCEL导入数据时，用户需要将可能存在重复的主键信息提示出来</a></h1>
+            <div class="summary"><p>OAF开发通过EXCEL导入数据时，用户需要将可能存在重复的主键信息提示出来.</p>
+
+<p>有以下两种主键冲突情况：</p>
+
+<p>1, 表中不存在重复数据，即将导入的数据中存在重复数据。比如表中记录为空，导入的EXCEL中存在记录ID007,ID008,ID009,ID007，此时OAF页面需要将ID007提示出来；</p>
+
+<p>2,表中存在重复数据。即表中原来已经存在一条记录ID007，此时导入的数据中也存在ID007，需要将ID007提示出来。</p>
+
+<p>解决方案：</p>
+
+<p>原本想通过查询数据库中ID007的记录是否存在再抛出OAException的做法来实现此需求，后来一想感觉好麻烦；便换种思路决定通过异常来判断。</p>
+
+<p>情况1，在ViewObject对象CreateRow()之后，给创建的新Row.setAttribute("id",007)时，如果VO中存在两个007的新ROW，会抛出TooManyObjectsException,此时捕获该异常并返回此ID值。</p>
+
+<p>情况2，难点也在这里，调用commit保存数据时，主键约束异常才会抛出来而且还不知道重复的ID值是多少。重写EO的doDML方法，在此方法中捕获DMLException异常，并且可以得到重复的ID值；
+<pre class="brush:java">  public void doDML(int i,TransactionEvent e)
+  {
+    try{
+    super.doDML(i ...</pre></p>
+                <a class="btn btn-small" href="http://localhost:8000/oafkai-fa-tong-guo-exceldao-ru-shu-ju-shi-yong-hu-xu-yao-jiang-ke-neng-cun-zai-zhong-fu-de-zhu-jian-xin-xi-ti-shi-chu-lai.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+    <div class="span2">
+        <div class="well small"><footer class="post-info">
+<abbr class="published" title="2013-01-09T00:00:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2013-01-09(Wednesday) 00:00
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/oaf.html" class="label"><i class="icon-tag"></i>&nbsp;oaf</a>
+</footer><!-- /.post-info --></div>
+    </div>
+    <div class="span6">
+        <div class="article well">
+            <h1><a href="http://localhost:8000/oaf-shi-yong-oaexceptionshu-chu-zhong-wen-shi-chu-xian-luan-ma-jie-jue.html">OAF 使用OAException输出中文时出现乱码 解决</a></h1>
+            <div class="summary"><p>使用throw new OAException(“你们好”,OAException.WARNING);时出现乱码，尝试new String("你们好”.getBytes("GBK"),"UTF-8")依然没用。</p>
+
+<p>检查JDEV的Preferences中ENCODING已经更改为“UTF-8”，纠结了好一阵子，才发现工程的Project Settings的Compiler里也有一个ENCODING没有改，囧改好之后再测试乱码问题即解决</p>
+                <a class="btn btn-small" href="http://localhost:8000/oaf-shi-yong-oaexceptionshu-chu-zhong-wen-shi-chu-xian-luan-ma-jie-jue.html">点我客官</a>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <hr />
+    </div>
+
+<div class="span6">
+</div>
+</div>
+        </div><!--/span-->
+        <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="http://localhost:8000/category/adf.html">
+    <i class="icon-folder-open icon-large"></i>ADF
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/ebs.html">
+    <i class="icon-folder-open icon-large"></i>ebs
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/java.html">
+    <i class="icon-folder-open icon-large"></i>java
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>linux
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/octopress.html">
+    <i class="icon-folder-open icon-large"></i>octopress
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/oracle.html">
+    <i class="icon-folder-open icon-large"></i>oracle
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/others.html">
+    <i class="icon-folder-open icon-large"></i>others
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/sinaapp.html">
+    <i class="icon-folder-open icon-large"></i>sinaapp
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/soa.html">
+    <i class="icon-folder-open icon-large"></i>soa
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/webcenter.html">
+    <i class="icon-folder-open icon-large"></i>webcenter
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/weblogic.html">
+    <i class="icon-folder-open icon-large"></i>weblogic
+</a>
+</li>
+
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+    </div><!--/.fluid-container-->
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://localhost:8000/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="http://localhost:8000/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

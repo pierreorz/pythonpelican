@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>weblogic配置jython | Dengdezhao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="pierreorz" />
+    <meta name="kittycheck_rumble" content="true" />
+    <meta name="kittycheck_position" content="top=60,right=60" />
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://localhost:8000/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="http://localhost:8000/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/font-awesome.css" rel="stylesheet">
+    <link href="http://localhost:8000/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://localhost:8000/theme/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://localhost:8000/theme/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:8000/theme/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:8000/theme/img/apple-touch-icon-114x114.png">
+
+    <link href="http://localhost:8000/" type="application/atom+xml" rel="alternate" title="Dengdezhao ATOM Feed" />
+    <link href="http://localhost:8000/feeds/rss.xml" type="application/atom+xml" rel="alternate" title="Dengdezhao RSS Feed" />
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://localhost:8000/index.html">Dengdezhao </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                <li class="divider-vertical"></li>
+            <!--  <ul class="nav pull-right">
+                    <li><a href="http://localhost:8000/"><i class="icon-th-list"></i>Archives</a></li>
+              </ul>
+		-->
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span8" id="content">
+<div class="row">
+    <div class="span2">
+        <div class="well">
+<footer class="post-info">
+<abbr class="published" title="2016-05-17T22:20:00+08:00">
+    <i class="icon-calendar"></i>&nbsp;2016-05-17(Tuesday) 22:20
+</abbr>
+<br/><a href="http://localhost:8000/author/pierreorz.html"><i class="icon-user"></i>&nbsp;pierreorz</a>
+
+
+<br/>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/weblogic.html" class="label"><i class="icon-tag"></i>&nbsp;weblogic</a>
+	&nbsp;&nbsp;<a href="http://localhost:8000/tag/jython.html" class="label"><i class="icon-tag"></i>&nbsp;jython</a>
+</footer><!-- /.post-info -->        </div>
+    </div>
+    <div class="span6">
+<section id="content" class="well">
+    <article>
+        <header>
+            <h1>
+                <a href=""
+                        rel="bookmark"
+                        title="Permalink to weblogic配置jython">
+                        weblogic配置jython
+                </a>
+            </h1>
+        </header>
+        <div class="entry-content">
+
+        <h3 id="jython">在服务器端使用jython</h3>
+<p>以下以139服务器为例：</p>
+<ul>
+<li>在当前shell环境中设置<code>setWLSEnv.sh</code>  <br />
+进入<code>/oracle/Oracle/Middleware/wlserver_10.3/server/bin</code>目录下  </li>
+<li>执行命令 <code>. ./setWLSEnv.sh</code> <strong><em>*注意两个点号中间有空格</em></strong>* </li>
+<li>进入WLST：<code>java weblogic.WLST</code></li>
+<li>进入jython： <code>java org.python.util.jython</code> 可以查看weblogic内置jython版本为jython2.2.1</li>
+</ul>
+<h3 id="jython_1">在jython中加载标准模块</h3>
+<ul>
+<li>由于jython的标准模块在<code>$WL_HOME/common/wlst/modules/jython-modules.jar</code>中，因此需要在启动jython的时候将该路径加载到系统路径中才行</li>
+<li>进入jython命令行 加载sys模块<code>import sys</code></li>
+<li>在系统路径中加入jython-modules.jar, <code>sys.path.append('$WL_HOME/common/wlst/modules/jython-modules.jar/Lib')</code></li>
+<li>然后<code>import time</code>之后便可以import其它标准模块 </li>
+</ul>
+<h3 id="javajython">在java中调用jython</h3>
+<ul>
+<li>由于weblogic自带jython2.2.1，所以不需要引用额外的jython包。(<code>目前测试发现引用最新包时出导致发包失败</code>)</li>
+<li>因要发包在487服务器来测试，以下以487为例，在服务器创建目录/data01/oracle/scripts</li>
+<li>将上文提到的jython-modules.jar复制到scripts目录，或者扩展自己的python脚本</li>
+<li>加载方式：先加载sys模块，<code>import sys</code></li>
+<li>将刚刚的路径添加到sys.path中以便jython能够使用模块<code>sys.path.append('/data01/oracle/scripts/jython-modules.jar/Lib;/data01/oracle/scripts')</code></li>
+<li>现在便可自由加载/data01/oracle/scripts目录下的模块了<code>import time</code></li>
+</ul>
+<h3 id="weblogicjython">在weblogic容器环境使用高版本的jython</h3>
+<ul>
+<li>
+<p>为何要使用高版本？jython2.2.1版本太过简陋自带只有sys/io模块，所以才会有以上加载标准模块的问题。如果升级高版本之后，自带便有大部分python的标准模块，扩展纯python模块也很方便只需要在路径中加载模块地址即可</p>
+</li>
+<li>
+<p>目前最新版本的jython是jython2.7.0 基于JDK1.8的，而weblogic基于的JDK是1.6，升级起来太麻烦，只能将就weblogic，使用基于JDK1.6的版本jython2.5.4</p>
+</li>
+<li>
+<p>有两种方法：    </p>
+<h6 id="_1">方法一：</h6>
+<p>在项目中配置weblogic.xml优先加载Web-inf下的jython2.5.4包
+不过在测试中发现应用第一次访问时会报错，之后便正常。推测原因可能是weblogic自带的jython2.2.1版本在服务器启动时便加载，后面weblogic.xml的配置是应用级别的，所以替换就慢了一步，第二次访问应用时才会加载到jython2.5.4的包，于是便报错了。</p>
+<h6 id="_2">方法二：</h6>
+<p>在修改服务器的weblogic的启动脚本setWeblogic.sh中的CLASSPATH，提前将jython2.5.4的jar包路径放在classpath之前优先加载，重启服务器之后版本便升级为2.5.4(如果要在服务器直接运行jython，由于jrockit的一个BUG导致出错，需要补丁：Patch 16569812）</p>
+<p>修改setDomainEnv.sh中的BEA_JAVA_HOME以及JAVA_HOME，将jrockit补丁路径替换进去，然后执行命令<code>. ./setDomainEnv.sh</code> 再重启相关节点服务器即可完成升级。    </p>
+</li>
+</ul>
+<h3 id="jythonzxjdbc">jython通过zxJDBC操作数据库</h3>
+<ul>
+<li>jython通过zxJDBC操作数据库</li>
+<li>加载zxJDBC  <br />
+<code>from com.ziclix.python.sql import zxJDBC</code>        </li>
+<li>查找JNDI得到数据库连接   <br />
+<code>conn=zxJDBC.lookup('jdbc/HR_HWLCM')</code>    </li>
+<li>根据conn得到cursor进行查询     <br />
+<code>cursor=conn.cursor()</code>  <br />
+<code>cursor.execute("select * from testd")</code></li>
+</ul>
+<h3 id="jythonrest">jython调用rest服务</h3>
+<ul>
+<li>
+<p>调用<strong>GET</strong>服务 使用urllib2以及json模块即可调用rest服务。其中json在jython2.5中非标准模块，需要下载安装，将json.py移到Lib目录即可加载。详细参照以下代码：  <br />
+<code>import urllib2</code>  <br />
+<code>import json</code>  <br />
+<code>url='http://szxtsp140-or:8001/testrest/jersey/rest/getresult'</code>  <br />
+<code>resp=urllib2.urlopen(url+'/222')</code>  <br />
+<code>result=resp.read()</code>        </p>
+</li>
+<li>
+<p>如果输入是json，在pathParam中需要转义,可以使用urllib.quote(jsonstring)对jsonstring进行转义之后，再拼接到url中即可。</p>
+</li>
+<li>调用<strong>POST</strong>服务 参照以下代码    将字典类型的参数先通过json模块的json.write转成json串，再通过urllib模块的quote将json串转义，最终拼成URL，构建Request对象，设置访问方式为<strong>POST</strong> 其它类型的访问方式如<strong>PUT</strong>,<strong>DELETE</strong>均如此设置即可  <br />
+<code>import urllib2</code>  <br />
+<code>import urllib</code>  <br />
+<code>import json</code>  <br />
+<code>url='http://szxtsp140-or:8001/testrest/jersey/rest/putparamters/'</code>      <br />
+<code>param={"test1":1,"test2":2}</code>  <br />
+<code>jsonparam=json.write(param)</code>  <br />
+<code>encodeparam=urllib.quote(jsonparam)</code>  <br />
+<code>url=url+encodeparam</code>
+<code>req=urllib2.Request(url)</code>  <br />
+<code>req.get_method=lambda:'POST'</code>  <br />
+<code>result=urllib2.urlopen(req)</code>  <br />
+<code>result=result.read()</code>    </li>
+</ul>
+        </div><!-- /.entry-content -->
+    </article>
+</section>
+</div>
+</div>
+        </div><!--/span-->
+        <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="http://localhost:8000/category/adf.html">
+    <i class="icon-folder-open icon-large"></i>ADF
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/ebs.html">
+    <i class="icon-folder-open icon-large"></i>ebs
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/java.html">
+    <i class="icon-folder-open icon-large"></i>java
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/linux.html">
+    <i class="icon-folder-open icon-large"></i>linux
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/octopress.html">
+    <i class="icon-folder-open icon-large"></i>octopress
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/oracle.html">
+    <i class="icon-folder-open icon-large"></i>oracle
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/others.html">
+    <i class="icon-folder-open icon-large"></i>others
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/sinaapp.html">
+    <i class="icon-folder-open icon-large"></i>sinaapp
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/soa.html">
+    <i class="icon-folder-open icon-large"></i>soa
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/webcenter.html">
+    <i class="icon-folder-open icon-large"></i>webcenter
+</a>
+</li>
+<li>
+<a href="http://localhost:8000/category/weblogic.html">
+    <i class="icon-folder-open icon-large"></i>weblogic
+</a>
+</li>
+
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+    </div><!--/.fluid-container-->
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://localhost:8000/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="http://localhost:8000/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>
